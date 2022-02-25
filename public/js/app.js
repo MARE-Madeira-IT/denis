@@ -763,14 +763,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ handleScroll)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -784,21 +776,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-function handleScroll(section, object) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    about: 1,
-    partners: 1,
-    timeline: 1
-  }),
+function handleScroll(section) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState2 = _slicedToArray(_useState, 2),
       scale = _useState2[0],
       setScale = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    about: 1,
-    partners: 1,
-    timeline: 1
-  }),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState4 = _slicedToArray(_useState3, 2),
       opacity = _useState4[0],
       setOpacity = _useState4[1];
@@ -811,20 +795,20 @@ function handleScroll(section, object) {
   var handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     var DOM = document.getElementById(section);
     var distanceTop = getOffset(DOM);
-    var scale = 1,
-        opacity = 1;
+    var cScale = 1,
+        cOpacity = 1;
 
     if (window.scrollY > distanceTop + DOM.offsetHeight) {
-      scale = 1.3;
-      opacity = 0;
+      cScale = 1.3;
+      cOpacity = 0;
     } else {
       var value = Math.floor(window.scrollY / (window.scrollY + DOM.offsetHeight) * 100);
-      opacity = value / 100;
-      scale = 0.3 * value / 100 + 1;
+      cOpacity = value / 100;
+      cScale = 0.3 * value / 100 + 1;
     }
 
-    setScale.apply(void 0, _toConsumableArray(scale).concat([{}]));
-    setOpacity(opacity);
+    setScale(cScale);
+    setOpacity(cOpacity);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     window.addEventListener("scroll", handleScroll, true);
@@ -913,7 +897,7 @@ var TutorialContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"
 var UsersContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n\n    p {\n        width: 50%;\n        padding: 10px;\n        box-sizing: border-box;\n    }\n    \n"])));
 
 function About() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("about-container");
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("about-container", "about");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
     id: "about-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
@@ -1021,7 +1005,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Partners() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("partner-container");
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("partner-container", "partners");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
     id: "partner-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
@@ -1106,7 +1090,7 @@ var TimelineContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"
 var TimelineItem = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 3em 2em 2em;\n\tposition: relative;\n\tcolor: rgba(black, .7);\n\tborder-left: 2px solid rgba(0,0,0, .3);\n\t\n\tp {\n\t\tfont-size: 16px;\n\t}\n\n\t&::after {\n\t\twidth: 10px;\n\t\theight: 10px;\n\t\tdisplay: block;\n\t\ttop: 1em;\n\t\tposition: absolute;\n\t\tleft: -7px;\n\t\tborder-radius: 10px;\n\t\tcontent: '';\n\t\tborder: 2px solid rgba(0,0,0, .3);\n\t\tbackground: white;\n\t}\n\n\t&:last-child {\n\t\tborder-image: linear-gradient(\n\t\t\tto bottom,\n\t\t\trgba(0,0,0, .3),\n\t\t\trgba(0,0,0, 0)) 1 100%\n\t\t;\n\t}\n"])));
 
 function Timeline() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("timeline-container");
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("timeline-container", "timeline");
   console.log(scrollParameters);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {

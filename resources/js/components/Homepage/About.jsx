@@ -53,7 +53,7 @@ const UsersContainer = styled.div`
 
 
 function About() {
-    const scrollParameters = handleScroll("about-container");
+    const scrollParameters = handleScroll("about-container", "about");
 
     return (
         <Container id="about-container">

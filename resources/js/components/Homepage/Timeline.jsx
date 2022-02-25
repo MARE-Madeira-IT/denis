@@ -43,7 +43,7 @@ const TimelineItem = styled.div`
 
 
 function Timeline() {
-    const scrollParameters = handleScroll("timeline-container");
+    const scrollParameters = handleScroll("timeline-container", "timeline");
     console.log(scrollParameters);
     return (
         <Container>

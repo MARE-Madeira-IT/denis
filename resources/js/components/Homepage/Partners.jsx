@@ -3,7 +3,7 @@ import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
 
 function Partners() {
-    const scrollParameters = handleScroll("partner-container");
+    const scrollParameters = handleScroll("partner-container", "partners");
 
     return (
         <Container id="partner-container">
