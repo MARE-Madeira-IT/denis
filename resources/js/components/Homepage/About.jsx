@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
+import { Link } from 'react-router-dom';
 
 const StyledContent = styled(Content)`
     h2 {
@@ -50,7 +51,26 @@ const UsersContainer = styled.div`
     
 `;
 
+const MapLink = styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
 
+    p {
+        
+        color: black;
+        text-decoration: none;
+        
+    }
+
+    img {
+        margin-top: 5px;
+        width: 25px;
+    }
+    
+`;
 
 function About() {
     const scrollParameters = handleScroll("about-container", "about");
@@ -72,6 +92,11 @@ function About() {
                         <li> Historical information in dynamic views</li>
                         <li> Credibility from experts validation</li>
                     </ul>
+                    <MapLink to="/map">
+                        <p>Check The Lastest Reports</p>
+                        <img src="/images/about/map-link.svg" alt="" />
+                    </MapLink>
+
                     <h2>How it Works</h2>
                     <TutorialContainer>
                         <div>
@@ -106,6 +131,8 @@ function About() {
                     <div>
                         <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!</p>
                     </div>
+
+
                 </div >
             </StyledContent >
         </Container >
