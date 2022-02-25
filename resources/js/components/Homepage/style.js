@@ -21,16 +21,7 @@ export const Title = styled.div`
         width: 100%;
         height: 30%;
         z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: left;
         background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));
-
-        h2 {
-            font-size: 40px;
-            color: white;
-            margin-left: 40px;
-        }
     }
 
     img {
@@ -51,6 +42,7 @@ export const Content = styled.div`
     min-height: 100vh;
     padding: 100px 48px;
     box-sizing: border-box;
+    text-align: justify;
 
     .content-width {
         width: 80%;

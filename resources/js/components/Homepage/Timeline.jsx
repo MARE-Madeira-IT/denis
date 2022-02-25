@@ -48,9 +48,6 @@ function Timeline() {
     return (
         <Container>
             <Title id="timeline-container">
-                <div style={{ opacity: scrollParameters.opacity }}>
-                    <h2>Timeline</h2>
-                </div>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/3.jpg" alt="" />
             </Title>
             <Content>

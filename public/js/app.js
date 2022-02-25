@@ -782,11 +782,6 @@ function handleScroll(section) {
       scale = _useState2[0],
       setScale = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
-      _useState4 = _slicedToArray(_useState3, 2),
-      opacity = _useState4[0],
-      setOpacity = _useState4[1];
-
   function getOffset(el) {
     var rect = el.getBoundingClientRect();
     return rect.top + window.scrollY;
@@ -795,20 +790,16 @@ function handleScroll(section) {
   var handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     var DOM = document.getElementById(section);
     var distanceTop = getOffset(DOM);
-    var cScale = 1,
-        cOpacity = 1;
+    var cScale = 1;
 
     if (window.scrollY > distanceTop + DOM.offsetHeight) {
       cScale = 1.3;
-      cOpacity = 0;
     } else {
       var value = Math.floor(window.scrollY / (window.scrollY + DOM.offsetHeight) * 100);
-      cOpacity = value / 100;
       cScale = 0.3 * value / 100 + 1;
     }
 
     setScale(cScale);
-    setOpacity(cOpacity);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     window.addEventListener("scroll", handleScroll, true);
@@ -817,7 +808,6 @@ function handleScroll(section) {
     };
   }, [handleScroll]);
   return {
-    opacity: opacity,
     scale: scale
   };
 }
@@ -878,10 +868,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./resources/js/components/Homepage/style.js");
 /* harmony import */ var _Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Helper/handleScroll */ "./resources/js/components/Helper/handleScroll.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_animation_on_scroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-animation-on-scroll */ "./node_modules/react-animation-on-scroll/dist/esm/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject, _templateObject2, _templateObject3;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -892,85 +883,79 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var StyledContent = (0,styled_components__WEBPACK_IMPORTED_MODULE_4__["default"])(_style__WEBPACK_IMPORTED_MODULE_1__.Content)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    h2 {\n        font-weight: 400;\n        font-size: 40px;\n        margin: 40px 0px;\n    }\n    \n    p, li {\n        font-weight: lighter;\n    }\n    \n"])));
-var TutorialContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-around;\n\n    div {\n        width: 33%;\n        padding: 10px;\n        box-sizing: border-box;\n\n        img {\n            width: 60%;\n            margin: auto;\n            display: block;\n        }\n\n        p {\n            text-align: center;\n            font-size: 18px;\n        }\n    }\n    \n"])));
-var UsersContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n\n    p {\n        width: 50%;\n        padding: 10px;\n        box-sizing: border-box;\n    }\n    \n"])));
+
+var StyledContent = (0,styled_components__WEBPACK_IMPORTED_MODULE_5__["default"])(_style__WEBPACK_IMPORTED_MODULE_1__.Content)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    h2 {\n        font-weight: 400;\n        font-size: 40px;\n        margin: 40px 0px;\n    }\n    \n    p, li {\n        font-weight: lighter;\n    }\n    \n"])));
+var TutorialContainer = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-around;\n\n    div {\n        width: 33%;\n        padding: 10px;\n        box-sizing: border-box;\n\n        img {\n            width: 60%;\n            margin: auto;\n            display: block;\n        }\n\n        p {\n            text-align: center;\n            font-size: 18px;\n        }\n    }\n    \n"])));
+var UsersContainer = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n\n    p {\n        width: 50%;\n        padding: 10px;\n        box-sizing: border-box;\n    }\n    \n"])));
 
 function About() {
   var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("about-container", "about");
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
     id: "about-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        style: {
-          opacity: scrollParameters.opacity
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          children: "lorem"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
         style: {
           transform: "scale(" + scrollParameters.scale + ")"
         },
         src: "/images/homepage/1.jpg",
         alt: ""
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(StyledContent, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(StyledContent, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "content-width",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
           children: "About Us"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
             children: " Transparency of data publicly available on the platform"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
             children: " Historical information in dynamic views"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
             children: " Credibility from experts validation"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
           children: "How it Works"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(TutorialContainer, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(TutorialContainer, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
               src: "/images/about/observation.svg",
               alt: ""
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
               children: "Collect your observations"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
               src: "/images/about/add.svg",
               alt: ""
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
               children: "Insert into the database"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
               src: "/images/about/visualize.svg",
               alt: ""
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
               children: "Visualize obervations around the Atlantic"
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
           children: "Who Is LOREM For?"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(UsersContainer, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(UsersContainer, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
           children: "Community"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             children: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!"
           })
         })]
@@ -1008,21 +993,14 @@ function Partners() {
   var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("partner-container", "partners");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
     id: "partner-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        style: {
-          opacity: scrollParameters.opacity
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          children: "Partners"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         style: {
           transform: "scale(" + scrollParameters.scale + ")"
         },
         src: "/images/homepage/2.jpg",
         alt: ""
-      })]
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Content, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "content-width",
@@ -1093,22 +1071,15 @@ function Timeline() {
   var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("timeline-container", "timeline");
   console.log(scrollParameters);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
       id: "timeline-container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        style: {
-          opacity: scrollParameters.opacity
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          children: "Timeline"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         style: {
           transform: "scale(" + scrollParameters.scale + ")"
         },
         src: "/images/homepage/3.jpg",
         alt: ""
-      })]
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Content, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "content-width",
@@ -1186,8 +1157,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: space-around;\n"])));
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 50%;\n    height: 100vh;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 0;\n    overflow: hidden;\n    \n    div {\n        position: absolute;\n        bottom: 0px;\n        width: 100%;\n        height: 30%;\n        z-index: 2;\n        display: flex;\n        align-items: center;\n        justify-content: left;\n        background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));\n\n        h2 {\n            font-size: 40px;\n            color: white;\n            margin-left: 40px;\n        }\n    }\n\n    img {\n        position: absolute;\n        left: 0%;\n        top: 0%;\n        right: 0%;\n        bottom: 0%;\n        width: 100%;\n        height: 100%;\n        object-fit: cover;\n        transition: .2s ease;\n    }\n"])));
-var Content = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 50%;\n    min-height: 100vh;\n    padding: 100px 48px;\n    box-sizing: border-box;\n\n    .content-width {\n        width: 80%;\n        margin: auto;\n    }\n"])));
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 50%;\n    height: 100vh;\n    position: -webkit-sticky;\n    position: sticky;\n    top: 0;\n    overflow: hidden;\n    \n    div {\n        position: absolute;\n        bottom: 0px;\n        width: 100%;\n        height: 30%;\n        z-index: 2;\n        background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));\n    }\n\n    img {\n        position: absolute;\n        left: 0%;\n        top: 0%;\n        right: 0%;\n        bottom: 0%;\n        width: 100%;\n        height: 100%;\n        object-fit: cover;\n        transition: .2s ease;\n    }\n"])));
+var Content = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 50%;\n    min-height: 100vh;\n    padding: 100px 48px;\n    box-sizing: border-box;\n    text-align: justify;\n\n    .content-width {\n        width: 80%;\n        margin: auto;\n    }\n"])));
 
 /***/ }),
 
@@ -1239,7 +1210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _templateObject;
+var _templateObject, _templateObject2;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -1247,15 +1218,25 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    left: 0%;\n    top: 0%;\n    right: 0%;\n    bottom: auto;\n    z-index: 990;\n    width: 50%;\n    padding: 48px;\n    text-transform: uppercase;\n    color: white;\n\n    h1 {\n        font-size: 48px;\n        margin-bottom: 10px;\n    }\n\n    p {\n        margin-top: 0px;\n        font-size: 18px;\n    }\n"])));
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    left: 0%;\n    top: 0%;\n    right: 0%;\n    bottom: auto;\n    z-index: 990;\n    width: 100%;\n    text-transform: uppercase;\n    color: white;\n"])));
+var Flex = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 48px;\n\n    div {\n        width: 50%;\n\n        h1 {\n            font-size: 48px;\n            margin-bottom: 10px;\n        }\n\n        p {\n            margin-top: 0px;\n            font-size: 18px;\n        }\n\n        img {\n            width: 35px;\n            float: right;\n            cursor: pointer;\n        }\n    }\n\n    \n"])));
 
 function Navbar() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Container, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "LOREM"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-      children: "Lorem ipsum dolor."
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Container, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Flex, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+          children: "LOREM"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          children: "Lorem ipsum dolor."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+          src: "/images/navbar/login.svg",
+          alt: ""
+        })
+      })]
+    })
   });
 }
 
@@ -2271,6 +2252,455 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function e(e){this.message=e}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=!0===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (o);
 //# sourceMappingURL=jwt-decode.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash.throttle/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash.throttle/index.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof __webpack_require__.g == 'object' && __webpack_require__.g && __webpack_require__.g.Object === Object && __webpack_require__.g;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = throttle;
 
 
 /***/ }),
@@ -3361,6 +3791,286 @@ module.exports = ReactPropTypesSecret;
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
+
+/***/ }),
+
+/***/ "./node_modules/react-animation-on-scroll/dist/esm/components/AnimationOnScroll.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/react-animation-on-scroll/dist/esm/components/AnimationOnScroll.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AnimationOnScroll": () => (/* binding */ AnimationOnScroll)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash.throttle */ "./node_modules/lodash.throttle/index.js");
+/* harmony import */ var lodash_throttle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_throttle__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const animatedClass = 'animate__animated';
+const serverSide = typeof window === 'undefined';
+let scrollableParentRefInitialValue = undefined;
+
+if (!serverSide) {
+  scrollableParentRefInitialValue = window;
+}
+
+const AnimationOnScroll = ({
+  offset = 150,
+  duration = 1,
+  style: styleProps,
+  className: classNameProps,
+  initiallyVisible = false,
+  animateIn,
+  afterAnimatedIn,
+  animateOut,
+  delay = 0,
+  animatePreScroll = true,
+  afterAnimatedOut,
+  scrollableParentSelector,
+  animateOnce = false,
+  children
+}) => {
+  const [classes, setClasses] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(animatedClass);
+  const [style, setStyle] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    animationDuration: `${duration}s`,
+    opacity: initiallyVisible ? 1 : 0
+  });
+  const node = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const animating = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  const visibilityRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    onScreen: false,
+    inViewport: false
+  });
+  const delayedAnimationTORef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(undefined);
+  const callbackTORef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(undefined);
+  const scrollableParentRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(scrollableParentRefInitialValue);
+  const getElementTop = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(elm => {
+    let yPos = 0;
+
+    while (elm && elm.offsetTop !== undefined && elm.clientTop !== undefined) {
+      yPos += elm.offsetTop + elm.clientTop;
+      elm = elm.offsetParent;
+    }
+
+    return yPos;
+  }, []);
+  const getScrollPos = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (scrollableParentRef.current.pageYOffset !== undefined) {
+      return scrollableParentRef.current.pageYOffset;
+    }
+
+    return scrollableParentRef.current.scrollTop;
+  }, [scrollableParentRef]);
+  const getScrollableParentHeight = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (scrollableParentRef.current.innerHeight !== undefined) {
+      return scrollableParentRef.current.innerHeight;
+    }
+
+    return scrollableParentRef.current.clientHeight;
+  }, [scrollableParentRef]);
+  const getViewportTop = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    return getScrollPos() + offset;
+  }, [offset, getScrollPos]);
+  const getViewportBottom = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    return getScrollPos() + getScrollableParentHeight() - offset;
+  }, [offset, getScrollPos, getScrollableParentHeight]);
+  const isInViewport = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(y => {
+    return y >= getViewportTop() && y <= getViewportBottom();
+  }, [getViewportTop, getViewportBottom]);
+  const isAboveViewport = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(y => {
+    return y < getViewportTop();
+  }, [getViewportTop]);
+  const isBelowViewport = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(y => {
+    return y > getViewportBottom();
+  }, [getViewportBottom]);
+  const inViewport = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((elementTop, elementBottom) => {
+    return isInViewport(elementTop) || isInViewport(elementBottom) || isAboveViewport(elementTop) && isBelowViewport(elementBottom);
+  }, [isInViewport, isAboveViewport, isBelowViewport]);
+  const isAboveScreen = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(y => {
+    return y < getScrollPos();
+  }, [getScrollPos]);
+  const isBelowScreen = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(y => {
+    return y > getScrollPos() + getScrollableParentHeight();
+  }, [getScrollPos, getScrollableParentHeight]);
+  const onScreen = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((elementTop, elementBottom) => {
+    return !isAboveScreen(elementBottom) && !isBelowScreen(elementTop);
+  }, [isAboveScreen, isBelowScreen]);
+  const getVisibility = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    const elementTop = getElementTop(node.current) - getElementTop(scrollableParentRef.current);
+    const elementBottom = elementTop + node.current.clientHeight;
+    return {
+      inViewport: inViewport(elementTop, elementBottom),
+      onScreen: onScreen(elementTop, elementBottom)
+    };
+  }, [getElementTop, node, inViewport, onScreen, scrollableParentRef]);
+  const visibilityHasChanged = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((previousVis, currentVis) => {
+    return previousVis.inViewport !== currentVis.inViewport || previousVis.onScreen !== currentVis.onScreen;
+  }, []);
+  const animate = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((animation, callback) => {
+    delayedAnimationTORef.current = setTimeout(() => {
+      animating.current = true;
+      setClasses(`${animatedClass} ${animation}`);
+      setStyle({
+        animationDuration: `${duration}s`
+      });
+      callbackTORef.current = setTimeout(callback, duration * 1000);
+    }, delay);
+  }, [animating, delay, duration]);
+  const animateInTrigger = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(callback => {
+    animate(animateIn, () => {
+      if (!animateOnce) {
+        setStyle({
+          animationDuration: `${duration}s`,
+          opacity: 1
+        });
+        animating.current = false;
+      }
+
+      const vis = getVisibility();
+
+      if (callback) {
+        callback(vis);
+      }
+    });
+  }, [animating, animateIn, animateOnce, duration, animate, getVisibility]);
+  const animateOutTrigger = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(callback => {
+    animate(animateOut, () => {
+      setClasses(animatedClass);
+      setStyle({
+        animationDuration: `${duration}s`,
+        opacity: 0
+      });
+      const vis = getVisibility();
+
+      if (vis.inViewport && animateIn) {
+        animateInTrigger(afterAnimatedIn);
+      } else {
+        animating.current = false;
+      }
+
+      if (callback) {
+        callback(vis);
+      }
+    });
+  }, [animating, animate, animateIn, duration, afterAnimatedIn, animateInTrigger, animateOut, getVisibility]);
+  const handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    if (!animating.current) {
+      const {
+        current: visibility
+      } = visibilityRef;
+      const currentVis = getVisibility();
+
+      if (visibilityHasChanged(visibility, currentVis)) {
+        clearTimeout(delayedAnimationTORef.current);
+
+        if (!currentVis.onScreen) {
+          setClasses(animatedClass);
+          setStyle({
+            animationDuration: `${duration}s`,
+            opacity: initiallyVisible ? 1 : 0
+          });
+        } else if (currentVis.inViewport && animateIn) {
+          animateInTrigger(afterAnimatedIn);
+        } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === '1') {
+          animateOutTrigger(afterAnimatedOut);
+        }
+
+        visibilityRef.current = currentVis;
+      }
+    }
+  }, [afterAnimatedIn, afterAnimatedOut, animateIn, animateInTrigger, animateOut, duration, initiallyVisible, visibilityHasChanged, animateOutTrigger, getVisibility]);
+  const listener = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => lodash_throttle__WEBPACK_IMPORTED_MODULE_1___default()(() => {
+    handleScroll();
+  }, 50), [handleScroll]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!serverSide) {
+      const parentSelector = scrollableParentSelector;
+      scrollableParentRef.current = parentSelector ? document.querySelector(parentSelector) : window;
+
+      if (scrollableParentRef.current && scrollableParentRef.current.addEventListener) {
+        scrollableParentRef.current.addEventListener('scroll', listener);
+      } else {
+        console.warn(`Cannot find element by locator: ${scrollableParentSelector}`);
+      }
+
+      if (animatePreScroll) {
+        handleScroll();
+      }
+
+      return () => {
+        clearTimeout(delayedAnimationTORef.current);
+        clearTimeout(callbackTORef.current);
+
+        if (window && window.removeEventListener) {
+          window.removeEventListener('scroll', listener);
+        }
+      };
+    }
+  }, [handleScroll, scrollableParentSelector, scrollableParentRef, listener, animatePreScroll]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    ref: node,
+    className: classNameProps ? `${classNameProps} ${classes}` : classes,
+    style: Object.assign({}, style, styleProps)
+  }, children);
+};
+AnimationOnScroll.propTypes = {
+  offset: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+  duration: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+  style: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().any),
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+  initiallyVisible: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool),
+  animateIn: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+  afterAnimatedIn: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().any),
+  animateOut: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+  delay: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().number),
+  animatePreScroll: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool),
+  afterAnimatedOut: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().any),
+  scrollableParentSelector: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().string),
+  animateOnce: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool),
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().any)
+};
+//# sourceMappingURL=AnimationOnScroll.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-animation-on-scroll/dist/esm/components/index.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/react-animation-on-scroll/dist/esm/components/index.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AnimationOnScroll": () => (/* reexport safe */ _AnimationOnScroll__WEBPACK_IMPORTED_MODULE_0__.AnimationOnScroll)
+/* harmony export */ });
+/* harmony import */ var _AnimationOnScroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimationOnScroll */ "./node_modules/react-animation-on-scroll/dist/esm/components/AnimationOnScroll.js");
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-animation-on-scroll/dist/esm/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/react-animation-on-scroll/dist/esm/index.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AnimationOnScroll": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_0__.AnimationOnScroll)
+/* harmony export */ });
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./node_modules/react-animation-on-scroll/dist/esm/components/index.js");
+
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -39213,6 +39923,18 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /******/ 				}
 /******/ 			}
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

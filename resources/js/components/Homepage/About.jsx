@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 const StyledContent = styled(Content)`
     h2 {
@@ -58,12 +59,7 @@ function About() {
     return (
         <Container id="about-container">
             <Title>
-                <div style={{ opacity: scrollParameters.opacity }}>
-                    <h2>lorem</h2>
-                </div>
-
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />
-
             </Title>
             <StyledContent>
                 <div className="content-width">

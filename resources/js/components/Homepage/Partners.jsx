@@ -8,12 +8,7 @@ function Partners() {
     return (
         <Container id="partner-container">
             <Title>
-                <div style={{ opacity: scrollParameters.opacity }}>
-                    <h2>Partners</h2>
-                </div>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
-
-
             </Title>
             <Content>
                 <div className="content-width">
