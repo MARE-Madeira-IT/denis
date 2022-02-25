@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
-import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 const StyledContent = styled(Content)`
     h2 {

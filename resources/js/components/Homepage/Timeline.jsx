@@ -6,7 +6,7 @@ import handleScroll from "../Helper/handleScroll";
 const TimelineContainer = styled.div`
     max-width: 1024px;
 	width: 90%;
-	margin: 0 auto;
+	margin: 50px auto;
 `;
 
 const TimelineItem = styled.div`
@@ -14,7 +14,7 @@ const TimelineItem = styled.div`
 	position: relative;
 	color: rgba(black, .7);
 	border-left: 2px solid rgba(0,0,0, .3);
-	
+    
 	p {
 		font-size: 16px;
 	}
@@ -52,6 +52,11 @@ function Timeline() {
             </Title>
             <Content>
                 <div className="content-width">
+                    <h2>Timeline</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
+                    </p>
                     <TimelineContainer>
 
                         <TimelineItem >
