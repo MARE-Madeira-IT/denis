@@ -57,12 +57,11 @@ const MapLink = styled(Link)`
     justify-content: center;
     padding: 10px;
     box-sizing: border-box;
-
+    text-decoration: none;
+    
     p {
-        
+        font-weight: 900;
         color: black;
-        text-decoration: none;
-        
     }
 
     img {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -11,6 +12,7 @@ const Container = styled.div`
     width: 100%;
     text-transform: uppercase;
     color: white;
+    
 `;
 
 const Flex = styled.div`
@@ -19,8 +21,7 @@ const Flex = styled.div`
     align-items: center;
     padding: 48px;
 
-    div {
-        width: 50%;
+    .column {
 
         h1 {
             font-size: 48px;
@@ -46,15 +47,15 @@ function Navbar() {
     return (
         <Container>
             <Flex>
-                <div>
+                <div className='column' style={{ width: "50%" }}>
                     <h1>LOREM</h1>
                     <p>Lorem ipsum dolor.</p>
 
                 </div>
-                <div>
+                <Link className='column' to="/dashboard">
                     <img src="/images/navbar/login.svg" alt="" />
 
-                </div>
+                </Link>
             </Flex>
         </Container>
     )

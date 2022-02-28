@@ -9,13 +9,19 @@ const Container = styled.div`
     scroll-behavior: smooth;
 `;
 
+const Content = styled.div`
+    z-index: 2;
+`;
+
 function Homepage() {
     return (
         <Container>
             <Navbar />
-            <About />
-            <Partners />
-            <Timeline />
+            <Content>
+                <About />
+                <Partners />
+                <Timeline />
+            </Content>
         </Container>
     )
 }
