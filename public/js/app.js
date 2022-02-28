@@ -1400,11 +1400,9 @@ function handleScroll(section) {
     var DOM = document.getElementById(section);
     var distanceTop = getOffset(DOM);
 
-    var distanceCopy = _objectSpread({}, distance); // copying the old datas array
+    var distanceCopy = _objectSpread({}, distance);
 
-
-    distanceCopy[section] = distanceTop; // replace e.target.value with whatever you want to change it to
-
+    distanceCopy[section] = distanceTop;
     setDistance(distanceCopy);
   }, []);
   var handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (initDistance) {
@@ -1415,16 +1413,7 @@ function handleScroll(section) {
     if (window.scrollY > distanceTop + DOM.offsetHeight) {
       cScale = 1.3;
     } else if (window.scrollY >= initDistance[section] && window.scrollY < distanceTop + DOM.offsetHeight) {
-      var value = Math.floor(window.scrollY / (initDistance[section] + DOM.offsetHeight) * 100);
-
-      if (section == "partnerContainer") {
-        console.log("-------------------------");
-        console.log(initDistance[section]);
-        console.log(initDistance[section] + DOM.offsetHeight);
-        console.log(window.scrollY);
-        console.log(value);
-      }
-
+      var value = Math.floor((window.scrollY - initDistance[section]) * 100 / DOM.offsetHeight);
       cScale = 0.3 * value / 100 + 1;
     }
 
@@ -1437,11 +1426,9 @@ function handleScroll(section) {
     var DOM = document.getElementById(section);
     var distanceTop = getOffset(DOM);
 
-    var distanceCopy = _objectSpread({}, distance); // copying the old datas array
+    var distanceCopy = _objectSpread({}, distance);
 
-
-    distanceCopy[section] = distanceTop; // replace e.target.value with whatever you want to change it to
-
+    distanceCopy[section] = distanceTop;
     setDistance(distanceCopy);
     window.addEventListener("scroll", function () {
       return handleScroll(distanceCopy);
