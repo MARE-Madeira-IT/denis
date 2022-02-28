@@ -1964,7 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _templateObject, _templateObject2;
+var _templateObject, _templateObject2, _templateObject3;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -1973,31 +1973,28 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    left: 0%;\n    top: 0%;\n    right: 0%;\n    bottom: auto;\n    z-index: 990;\n    width: 100%;\n    text-transform: uppercase;\n    color: white;\n    \n"])));
-var Flex = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 48px;\n\n    .column {\n\n        h1 {\n            font-size: 48px;\n            margin-bottom: 10px;\n        }\n\n        p {\n            margin-top: 0px;\n            font-size: 18px;\n        }\n\n        img {\n            width: 35px;\n            float: right;\n            cursor: pointer;\n        }\n    }\n\n    \n"])));
+var FlexContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    top: 0%;\n    bottom: auto;\n    z-index: 990;\n    width: 100%;\n    text-transform: uppercase;\n    color: white;\n"])));
+var Logo = (0,styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(FlexContainer)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    left:48px;\n    top: 48px;\n\n    h1 {\n        font-size: 48px;\n        margin-bottom: 10px;\n        margin-top: 0px;\n    }\n\n    p {\n        margin-top: 0px;\n        font-size: 18px;\n    }\n    \n"])));
+var Login = (0,styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(FlexContainer)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    right:48px;\n    top: 48px;\n    width: 35px;\n\n    .link {\n        img {\n            width: 100%;\n            float: right;\n            cursor: pointer;\n        }     \n    }   \n"])));
 
 function Navbar() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Container, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Flex, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "column",
-        style: {
-          width: "50%"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-          children: "LOREM"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-          children: "Lorem ipsum dolor."
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        className: "column",
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(Logo, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+        children: "LOREM"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        children: "Lorem ipsum dolor."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Login, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        className: "link",
         to: "/dashboard",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
           src: "/images/navbar/login.svg",
           alt: ""
         })
-      })]
-    })
+      })
+    })]
   });
 }
 
