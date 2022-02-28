@@ -1353,6 +1353,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ handleScroll)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1367,38 +1373,87 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function handleScroll(section) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    aboutContainer: 1,
+    partnerContainer: 1,
+    timelineContainer: 1
+  }),
       _useState2 = _slicedToArray(_useState, 2),
       scale = _useState2[0],
       setScale = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    aboutContainer: 0,
+    partnerContainer: 0,
+    timelineContainer: 0
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      distance = _useState4[0],
+      setDistance = _useState4[1];
 
   function getOffset(el) {
     var rect = el.getBoundingClientRect();
     return rect.top + window.scrollY;
   }
 
-  var handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var DOM = document.getElementById(section);
+    var distanceTop = getOffset(DOM);
+
+    var distanceCopy = _objectSpread({}, distance); // copying the old datas array
+
+
+    distanceCopy[section] = distanceTop; // replace e.target.value with whatever you want to change it to
+
+    setDistance(distanceCopy);
+  }, []);
+  var handleScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (initDistance) {
     var DOM = document.getElementById(section);
     var distanceTop = getOffset(DOM);
     var cScale = 1;
 
     if (window.scrollY > distanceTop + DOM.offsetHeight) {
       cScale = 1.3;
-    } else {
-      var value = Math.floor(window.scrollY / (window.scrollY + DOM.offsetHeight) * 100);
+    } else if (window.scrollY >= initDistance[section] && window.scrollY < distanceTop + DOM.offsetHeight) {
+      var value = Math.floor(window.scrollY / (initDistance[section] + DOM.offsetHeight) * 100);
+
+      if (section == "partnerContainer") {
+        console.log("-------------------------");
+        console.log(initDistance[section]);
+        console.log(initDistance[section] + DOM.offsetHeight);
+        console.log(window.scrollY);
+        console.log(value);
+      }
+
       cScale = 0.3 * value / 100 + 1;
     }
 
-    setScale(cScale);
+    var scaleCopy = _objectSpread({}, scale);
+
+    scaleCopy[section] = cScale;
+    setScale(scaleCopy);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    window.addEventListener("scroll", handleScroll, true);
+    var DOM = document.getElementById(section);
+    var distanceTop = getOffset(DOM);
+
+    var distanceCopy = _objectSpread({}, distance); // copying the old datas array
+
+
+    distanceCopy[section] = distanceTop; // replace e.target.value with whatever you want to change it to
+
+    setDistance(distanceCopy);
+    window.addEventListener("scroll", function () {
+      return handleScroll(distanceCopy);
+    }, true);
     return function () {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", function () {
+        return handleScroll(distanceCopy);
+      });
     };
   }, [handleScroll]);
   return {
-    scale: scale
+    scale: scale[section]
   };
 }
 
@@ -1483,9 +1538,9 @@ var UsersContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].d
 var MapLink = (0,styled_components__WEBPACK_IMPORTED_MODULE_4__["default"])(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 10px;\n    box-sizing: border-box;\n    text-decoration: none;\n    \n    p {\n        font-weight: 900;\n        color: black;\n    }\n\n    img {\n        margin-top: 5px;\n        width: 25px;\n    }\n    \n"])));
 
 function About() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("about-container", "about");
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("aboutContainer");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
-    id: "about-container",
+    id: "aboutContainer",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         style: {
@@ -1600,9 +1655,9 @@ var StyledContent = (0,styled_components__WEBPACK_IMPORTED_MODULE_4__["default"]
 var Flex = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    margin: 50px 0px;\n    flex-wrap: wrap;\n    \n    div {\n        width: 33%;\n        padding: 20px;\n        box-sizing: border-box;\n\n        img {\n            width: 100%;\n        }\n    }\n"])));
 
 function Partners() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("partner-container", "partners");
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("partnerContainer");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
-    id: "partner-container",
+    id: "partnerContainer",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         style: {
@@ -1707,11 +1762,10 @@ var TimelineContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"
 var TimelineItem = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 3em 2em 2em;\n\tposition: relative;\n\tcolor: rgba(black, .7);\n\tborder-left: 2px solid rgba(0,0,0, .3);\n    \n\tp {\n\t\tfont-size: 16px;\n\t}\n\n\t&::after {\n\t\twidth: 10px;\n\t\theight: 10px;\n\t\tdisplay: block;\n\t\ttop: 1em;\n\t\tposition: absolute;\n\t\tleft: -7px;\n\t\tborder-radius: 10px;\n\t\tcontent: '';\n\t\tborder: 2px solid rgba(0,0,0, .3);\n\t\tbackground: white;\n\t}\n\n\t&:last-child {\n\t\tborder-image: linear-gradient(\n\t\t\tto bottom,\n\t\t\trgba(0,0,0, .3),\n\t\t\trgba(0,0,0, 0)) 1 100%\n\t\t;\n\t}\n"])));
 
 function Timeline() {
-  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("timeline-container", "timeline");
-  console.log(scrollParameters);
+  var scrollParameters = (0,_Helper_handleScroll__WEBPACK_IMPORTED_MODULE_2__["default"])("timelineContainer", "timeline");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_1__.Container, {
+    id: "timelineContainer",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.Title, {
-      id: "timeline-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
         style: {
           transform: "scale(" + scrollParameters.scale + ")"

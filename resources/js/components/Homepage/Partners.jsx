@@ -39,10 +39,10 @@ const Flex = styled.div`
 `;
 
 function Partners() {
-    const scrollParameters = handleScroll("partner-container", "partners");
+    const scrollParameters = handleScroll("partnerContainer");
 
     return (
-        <Container id="partner-container">
+        <Container id="partnerContainer">
             <Title>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
             </Title>

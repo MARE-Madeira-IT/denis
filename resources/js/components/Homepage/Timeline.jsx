@@ -43,11 +43,11 @@ const TimelineItem = styled.div`
 
 
 function Timeline() {
-    const scrollParameters = handleScroll("timeline-container", "timeline");
-    console.log(scrollParameters);
+    const scrollParameters = handleScroll("timelineContainer", "timeline");
+
     return (
-        <Container>
-            <Title id="timeline-container">
+        <Container id="timelineContainer" >
+            <Title >
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/3.jpg" alt="" />
             </Title>
             <Content>

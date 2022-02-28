@@ -72,10 +72,10 @@ const MapLink = styled(Link)`
 `;
 
 function About() {
-    const scrollParameters = handleScroll("about-container", "about");
+    const scrollParameters = handleScroll("aboutContainer");
 
     return (
-        <Container id="about-container">
+        <Container id="aboutContainer">
             <Title>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />
             </Title>
