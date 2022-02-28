@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Route, Routes } from "react-router-dom";
 import Homepage from './Components/Homepage';
+import Navbar from './Navbar'
 
 const Container = styled.div`
     width: 100%;
@@ -15,12 +16,11 @@ const Container = styled.div`
 `;
 
 
-function DashboardLayout() {
+function DashboardLayout({ children }) {
     return (
         <Container>
-            <Routes>
-                <Route path="/dashboard" element={<Homepage />} />
-            </Routes>
+            <Navbar />
+            {children}
         </Container>
     )
 }

@@ -65,7 +65,7 @@ const MapLink = styled(Link)`
     }
 
     img {
-        margin-top: 5px;
+        margin-top: -10px;
         width: 25px;
     }
     

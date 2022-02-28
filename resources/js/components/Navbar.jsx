@@ -15,11 +15,12 @@ const FlexContainer = styled.div`
 const Logo = styled(FlexContainer)`
     left:48px;
     top: 48px;
-
+    
     h1 {
         font-size: 48px;
         margin-bottom: 10px;
         margin-top: 0px;
+        color: white;
     }
 
     p {

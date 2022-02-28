@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducer'
 import ReactDOM from 'react-dom';
 import Router from './router';
-
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 ReactDOM.render(
     <Router />,

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="350pt"
+   height="367.5pt"
+   version="1.1"
+   viewBox="0 0 350 367.5"
+   id="svg12"
+   sodipodi:docname="dashboard.svg"
+   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs16" />
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="pt"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.54472476"
+     inkscape:cx="180.82527"
+     inkscape:cy="396.53053"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <g
+     id="g10"
+     transform="translate(-175,-105)">
+    <path
+       d="m 385,105 h 122.5 c 9.6641,0 17.5,9.6641 17.5,17.5 v 175 c 0,9.6641 -7.8359,17.5 -17.5,17.5 H 385 c -9.6641,0 -17.5,-9.6641 -17.5,-17.5 v -175 c 0,-9.6641 7.8359,-17.5 17.5,-17.5 z"
+       id="path2" />
+    <path
+       d="M 192.5,262.5 H 315 c 9.6641,0 17.5,9.6641 17.5,17.5 v 175 c 0,9.6641 -7.8359,17.5 -17.5,17.5 H 192.5 C 182.8359,472.5 175,462.8359 175,455 V 280 c 0,-9.6641 7.8359,-17.5 17.5,-17.5 z"
+       id="path4" />
+    <path
+       d="M 192.5,105 H 315 c 9.6641,0 17.5,9.6641 17.5,17.5 v 105 c 0,9.6641 -7.8359,17.5 -17.5,17.5 H 192.5 c -9.6641,0 -17.5,-9.6641 -17.5,-17.5 v -105 c 0,-9.6641 7.8359,-17.5 17.5,-17.5 z"
+       id="path6" />
+    <path
+       d="m 385,332.5 h 122.5 c 9.6641,0 17.5,9.6641 17.5,17.5 v 105 c 0,9.6641 -7.8359,17.5 -17.5,17.5 H 385 c -9.6641,0 -17.5,-9.6641 -17.5,-17.5 V 350 c 0,-9.6641 7.8359,-17.5 17.5,-17.5 z"
+       id="path8" />
+  </g>
+</svg>
