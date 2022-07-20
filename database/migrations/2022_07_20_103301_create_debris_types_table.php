@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLmesTable extends Migration
+class CreateDebrisTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLmesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lmes', function (Blueprint $table) {
+        Schema::create('debris_types', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateLmesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lmes');
+        Schema::dropIfExists('debris_types');
     }
 }

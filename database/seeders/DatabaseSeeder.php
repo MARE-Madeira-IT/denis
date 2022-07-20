@@ -17,5 +17,14 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CountrySeeder::class);
         $this->call(LmeSeeder::class);
+
+        $this->call(DebrisMaterialSeeder::class);
+        $this->call(DebrisTypeSeeder::class);
+        $this->call(DebrisSizeSeeder::class);
+        $this->call(DebrisThicknessSeeder::class);
+        $this->call(DebrisHabitatSeeder::class);
+        $this->call(DebrisRugositySeeder::class);
+        $this->call(DebrisCategorySeeder::class);
+        $this->call(DebrisSubCategorySeeder::class);
     }
 }
