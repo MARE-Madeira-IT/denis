@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
         $this->call(CountrySeeder::class);
         $this->call(LmeSeeder::class);
 
@@ -26,5 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->call(DebrisRugositySeeder::class);
         $this->call(DebrisCategorySeeder::class);
         $this->call(DebrisSubCategorySeeder::class);
+
+        $this->call(TaxaLevelSeeder::class);
+        $this->call(TaxaSpeciesStatusSeeder::class);
+        $this->call(TaxaPopulationStatusSeeder::class);
+        $this->call(TaxaAbundanceSeeder::class);
+        $this->call(TaxaViabilitySeeder::class);
+        $this->call(TaxaMaturitySeeder::class);
+        $this->call(TaxaNativeRegionSeeder::class);
     }
 }
