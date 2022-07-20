@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 
 const StyledContent = styled(Content)`
     h2 {
-        font-weight: 400;
         font-size: 40px;
-        margin: 40px 0px;
+        margin: 50px 0px;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: bold;
     }
     
     p, li {
@@ -34,7 +35,8 @@ const TutorialContainer = styled.div`
 
         p {
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
+            margin-top: 10px;
         }
     }
     
@@ -44,6 +46,17 @@ const UsersContainer = styled.div`
     display: flex;
 
     p {
+        width: 50%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+`;
+
+const ProtocolContainer = styled.div`
+    display: flex;
+
+    .column {
         width: 50%;
         padding: 10px;
         box-sizing: border-box;
@@ -83,14 +96,16 @@ function About() {
                 <div className="content-width">
                     <h2>About Us</h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
+                        Marine debris is considered among the major threats to marine life, biodiversity, and ecosystems and causes particular concern due to its abundance, durability, and persistence in the marine environment. Moreover, marine debris contributes to the transfer of Non-Indigenous Species - NIS, acting as a vector for both first introductions in a new region and secondary spread within an already affected region.
+
                     </p>
-                    <ul>
+                    <p>Opportunistic sampling methodologies provide an extensive range of information from all around the world, allowing increasing knowledge and filling the gaps in data.</p>
+                    {false && <ul>
                         <li> Transparency of data publicly available on the platform</li>
                         <li> Historical information in dynamic views</li>
                         <li> Credibility from experts validation</li>
-                    </ul>
+                    </ul>}
+
                     <MapLink to="/map">
                         <p>Check The Lastest Reports</p>
                         <img src="/images/about/map-link.svg" alt="" />
@@ -100,7 +115,7 @@ function About() {
                     <TutorialContainer>
                         <div>
                             <img src="/images/about/observation.svg" alt="" />
-                            <p>Collect your observations</p>
+                            <p>Follow the protocol</p>
                         </div>
                         <div>
                             <img src="/images/about/add.svg" alt="" />
@@ -108,12 +123,12 @@ function About() {
                         </div>
                         <div>
                             <img src="/images/about/visualize.svg" alt="" />
-                            <p>Visualize obervations around the Atlantic</p>
+                            <p>Visualize obervations</p>
                         </div>
                     </TutorialContainer>
 
 
-                    <h2>Who Is LOREM For?</h2>
+                    <h2>Who Is DATABASE For?</h2>
                     <UsersContainer>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
@@ -123,13 +138,52 @@ function About() {
                         </p>
                     </UsersContainer>
 
-                    <h2>Community</h2>
-                    <div>
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!</p>
-                    </div>
-                    <div>
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!</p>
-                    </div>
+                    <h2>Protocol for opportunistic sampling</h2>
+
+                    <h3>Materials</h3>
+                    <ProtocolContainer>
+                        <div className='column'>
+                            <ul>
+                                <li>GPS</li>
+                                <li>Camera</li>
+                                <li>Annotation Material (paper / pencil)</li>
+
+                            </ul>
+                        </div>
+                        <div className='column'>
+                            <ul>
+                                <li>Microscope (Optional)</li>
+                                <li>PC with internet</li>
+                                <li>Scale (Optional)</li>
+                            </ul>
+
+                        </div>
+                    </ProtocolContainer>
+                    <p>Once detected an object in the sea (seafloor or floating) or its proximity (beaches), record the date and the location where the object was detected, record its GPS position (during a dive, collect the GPS of the diving spot and the depth (in meters) where the object was found), take a picture, and collect it for further analysis.</p>
+
+                    <p>Each item will be analyzed, particularly the following parameters should be recorded:</p>
+                    <ProtocolContainer>
+                        <div className='column'>
+                            <ul>
+                                <li>Debris type</li>
+                                <li>Habitat of the findings</li>
+                                <li>Debris material</li>
+                                <li>Debris size and weight</li>
+
+                            </ul>
+                        </div>
+                        <div className='column'>
+                            <ul>
+                                <li>Debris characteristics</li>
+                                <li>Categories of debris item</li>
+                                <li>Identification marks</li>
+                            </ul>
+
+                        </div>
+                    </ProtocolContainer>
+
+                    <p>All sessile and mobile macroalgae and macroinvertebrates colonizing litter items should be identified to the lowest possible taxonomic group, using the microscope if necessary. Indicate the abundance of each species (number or percent cover), their Viability (alive or dead) and their Maturity stage (e.g. Egg, Larvae, Juvenile, Mature).</p>
+
 
 
                 </div >

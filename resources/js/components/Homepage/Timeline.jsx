@@ -62,28 +62,21 @@ function Timeline() {
                         <TimelineItem >
                             <h3>February, 2022</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
+                                Marine debris & Non-Indigenous Species (NIS) Excel spreadsheet
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
                             <h3>March, 2022</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
-                            </p>
-                        </TimelineItem>
-
-                        <TimelineItem >
-                            <h3>April, 2022</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
+                                Database architecture, model definition, and API endpoints
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
                             <h3>May, 2022</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
+                               Initial design concepts, validation reviews, and strategy definitions
                             </p>
                         </TimelineItem>
 
@@ -91,23 +84,28 @@ function Timeline() {
                         <TimelineItem >
                             <h3>June, 2022</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
+                                Design revisions and final design approval, cross browser support and responsive design 
                             </p>
                         </TimelineItem>
-
-
-                        <TimelineItem >
-                            <h3>July, 2022</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
-                            </p>
-                        </TimelineItem>
-
 
                         <TimelineItem >
                             <h3>August, 2022</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium quasi perspiciatis obcaecati totam ut! Eius nemo excepturi enim asperiores ut, quibusdam qui deleniti maiores non, optio et est possimus eveniet.
+                                Database and interface integration
+                            </p>
+                        </TimelineItem>
+
+                        <TimelineItem >
+                            <h3>September, 2022</h3>
+                            <p>
+                                Staging QA, Release validation, and platform launch
+                            </p>
+                        </TimelineItem>
+
+                        <TimelineItem >
+                            <h3>October, 2022</h3>
+                            <p>
+                                Support and maintenance
                             </p>
                         </TimelineItem>
 

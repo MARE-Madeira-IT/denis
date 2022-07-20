@@ -73,7 +73,7 @@ function Navbar() {
             <PagesContainer>
                 {navbarItems.map((item, index) => (
                     <PageContainer
-                        className={({ isActive }) => isActive ? "link--active" : ''}
+                        className={({ isActive }) => isActive ? "link--active" : undefined}
                         key={index}
                         to={item.to}>
                         {item.image} {item.title}

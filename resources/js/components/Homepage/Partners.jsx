@@ -28,8 +28,8 @@ const Flex = styled.div`
     flex-wrap: wrap;
     
     div {
-        width: 33%;
-        padding: 20px;
+        width: 50%;
+        padding: 40px;
         box-sizing: border-box;
 
         img {
@@ -49,18 +49,13 @@ function Partners() {
             <StyledContent>
                 <div className="content-width">
                     <h2>Our Partners & Supporters</h2>
-                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!</p>
+                    <p>DATABASE partners are the barebones that make this platform available for the scientific community.</p>
 
                     <Flex>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
-                        <div><img src="/images/partners/logo.png" alt="" /></div>
+                        <div><img src="/images/partners/arditi.jpg" alt="ARDITI" /></div>
+                        <div><img src="/images/partners/mare.svg" alt="MARE" /></div>
+                        <div><img src="/images/partners/ICES.svg" alt="ICES" /></div>
+                        <div><img src="/images/partners/wave.png" alt="wave" /></div>
                     </Flex>
 
                     <p> Want to help? Contact us and we'll work together!</p>

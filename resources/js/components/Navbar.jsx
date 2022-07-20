@@ -16,16 +16,20 @@ const Logo = styled(FlexContainer)`
     left:48px;
     top: 48px;
     
+
     h1 {
-        font-size: 48px;
-        margin-bottom: 10px;
+        font-size: 80px;
+        margin-bottom: 40px;
         margin-top: 0px;
         color: white;
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
     }
 
     p {
         margin-top: 0px;
-        font-size: 18px;
+        font-size: 19.2px;
+        font-family: 'Poppins', sans-serif;
     }
     
 `;
@@ -49,8 +53,8 @@ function Navbar() {
     return (
         <Fragment>
             <Logo>
-                <h1>LOREM</h1>
-                <p>Lorem ipsum dolor.</p>
+                <h1>DATABASE</h1>
+                <p>Marine debris & Non-Indigenous Species</p>
             </Logo>
             <Login>
                 <Link className='link' to="/dashboard">
