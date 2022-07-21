@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Taxa extends Model
+class Report extends Model
 {
     use HasFactory;
 
-    public function maturities()
+    public function validations()
     {
-        return $this->belongsToMany(TaxaMaturity::class, 'taxa_has_maturities');
+        return $this->belongsToMany(User::class, 'report_has_validations');
     }
 }
