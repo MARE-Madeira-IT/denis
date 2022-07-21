@@ -3,24 +3,32 @@ import styled from 'styled-components';
 import { Route, Routes } from "react-router-dom";
 import Homepage from './Components/Homepage';
 import Navbar from './Navbar'
+import { maxWidth } from './dashboardHelper';
 
 const Container = styled.div`
     width: 100%;
     min-height: 100vh;
-    overflow: visible;
-    background: #fff;
-    box-sizing: border-box;
-    color: #000;
-    font-size: 18px;
-    line-height: 24px;
+    display: flex;
+    flex-direction: column;
 `;
+
+const Content = styled.section`
+    width: 100%;
+    height: 100%;
+    max-width: ${maxWidth};
+    margin: auto;
+    flex: 1;
+    display: block;
+`;
+
 
 
 function DashboardLayout({ children }) {
     return (
         <Container>
             <Navbar />
-            {children}
+            <Content>{children}</Content>
+
         </Container>
     )
 }

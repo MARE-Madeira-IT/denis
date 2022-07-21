@@ -1,42 +1,53 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { profile, reports, validation, ecosystem, users, litter } from './icons';
+import { maxWidth } from './dashboardHelper';
 
 const navbarItems = [
-    { to: "/dashboard/", image: profile(), title: "Profile" },
-    { to: "/dashboard/reports", image: reports(), title: "Reports" },
-    { to: "/dashboard/validation", image: validation(), title: "Validation" },
-    { to: "/dashboard/users", image: users(), title: "Users" },
-    { to: "/dashboard/litter", image: litter(), title: "Litter" },
-    { to: "/dashboard/ecosystems", image: ecosystem(), title: "Ecosystems" },
+    { to: "/dashboard/", title: "Profile" },
+    { to: "/dashboard/reports", title: "Reports" },
+    { to: "/dashboard/validation", title: "Validation" },
+    { to: "/dashboard/users", title: "Users" },
+    { to: "/dashboard/debris", title: "Debris" },
+    { to: "/dashboard/ecosystems", title: "Ecosystems" },
 ];
 
 const Container = styled.div`
     width: 100%;
-    
+    background-color: #B7DAFB;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
 `;
 
-const LogoContainer = styled.h1`
-    text-align: center;
-    width: 100%;
-    padding: 10px;
+const Title = styled.div`
+    height: 130px;
+    background-color: #002548;
+    padding: 10px 50px;
     box-sizing: border-box;
-    text-transform: uppercase;
-    font-size: 28px;
+
+    h1 {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        margin:0px  auto ;
+        font-size: 64px;
+        color: white;
+        font-weight: bold;
+    }
 `;
 
 const PagesContainer = styled.div`
-    width: 100%;
-    padding: 20px;
+    margin: auto;
+    padding: 0px 20px;
     box-sizing: border-box;
     border-bottom: 1px solid #dddddd;
     display: flex;
     justify-content: space-around;
 
     .link--active{
-        svg {
-            fill: #5b64bd;
+        span {
+            font-weight: bold;
         }
         
     }
@@ -44,25 +55,22 @@ const PagesContainer = styled.div`
 `;
 
 const PageContainer = styled(NavLink)`
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: none;
     color: black;
 
-    &:hover {
-        color: black;
-        
-        svg {
-            fill: #5b64bd;
-        }
-        
+    span {
+        margin: 0px 20px;
+        transition: all .3s ease;
     }
 
-    img, svg {
-        fill: #000000;
-        display: block;
-        width: 25px;
-        height: 25px;
-        margin: 0px auto 10px auto;
+    &:hover {
+        color: black;
+
+        span {
+            font-weight: bold;
+        }
+        
     }
 `;
 
@@ -70,13 +78,14 @@ const PageContainer = styled(NavLink)`
 function Navbar() {
     return (
         <Container>
+            <Title><h1>Database</h1></Title>
             <PagesContainer>
                 {navbarItems.map((item, index) => (
                     <PageContainer
                         className={({ isActive }) => isActive ? "link--active" : undefined}
                         key={index}
                         to={item.to}>
-                        {item.image} {item.title}
+                        <span>{item.title}</span>
                     </PageContainer>
                 ))}
             </PagesContainer>

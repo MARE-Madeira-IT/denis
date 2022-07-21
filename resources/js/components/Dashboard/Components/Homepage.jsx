@@ -72,33 +72,11 @@ const data = [
         address: 'London No. 1 Lake Park',
         tags: 'London No. 1 Lake Park'
     },
-    {
-        key: '6',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '7',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '8',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
 ];
 
 const Container = styled.div`
     width: 100%;
     overflow: visible;
-    background: #ffffff;
     box-sizing: border-box;
     color: #000;
     padding: 48px;
@@ -116,7 +94,7 @@ const Welcome = styled.div`
 
     p {
         font-size: 16px;
-        color: #6b6b6b;
+        color: #000000;
         margin-top: 0px;
         margin-bottom: 50px;
     }
@@ -129,41 +107,34 @@ const SectionContainer = styled.div`
 `;
 
 const Section = styled.div`
-    width: ${props => props.width};
-    
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     box-sizing: border-box;
+    margin-bottom: 100px;
     
-    &:nth-child(2){
-        padding: 0px 30px;
-    }
 
-    .content {
-        border-radius: 6px;
-        border: 1px solid #d8d8d8;
 
         .image-container{
-            width: 100%;
-            height: 400px;
-            position: relative;
+            width: 330px;
+            height: 330px;
 
             img {
-                position: absolute;
-                left: 0%;
-                top: 0%;
-                right: 0%;
-                bottom: 0%;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
+                border-radius: 330px;
+                
             }
         }
 
         .information-container{
-            padding: 20px;
+            width: 70%;
+            padding: 0px 30px;
             box-sizing: border-box;
             position: relative;
+            
 
             .name, .label, .value {
                 margin: 0px;
@@ -183,14 +154,14 @@ const Section = styled.div`
                     width: 50%;
 
                     .label {
-                        color: #777;
+                        opacity: .6;
                         margin-top: 15px;
                     }
                 }
             }
             
             
-        }
+        
     }
 `;
 
@@ -211,35 +182,34 @@ function Homepage() {
     return (
         <div>
             <Container>
-                <Welcome>
-                    <h2>Hello, Lorem!</h2>
-                    <p>Welcome to lorem</p>
-                </Welcome>
+
                 <SectionContainer>
-                    <Section width="30%">
-                        <div className='content'>
-                            <div className='image-container'>
-                                <img src="/placeholder.webp" alt="profile " />
-                            </div>
-                            <div className='information-container'>
-                                <h3 className='name'>Lorem lorem</h3>
-                                <Role color="magenta">Expert</Role>
+                    <Section>
+                        <div className='image-container'>
+                            <img src="/placeholder.webp" alt="profile " />
+                        </div>
+                        <div className='information-container'>
+                            <Welcome>
+                                <h2>Carla Fernandes</h2>
+                                <p>Madeira, Portugal</p>
+                            </Welcome>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum laborum est quibusdam iusto nulla cumque maiores, alias quasi, sit veniam expedita accusamus, possimus eveniet similique ipsum molestiae in maxime. Dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus accusamus magni, perspiciatis, itaque earum excepturi, veritatis doloremque inventore facilis nemo ullam maiores perferendis quasi porro fugiat voluptas reprehenderit harum eum.</p>
+                            <Role color="blue">Validator</Role>
 
-                                <div className='field-container'>
-                                    <ProfileField label="Accepted Reports" value={12} />
-                                    <ProfileField label="Pending Validation" value={2} />
-                                    <ProfileField label="Discord" value="Lorem&#35;0000" />
-                                    <ProfileField label="Email" value="lorem@lorem.com" />
-                                </div>
+                            <div className='field-container'>
+                                <ProfileField label="Accepted Reports" value={12} />
+                                <ProfileField label="Pending Validation" value={2} />
+                                <ProfileField label="Discord" value="Lorem&#35;0000" />
+                                <ProfileField label="Email" value="lorem@lorem.com" />
                             </div>
-
                         </div>
 
                     </Section>
-                    <Section width="70%">
-                        <h2>Your Reports</h2>
-                        <Table columns={columns} dataSource={data} />
-
+                    <Section>
+                        <div>
+                            <h2>Your Reports</h2>
+                            <Table columns={columns} dataSource={data} />
+                        </div>
                     </Section>
                 </SectionContainer>
 
