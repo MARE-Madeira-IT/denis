@@ -12,7 +12,7 @@ import PrivateRoute from "./components/Dashboard/PrivateRoute";
 import DashboardHomepage from "./components/Dashboard/Components/Homepage";
 
 import DashboardReports from "./components/Dashboard/Components/Reports";
-import Navbar from "./components/Dashboard/Navbar";
+import Debris from "./components/Dashboard/Components/Debris/DebrisMain";
 
 export const history = createBrowserHistory();
 
@@ -23,6 +23,8 @@ const Router = () => {
             <Routes>
                 <Route exact path="/map" element={<Layout><MapView /></Layout>} />
                 <Route exact path="/" element={<Layout><Homepage /></Layout>} />
+
+                <Route exact path="/dashboard/debris" element={<DashboardLayout><PrivateRoute Component={Debris} /></DashboardLayout>} />
                 <Route exact path="/dashboard/reports" element={<DashboardLayout><PrivateRoute Component={DashboardReports} /></DashboardLayout>} />
                 <Route exact path="/dashboard/" element={<DashboardLayout><PrivateRoute Component={DashboardHomepage} /></DashboardLayout>} />
             </Routes>
