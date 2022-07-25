@@ -15,6 +15,21 @@ const navbarItems = [
 const Container = styled.div`
     width: 100%;
     background-color: #B7DAFB;
+    display: flex;
+    height: 100px;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+`;
+
+const BlueBackground = styled.div`
+    width: calc((100% - ${maxWidth} )/ 2);
+    height: 130px;
+    background-color: #002548;
+`;
+
+const Content = styled.div`
+    width: 100%;
+    max-width: ${maxWidth};
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -27,13 +42,25 @@ const Title = styled.div`
     box-sizing: border-box;
 
     h1 {
-        text-align: center;
         width: 100%;
         box-sizing: border-box;
-        margin:0px  auto ;
+        margin:0px;
         font-size: 64px;
         color: white;
-        font-weight: bold;
+        font-weight: 900;
+        line-height: 64px;
+        text-transform: uppercase;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.041em;
+    }
+
+    h2 {
+        font-family: 'Lato', sans-serif;
+        margin:0px;
+        font-weight: 300;
+        color: white;
+        letter-spacing: -0.04em;
+        font-size: 18px;
     }
 `;
 
@@ -41,7 +68,6 @@ const PagesContainer = styled.div`
     margin: auto;
     padding: 0px 20px;
     box-sizing: border-box;
-    border-bottom: 1px solid #dddddd;
     display: flex;
     justify-content: space-around;
 
@@ -78,17 +104,23 @@ const PageContainer = styled(NavLink)`
 function Navbar() {
     return (
         <Container>
-            <Title><h1>Database</h1></Title>
-            <PagesContainer>
-                {navbarItems.map((item, index) => (
-                    <PageContainer
-                        className={({ isActive }) => isActive ? "link--active" : undefined}
-                        key={index}
-                        to={item.to}>
-                        <span>{item.title}</span>
-                    </PageContainer>
-                ))}
-            </PagesContainer>
+            <BlueBackground />
+            <Content>
+                <Title>
+                    <h1>Database</h1>
+                    <h2>MARINE DEBRIS & NON-INDIGENOUS SPECIES</h2>
+                </Title>
+                <PagesContainer>
+                    {navbarItems.map((item, index) => (
+                        <PageContainer
+                            className={({ isActive }) => isActive ? "link--active" : undefined}
+                            key={index}
+                            to={item.to}>
+                            <span>{item.title}</span>
+                        </PageContainer>
+                    ))}
+                </PagesContainer>
+            </Content>
         </Container>
     )
 }

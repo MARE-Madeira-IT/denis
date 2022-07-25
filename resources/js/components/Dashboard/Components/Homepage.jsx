@@ -85,19 +85,29 @@ const Container = styled.div`
 
 const Welcome = styled.div`
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
 
-    h2 {
-        margin-bottom: 0px;
-        font-size: 28px;
-        font-weight: 900;
+    .button-container{
+        display: flex;
     }
 
-    p {
-        font-size: 16px;
-        color: #000000;
-        margin-top: 0px;
-        margin-bottom: 50px;
+    .flex {
+        h2 {
+            margin-bottom: 0px;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        p {
+            font-size: 16px;
+            margin-top: 0px;
+        }
     }
+
+    
 `;
 
 const SectionContainer = styled.div`
@@ -151,11 +161,24 @@ const Section = styled.div`
                 flex-wrap: wrap;
 
                 .profile-field {
-                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    padding-right: 30px;
+                    box-sizing: border-box;
 
                     .label {
                         opacity: .6;
-                        margin-top: 15px;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 18px;
+                    }
+
+                    .value {
+                        font-size: 42px;
+                        margin-right: 5px;
+                        line-height: 63px;
+                        font-weight: 700;
+                        opacity: .6;
                     }
                 }
             }
@@ -165,17 +188,29 @@ const Section = styled.div`
     }
 `;
 
-const Role = styled(Tag)`
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 5px 10px;
-    border-radius: 6px;
+const Button = styled.div`
+    padding: 10px 25px;
+    font-weight: 700;
+    border-radius: 16px;  
 `;
+
+const Role = styled(Button)`
+    color: #002548;;
+    border: 2px solid #002548;
+    margin-right: 10px;
+`;
+
+const Edit = styled(Button)`
+    background-color: #002548;
+    color: white;
+    border: 2px solid #002548;
+    cursor: pointer;
+`;
+
 const ProfileField = ({ label, value }) => (
     <div className='profile-field'>
-        <p className='label'>{label}</p>
         <p className='value'>{value}</p>
+        <p className='label'>{label} <br /> reports</p>
     </div>
 )
 function Homepage() {
@@ -190,17 +225,22 @@ function Homepage() {
                         </div>
                         <div className='information-container'>
                             <Welcome>
-                                <h2>Carla Fernandes</h2>
-                                <p>Madeira, Portugal</p>
+                                <div className='flex'>
+                                    <h2>Carla Fernandes</h2>
+                                    <p>Madeira, Portugal</p>
+                                </div>
+                                <div className='flex button-container'>
+                                    <Role>Validator</Role>
+                                    <Edit>Edit Profile</Edit>
+                                </div>
                             </Welcome>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum laborum est quibusdam iusto nulla cumque maiores, alias quasi, sit veniam expedita accusamus, possimus eveniet similique ipsum molestiae in maxime. Dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus accusamus magni, perspiciatis, itaque earum excepturi, veritatis doloremque inventore facilis nemo ullam maiores perferendis quasi porro fugiat voluptas reprehenderit harum eum.</p>
-                            <Role color="blue">Validator</Role>
+
 
                             <div className='field-container'>
-                                <ProfileField label="Accepted Reports" value={12} />
-                                <ProfileField label="Pending Validation" value={2} />
-                                <ProfileField label="Discord" value="Lorem&#35;0000" />
-                                <ProfileField label="Email" value="lorem@lorem.com" />
+                                <ProfileField label="accepted" value={14} />
+                                <ProfileField label="pending" value={2} />
+                                <ProfileField label="rejected" value={2} />
                             </div>
                         </div>
 
