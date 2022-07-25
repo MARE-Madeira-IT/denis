@@ -13,7 +13,7 @@ class DebrisSubCategory extends Model
 
     public function category()
     {
-        return $this->belongsTo(DebrisCategory::class);
+        return $this->belongsTo(DebrisCategory::class, 'debris_category_id');
     }
 
     public function debris()

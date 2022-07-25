@@ -16,7 +16,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
     padding: 50px;
     box-sizing: border-box;
 `;

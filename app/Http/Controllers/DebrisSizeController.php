@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DebrisSizeResource;
 use App\Models\DebrisSize;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DebrisSizeController extends Controller
      */
     public function index()
     {
-        //
+        return DebrisSizeResource::collection(DebrisSize::paginate(10));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DebrisRugosityResource;
 use App\Models\DebrisRugosity;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DebrisRugosityController extends Controller
      */
     public function index()
     {
-        //
+        return DebrisRugosityResource::collection(DebrisRugosity::paginate(10));
     }
 
     /**

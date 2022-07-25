@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DebrisHabitatResource;
 use App\Models\DebrisHabitat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DebrisHabitatController extends Controller
      */
     public function index()
     {
-        //
+        return DebrisHabitatResource::collection(DebrisHabitat::paginate(10));
     }
 
     /**

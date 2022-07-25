@@ -19,3 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('debris/materials', 'App\Http\Controllers\DebrisMaterialController');
+Route::apiResource('debris/types', 'App\Http\Controllers\DebrisTypeController');
+Route::apiResource('debris/sizes', 'App\Http\Controllers\DebrisSizeController');
+Route::apiResource('debris/thicknesses', 'App\Http\Controllers\DebrisThicknessController');
+Route::apiResource('debris/habitats', 'App\Http\Controllers\DebrisHabitatController');
+Route::apiResource('debris/rugosities', 'App\Http\Controllers\DebrisRugosityController');
+Route::apiResource('debris/categories', 'App\Http\Controllers\DebrisCategoryController');
+Route::apiResource('debris/subcategories', 'App\Http\Controllers\DebrisSubCategoryController');

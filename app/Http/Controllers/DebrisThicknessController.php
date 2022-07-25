@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DebrisThicknessResource;
 use App\Models\DebrisThickness;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DebrisThicknessController extends Controller
      */
     public function index()
     {
-        //
+        return DebrisThicknessResource::collection(DebrisThickness::paginate(10));
     }
 
     /**

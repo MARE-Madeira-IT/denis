@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DebrisCategoryResource;
 use App\Models\DebrisCategory;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DebrisCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return DebrisCategoryResource::collection(DebrisCategory::paginate(10));
     }
 
     /**
