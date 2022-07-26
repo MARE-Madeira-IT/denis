@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaLevelResource;
 use App\Models\TaxaLevel;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaLevelController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaLevelResource::collection(TaxaLevel::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaLevelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaLevel $taxaLevel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaLevel  $taxaLevel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaLevel $taxaLevel)
     {
         //
     }

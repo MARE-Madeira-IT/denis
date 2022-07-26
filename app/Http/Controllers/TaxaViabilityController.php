@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaViabilityResource;
 use App\Models\TaxaViability;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaViabilityController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaViabilityResource::collection(TaxaViability::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaViabilityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaViability $taxaViability)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaViability  $taxaViability
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaViability $taxaViability)
     {
         //
     }

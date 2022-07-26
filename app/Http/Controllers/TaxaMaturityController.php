@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaMaturityResource;
 use App\Models\TaxaMaturity;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaMaturityController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaMaturityResource::collection(TaxaMaturity::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaMaturityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaMaturity $taxaMaturity)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaMaturity  $taxaMaturity
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaMaturity $taxaMaturity)
     {
         //
     }

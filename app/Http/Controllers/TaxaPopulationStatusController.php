@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaPopulationStatusResource;
 use App\Models\TaxaPopulationStatus;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaPopulationStatusController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaPopulationStatusResource::collection(TaxaPopulationStatus::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaPopulationStatusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaPopulationStatus $taxaPopulationStatus)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaPopulationStatus  $taxaPopulationStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaPopulationStatus $taxaPopulationStatus)
     {
         //
     }

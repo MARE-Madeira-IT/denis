@@ -10,6 +10,14 @@ import debrisRugosity from './redux/debrisRugosity'
 import debrisCategory from './redux/debrisCategory'
 import debrisSubCategory from './redux/debrisSubCategory'
 
+import taxaLevel from './redux/taxaLevel'
+import taxaSpeciesStatus from './redux/taxaSpeciesStatus'
+import taxaPopulationStatus from './redux/taxaPopulationStatus'
+import taxaAbundance from './redux/taxaAbundance'
+import taxaViability from './redux/taxaViability'
+import taxaMaturity from './redux/taxaMaturity'
+import taxaNativeRegion from './redux/taxaNativeRegion'
+
 const reducer = combineReducers({
     auth,
 
@@ -20,7 +28,15 @@ const reducer = combineReducers({
     debrisHabitat,
     debrisRugosity,
     debrisCategory,
-    debrisSubCategory
+    debrisSubCategory,
+
+    taxaLevel,
+    taxaSpeciesStatus,
+    taxaPopulationStatus,
+    taxaAbundance,
+    taxaViability,
+    taxaMaturity,
+    taxaNativeRegion
 })
 
 export default reducer

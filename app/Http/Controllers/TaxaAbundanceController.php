@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaAbundanceResource;
 use App\Models\TaxaAbundance;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaAbundanceController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaAbundanceResource::collection(TaxaAbundance::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaAbundanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaAbundance $taxaAbundance)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaAbundance  $taxaAbundance
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaAbundance $taxaAbundance)
     {
         //
     }

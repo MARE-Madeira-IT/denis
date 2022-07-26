@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TaxaNativeRegionResource;
 use App\Models\TaxaNativeRegion;
 use Illuminate\Http\Request;
 
@@ -14,17 +15,7 @@ class TaxaNativeRegionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaxaNativeRegionResource::collection(TaxaNativeRegion::paginate(10));
     }
 
     /**
@@ -45,17 +36,6 @@ class TaxaNativeRegionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaxaNativeRegion $taxaNativeRegion)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaxaNativeRegion  $taxaNativeRegion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaxaNativeRegion $taxaNativeRegion)
     {
         //
     }

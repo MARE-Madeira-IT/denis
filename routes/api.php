@@ -18,11 +18,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('debris/materials', 'App\Http\Controllers\DebrisMaterialController');
-Route::apiResource('debris/types', 'App\Http\Controllers\DebrisTypeController');
-Route::apiResource('debris/sizes', 'App\Http\Controllers\DebrisSizeController');
-Route::apiResource('debris/thicknesses', 'App\Http\Controllers\DebrisThicknessController');
-Route::apiResource('debris/habitats', 'App\Http\Controllers\DebrisHabitatController');
-Route::apiResource('debris/rugosities', 'App\Http\Controllers\DebrisRugosityController');
-Route::apiResource('debris/categories', 'App\Http\Controllers\DebrisCategoryController');
-Route::apiResource('debris/subcategories', 'App\Http\Controllers\DebrisSubCategoryController');
+Route::prefix('debris')->group(function () {
+    Route::apiResource('/materials', 'App\Http\Controllers\DebrisMaterialController');
+    Route::apiResource('/types', 'App\Http\Controllers\DebrisTypeController');
+    Route::apiResource('/sizes', 'App\Http\Controllers\DebrisSizeController');
+    Route::apiResource('/thicknesses', 'App\Http\Controllers\DebrisThicknessController');
+    Route::apiResource('/habitats', 'App\Http\Controllers\DebrisHabitatController');
+    Route::apiResource('/rugosities', 'App\Http\Controllers\DebrisRugosityController');
+    Route::apiResource('/categories', 'App\Http\Controllers\DebrisCategoryController');
+    Route::apiResource('/subcategories', 'App\Http\Controllers\DebrisSubCategoryController');
+});
+
+
+Route::prefix('taxa')->group(function () {
+    Route::apiResource('/levels', 'App\Http\Controllers\TaxaLevelController');
+    Route::apiResource('/speciesstatuses', 'App\Http\Controllers\TaxaSpeciesStatusController');
+    Route::apiResource('/populationstatuses', 'App\Http\Controllers\TaxaPopulationStatusController');
+    Route::apiResource('/abundances', 'App\Http\Controllers\TaxaAbundanceController');
+    Route::apiResource('/viabilities', 'App\Http\Controllers\TaxaViabilityController');
+    Route::apiResource('/maturities', 'App\Http\Controllers\TaxaMaturityController');
+    Route::apiResource('/nativeregions', 'App\Http\Controllers\TaxaNativeRegionController');
+});
