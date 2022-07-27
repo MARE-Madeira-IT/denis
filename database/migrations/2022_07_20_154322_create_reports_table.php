@@ -19,6 +19,7 @@ class CreateReportsTable extends Migration
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
             $table->text('notes')->nullable();
+            $table->text('ongoing_survey')->nullable();
             $table->unsignedBigInteger('site_id');
             $table->unsignedBigInteger('debris_id');
             $table->unsignedBigInteger('taxa_id');

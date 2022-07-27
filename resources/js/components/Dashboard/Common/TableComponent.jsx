@@ -6,11 +6,39 @@ const Container = styled.div`
     background: transparent;
     border-radius: 5px;
 
+    .ant-table-thead > tr > th {
+        background-color: #EAEAEA;
+        font-weight: bold;
+    }
+
+    .ant-table-cell {
+        padding: 15px 20px !important;
+    }
+
+    .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+        display: none;
+    }
+
     .table-row  {
         &:hover {
             cursor: pointer;
         }
     }
+    
+    .ant-table-wrapper {
+        background-color: white;
+    }
+    
+    .ant-pagination {
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+    
+    .ant-pagination-total-text {
+        margin-right: auto;
+    }
+
+    
 `;
 
 
@@ -28,8 +56,7 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                     pagination={meta ? {
                         showQuickJumper: showQuickJumper,
                         total: meta.total,
-                        showTotal: (total, range) => `Showing ${range[0]} to ${range[1]} from ${total}`,
-                        total: meta.total,
+                        showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} records`,
                         current: meta.current_page,
                         pageSize: meta.per_page,
                     } : false}

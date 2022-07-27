@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Route, Routes } from "react-router-dom";
 import Homepage from './Components/Homepage';
 import Navbar from './Navbar'
 import { maxWidth } from './dashboardHelper';
@@ -10,12 +9,13 @@ const Container = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Lato';
 `;
 
 const Content = styled.section`
     width: 100%;
     height: 100%;
-    max-width: ${maxWidth};
+    max-width: 1270px;
     margin: auto;
     flex: 1;
     display: block;

@@ -14,31 +14,22 @@ const navbarItems = [
 
 const Container = styled.div`
     width: 100%;
-    background-color: #B7DAFB;
+    background-color: #0C4C88;
     display: flex;
-    height: 100px;
-    justify-content: flex-start;
+    justify-content: center;
     margin-bottom: 50px;
-`;
-
-const BlueBackground = styled.div`
-    width: calc((100% - ${maxWidth} )/ 2);
-    height: 130px;
-    background-color: #002548;
+    padding: 10px 0px;
 `;
 
 const Content = styled.div`
     width: 100%;
     max-width: ${maxWidth};
-    height: 100px;
     display: flex;
     justify-content: space-between;
 `;
 
 const Title = styled.div`
-    height: 130px;
-    background-color: #002548;
-    padding: 10px 50px;
+    padding: 10px 50px 10px 0px;
     box-sizing: border-box;
 
     h1 {
@@ -61,15 +52,17 @@ const Title = styled.div`
         color: white;
         letter-spacing: -0.04em;
         font-size: 18px;
+        line-height: 18px;
     }
 `;
 
 const PagesContainer = styled.div`
     margin: auto;
-    padding: 0px 20px;
+    padding: 0px;
+    flex: 1;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
 
     .link--active{
         span {
@@ -83,7 +76,7 @@ const PagesContainer = styled.div`
 const PageContainer = styled(NavLink)`
     font-size: 18px;
     text-decoration: none;
-    color: black;
+    color: white;
 
     span {
         margin: 0px 20px;
@@ -91,7 +84,7 @@ const PageContainer = styled(NavLink)`
     }
 
     &:hover {
-        color: black;
+        color: white;
 
         span {
             font-weight: bold;
@@ -104,7 +97,6 @@ const PageContainer = styled(NavLink)`
 function Navbar() {
     return (
         <Container>
-            <BlueBackground />
             <Content>
                 <Title>
                     <h1>Database</h1>

@@ -5,14 +5,6 @@ import TableComponent from "../../../Common/TableComponent";
 
 const Container = styled.div`
     width: 100%;
-
-    .ant-table-thead > tr > th {
-        background-color: white;
-    }
-
-    .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-        display: none;
-    }
 `;
 
 function TableContainer({ loading, data, meta, handlePageChange }) {
@@ -28,8 +20,8 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
             editable: true,
         },
         {
-            title: 'operation',
-            dataIndex: 'operation',
+            title: 'Operation',
+            dataIndex: 'Operation',
             render: (_, record) =>
                 data.length >= 1 ? (
                     <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>

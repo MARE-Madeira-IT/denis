@@ -18,6 +18,7 @@ class CreateTaxasTable extends Migration
             $table->string('authority')->nullable();
             $table->string('year_first_report')->nullable();
             $table->string('reference')->nullable();
+            $table->string('identification');
             $table->unsignedBigInteger('taxa_level_id');
             $table->unsignedBigInteger('taxa_species_status_id');
             $table->unsignedBigInteger('taxa_population_status_id');

@@ -15,12 +15,13 @@ class CreateDebrisTable extends Migration
     {
         Schema::create('debris', function (Blueprint $table) {
             $table->id();
-            $table->string('habitat');
-            $table->string('depth');
-            $table->string('weight');
-            $table->string('rugosity');
-            $table->string('marks');
-            $table->string('origin');
+            $table->string('otherHabitat')->nullable();
+            $table->string('otherMaterial')->nullable();
+            $table->string('depth')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('otherRugosity')->nullable();
+            $table->string('marks')->nullable();
+            $table->string('origin')->nullable();
             $table->unsignedBigInteger('debris_size_id');
             $table->unsignedBigInteger('debris_rugosity_id');
             $table->unsignedBigInteger('debris_habitat_id');

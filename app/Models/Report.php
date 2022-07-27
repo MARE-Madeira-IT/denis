@@ -13,4 +13,19 @@ class Report extends Model
     {
         return $this->belongsToMany(User::class, 'report_has_validations');
     }
+
+    public function debris()
+    {
+        return $this->belongsTo(Debris::class);
+    }
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+
+    public function taxa()
+    {
+        return $this->belongsTo(Taxa::class);
+    }
 }
