@@ -1,7 +1,7 @@
 import React from "react";
 import { Popconfirm } from 'antd';
 import styled from "styled-components";
-import TableComponent from "../../../Common/TableComponent";
+import TableComponent from "../../../Common/ModalTableComponent";
 
 const Container = styled.div`
     width: 100%;
@@ -48,6 +48,7 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
+                title="Native regions"
             />
         </Container>
     )

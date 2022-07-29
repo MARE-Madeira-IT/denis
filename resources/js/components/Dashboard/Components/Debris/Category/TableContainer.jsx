@@ -1,7 +1,7 @@
 import React from "react";
 import { Popconfirm } from 'antd';
 import styled from "styled-components";
-import TableComponent from "../../../Common/TableComponent";
+import ModalTableComponent from "../../../Common/ModalTableComponent";
 
 const Container = styled.div`
     width: 100%;
@@ -34,12 +34,13 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
 
     return (
         <Container>
-            <TableComponent
+            <ModalTableComponent
                 loading={loading}
                 data={data}
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
+                title="Master list of debris categories"
             />
         </Container>
     )

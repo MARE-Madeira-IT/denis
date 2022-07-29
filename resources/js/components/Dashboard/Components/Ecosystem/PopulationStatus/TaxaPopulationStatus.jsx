@@ -7,8 +7,6 @@ import TableContainer from "./TableContainer";
 const ContentContainer = styled.div`
     width: 100%;
     margin: auto;
-    
-
 `;
 
 const Container = styled.div`
@@ -16,15 +14,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
-    padding: 50px;
     box-sizing: border-box;
+    font-family: 'Lato';
 `;
-
-const Table = styled.div`
-    width: 100%;
-`;
-
 
 function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses }) {
     const [filters, setFilters] = useState({});
@@ -40,15 +32,12 @@ function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses
     return (
         <Container>
             <ContentContainer>
-                <Table>
-                    <h2>Population status</h2>
-                    <TableContainer
-                        handlePageChange={handlePageChange}
-                        data={data}
-                        loading={loading}
-                        meta={meta}
-                    />
-                </Table>
+                <TableContainer
+                    handlePageChange={handlePageChange}
+                    data={data}
+                    loading={loading}
+                    meta={meta}
+                />
             </ContentContainer>
         </Container>
     )

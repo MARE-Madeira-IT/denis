@@ -16,13 +16,8 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
-    padding: 50px;
     box-sizing: border-box;
-`;
-
-const Table = styled.div`
-    width: 100%;
+    font-family: 'Lato';
 `;
 
 
@@ -40,15 +35,13 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
     return (
         <Container>
             <ContentContainer>
-                <Table>
-                    <h2>Sub categories</h2>
-                    <TableContainer
-                        handlePageChange={handlePageChange}
-                        data={data}
-                        loading={loading}
-                        meta={meta}
-                    />
-                </Table>
+
+                <TableContainer
+                    handlePageChange={handlePageChange}
+                    data={data}
+                    loading={loading}
+                    meta={meta}
+                />
             </ContentContainer>
         </Container>
     )

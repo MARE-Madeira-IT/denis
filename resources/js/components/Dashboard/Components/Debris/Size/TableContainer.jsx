@@ -1,18 +1,10 @@
 import React from "react";
 import { Popconfirm } from 'antd';
 import styled from "styled-components";
-import TableComponent from "../../../Common/TableComponent";
+import TableComponent from "../../../Common/ModalTableComponent";
 
 const Container = styled.div`
     width: 100%;
-
-    .ant-table-thead > tr > th {
-        background-color: white;
-    }
-
-    .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-        display: none;
-    }
 `;
 
 function TableContainer({ loading, data, meta, handlePageChange }) {
@@ -48,6 +40,7 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
+                title="Size classes"
             />
         </Container>
     )

@@ -16,15 +16,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
-    padding: 50px;
     box-sizing: border-box;
+    font-family: 'Lato';
 `;
-
-const Table = styled.div`
-    width: 100%;
-`;
-
 
 function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
     const [filters, setFilters] = useState({});
@@ -40,15 +34,12 @@ function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
     return (
         <Container>
             <ContentContainer>
-                <Table>
-                    <h2>Thickness classes</h2>
-                    <TableContainer
-                        handlePageChange={handlePageChange}
-                        data={data}
-                        loading={loading}
-                        meta={meta}
-                    />
-                </Table>
+                <TableContainer
+                    handlePageChange={handlePageChange}
+                    data={data}
+                    loading={loading}
+                    meta={meta}
+                />
             </ContentContainer>
         </Container>
     )

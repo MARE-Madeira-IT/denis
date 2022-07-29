@@ -1,8 +1,9 @@
 import { Col, Modal, Row } from 'antd'
 import React, { useState } from 'react'
 import styled from "styled-components";
+import List from '../../Common/List';
+import { font } from '../../dashboardHelper';
 import DebrisCategory from './Category/DebrisCategory';
-import DebrisList from './DebrisList';
 import DebrisHabitat from './Habitat/DebrisHabitat'
 import DebrisMaterial from './Material/DebrisMaterial'
 import DebrisRugosity from './Rugosity/DebrisRugosity'
@@ -21,8 +22,28 @@ const TableContainer = styled(Modal)`
     }
 `;
 
+const TitleContainer = styled.div`
+    font-family: ${font};
+    text-align: center;
+    margin-bottom: 50px;
+
+    h1 {
+        font-weight: 900;
+        font-size: 54px;
+        margin: 0px auto ;
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 400;
+        opacity: .7;
+        width: 40%;
+        margin: 0px auto ;
+    }
+`;
+
 function Main() {
-    const [activeModal, setActiveModal] = useState(0)
+    const [activeModal, setActiveModal] = useState(undefined)
 
     const items = [
         { title: "Categories", description: "Master list of categories of debris items by materials", image: "debris_categories", component: <DebrisCategory /> },
@@ -53,7 +74,12 @@ function Main() {
                 {activeModal != undefined && items[activeModal].component}
             </TableContainer>
 
-            <DebrisList items={items} setActiveModal={setActiveModal} />
+            <TitleContainer>
+                <h1>Marine Debris characterization</h1>
+                <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. </h2>
+            </TitleContainer>
+
+            <List items={items} setActiveModal={setActiveModal} />
         </div>
     )
 }
