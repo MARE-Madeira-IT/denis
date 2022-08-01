@@ -17,13 +17,10 @@ class ReportResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => $this->date,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-            'notes' => $this->notes,
-            'ongoing_survey' => $this->ongoing_survey,
+            'status' => $this->validation,
             'site' =>  new SiteResource($this->site),
             'debris' => new DebrisResource($this->debris),
-            'taxa' =>  new TaxaResource($this->taxa),
+            'taxas' =>  TaxaResource::collection($this->taxas),
             'created_at' => $this->created_at,
         ];
     }

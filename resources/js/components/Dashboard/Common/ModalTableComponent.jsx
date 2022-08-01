@@ -90,13 +90,16 @@ const TableControls = styled.div`
     display: flex;
     justify-content: space-between;
 
-    h3 {
-        margin: 0px;
+    .search {               
+        height: 100%;
         padding: 15px 20px;
         box-sizing: border-box;
-        font-weight: bold;
-        opacity: .8;
-        min-width: 55%;
+        margin: auto 0px;
+    }
+
+    img {
+        width: 15px;
+        margin: 0px 10px 0px 0px;
     }
 
     .controls {
@@ -112,6 +115,10 @@ const TableControls = styled.div`
             margin: auto;
         }
 
+        img {
+            margin: 0px 10px;
+        }
+
         .dark-background {
             background-color: #333334;
             color: #fff;
@@ -119,10 +126,7 @@ const TableControls = styled.div`
             
         }
 
-        img {
-            width: 15px;
-            margin: 0px 10px;
-        }
+        
     }
 `;
 
@@ -136,10 +140,9 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                 <span><img src="/icons/fullscreen.svg" /> Open as page</span>
             </TitleContainer>
             <TableControls>
-                <h3>Records ({meta.total})</h3>
+                <p className="search"><img src="/icons/search.svg" /> Search</p>
                 <div className="controls">
                     <p><img src="/icons/export.svg" /> Export</p>
-                    <p><img src="/icons/search.svg" /> Search</p>
                     <p className="dark-background">Add record <img src="/icons/add.svg" /></p>
                 </div>
             </TableControls>

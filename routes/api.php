@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/reports', 'App\Http\Controllers\ReportController');
+Route::apiResource('/users', 'App\Http\Controllers\UserController');
 
 Route::prefix('debris')->group(function () {
     Route::apiResource('/materials', 'App\Http\Controllers\DebrisMaterialController');

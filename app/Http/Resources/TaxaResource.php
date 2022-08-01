@@ -44,7 +44,7 @@ class TaxaResource extends JsonResource
                 'id' => $this->nativeRegion->id,
                 'name' => $this->nativeRegion->name
             ],
-            'maturity' => $this->maturity,
+            'maturities' => $this->maturities,
         ];
     }
 }

@@ -43,4 +43,9 @@ class Debris extends Model
     {
         return $this->belongsTo(DebrisRugosity::class, 'debris_rugosity_id');
     }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class);
+    }
 }

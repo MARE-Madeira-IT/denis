@@ -17,12 +17,12 @@ class CreateReportHasValidationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('report_id');
             $table->unsignedBigInteger('validation_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('validator_id')->nullable();
             $table->timestamps();
 
             $table->foreign('report_id')->references('id')->on('reports');
             $table->foreign('validation_id')->references('id')->on('validations');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('validator_id')->references('id')->on('users');
         });
     }
 

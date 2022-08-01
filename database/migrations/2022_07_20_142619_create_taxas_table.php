@@ -19,6 +19,7 @@ class CreateTaxasTable extends Migration
             $table->string('year_first_report')->nullable();
             $table->string('reference')->nullable();
             $table->string('identification');
+            $table->unsignedBigInteger('report_id');
             $table->unsignedBigInteger('taxa_level_id');
             $table->unsignedBigInteger('taxa_species_status_id');
             $table->unsignedBigInteger('taxa_population_status_id');
@@ -27,6 +28,7 @@ class CreateTaxasTable extends Migration
             $table->unsignedBigInteger('taxa_native_region_id');
             $table->timestamps();
 
+            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
             $table->foreign('taxa_level_id')->references('id')->on('taxa_levels');
             $table->foreign('taxa_species_status_id')->references('id')->on('taxa_species_statuses');
             $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses');

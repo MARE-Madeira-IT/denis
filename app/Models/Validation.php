@@ -13,6 +13,6 @@ class Validation extends Model
 
     public function reports()
     {
-        return $this->belongsToMany(Report::class, 'report_has_validations');
+        return $this->belongsToMany(Report::class, 'report_has_validations', 'validation_id', 'report_id');
     }
 }

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 
 import auth from './redux/auth'
+import user from './redux/user'
+
 import debrisMaterial from './redux/debrisMaterial'
 import debrisType from './redux/debrisType'
 import debrisSize from './redux/debrisSize'
@@ -18,8 +20,11 @@ import taxaViability from './redux/taxaViability'
 import taxaMaturity from './redux/taxaMaturity'
 import taxaNativeRegion from './redux/taxaNativeRegion'
 
+import report from './redux/report'
+
 const reducer = combineReducers({
     auth,
+    user,
 
     debrisMaterial,
     debrisType,
@@ -36,7 +41,9 @@ const reducer = combineReducers({
     taxaAbundance,
     taxaViability,
     taxaMaturity,
-    taxaNativeRegion
+    taxaNativeRegion,
+
+    report
 })
 
 export default reducer

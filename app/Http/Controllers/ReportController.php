@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MinimalReportResource;
 use App\Http\Resources\ReportResource;
 use App\Models\Report;
+use App\QueryFilters\ReportFilters;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -13,19 +15,9 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ReportFilters $filters)
     {
-        return ReportResource::collection(Report::paginate(10));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return MinimalReportResource::collection(Report::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -47,18 +39,7 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Report $report)
-    {
-        //
+        return new ReportResource($report);
     }
 
     /**

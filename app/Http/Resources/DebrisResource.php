@@ -16,6 +16,9 @@ class DebrisResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'weight' => $this->weight,
+            'marks' => $this->marks,
+            'origin' => $this->origin,
             'type' => [
                 'id' => $this->type->id,
                 'name' => $this->type->name,
@@ -49,9 +52,7 @@ class DebrisResource extends JsonResource
                 'name' => $this->subcategory->name,
                 'mdi_code' => $this->subcategory->mdi_code
             ],
-            'weight' => $this->weight,
-            'marks' => $this->marks,
-            'origin' => $this->origin,
+            
         ];
     }
 }
