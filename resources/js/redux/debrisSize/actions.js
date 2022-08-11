@@ -9,6 +9,13 @@ export const fetchDebrisSizes = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisSizeSelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_SIZE_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/sizes?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchDebrisSize = id => ({
     type: types.FETCH_DEBRIS_SIZE,
     payload: axios.get(`${window.location.origin}/api/debris/sizes/${id}`),

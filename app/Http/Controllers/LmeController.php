@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LmeResource;
 use App\Models\Lme;
 use Illuminate\Http\Request;
 

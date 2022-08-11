@@ -1,0 +1,3 @@
+export const types = {
+    FETCH_SITE_COUNTRIES_SELECTOR: 'FETCH_SITE_COUNTRIES_SELECTOR',
+};

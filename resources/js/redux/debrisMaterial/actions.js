@@ -9,6 +9,13 @@ export const fetchDebrisMaterials = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisMaterialSelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_MATERIAL_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/materials?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchDebrisMaterial = id => ({
     type: types.FETCH_DEBRIS_MATERIAL,
     payload: axios.get(`${window.location.origin}/api/debris/materials/${id}`),

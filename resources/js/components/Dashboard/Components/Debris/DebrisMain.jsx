@@ -63,7 +63,7 @@ function Main() {
     return (
         <div>
             <TableContainer
-                width={960}
+                width={1200}
                 footer={null}
                 closable={false}
                 title={null}

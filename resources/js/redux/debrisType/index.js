@@ -2,6 +2,7 @@ import { types } from "./types";
 
 export const initialState = {
     data: [],
+    selector: [],
     meta: {},
     loading: false,
     current: {},
@@ -9,6 +10,7 @@ export const initialState = {
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
+        case `${types.FETCH_DEBRIS_TYPE_SELECTOR}_PENDING`:
         case `${types.FETCH_DEBRIS_TYPES}_PENDING`:
         case `${types.FETCH_DEBRIS_TYPE}_PENDING`:
         case `${types.CREATE_DEBRIS_TYPE}_PENDING`:
@@ -19,8 +21,8 @@ export default (state = initialState, action = {}) => {
                 loading: true
             };
 
-        case `${types.ME}_REJECTED`:
         case `${types.FETCH_DEBRIS_TYPES}_REJECTED`:
+        case `${types.FETCH_DEBRIS_TYPE_SELECTOR}_REJECTED`:
         case `${types.FETCH_DEBRIS_TYPE}_REJECTED`:
         case `${types.CREATE_DEBRIS_TYPE}_REJECTED`:
         case `${types.UPDATE_DEBRIS_TYPE}_REJECTED`:
@@ -30,6 +32,12 @@ export default (state = initialState, action = {}) => {
                 loading: false,
             };
 
+        case `${types.FETCH_DEBRIS_TYPE_SELECTOR}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                selector: action.payload.data.data,
+            };
         case `${types.FETCH_DEBRIS_TYPES}_FULFILLED`:
             return {
                 ...state,

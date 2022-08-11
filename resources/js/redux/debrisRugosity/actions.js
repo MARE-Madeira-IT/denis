@@ -9,6 +9,13 @@ export const fetchDebrisRugosities = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisRugositySelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_RUGOSITY_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/rugosities?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchDebrisRugosity = id => ({
     type: types.FETCH_DEBRIS_RUGOSITY,
     payload: axios.get(`${window.location.origin}/api/debris/rugosities/${id}`),

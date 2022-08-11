@@ -9,6 +9,14 @@ export const fetchDebrisTypes = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisTypeSelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_TYPE_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/types?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
+
 export const fetchDebrisType = id => ({
     type: types.FETCH_DEBRIS_TYPE,
     payload: axios.get(`${window.location.origin}/api/debris/types/${id}`),

@@ -42,3 +42,30 @@ Route::prefix('taxa')->group(function () {
     Route::apiResource('/maturities', 'App\Http\Controllers\TaxaMaturityController');
     Route::apiResource('/nativeregions', 'App\Http\Controllers\TaxaNativeRegionController');
 });
+
+
+Route::prefix('selector')->group(function () {
+    Route::get('/site/countries', 'App\Http\Controllers\SelectorController@countries');
+    Route::get('/site/lmes', 'App\Http\Controllers\SelectorController@lmes');
+
+    Route::prefix('taxa')->group(function () {
+        Route::get('/levels', 'App\Http\Controllers\SelectorController@taxaLevels');
+        Route::get('/speciesstatuses', 'App\Http\Controllers\SelectorController@taxaSpeciesstatuses');
+        Route::get('/populationstatuses', 'App\Http\Controllers\SelectorController@taxaPopulationstatuses');
+        Route::get('/abundances', 'App\Http\Controllers\SelectorController@taxaAbundances');
+        Route::get('/viabilities', 'App\Http\Controllers\SelectorController@taxaViabilities');
+        Route::get('/maturities', 'App\Http\Controllers\SelectorController@taxaMaturities');
+        Route::get('/nativeregions', 'App\Http\Controllers\SelectorController@taxaNativeregions');
+    });
+
+    Route::prefix('debris')->group(function () {
+        Route::get('/materials', 'App\Http\Controllers\SelectorController@debrisMaterials');
+        Route::get('/types', 'App\Http\Controllers\SelectorController@debrisTypes');
+        Route::get('/sizes', 'App\Http\Controllers\SelectorController@debrisSizes');
+        Route::get('/thicknesses', 'App\Http\Controllers\SelectorController@debrisThicknesses');
+        Route::get('/habitats', 'App\Http\Controllers\SelectorController@debrisHabitats');
+        Route::get('/rugosities', 'App\Http\Controllers\SelectorController@debrisRugosities');
+        Route::get('/categories', 'App\Http\Controllers\SelectorController@debrisCategories');
+        Route::get('/subcategories', 'App\Http\Controllers\SelectorController@debrisSubcategories');
+    });
+});

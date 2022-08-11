@@ -21,7 +21,7 @@ const colorDecoder = {
     "rejected": "magenta",
 }
 
-function TableContainer({ loading, data, meta, handlePageChange }) {
+function TableContainer({ loading, data, meta, handlePageChange, handleRowClick }) {
 
     const columns = [
         {
@@ -79,6 +79,11 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
+                onRow={(record) => ({
+                    onClick: () => {
+                        handleRowClick(record);
+                    },
+                })}
             />
         </Container>
     )

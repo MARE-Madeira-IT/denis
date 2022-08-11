@@ -9,6 +9,14 @@ export const fetchDebrisThicknesses = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisThicknessSelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_THICKNESS_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/thicknesses?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
+
 export const fetchDebrisMaterial = id => ({
     type: types.FETCH_DEBRIS_THICKNESS,
     payload: axios.get(`${window.location.origin}/api/debris/thicknesses/${id}`),

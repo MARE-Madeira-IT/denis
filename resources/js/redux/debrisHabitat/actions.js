@@ -9,6 +9,14 @@ export const fetchDebrisHabitats = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchDebrisHabitatSelector = (filters = {}) => ({
+    type: types.FETCH_DEBRIS_HABITAT_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/debris/habitats?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
+
 export const fetchDebrisHabitat = id => ({
     type: types.FETCH_DEBRIS_HABITAT,
     payload: axios.get(`${window.location.origin}/api/debris/habitats/${id}`),
