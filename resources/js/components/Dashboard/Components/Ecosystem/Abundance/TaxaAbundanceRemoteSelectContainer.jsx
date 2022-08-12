@@ -1,18 +1,19 @@
 import { Select } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
+import { fetchTaxaAbundanceSelector } from "../../../../../redux/taxaAbundance/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function TaxaAbundanceRemoteSelectContainer({ fetchTaxaAbundanceSelector, data, loading }) {
     useEffect(() => {
-        fetchDebrisTypeSelector()
+        fetchTaxaAbundanceSelector()
     }, [])
 
 
     return (
         <Select
             loading={loading}
-            placeholder="Select the debris type"
+            showSearch
+            placeholder="Select the species abundance"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
@@ -25,15 +26,15 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchDebrisTypeSelector: (filters) => dispatch(fetchDebrisTypeSelector(filters)),
+        fetchTaxaAbundanceSelector: (filters) => dispatch(fetchTaxaAbundanceSelector(filters)),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        data: state.debrisType.selector,
-        loading: state.debrisType.loading,
+        data: state.taxaAbundance.selector,
+        loading: state.taxaAbundance.loading,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DebrisTypeRemoteSelectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaxaAbundanceRemoteSelectContainer);

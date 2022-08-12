@@ -1,18 +1,19 @@
 import { Select } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
+import { fetchTaxaLevelSelector } from "../../../../../redux/taxaLevel/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function TaxaLevelRemoteSelectContainer({ fetchTaxaLevelSelector, data, loading }) {
     useEffect(() => {
-        fetchDebrisTypeSelector()
+        fetchTaxaLevelSelector()
     }, [])
 
 
     return (
         <Select
             loading={loading}
-            placeholder="Select the debris type"
+            showSearch
+            placeholder="Select the highest taxonomic level"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
@@ -25,15 +26,15 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchDebrisTypeSelector: (filters) => dispatch(fetchDebrisTypeSelector(filters)),
+        fetchTaxaLevelSelector: (filters) => dispatch(fetchTaxaLevelSelector(filters)),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        data: state.debrisType.selector,
-        loading: state.debrisType.loading,
+        data: state.taxaLevel.selector,
+        loading: state.taxaLevel.loading,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DebrisTypeRemoteSelectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaxaLevelRemoteSelectContainer);

@@ -1,18 +1,20 @@
 import { Select } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
+import { fetchTaxaMaturitySelector } from "../../../../../redux/taxaMaturity/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function TaxaMaturityRemoteSelectContainer({ fetchTaxaMaturitySelector, data, loading }) {
     useEffect(() => {
-        fetchDebrisTypeSelector()
+        fetchTaxaMaturitySelector()
     }, [])
 
 
     return (
         <Select
             loading={loading}
-            placeholder="Select the debris type"
+            showSearch
+            mode="multiple"
+            placeholder="Select all existing maturity stages"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
@@ -25,15 +27,15 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchDebrisTypeSelector: (filters) => dispatch(fetchDebrisTypeSelector(filters)),
+        fetchTaxaMaturitySelector: (filters) => dispatch(fetchTaxaMaturitySelector(filters)),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        data: state.debrisType.selector,
-        loading: state.debrisType.loading,
+        data: state.taxaMaturity.selector,
+        loading: state.taxaMaturity.loading,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DebrisTypeRemoteSelectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaxaMaturityRemoteSelectContainer);

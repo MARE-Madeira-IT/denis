@@ -9,6 +9,13 @@ export const fetchTaxaViabilities = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaViabilitySelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_VIABILITY_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/viabilities?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchTaxaViability = id => ({
     type: types.FETCH_TAXA_VIABILITY,
     payload: axios.get(`${window.location.origin}/api/taxa/viabilities/${id}`),

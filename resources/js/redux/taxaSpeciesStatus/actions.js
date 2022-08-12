@@ -9,6 +9,13 @@ export const fetchTaxaSpeciesStatuses = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaSpeciesStatusSelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_SPECIES_STATUS_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/speciesstatuses?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchTaxaSpeciesStatus = id => ({
     type: types.FETCH_TAXA_SPECIES_STATUS
     ,

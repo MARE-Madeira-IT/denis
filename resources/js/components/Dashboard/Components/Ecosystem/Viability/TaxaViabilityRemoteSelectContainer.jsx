@@ -1,18 +1,19 @@
 import { Select } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
+import { fetchTaxaViabilitySelector } from "../../../../../redux/taxaViability/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function TaxaViabilityRemoteSelectContainer({ fetchTaxaViabilitySelector, data, loading }) {
     useEffect(() => {
-        fetchDebrisTypeSelector()
+        fetchTaxaViabilitySelector()
     }, [])
 
 
     return (
         <Select
             loading={loading}
-            placeholder="Select the debris type"
+            showSearch
+            placeholder="Select the viability"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
@@ -25,15 +26,15 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchDebrisTypeSelector: (filters) => dispatch(fetchDebrisTypeSelector(filters)),
+        fetchTaxaViabilitySelector: (filters) => dispatch(fetchTaxaViabilitySelector(filters)),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        data: state.debrisType.selector,
-        loading: state.debrisType.loading,
+        data: state.taxaViability.selector,
+        loading: state.taxaViability.loading,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DebrisTypeRemoteSelectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaxaViabilityRemoteSelectContainer);

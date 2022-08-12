@@ -23,9 +23,7 @@ class DebrisCategorySeeder extends Seeder
             ['name' => 'Processed/worked wood'],
             ['name' => 'Glass/ceramics'],
             ['name' => 'Chemicals'],
-            ['name' => 'Food waste'],
             ['name' => 'Other'],
-            ['name' => 'Fishing gear']
         ];
 
 

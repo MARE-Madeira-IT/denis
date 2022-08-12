@@ -1,18 +1,19 @@
 import { Select } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
-import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
+import { fetchTaxaNativeRegionSelector } from "../../../../../redux/taxaNativeRegion/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function TaxaNativeRegionRemoteSelectContainer({ fetchTaxaNativeRegionSelector, data, loading }) {
     useEffect(() => {
-        fetchDebrisTypeSelector()
+        fetchTaxaNativeRegionSelector()
     }, [])
 
 
     return (
         <Select
             loading={loading}
-            placeholder="Select the debris type"
+            showSearch
+            placeholder="Select the biological sample native region"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
@@ -25,15 +26,15 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchDebrisTypeSelector: (filters) => dispatch(fetchDebrisTypeSelector(filters)),
+        fetchTaxaNativeRegionSelector: (filters) => dispatch(fetchTaxaNativeRegionSelector(filters)),
     };
 };
 
 const mapStateToProps = (state) => {
     return {
-        data: state.debrisType.selector,
-        loading: state.debrisType.loading,
+        data: state.taxaNativeRegion.selector,
+        loading: state.taxaNativeRegion.loading,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DebrisTypeRemoteSelectContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaxaNativeRegionRemoteSelectContainer);

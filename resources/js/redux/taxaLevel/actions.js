@@ -9,6 +9,14 @@ export const fetchTaxaLevels = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaLevelSelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_LEVEL_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/levels?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
+
 export const fetchTaxaLevel = id => ({
     type: types.FETCH_TAXA_LEVEL,
     payload: axios.get(`${window.location.origin}/api/taxa/levels/${id}`),

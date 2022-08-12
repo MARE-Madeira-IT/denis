@@ -9,6 +9,13 @@ export const fetchTaxaNativeRegions = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaNativeRegionSelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_NATIVE_REGION_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/nativeregions?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchTaxaNativeRegion = id => ({
     type: types.FETCH_TAXA_NATIVE_REGION,
     payload: axios.get(`${window.location.origin}/api/taxa/nativeregions/${id}`),

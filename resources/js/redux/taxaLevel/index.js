@@ -2,6 +2,7 @@ import { types } from "./types";
 
 export const initialState = {
     data: [],
+    selector: [],
     meta: {},
     loading: false,
     current: {},
@@ -9,6 +10,7 @@ export const initialState = {
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
+        case `${types.FETCH_TAXA_LEVEL_SELECTOR}_PENDING`:
         case `${types.FETCH_TAXA_LEVELS}_PENDING`:
         case `${types.FETCH_TAXA_LEVEL}_PENDING`:
         case `${types.CREATE_TAXA_LEVEL}_PENDING`:
@@ -19,7 +21,7 @@ export default (state = initialState, action = {}) => {
                 loading: true
             };
 
-        case `${types.ME}_REJECTED`:
+        case `${types.FETCH_TAXA_LEVEL_SELECTOR}_REJECTED`:
         case `${types.FETCH_TAXA_LEVELS}_REJECTED`:
         case `${types.FETCH_TAXA_LEVEL}_REJECTED`:
         case `${types.CREATE_TAXA_LEVEL}_REJECTED`:
@@ -28,6 +30,13 @@ export default (state = initialState, action = {}) => {
             return {
                 ...state,
                 loading: false,
+            };
+
+        case `${types.FETCH_TAXA_LEVEL_SELECTOR}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                selector: action.payload.data.data,
             };
 
         case `${types.FETCH_TAXA_LEVELS}_FULFILLED`:

@@ -9,6 +9,13 @@ export const fetchTaxaAbundances = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaAbundanceSelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_ABUNDANCE_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/abundances?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchTaxaAbundance = id => ({
     type: types.FETCH_TAXA_ABUNDANCE,
     payload: axios.get(`${window.location.origin}/api/taxa/abundances/${id}`),

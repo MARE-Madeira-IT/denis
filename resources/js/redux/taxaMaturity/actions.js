@@ -9,6 +9,13 @@ export const fetchTaxaMaturities = (page = 1, filters = {}) => ({
     })}?page=${page}`)
 });
 
+export const fetchTaxaMaturitySelector = (filters = {}) => ({
+    type: types.FETCH_TAXA_MATURITY_SELECTOR,
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/maturities?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
+});
+
 export const fetchTaxaMaturity = id => ({
     type: types.FETCH_TAXA_MATURITY,
     payload: axios.get(`${window.location.origin}/api/taxa/maturities/${id}`),

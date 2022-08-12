@@ -11,6 +11,13 @@ use App\Http\Resources\DebrisSizeResource;
 use App\Http\Resources\DebrisThicknessResource;
 use App\Http\Resources\DebrisTypeResource;
 use App\Http\Resources\LmeResource;
+use App\Http\Resources\TaxaAbundanceResource;
+use App\Http\Resources\TaxaLevelResource;
+use App\Http\Resources\TaxaMaturityResource;
+use App\Http\Resources\TaxaNativeRegionResource;
+use App\Http\Resources\TaxaPopulationStatusResource;
+use App\Http\Resources\TaxaSpeciesStatusResource;
+use App\Http\Resources\TaxaViabilityResource;
 use App\Models\Country;
 use App\Models\DebrisCategory;
 use App\Models\DebrisHabitat;
@@ -20,6 +27,13 @@ use App\Models\DebrisSize;
 use App\Models\DebrisThickness;
 use App\Models\DebrisType;
 use App\Models\Lme;
+use App\Models\TaxaAbundance;
+use App\Models\TaxaLevel;
+use App\Models\TaxaMaturity;
+use App\Models\TaxaNativeRegion;
+use App\Models\TaxaPopulationStatus;
+use App\Models\TaxaSpeciesStatus;
+use App\Models\TaxaViability;
 use Illuminate\Http\Request;
 
 class SelectorController extends Controller
@@ -67,5 +81,40 @@ class SelectorController extends Controller
     public function debrisCategories()
     {
         return CompleteDebrisCategoryResource::collection(DebrisCategory::all());
+    }
+
+    public function taxaLevels()
+    {
+        return TaxaLevelResource::collection(TaxaLevel::all());
+    }
+
+    public function taxaSpeciesstatuses()
+    {
+        return TaxaSpeciesStatusResource::collection(TaxaSpeciesStatus::all());
+    }
+
+    public function taxaPopulationstatuses()
+    {
+        return TaxaPopulationStatusResource::collection(TaxaPopulationStatus::all());
+    }
+
+    public function taxaAbundances()
+    {
+        return TaxaAbundanceResource::collection(TaxaAbundance::all());
+    }
+
+    public function taxaViabilities()
+    {
+        return TaxaViabilityResource::collection(TaxaViability::all());
+    }
+
+    public function taxaMaturities()
+    {
+        return TaxaMaturityResource::collection(TaxaMaturity::all());
+    }
+
+    public function taxaNativeRegions()
+    {
+        return TaxaNativeRegionResource::collection(TaxaNativeRegion::all());
     }
 }
