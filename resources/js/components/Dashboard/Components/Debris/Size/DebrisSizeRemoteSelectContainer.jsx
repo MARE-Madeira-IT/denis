@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchDebrisSizeSelector } from "../../../../../redux/debrisSize/actions";
 
-function DebrisSizeRemoteSelectContainer({ fetchDebrisSizeSelector, data, loading }) {
+function DebrisSizeRemoteSelectContainer({ fetchDebrisSizeSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchDebrisSizeSelector()
     }, [])
@@ -11,6 +11,8 @@ function DebrisSizeRemoteSelectContainer({ fetchDebrisSizeSelector, data, loadin
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the debris size class"

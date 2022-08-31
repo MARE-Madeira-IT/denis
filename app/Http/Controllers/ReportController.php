@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Http\Resources\MinimalReportResource;
 use App\Http\Resources\ReportResource;
+use App\Models\Debris;
 use App\Models\Report;
+use App\Models\Site;
+use App\Models\Taxa;
 use App\QueryFilters\ReportFilters;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -26,9 +31,46 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request)
     {
-        //
+        $validator = $request->validated();
+
+        try {
+            DB::beginTransaction();
+
+            $debris = Debris::store($validator);
+
+            $site = Site::create([
+                "name" => $validator["site"],
+                "region" => $validator["region"],
+                "country_id" => $validator["country"],
+                "lme_id" => $validator["lme"],
+            ]);
+
+            $validator["site_id"] = $site->id;
+            $validator["debris_id"] = $debris->id;
+
+            $report = Report::store($validator);
+            $report->validation()->attach(1);
+
+            $validator["report_id"] = $report->id;
+
+            Taxa::store($validator);
+
+            DB::commit();
+
+            return new MinimalReportResource($report);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response([
+                'message' => $th->getMessage(),
+                'status' => 'failed'
+            ], 400);
+        }
+
+
+
+        return $validator;
     }
 
     /**

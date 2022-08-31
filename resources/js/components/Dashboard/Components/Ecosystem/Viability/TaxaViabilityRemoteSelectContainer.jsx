@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaViabilitySelector } from "../../../../../redux/taxaViability/actions";
 
-function TaxaViabilityRemoteSelectContainer({ fetchTaxaViabilitySelector, data, loading }) {
+function TaxaViabilityRemoteSelectContainer({ fetchTaxaViabilitySelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaViabilitySelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaViabilityRemoteSelectContainer({ fetchTaxaViabilitySelector, data, 
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the viability"

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaNativeRegionSelector } from "../../../../../redux/taxaNativeRegion/actions";
 
-function TaxaNativeRegionRemoteSelectContainer({ fetchTaxaNativeRegionSelector, data, loading }) {
+function TaxaNativeRegionRemoteSelectContainer({ fetchTaxaNativeRegionSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaNativeRegionSelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaNativeRegionRemoteSelectContainer({ fetchTaxaNativeRegionSelector, 
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the biological sample native region"

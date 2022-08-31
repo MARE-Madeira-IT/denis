@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchSiteLmesSelector } from "../../../../../redux/siteLme/actions";
 
-function LmeRemoteSelectContainer({ fetchSiteLmesSelector, data, loading }) {
+function LmeRemoteSelectContainer({ fetchSiteLmesSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchSiteLmesSelector()
     }, [])
@@ -11,6 +11,8 @@ function LmeRemoteSelectContainer({ fetchSiteLmesSelector, data, loading }) {
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select a large marine ecosystem"

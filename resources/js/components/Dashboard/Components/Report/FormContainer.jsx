@@ -1,31 +1,92 @@
 import React, { useState } from 'react'
-import { Form, Modal, Row, Col, Input, DatePicker, Steps, Button, InputNumber } from 'antd'
-import CountryRemoteSelectContainer from '../Site/Country/CountryRemoteSelectContainer';
-import LmeRemoteSelectContainer from '../Site/Lme/LmeRemoteSelectContainer';
-import DebrisTypeRemoteSelectContainer from '../Debris/Type/DebrisTypeRemoteSelectContainer';
-import DebrisHabitatRemoteSelectContainer from '../Debris/Habitat/DebrisHabitatRemoteSelectContainer';
-import DebrisMaterialRemoteSelectContainer from '../Debris/Material/DebrisMaterialRemoteSelectContainer';
-import DebrisSizeRemoteSelectContainer from '../Debris/Size/DebrisSizeRemoteSelectContainer';
-import DebrisThicknessRemoteSelectContainer from '../Debris/Thickness/DebrisThicknessRemoteSelectContainer';
-import DebrisRugosityRemoteSelectContainer from '../Debris/Rugosity/DebrisRugosityRemoteSelectContainer';
-import DebrisCategoryRemoteSelectContainer from '../Debris/Category/DebrisCategoryRemoteSelectContainer';
-import TaxaLevelRemoteSelectContainer from '../Ecosystem/Level/TaxaLevelRemoteSelectContainer';
-import TaxaSpeciesStatusRemoteSelectContainer from '../Ecosystem/SpeciesStatus/TaxaSpeciesStatusRemoteSelectContainer';
-import TaxaPopulationStatusRemoteSelectContainer from '../Ecosystem/PopulationStatus/TaxaPopulationStatusRemoteSelectContainer';
-import TaxaMaturityRemoteSelectContainer from '../Ecosystem/Maturity/TaxaMaturityRemoteSelectContainer';
-import TaxaViabilityRemoteSelectContainer from '../Ecosystem/Viability/TaxaViabilityRemoteSelectContainer';
-import TaxaAbundanceRemoteSelectContainer from '../Ecosystem/Abundance/TaxaAbundanceRemoteSelectContainer';
-import TaxaNativeRegionRemoteSelectContainer from '../Ecosystem/NativeRegion/TaxaNativeRegionRemoteSelectContainer';
+import { Form, Modal, Steps, Button, Row } from 'antd'
+import { createReport } from "../../../../redux/report/actions";
+import styled from "styled-components";
+import BiologicalInformation from './Form/BiologicalInformation';
+import DebrisCharacterization from './Form/DebrisCharacterization';
+import ItemDetection from './Form/ItemDetection';
+import { dimensions } from '../../dashboardHelper';
+import { connect } from "react-redux";
+import moment from 'moment';
 
 const { Step } = Steps;
 
-function FormContainer({ activeForm, setFormModal }) {
+const CustomModal = styled(Modal)`
+    .ant-modal-body {
+        padding: 30px 60px;
+    } 
+`;
+
+const CustomSteps = styled(Steps)`
+    width: 90%;
+    margin: auto;
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+    }
+`;
+
+
+
+const Add = styled.button`
+    padding: 1em 1.5em;
+    transition: outline 1s ease;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: transparent;
+    position: relative;
+
+    &::after, &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 20%;
+        height: 20%;
+        border: 2px solid;
+        transition: all 0.6s ease;
+        border-radius: 2px;
+    }
+
+    &::before {
+        top: 0;
+        left: 0;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-top-color: #777;
+        border-left-color: #777;
+    }
+
+    &::after {
+        bottom: 0;
+        right: 0;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-bottom-color: #777;
+        border-right-color: #777;
+    }
+
+    &:hover {
+        &::after, &::before {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+`;
+
+function FormContainer({ activeForm, setFormModal, createReport }) {
     const [form] = Form.useForm();
-    const [currentStep, setCurrentStep] = useState(2)
+    const [currentStep, setCurrentStep] = useState(0)
+    const [numSpecies, setNumSpecies] = useState(1)
+    const [formData, setFormData] = useState({})
 
     const create = () => {
         form.validateFields().then(values => {
-            console.log(values);
+            var submitData = { ...formData, ...values }
+            submitData.date = moment(submitData.date).format("YYYY-MM-DD");
+            createReport(submitData);
             // if (!err) {
             //     createMareDepth(values).then(data => {
             //         handleCancel();
@@ -36,187 +97,58 @@ function FormContainer({ activeForm, setFormModal }) {
 
     const handleCancel = () => {
         setFormModal(false);
+        setNumSpecies(1);
+        currentStep(0)
         form.resetFields();
     };
-    const steps = [
-        <Row type="flex" gutter={32}>
-            <Col xs={24} md={6}>
-                <Form.Item label="Date of survey" name="date" rules={[{ required: true }]}>
-                    <DatePicker style={{ width: "100%" }} placeholder="Date" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Latitude" name="latitude" rules={[{ required: true }]}>
-                    <Input placeholder="Latitude" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Longitude" name="longitude" rules={[{ required: true }]}>
-                    <Input placeholder="Longitude" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Ongoing Surveys Modality" name="on_going_survey" rules={[{ required: true }]}>
-                    <Input placeholder="Ex.: Diving transect (25 m)" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Site name" name="site" rules={[{ required: true }]}>
-                    <Input placeholder="Site" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Region/Province" name="region" rules={[{ required: true }]}>
-                    <Input placeholder="Region/Province" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Country" name="country" rules={[{ required: true }]}>
-                    <CountryRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Large marine ecosystem" name="lme" rules={[{ required: true }]}>
-                    <LmeRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-        </Row>,
-
-        <Row type="flex" gutter={32}>
-            <Col xs={24} md={12}>
-                <Row type="flex" gutter={32}>
-                    <Col span={12}>
-                        <Form.Item label="Debris Type (If 'Seafloor', specify depth)" name="debris_type" rules={[{ required: true }]}>
-                            <DebrisTypeRemoteSelectContainer />
-                        </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                        <Form.Item label=" " name="debris_depth" rules={[{ required: false }]}>
-                            <Input placeholder='Depth (m)' />
-                        </Form.Item>
-                    </Col>
-                </Row>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Habitat of the finding" name="debris_habitat" rules={[{ required: true }]}>
-                    <DebrisHabitatRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris material" name="debris_material" rules={[{ required: true }]}>
-                    <DebrisMaterialRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris size class" name="debris_size" rules={[{ required: true }]}>
-                    <DebrisSizeRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris weight (Kg)" name="debris_weight" rules={[{ required: true }]}>
-                    <InputNumber style={{ width: "100%" }} placeholder='Debris weight' />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris thickness" name="debris_thickness" rules={[{ required: true }]}>
-                    <DebrisThicknessRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris surface rugosity" name="debris_rugosity" rules={[{ required: true }]}>
-                    <DebrisRugosityRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Categories of Litter Items" name="debris_sub_category" rules={[{ required: true }]}>
-                    <DebrisCategoryRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris identification marks" name="debris_marks" rules={[{ required: true }]}>
-                    <Input placeholder="Debris identification marks" />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Probable debris origin" name="debris_origin" rules={[{ required: true }]}>
-                    <Input placeholder="Probable debris origin" />
-                </Form.Item>
-            </Col>
-        </Row>,
-
-        <Row type="flex" gutter={32}>
-            <Col xs={24} md={12}>
-                <Form.Item label="Highest taxonomic level" name="taxa_level" rules={[{ required: true }]}>
-                    <TaxaLevelRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-                <Form.Item label="Specify it" name="taxa_identification" rules={[{ required: true }]}>
-                    <Input placeholder='Identification based on the highest taxonomic level' />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-                <Form.Item label="Authority" name="taxa_authority" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-                <Form.Item label="Year of first report" name="taxa_year_first_report" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-                <Form.Item label="Reference" name="taxa_reference" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-                <Form.Item label="Species Status" name="taxa_species_status" rules={[{ required: true }]}>
-                    <TaxaSpeciesStatusRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-                <Form.Item label="Population Status" name="taxa_population_status" rules={[{ required: true }]}>
-                    <TaxaPopulationStatusRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-        </Row>,
-
-        <Row type="flex" gutter={32}>
-            <Col xs={24} md={12}>
-                <Form.Item label="Species abundance" name="taxa_abundance" rules={[{ required: true }]}>
-                    <TaxaAbundanceRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-                <Form.Item label="Viability" name="taxa_viability" rules={[{ required: true }]}>
-                    <TaxaViabilityRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-                <Form.Item label="Maturity stage" name="taxa_maturity" rules={[{ required: true }]}>
-                    <TaxaMaturityRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-                <Form.Item label="Native region" name="taxa_native_region" rules={[{ required: true }]}>
-                    <TaxaNativeRegionRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-        </Row>
-
-    ]
 
     const previous = () => {
         setCurrentStep(currentStep - 1);
     };
 
     const next = () => {
-        setCurrentStep(currentStep + 1);
+        form.validateFields(fieldsPerSteps[currentStep]).then(values => {
+            setFormData({ ...formData, ...values })
+            setCurrentStep(currentStep + 1);
+        })
+
     };
 
+    const steps = [
+        <ItemDetection />,
+        <DebrisCharacterization />,
+        <>
+            <p><b>IMPORTANT</b>: When multiple species grow on the same debris item, fill the "Biological identification & samples information" corresponding to the number of species. Each section corresponds to one species.</p>
+            <Form.List name="taxas">
+                {() => (
+                    <>
+                        {[...Array(numSpecies)].map((p, index) =>
+                            <Form.List key={index} name={index}>
+                                {() => (
+                                    <>
+                                        <BiologicalInformation handleDelete={() => setNumSpecies(numSpecies - 1)} last={index == numSpecies - 1 && index != 0} />
+                                    </>
+                                )}
+                            </Form.List>
+                        )}
+                    </>
+                )}
+            </Form.List>
+            <Row type="flex" justify='center'>
+                <Add onClick={() => setNumSpecies(numSpecies + 1)}> Add another species</Add>
+            </Row>
+
+        </>
+    ]
+
+    const fieldsPerSteps = [
+        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme"],
+        ["debris_type", "debris_depth", "debris_habitat", "debris_material", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
+        ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region"]
+    ]
+
     return (
-        <Modal
+        <CustomModal
             width={1200}
             title="Create report"
             visible={activeForm}
@@ -236,20 +168,31 @@ function FormContainer({ activeForm, setFormModal }) {
         >
             {activeForm != undefined &&
                 <>
-                    <Steps size="small" current={currentStep} onChange={(step) => setCurrentStep(step)}>
+                    <CustomSteps size="small" current={currentStep} onChange={(step) => setCurrentStep(step)}>
                         <Step title="Item detection" />
                         <Step title="Marine Debris characterization" />
-                        <Step title="Biological identification" />
-                        <Step title="Biological samples information" />
-                    </Steps>
+                        <Step title="Biological information" />
+                    </CustomSteps>
 
                     <Form style={{ margin: "50px auto" }} layout="vertical" hideRequiredMark form={form}>
                         {steps[currentStep]}
                     </Form>
                 </>
             }
-        </Modal>
+        </CustomModal>
     )
 }
 
-export default FormContainer
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createReport: (data) => dispatch(createReport(data)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.report.loading,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);

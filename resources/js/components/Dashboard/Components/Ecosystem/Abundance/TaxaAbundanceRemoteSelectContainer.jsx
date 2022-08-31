@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaAbundanceSelector } from "../../../../../redux/taxaAbundance/actions";
 
-function TaxaAbundanceRemoteSelectContainer({ fetchTaxaAbundanceSelector, data, loading }) {
+function TaxaAbundanceRemoteSelectContainer({ fetchTaxaAbundanceSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaAbundanceSelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaAbundanceRemoteSelectContainer({ fetchTaxaAbundanceSelector, data, 
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the species abundance"

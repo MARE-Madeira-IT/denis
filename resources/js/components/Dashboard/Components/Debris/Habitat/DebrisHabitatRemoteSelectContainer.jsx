@@ -10,7 +10,7 @@ const Add = styled.img`
     display: block;
 `;
 
-function DebrisHabitatRemoteSelectContainer({ fetchDebrisHabitatSelector, data, loading }) {
+function DebrisHabitatRemoteSelectContainer({ fetchDebrisHabitatSelector, data, loading, value, onChange }) {
     const inputRef = useRef(null);
     const [other, setOther] = useState(undefined)
     const [selected, setSelected] = useState(false)
@@ -22,6 +22,8 @@ function DebrisHabitatRemoteSelectContainer({ fetchDebrisHabitatSelector, data, 
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the habitat of the finding"

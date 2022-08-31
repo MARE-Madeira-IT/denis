@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaPopulationStatusSelector } from "../../../../../redux/taxaPopulationStatus/actions";
 
-function TaxaPopulationStatusRemoteSelectContainer({ fetchTaxaPopulationStatusSelector, data, loading }) {
+function TaxaPopulationStatusRemoteSelectContainer({ fetchTaxaPopulationStatusSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaPopulationStatusSelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaPopulationStatusRemoteSelectContainer({ fetchTaxaPopulationStatusSe
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the population status"

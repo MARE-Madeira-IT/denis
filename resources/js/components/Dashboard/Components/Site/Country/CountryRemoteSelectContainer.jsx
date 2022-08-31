@@ -1,9 +1,9 @@
-import { Select } from 'antd';
+import { Select, Form } from 'antd';
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchSiteCountriesSelector } from "../../../../../redux/siteCountry/actions";
 
-function CountryRemoteSelectContainer({ fetchSiteCountriesSelector, data, loading }) {
+function CountryRemoteSelectContainer({ fetchSiteCountriesSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchSiteCountriesSelector()
     }, [])
@@ -11,6 +11,8 @@ function CountryRemoteSelectContainer({ fetchSiteCountriesSelector, data, loadin
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select a country"

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchDebrisThicknessSelector } from "../../../../../redux/debrisThickness/actions";
 
-function DebrisThicknessRemoteSelectContainer({ fetchDebrisThicknessSelector, data, loading }) {
+function DebrisThicknessRemoteSelectContainer({ fetchDebrisThicknessSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchDebrisThicknessSelector()
     }, [])
@@ -11,6 +11,8 @@ function DebrisThicknessRemoteSelectContainer({ fetchDebrisThicknessSelector, da
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the debris thickness"

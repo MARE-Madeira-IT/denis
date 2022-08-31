@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchDebrisCategorySelector } from "../../../../../redux/debrisCategory/actions";
 
-function DebrisCategoryRemoteSelectContainer({ fetchDebrisCategorySelector, data, loading }) {
+function DebrisCategoryRemoteSelectContainer({ fetchDebrisCategorySelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchDebrisCategorySelector()
     }, [])
@@ -13,6 +13,8 @@ function DebrisCategoryRemoteSelectContainer({ fetchDebrisCategorySelector, data
 
     return (
         <Cascader
+            value={value}
+            onChange={onChange}
             options={data}
             loading={loading}
             fieldNames={{

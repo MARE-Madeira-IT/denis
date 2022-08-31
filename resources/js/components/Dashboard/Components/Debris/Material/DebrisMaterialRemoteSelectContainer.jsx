@@ -10,7 +10,7 @@ const Add = styled.img`
     display: block;
 `;
 
-function DebrisMaterialRemoteSelectContainer({ fetchDebrisMaterialSelector, data, loading }) {
+function DebrisMaterialRemoteSelectContainer({ fetchDebrisMaterialSelector, data, loading, value, onChange }) {
     const inputRef = useRef(null);
     const [other, setOther] = useState(undefined)
     const [selected, setSelected] = useState(false)
@@ -22,6 +22,8 @@ function DebrisMaterialRemoteSelectContainer({ fetchDebrisMaterialSelector, data
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the material of the debris"

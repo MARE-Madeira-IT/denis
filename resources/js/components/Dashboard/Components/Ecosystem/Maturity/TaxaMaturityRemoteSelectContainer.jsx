@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaMaturitySelector } from "../../../../../redux/taxaMaturity/actions";
 
-function TaxaMaturityRemoteSelectContainer({ fetchTaxaMaturitySelector, data, loading }) {
+function TaxaMaturityRemoteSelectContainer({ fetchTaxaMaturitySelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaMaturitySelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaMaturityRemoteSelectContainer({ fetchTaxaMaturitySelector, data, lo
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             mode="multiple"

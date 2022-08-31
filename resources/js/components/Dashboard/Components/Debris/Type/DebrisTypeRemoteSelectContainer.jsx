@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchDebrisTypeSelector } from "../../../../../redux/debrisType/actions";
 
-function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading }) {
+function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchDebrisTypeSelector()
     }, [])
@@ -11,6 +11,8 @@ function DebrisTypeRemoteSelectContainer({ fetchDebrisTypeSelector, data, loadin
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             placeholder="Select the debris type"
             optionFilterProp="name"

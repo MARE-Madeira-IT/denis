@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchTaxaLevelSelector } from "../../../../../redux/taxaLevel/actions";
 
-function TaxaLevelRemoteSelectContainer({ fetchTaxaLevelSelector, data, loading }) {
+function TaxaLevelRemoteSelectContainer({ fetchTaxaLevelSelector, data, loading, value, onChange }) {
     useEffect(() => {
         fetchTaxaLevelSelector()
     }, [])
@@ -11,6 +11,8 @@ function TaxaLevelRemoteSelectContainer({ fetchTaxaLevelSelector, data, loading 
 
     return (
         <Select
+            value={value}
+            onChange={onChange}
             loading={loading}
             showSearch
             placeholder="Select the highest taxonomic level"
