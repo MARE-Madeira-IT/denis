@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisRugosityResource;
 use App\Models\DebrisRugosity;
+use App\QueryFilters\DebrisRugosityFilters;
 use Illuminate\Http\Request;
 
 class DebrisRugosityController extends Controller
@@ -13,9 +14,9 @@ class DebrisRugosityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisRugosityFilters $filters)
     {
-        return DebrisRugosityResource::collection(DebrisRugosity::paginate(10));
+        return DebrisRugosityResource::collection(DebrisRugosity::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -51,17 +52,6 @@ class DebrisRugosityController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DebrisRugosity  $debrisRugosity
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DebrisRugosity $debrisRugosity)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,8 +69,10 @@ class DebrisRugosityController extends Controller
      * @param  \App\Models\DebrisRugosity  $debrisRugosity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisRugosity $debrisRugosity)
+    public function destroy(DebrisRugosity $rugosity)
     {
-        //
+        $rugosity->delete();
+
+        return response()->noContent();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisSubCategoryResource;
 use App\Models\DebrisSubCategory;
+use App\QueryFilters\DebrisSubCategoryFilters;
 use Illuminate\Http\Request;
 
 class DebrisSubCategoryController extends Controller
@@ -13,9 +14,9 @@ class DebrisSubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisSubCategoryFilters $filters)
     {
-        return DebrisSubCategoryResource::collection(DebrisSubCategory::paginate(10));
+        return DebrisSubCategoryResource::collection(DebrisSubCategory::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -79,8 +80,10 @@ class DebrisSubCategoryController extends Controller
      * @param  \App\Models\DebrisSubCategory  $debrisSubCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisSubCategory $debrisSubCategory)
+    public function destroy(DebrisSubCategory $subcategory)
     {
-        //
+        $subcategory->delete();
+
+        return response()->noContent();
     }
 }

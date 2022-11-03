@@ -6,7 +6,7 @@ export const fetchTaxaMaturities = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_MATURITIES,
     payload: axios.get(`${window.location.origin}/api/taxa/maturities?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaMaturitySelector = (filters = {}) => ({

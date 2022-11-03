@@ -6,7 +6,7 @@ export const fetchTaxaAbundances = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_ABUNDANCES,
     payload: axios.get(`${window.location.origin}/api/taxa/abundances?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaAbundanceSelector = (filters = {}) => ({

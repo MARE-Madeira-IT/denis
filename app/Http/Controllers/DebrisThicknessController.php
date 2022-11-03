@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisThicknessResource;
 use App\Models\DebrisThickness;
+use App\QueryFilters\DebrisThicknessFilters;
 use Illuminate\Http\Request;
 
 class DebrisThicknessController extends Controller
@@ -13,9 +14,9 @@ class DebrisThicknessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisThicknessFilters $filters)
     {
-        return DebrisThicknessResource::collection(DebrisThickness::paginate(10));
+        return DebrisThicknessResource::collection(DebrisThickness::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -79,8 +80,10 @@ class DebrisThicknessController extends Controller
      * @param  \App\Models\DebrisThickness  $debrisThickness
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisThickness $debrisThickness)
+    public function destroy(DebrisThickness $thickness)
     {
-        //
+        $thickness->delete();
+
+        return response()->noContent();
     }
 }

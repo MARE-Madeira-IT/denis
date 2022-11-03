@@ -6,7 +6,7 @@ export const fetchReports = (page = 1, filters = {}) => ({
     type: types.FETCH_REPORTS,
     payload: axios.get(`${window.location.origin}/api/reports?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchReport = id => ({

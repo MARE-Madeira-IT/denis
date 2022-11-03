@@ -31,12 +31,18 @@ function DebrisSize({ data, loading, meta, fetchDebrisSizes }) {
         fetchDebrisSizes(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisSizes(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleSearch={handleSearch}
                     loading={loading}
                     meta={meta}
                 />

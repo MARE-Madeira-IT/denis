@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaAbundanceResource;
 use App\Models\TaxaAbundance;
+use App\QueryFilters\TaxaAbundanceFilters;
 use Illuminate\Http\Request;
 
 class TaxaAbundanceController extends Controller
@@ -13,9 +14,9 @@ class TaxaAbundanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaAbundanceFilters $filters)
     {
-        return TaxaAbundanceResource::collection(TaxaAbundance::paginate(10));
+        return TaxaAbundanceResource::collection(TaxaAbundance::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaAbundanceController extends Controller
      * @param  \App\Models\TaxaAbundance  $taxaAbundance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaAbundance $taxaAbundance)
+    public function destroy(TaxaAbundance $abundance)
     {
-        //
+        $abundance->delete();
+
+        return response()->noContent();
     }
 }

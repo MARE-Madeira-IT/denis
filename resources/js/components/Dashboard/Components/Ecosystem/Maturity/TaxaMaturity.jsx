@@ -32,11 +32,18 @@ function TaxaMaturity({ data, loading, meta, fetchTaxaMaturities }) {
         fetchTaxaMaturities(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaMaturities(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

@@ -6,7 +6,7 @@ export const fetchTaxaLevels = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_LEVELS,
     payload: axios.get(`${window.location.origin}/api/taxa/levels?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaLevelSelector = (filters = {}) => ({

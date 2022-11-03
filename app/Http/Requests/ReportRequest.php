@@ -36,7 +36,7 @@ class ReportRequest extends FormRequest
             'date' => 'required|date',
             'latitude' => ['required', 'regex:/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
             'longitude' => ['required', 'regex:/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
-            
+
             'debris_type' => 'required|integer|exists:debris_types,id',
             'debris_depth' => 'required_if:debris_type,2|integer',
             'debris_habitat' => 'required|integer|exists:debris_habitats,id',
@@ -53,7 +53,7 @@ class ReportRequest extends FormRequest
             'debris_otherHabitat' => 'required_without:debris_habitat|string',
             'debris_otherMaterial' => 'required_without:debris_material|string',
             'debris_otherRugosity' => 'required_without:debris_rugosity|string',
-            
+
             'taxas' => 'required|array|min:1',
             'taxas.*.level' => 'required|integer|exists:taxa_levels,id',
             'taxas.*.identification' => 'required|string',

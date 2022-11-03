@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cerbero\QueryFilters\FiltersRecords;
 use Illuminate\Database\Eloquent\Model;
 
 class TaxaPopulationStatus extends Model
 {
-    use HasFactory;
+    use FiltersRecords;
 
     protected $fillable = ['name'];
 

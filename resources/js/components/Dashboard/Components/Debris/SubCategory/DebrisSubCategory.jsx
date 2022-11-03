@@ -32,6 +32,11 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
         fetchDebrisSubCategories(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisSubCategories(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
@@ -39,6 +44,7 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleSearch={handleSearch}
                     loading={loading}
                     meta={meta}
                 />

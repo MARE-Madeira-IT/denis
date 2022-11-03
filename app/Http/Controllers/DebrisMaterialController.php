@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisMaterialResource;
 use App\Models\DebrisMaterial;
+use App\QueryFilters\DebrisMaterialFilters;
 use Illuminate\Http\Request;
 
 class DebrisMaterialController extends Controller
@@ -13,19 +14,9 @@ class DebrisMaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(DebrisMaterialFilters $filters)
     {
-        return DebrisMaterialResource::collection(DebrisMaterial::paginate(10));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return DebrisMaterialResource::collection(DebrisMaterial::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -51,17 +42,6 @@ class DebrisMaterialController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DebrisMaterial  $debrisMaterial
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DebrisMaterial $debrisMaterial)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,8 +59,10 @@ class DebrisMaterialController extends Controller
      * @param  \App\Models\DebrisMaterial  $debrisMaterial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisMaterial $debrisMaterial)
+    public function destroy(DebrisMaterial $material)
     {
-        //
+        $material->delete();
+
+        return response()->noContent();
     }
 }

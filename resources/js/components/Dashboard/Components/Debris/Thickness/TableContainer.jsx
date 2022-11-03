@@ -15,7 +15,7 @@ const Container = styled.div`
     }
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange }) {
+function TableContainer({ loading, data, meta, handlePageChange, handleSearch }) {
 
     const columns = [
         {
@@ -47,6 +47,7 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 data={data}
                 columns={columns}
                 meta={meta}
+                handleSearch={handleSearch}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 title="Thickness classes"
             />

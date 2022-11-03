@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cerbero\QueryFilters\FiltersRecords;
 use Illuminate\Database\Eloquent\Model;
 
 class DebrisCategory extends Model
 {
-    use HasFactory;
+    use FiltersRecords;
 
     public function subcategories()
     {

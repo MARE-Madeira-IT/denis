@@ -30,11 +30,17 @@ function TaxaSpeciesStatus({ data, loading, meta, fetchTaxaSpeciesStatuses }) {
         fetchTaxaSpeciesStatuses(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaSpeciesStatuses(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

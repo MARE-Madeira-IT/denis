@@ -6,7 +6,7 @@ export const fetchTaxaSpeciesStatuses = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_SPECIES_STATUSES,
     payload: axios.get(`${window.location.origin}/api/taxa/speciesstatuses?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaSpeciesStatusSelector = (filters = {}) => ({

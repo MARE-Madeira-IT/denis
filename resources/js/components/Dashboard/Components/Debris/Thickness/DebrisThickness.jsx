@@ -31,11 +31,18 @@ function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
         fetchDebrisThicknesses(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisThicknesses(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

@@ -32,11 +32,17 @@ function TaxaLevel({ data, loading, meta, fetchTaxaLevels }) {
         fetchTaxaLevels(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaLevels(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

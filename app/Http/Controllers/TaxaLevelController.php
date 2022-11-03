@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaLevelResource;
 use App\Models\TaxaLevel;
+use App\QueryFilters\TaxaLevelFilters;
 use Illuminate\Http\Request;
 
 class TaxaLevelController extends Controller
@@ -13,9 +14,9 @@ class TaxaLevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaLevelFilters $filters)
     {
-        return TaxaLevelResource::collection(TaxaLevel::paginate(10));
+        return TaxaLevelResource::collection(TaxaLevel::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaLevelController extends Controller
      * @param  \App\Models\TaxaLevel  $taxaLevel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaLevel $taxaLevel)
+    public function destroy(TaxaLevel $level)
     {
-        //
+        $level->delete();
+
+        return response()->noContent();
     }
 }

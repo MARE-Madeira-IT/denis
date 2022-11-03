@@ -6,7 +6,7 @@ export const fetchUsers = (page = 1, filters = {}) => ({
     type: types.FETCH_USERS,
     payload: axios.get(`${window.location.origin}/api/users?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchUser = id => ({

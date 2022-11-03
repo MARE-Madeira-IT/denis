@@ -6,7 +6,7 @@ export const fetchDebrisMaterials = (page = 1, filters = {}) => ({
     type: types.FETCH_DEBRIS_MATERIALS,
     payload: axios.get(`${window.location.origin}/api/debris/materials?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchDebrisMaterialSelector = (filters = {}) => ({

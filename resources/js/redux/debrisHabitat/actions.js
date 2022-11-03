@@ -6,7 +6,7 @@ export const fetchDebrisHabitats = (page = 1, filters = {}) => ({
     type: types.FETCH_DEBRIS_HABITATS,
     payload: axios.get(`${window.location.origin}/api/debris/habitats?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchDebrisHabitatSelector = (filters = {}) => ({

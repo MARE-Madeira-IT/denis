@@ -6,7 +6,7 @@ export const fetchDebrisCategories = (page = 1, filters = {}) => ({
     type: types.FETCH_DEBRIS_CATEGORIES,
     payload: axios.get(`${window.location.origin}/api/debris/categories?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 

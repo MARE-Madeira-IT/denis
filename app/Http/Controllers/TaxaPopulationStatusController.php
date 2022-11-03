@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaPopulationStatusResource;
 use App\Models\TaxaPopulationStatus;
+use App\QueryFilters\TaxaPopulationStatusFilters;
 use Illuminate\Http\Request;
 
 class TaxaPopulationStatusController extends Controller
@@ -13,9 +14,9 @@ class TaxaPopulationStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaPopulationStatusFilters $filters)
     {
-        return TaxaPopulationStatusResource::collection(TaxaPopulationStatus::paginate(10));
+        return TaxaPopulationStatusResource::collection(TaxaPopulationStatus::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaPopulationStatusController extends Controller
      * @param  \App\Models\TaxaPopulationStatus  $taxaPopulationStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaPopulationStatus $taxaPopulationStatus)
+    public function destroy(TaxaPopulationStatus $populationstatus)
     {
-        //
+        $populationstatus->delete();
+
+        return response()->noContent();
     }
 }

@@ -29,11 +29,17 @@ function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses
         fetchTaxaPopulationStatuses(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaPopulationStatuses(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

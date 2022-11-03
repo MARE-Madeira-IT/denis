@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaNativeRegionResource;
 use App\Models\TaxaNativeRegion;
+use App\QueryFilters\TaxaNativeRegionFilters;
 use Illuminate\Http\Request;
 
 class TaxaNativeRegionController extends Controller
@@ -13,9 +14,9 @@ class TaxaNativeRegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaNativeRegionFilters $filters)
     {
-        return TaxaNativeRegionResource::collection(TaxaNativeRegion::paginate(10));
+        return TaxaNativeRegionResource::collection(TaxaNativeRegion::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaNativeRegionController extends Controller
      * @param  \App\Models\TaxaNativeRegion  $taxaNativeRegion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaNativeRegion $taxaNativeRegion)
+    public function destroy(TaxaNativeRegion $nativeregion)
     {
-        //
+        $nativeregion->delete();
+
+        return response()->noContent();
     }
 }

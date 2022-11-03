@@ -6,7 +6,7 @@ export const fetchTaxaViabilities = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_VIABILITIES,
     payload: axios.get(`${window.location.origin}/api/taxa/viabilities?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaViabilitySelector = (filters = {}) => ({

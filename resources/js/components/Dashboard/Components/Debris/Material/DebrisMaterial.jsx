@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisMaterials } from "../../../../../redux/debrisMaterial/actions";
+import { fetchDebrisMaterials, deleteDebrisMaterial } from "../../../../../redux/debrisMaterial/actions";
 import TableContainer from "./TableContainer";
 
 const ContentContainer = styled.div`
@@ -31,11 +31,18 @@ function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
         fetchDebrisMaterials(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisMaterials(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteDebrisMaterial}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -48,6 +55,7 @@ function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisMaterials: (page, filters) => dispatch(fetchDebrisMaterials(page, filters)),
+        deleteDebrisMaterial: (id) => dispatch(deleteDebrisMaterial(id))
     };
 };
 

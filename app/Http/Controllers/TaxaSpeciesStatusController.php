@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaSpeciesStatusResource;
 use App\Models\TaxaSpeciesStatus;
+use App\QueryFilters\TaxaSpeciesStatusFilters;
 use Illuminate\Http\Request;
 
 class TaxaSpeciesStatusController extends Controller
@@ -13,9 +14,9 @@ class TaxaSpeciesStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaSpeciesStatusFilters $filters)
     {
-        return TaxaSpeciesStatusResource::collection(TaxaSpeciesStatus::paginate(10));
+        return TaxaSpeciesStatusResource::collection(TaxaSpeciesStatus::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaSpeciesStatusController extends Controller
      * @param  \App\Models\TaxaSpeciesStatus  $taxaSpeciesStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaSpeciesStatus $taxaSpeciesStatus)
+    public function destroy(TaxaSpeciesStatus $speciesstatus)
     {
-        //
+        $speciesstatus->delete();
+
+        return response()->noContent();
     }
 }

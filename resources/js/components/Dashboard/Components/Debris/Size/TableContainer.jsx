@@ -7,7 +7,7 @@ const Container = styled.div`
     width: 100%;
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange }) {
+function TableContainer({ loading, data, meta, handlePageChange, handleSearch }) {
 
     const columns = [
         {
@@ -39,6 +39,7 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 data={data}
                 columns={columns}
                 meta={meta}
+                handleSearch={handleSearch}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 title="Size classes"
             />

@@ -6,7 +6,7 @@ export const fetchTaxaNativeRegions = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_NATIVE_REGIONS,
     payload: axios.get(`${window.location.origin}/api/taxa/nativeregions?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaNativeRegionSelector = (filters = {}) => ({

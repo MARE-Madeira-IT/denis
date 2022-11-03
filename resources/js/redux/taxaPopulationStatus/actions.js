@@ -6,7 +6,7 @@ export const fetchTaxaPopulationStatuses = (page = 1, filters = {}) => ({
     type: types.FETCH_TAXA_POPULATION_STATUSES,
     payload: axios.get(`${window.location.origin}/api/taxa/populationstatuses?${stringify(filters, {
         arrayFormat: "index"
-    })}?page=${page}`)
+    })}&page=${page}`)
 });
 
 export const fetchTaxaPopulationStatusSelector = (filters = {}) => ({

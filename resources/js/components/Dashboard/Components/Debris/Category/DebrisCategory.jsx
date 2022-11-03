@@ -31,12 +31,18 @@ function DebrisCategory({ data, loading, meta, fetchDebrisCategories }) {
         fetchDebrisCategories(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisCategories(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleSearch={handleSearch}
                     loading={loading}
                     meta={meta}
                 />

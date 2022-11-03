@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaMaturityResource;
 use App\Models\TaxaMaturity;
+use App\QueryFilters\TaxaMaturityFilters;
 use Illuminate\Http\Request;
 
 class TaxaMaturityController extends Controller
@@ -13,9 +14,9 @@ class TaxaMaturityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaMaturityFilters $filters)
     {
-        return TaxaMaturityResource::collection(TaxaMaturity::paginate(10));
+        return TaxaMaturityResource::collection(TaxaMaturity::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaMaturityController extends Controller
      * @param  \App\Models\TaxaMaturity  $taxaMaturity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaMaturity $taxaMaturity)
+    public function destroy(TaxaMaturity $maturity)
     {
-        //
+        $maturity->delete();
+
+        return response()->noContent();
     }
 }

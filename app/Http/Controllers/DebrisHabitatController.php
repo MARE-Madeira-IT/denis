@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisHabitatResource;
 use App\Models\DebrisHabitat;
+use App\QueryFilters\DebrisHabitatFilters;
 use Illuminate\Http\Request;
 
 class DebrisHabitatController extends Controller
@@ -13,9 +14,9 @@ class DebrisHabitatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisHabitatFilters $filters)
     {
-        return DebrisHabitatResource::collection(DebrisHabitat::paginate(10));
+        return DebrisHabitatResource::collection(DebrisHabitat::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -79,8 +80,10 @@ class DebrisHabitatController extends Controller
      * @param  \App\Models\DebrisHabitat  $debrisHabitat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisHabitat $debrisHabitat)
+    public function destroy(DebrisHabitat $habitat)
     {
-        //
+        $habitat->delete();
+
+        return response()->noContent();
     }
 }

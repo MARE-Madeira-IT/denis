@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Table from "antd/es/table"
+import { Input } from "antd";
+import debounce from 'lodash/debounce';
 
 const Container = styled.div`
     background: transparent;
@@ -92,7 +94,6 @@ const TableControls = styled.div`
 
     .search {               
         height: 100%;
-        padding: 15px 20px;
         box-sizing: border-box;
         margin: auto 0px;
     }
@@ -131,7 +132,7 @@ const TableControls = styled.div`
 `;
 
 function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
-    showQuickJumper = false, handleExpandable, bordered = false, title }) {
+    showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch }) {
 
     return (
         <div>
@@ -140,10 +141,19 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                 <span><img src="/icons/fullscreen.svg" /> Open as page</span>
             </TitleContainer>
             <TableControls>
-                <p className="search"><img src="/icons/search.svg" /> Search</p>
+                <Input
+                    placeholder="Search"
+                    bordered={false}
+                    onChange={debounce(handleSearch, 800)}
+                    className="search"
+                    prefix={<img src="/icons/search.svg" />}
+                    style={{
+                        width: "50%",
+                    }}
+                />
                 <div className="controls">
                     <p><img src="/icons/export.svg" /> Export</p>
-                    <p className="dark-background">Add record <img src="/icons/add.svg" /></p>
+                    <p className="dark-background"><img src="/icons/add.svg" /> Add record </p>
                 </div>
             </TableControls>
             <Container>

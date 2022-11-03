@@ -6,7 +6,6 @@ import { maxWidth } from './dashboardHelper';
 const navbarItems = [
     { to: "/dashboard/", title: "Profile" },
     { to: "/dashboard/reports", title: "Reports" },
-    { to: "/dashboard/validation", title: "Validation" },
     { to: "/dashboard/users", title: "Users" },
     { to: "/dashboard/debris", title: "Debris" },
     { to: "/dashboard/ecosystems", title: "Ecosystems" },

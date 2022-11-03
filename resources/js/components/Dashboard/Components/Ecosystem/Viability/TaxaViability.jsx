@@ -30,11 +30,17 @@ function TaxaViability({ data, loading, meta, fetchTaxaViabilities }) {
         fetchTaxaViabilities(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaViabilities(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}

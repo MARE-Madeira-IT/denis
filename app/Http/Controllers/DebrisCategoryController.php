@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisCategoryResource;
 use App\Models\DebrisCategory;
+use App\QueryFilters\DebrisCategoryFilters;
 use Illuminate\Http\Request;
 
 class DebrisCategoryController extends Controller
@@ -13,9 +14,9 @@ class DebrisCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisCategoryFilters $filters)
     {
-        return DebrisCategoryResource::collection(DebrisCategory::paginate(10));
+        return DebrisCategoryResource::collection(DebrisCategory::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -51,17 +52,6 @@ class DebrisCategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DebrisCategory  $debrisCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DebrisCategory $debrisCategory)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,8 +69,10 @@ class DebrisCategoryController extends Controller
      * @param  \App\Models\DebrisCategory  $debrisCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisCategory $debrisCategory)
+    public function destroy(DebrisCategory $category)
     {
-        //
+        $category->delete();
+
+        return response()->noContent();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DebrisSizeResource;
 use App\Models\DebrisSize;
+use App\QueryFilters\DebrisSizeFilters;
 use Illuminate\Http\Request;
 
 class DebrisSizeController extends Controller
@@ -13,9 +14,9 @@ class DebrisSizeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DebrisSizeFilters $filters)
     {
-        return DebrisSizeResource::collection(DebrisSize::paginate(10));
+        return DebrisSizeResource::collection(DebrisSize::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -79,8 +80,10 @@ class DebrisSizeController extends Controller
      * @param  \App\Models\DebrisSize  $debrisSize
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DebrisSize $debrisSize)
+    public function destroy(DebrisSize $size)
     {
-        //
+        $size->delete();
+
+        return response()->noContent();
     }
 }

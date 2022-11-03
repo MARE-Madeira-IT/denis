@@ -31,12 +31,18 @@ function DebrisHabitat({ data, loading, meta, fetchDebrisHabitats }) {
         fetchDebrisHabitats(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisHabitats(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleSearch={handleSearch}
                     loading={loading}
                     meta={meta}
                 />

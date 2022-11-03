@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TaxaViabilityResource;
 use App\Models\TaxaViability;
+use App\QueryFilters\TaxaViabilityFilters;
 use Illuminate\Http\Request;
 
 class TaxaViabilityController extends Controller
@@ -13,9 +14,9 @@ class TaxaViabilityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaxaViabilityFilters $filters)
     {
-        return TaxaViabilityResource::collection(TaxaViability::paginate(10));
+        return TaxaViabilityResource::collection(TaxaViability::filterBy($filters)->paginate(10));
     }
 
     /**
@@ -58,8 +59,10 @@ class TaxaViabilityController extends Controller
      * @param  \App\Models\TaxaViability  $taxaViability
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaxaViability $taxaViability)
+    public function destroy(TaxaViability $viability)
     {
-        //
+        $viability->delete();
+
+        return response()->noContent();
     }
 }

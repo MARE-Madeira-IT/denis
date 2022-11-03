@@ -32,12 +32,18 @@ function DebrisRugosity({ data, loading, meta, fetchDebrisRugosities }) {
         fetchDebrisRugosities(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchDebrisRugosities(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleSearch={handleSearch}
                     loading={loading}
                     meta={meta}
                 />

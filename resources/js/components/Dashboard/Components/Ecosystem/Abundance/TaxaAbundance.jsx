@@ -32,11 +32,17 @@ function TaxaAbundance({ data, loading, meta, fetchTaxaAbundances }) {
         fetchTaxaAbundances(pagination.current, filters);
     }
 
+    function handleSearch(e) {
+        fetchTaxaAbundances(1, { search: e.target.value });
+        setFilters({ search: e.target.value })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleSearch={handleSearch}
                     data={data}
                     loading={loading}
                     meta={meta}
