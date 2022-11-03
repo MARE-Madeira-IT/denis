@@ -64,7 +64,8 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_TAXA_ABUNDANCE}_FULFILLED`:
             return {
                 ...state,
-                data: [action.payload.data.data, ...state.data]
+                data: [action.payload.data.data, ...state.data],
+                loading: false,
             };
 
         case `${types.UPDATE_TAXA_ABUNDANCE}_FULFILLED`:

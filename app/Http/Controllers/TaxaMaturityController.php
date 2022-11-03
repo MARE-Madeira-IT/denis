@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaMaturityRequest;
 use App\Http\Resources\TaxaMaturityResource;
 use App\Models\TaxaMaturity;
 use App\QueryFilters\TaxaMaturityFilters;
@@ -25,9 +26,12 @@ class TaxaMaturityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaMaturityRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaMaturity::create($validator);
+
+        return new TaxaMaturityResource($record);
     }
 
     /**

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaSpeciesStatuses } from "../../../../../redux/taxaSpeciesStatus/actions";
+import { fetchTaxaSpeciesStatuses, createTaxaSpeciesStatus, deleteTaxaSpeciesStatus } from "../../../../../redux/taxaSpeciesStatus/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -19,8 +20,9 @@ const Container = styled.div`
 `;
 
 
-function TaxaSpeciesStatus({ data, loading, meta, fetchTaxaSpeciesStatuses }) {
+function TaxaSpeciesStatus({ data, loading, meta, fetchTaxaSpeciesStatuses, createTaxaSpeciesStatus, deleteTaxaSpeciesStatus }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaSpeciesStatuses();
@@ -35,12 +37,22 @@ function TaxaSpeciesStatus({ data, loading, meta, fetchTaxaSpeciesStatuses }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaSpeciesStatus(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteTaxaSpeciesStatus}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -53,6 +65,8 @@ function TaxaSpeciesStatus({ data, loading, meta, fetchTaxaSpeciesStatuses }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaSpeciesStatuses: (page, filters) => dispatch(fetchTaxaSpeciesStatuses(page, filters)),
+        createTaxaSpeciesStatus: (data) => dispatch(createTaxaSpeciesStatus(data)),
+        deleteTaxaSpeciesStatus: (id) => dispatch(deleteTaxaSpeciesStatus(id)),
     };
 };
 

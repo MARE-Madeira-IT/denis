@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DebrisCategoryRequest;
 use App\Http\Resources\DebrisCategoryResource;
 use App\Models\DebrisCategory;
 use App\QueryFilters\DebrisCategoryFilters;
@@ -20,24 +21,18 @@ class DebrisCategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DebrisCategoryRequest $request)
     {
-        //
+        $validator = $request->validated();
+
+        $record = DebrisCategory::create($validator);
+
+        return new DebrisCategoryResource($record);
     }
 
     /**

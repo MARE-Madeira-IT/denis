@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaViabilityRequest;
 use App\Http\Resources\TaxaViabilityResource;
 use App\Models\TaxaViability;
 use App\QueryFilters\TaxaViabilityFilters;
@@ -25,9 +26,12 @@ class TaxaViabilityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaViabilityRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaViability::create($validator);
+
+        return new TaxaViabilityResource($record);
     }
 
     /**

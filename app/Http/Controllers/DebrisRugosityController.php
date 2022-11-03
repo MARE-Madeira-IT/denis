@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DebrisRugosityRequest;
 use App\Http\Resources\DebrisRugosityResource;
 use App\Models\DebrisRugosity;
 use App\QueryFilters\DebrisRugosityFilters;
@@ -20,24 +21,17 @@ class DebrisRugosityController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DebrisRugosityRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = DebrisRugosity::create($validator);
+
+        return new DebrisRugosityResource($record);
     }
 
     /**

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisMaterials, deleteDebrisMaterial } from "../../../../../redux/debrisMaterial/actions";
+import { fetchDebrisMaterials, deleteDebrisMaterial, createDebrisMaterial } from "../../../../../redux/debrisMaterial/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
 `;
 
 
-function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
+function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials, createDebrisMaterial, deleteDebrisMaterial  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisMaterials();
@@ -36,6 +38,13 @@ function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisMaterial(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
@@ -43,6 +52,8 @@ function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
                     handlePageChange={handlePageChange}
                     handleDelete={deleteDebrisMaterial}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -55,7 +66,8 @@ function DebrisMaterial({ data, loading, meta, fetchDebrisMaterials }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisMaterials: (page, filters) => dispatch(fetchDebrisMaterials(page, filters)),
-        deleteDebrisMaterial: (id) => dispatch(deleteDebrisMaterial(id))
+        createDebrisMaterial: (data) => dispatch(createDebrisMaterial(data)),
+        deleteDebrisMaterial: (id) => dispatch(deleteDebrisMaterial(id)),
     };
 };
 

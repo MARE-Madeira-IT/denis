@@ -17,22 +17,22 @@ export const fetchDebrisThicknessSelector = (filters = {}) => ({
 });
 
 
-export const fetchDebrisMaterial = id => ({
+export const fetchDebrisThickness = id => ({
     type: types.FETCH_DEBRIS_THICKNESS,
     payload: axios.get(`${window.location.origin}/api/debris/thicknesses/${id}`),
 });
 
-export const deleteDebrisMaterial = id => ({
+export const deleteDebrisThickness = id => ({
     type: types.DELETE_DEBRIS_THICKNESS,
     payload: axios.delete(`${window.location.origin}/api/debris/thicknesses/${id}`),
 });
 
-export const createDebrisMaterial = data => ({
+export const createDebrisThickness = data => ({
     type: types.CREATE_DEBRIS_THICKNESS,
     payload: axios.post(`${window.location.origin}/api/debris/thicknesses/`, data),
 });
 
-export const updateDebrisMaterial = (id, data) => ({
+export const updateDebrisThickness = (id, data) => ({
     type: types.UPDATE_DEBRIS_THICKNESS,
     payload: axios.put(`${window.location.origin}/api/debris/thicknesses/${id}`, data),
 });

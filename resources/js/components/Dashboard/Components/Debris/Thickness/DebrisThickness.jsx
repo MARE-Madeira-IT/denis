@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisThicknesses } from "../../../../../redux/debrisThickness/actions";
+import { fetchDebrisThicknesses, createDebrisThickness, deleteDebrisThickness } from "../../../../../redux/debrisThickness/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
     font-family: 'Lato';
 `;
 
-function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
+function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses, createDebrisThickness, deleteDebrisThickness }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisThicknesses();
@@ -36,14 +38,24 @@ function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisThickness(values);
+            form.resetFields();
+        })
+    }
+
 
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
-                    handleSearch={handleSearch}
                     data={data}
+                    handleDelete={deleteDebrisThickness}
+                    handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -55,6 +67,8 @@ function DebrisThickness({ data, loading, meta, fetchDebrisThicknesses }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisThicknesses: (page, filters) => dispatch(fetchDebrisThicknesses(page, filters)),
+        createDebrisThickness: (data) => dispatch(createDebrisThickness(data)),
+        deleteDebrisThickness: (id) => dispatch(deleteDebrisThickness(id)),
     };
 };
 

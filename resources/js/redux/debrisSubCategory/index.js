@@ -55,7 +55,8 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_DEBRIS_SUB_CATEGORY}_FULFILLED`:
             return {
                 ...state,
-                data: [action.payload.data.data, ...state.data]
+                data: [action.payload.data.data, ...state.data],
+                loading: false,
             };
 
         case `${types.UPDATE_DEBRIS_SUB_CATEGORY}_FULFILLED`:

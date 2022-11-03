@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaMaturities } from "../../../../../redux/taxaMaturity/actions";
+import { fetchTaxaMaturities, createTaxaMaturity, deleteTaxaMaturity } from "../../../../../redux/taxaMaturity/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -21,8 +22,9 @@ const Container = styled.div`
 `;
 
 
-function TaxaMaturity({ data, loading, meta, fetchTaxaMaturities }) {
+function TaxaMaturity({ data, loading, meta, fetchTaxaMaturities, createTaxaMaturity, deleteTaxaMaturity }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaMaturities();
@@ -37,13 +39,22 @@ function TaxaMaturity({ data, loading, meta, fetchTaxaMaturities }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaMaturity(values);
+            form.resetFields();
+        })
+    }
 
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteTaxaMaturity}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -56,6 +67,8 @@ function TaxaMaturity({ data, loading, meta, fetchTaxaMaturities }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaMaturities: (page, filters) => dispatch(fetchTaxaMaturities(page, filters)),
+        createTaxaMaturity: (data) => dispatch(createTaxaMaturity(data)),
+        deleteTaxaMaturity: (id) => dispatch(deleteTaxaMaturity(id)),
     };
 };
 

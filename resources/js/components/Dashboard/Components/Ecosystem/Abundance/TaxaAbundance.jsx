@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaAbundances } from "../../../../../redux/taxaAbundance/actions";
+import { fetchTaxaAbundances, createTaxaAbundance, deleteTaxaAbundance } from "../../../../../redux/taxaAbundance/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -21,8 +22,9 @@ const Container = styled.div`
 `;
 
 
-function TaxaAbundance({ data, loading, meta, fetchTaxaAbundances }) {
+function TaxaAbundance({ data, loading, meta, fetchTaxaAbundances, createTaxaAbundance, deleteTaxaAbundance }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaAbundances();
@@ -37,13 +39,23 @@ function TaxaAbundance({ data, loading, meta, fetchTaxaAbundances }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaAbundance(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
-                    handleSearch={handleSearch}
                     data={data}
+                    handleDelete={deleteTaxaAbundance}
+                    handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -55,6 +67,8 @@ function TaxaAbundance({ data, loading, meta, fetchTaxaAbundances }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaAbundances: (page, filters) => dispatch(fetchTaxaAbundances(page, filters)),
+        createTaxaAbundance: (data) => dispatch(createTaxaAbundance(data)),
+        deleteTaxaAbundance: (id) => dispatch(deleteTaxaAbundance(id)),
     };
 };
 

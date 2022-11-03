@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisSizes } from "../../../../../redux/debrisSize/actions";
+import { fetchDebrisSizes, createDebrisSize, deleteDebrisSize } from "../../../../../redux/debrisSize/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
     font-family: 'Lato';
 `;
 
-function DebrisSize({ data, loading, meta, fetchDebrisSizes }) {
+function DebrisSize({ data, loading, meta, fetchDebrisSizes, createDebrisSize, deleteDebrisSize  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisSizes();
@@ -36,15 +38,26 @@ function DebrisSize({ data, loading, meta, fetchDebrisSizes }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisSize(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
-                <TableContainer
+            <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleDelete={deleteDebrisSize}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
+
                 />
             </ContentContainer>
         </Container>
@@ -54,6 +67,8 @@ function DebrisSize({ data, loading, meta, fetchDebrisSizes }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisSizes: (page, filters) => dispatch(fetchDebrisSizes(page, filters)),
+        createDebrisSize: (data) => dispatch(createDebrisSize(data)),
+        deleteDebrisSize: (id) => dispatch(deleteDebrisSize(id)),
     };
 };
 

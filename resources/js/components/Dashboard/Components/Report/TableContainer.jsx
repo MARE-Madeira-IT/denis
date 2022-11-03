@@ -63,7 +63,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick 
             dataIndex: 'Operation',
             render: (_, record) =>
                 data.length >= 1 ? (
-                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
                         <a>Delete</a>
                     </Popconfirm>
                 ) : null,

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisRugosities } from "../../../../../redux/debrisRugosity/actions";
+import { fetchDebrisRugosities, createDebrisRugosity, deleteDebrisRugosity } from "../../../../../redux/debrisRugosity/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -21,8 +22,9 @@ const Container = styled.div`
 `;
 
 
-function DebrisRugosity({ data, loading, meta, fetchDebrisRugosities }) {
+function DebrisRugosity({ data, loading, meta, fetchDebrisRugosities, createDebrisRugosity, deleteDebrisRugosity  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisRugosities();
@@ -37,13 +39,23 @@ function DebrisRugosity({ data, loading, meta, fetchDebrisRugosities }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisRugosity(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleDelete={deleteDebrisRugosity}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -55,6 +67,8 @@ function DebrisRugosity({ data, loading, meta, fetchDebrisRugosities }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisRugosities: (page, filters) => dispatch(fetchDebrisRugosities(page, filters)),
+        createDebrisRugosity: (data) => dispatch(createDebrisRugosity(data)),
+        deleteDebrisRugosity: (id) => dispatch(deleteDebrisRugosity(id)),
     };
 };
 

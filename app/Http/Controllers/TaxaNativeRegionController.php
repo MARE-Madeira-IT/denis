@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaNativeRegionRequest;
 use App\Http\Resources\TaxaNativeRegionResource;
 use App\Models\TaxaNativeRegion;
 use App\QueryFilters\TaxaNativeRegionFilters;
@@ -25,9 +26,12 @@ class TaxaNativeRegionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaNativeRegionRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaNativeRegion::create($validator);
+
+        return new TaxaNativeRegionResource($record);
     }
 
     /**

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaLevels } from "../../../../../redux/taxaLevel/actions";
+import { fetchTaxaLevels, createTaxaLevel, deleteTaxaLevel } from "../../../../../redux/taxaLevel/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -21,8 +22,9 @@ const Container = styled.div`
 `;
 
 
-function TaxaLevel({ data, loading, meta, fetchTaxaLevels }) {
+function TaxaLevel({ data, loading, meta, fetchTaxaLevels, createTaxaLevel, deleteTaxaLevel }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaLevels();
@@ -37,12 +39,23 @@ function TaxaLevel({ data, loading, meta, fetchTaxaLevels }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaLevel(values);
+            form.resetFields();
+        })
+    }
+
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteTaxaLevel}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -55,6 +68,8 @@ function TaxaLevel({ data, loading, meta, fetchTaxaLevels }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaLevels: (page, filters) => dispatch(fetchTaxaLevels(page, filters)),
+        createTaxaLevel: (data) => dispatch(createTaxaLevel(data)),
+        deleteTaxaLevel: (id) => dispatch(deleteTaxaLevel(id)),
     };
 };
 

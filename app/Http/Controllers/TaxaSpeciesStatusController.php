@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaSpeciesStatusRequest;
 use App\Http\Resources\TaxaSpeciesStatusResource;
 use App\Models\TaxaSpeciesStatus;
 use App\QueryFilters\TaxaSpeciesStatusFilters;
@@ -25,9 +26,12 @@ class TaxaSpeciesStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaSpeciesStatusRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaSpeciesStatus::create($validator);
+
+        return new TaxaSpeciesStatusResource($record);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaAbundanceRequest;
 use App\Http\Resources\TaxaAbundanceResource;
 use App\Models\TaxaAbundance;
 use App\QueryFilters\TaxaAbundanceFilters;
@@ -25,9 +26,12 @@ class TaxaAbundanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaAbundanceRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaAbundance::create($validator);
+
+        return new TaxaAbundanceResource($record);
     }
 
     /**

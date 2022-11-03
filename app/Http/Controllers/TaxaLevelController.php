@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaxaLevelRequest;
 use App\Http\Resources\TaxaLevelResource;
 use App\Models\TaxaLevel;
 use App\QueryFilters\TaxaLevelFilters;
@@ -25,9 +26,12 @@ class TaxaLevelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxaLevelRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = TaxaLevel::create($validator);
+
+        return new TaxaLevelResource($record);
     }
 
     /**

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisTypes } from "../../../../../redux/debrisType/actions";
+import { fetchDebrisTypes, createDebrisType, deleteDebrisType } from "../../../../../redux/debrisType/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
     font-family: 'Lato';
 `;
 
-function DebrisType({ data, loading, meta, fetchDebrisTypes }) {
+function DebrisType({ data, loading, meta, fetchDebrisTypes, createDebrisType, deleteDebrisType }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisTypes();
@@ -36,14 +38,23 @@ function DebrisType({ data, loading, meta, fetchDebrisTypes }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisType(values);
+            form.resetFields();
+        })
+    }
 
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
-                    handleSearch={handleSearch}
                     data={data}
+                    handleDelete={deleteDebrisType}
+                    handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -55,6 +66,8 @@ function DebrisType({ data, loading, meta, fetchDebrisTypes }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisTypes: (page, filters) => dispatch(fetchDebrisTypes(page, filters)),
+        createDebrisType: (data) => dispatch(createDebrisType(data)),
+        deleteDebrisType: (id) => dispatch(deleteDebrisType(id)),
     };
 };
 

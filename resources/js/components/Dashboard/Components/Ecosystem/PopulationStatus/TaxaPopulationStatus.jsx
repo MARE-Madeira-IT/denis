@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaPopulationStatuses } from "../../../../../redux/taxaPopulationStatus/actions";
+import { fetchTaxaPopulationStatuses, createTaxaPopulationStatus, deleteTaxaPopulationStatus  } from "../../../../../redux/taxaPopulationStatus/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
+
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -18,8 +20,9 @@ const Container = styled.div`
     font-family: 'Lato';
 `;
 
-function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses }) {
+function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses, createTaxaPopulationStatus, deleteTaxaPopulationStatus  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaPopulationStatuses();
@@ -34,13 +37,23 @@ function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaPopulationStatus(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
-                    handleSearch={handleSearch}
                     data={data}
+                    handleDelete={deleteTaxaPopulationStatus}
+                    handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -52,6 +65,8 @@ function TaxaPopulationStatus({ data, loading, meta, fetchTaxaPopulationStatuses
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaPopulationStatuses: (page, filters) => dispatch(fetchTaxaPopulationStatuses(page, filters)),
+        createTaxaPopulationStatus: (data) => dispatch(createTaxaPopulationStatus(data)),
+        deleteTaxaPopulationStatus: (id) => dispatch(deleteTaxaPopulationStatus(id)),
     };
 };
 

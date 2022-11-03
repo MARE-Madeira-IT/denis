@@ -2,12 +2,13 @@ import React from "react";
 import { Popconfirm } from 'antd';
 import styled from "styled-components";
 import TableComponent from "../../../Common/ModalTableComponent";
+import FormContainer from "./FormContainer";
 
 const Container = styled.div`
     width: 100%;
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange, handleSearch }) {
+function TableContainer({ loading, data, meta, handlePageChange, handleSearch, handleCreate, form, handleDelete }) {
 
     const columns = [
         {
@@ -24,7 +25,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch })
             dataIndex: 'Operation',
             render: (_, record) =>
                 data.length >= 1 ? (
-                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
                         <a>Delete</a>
                     </Popconfirm>
                 ) : null,
@@ -40,6 +41,8 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch })
                 columns={columns}
                 meta={meta}
                 handleSearch={handleSearch}
+                handleCreate={handleCreate}
+                form={<FormContainer form={form} />}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 title="Report type source"
             />

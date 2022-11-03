@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaNativeRegions } from "../../../../../redux/taxaNativeRegion/actions";
+import { fetchTaxaNativeRegions, createTaxaNativeRegion, deleteTaxaNativeRegion  } from "../../../../../redux/taxaNativeRegion/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
 
 
 
-function TaxaNativeRegion({ data, loading, meta, fetchTaxaNativeRegions }) {
+function TaxaNativeRegion({ data, loading, meta, fetchTaxaNativeRegions, createTaxaNativeRegion, deleteTaxaNativeRegion  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaNativeRegions();
@@ -36,12 +38,22 @@ function TaxaNativeRegion({ data, loading, meta, fetchTaxaNativeRegions }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaNativeRegion(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteTaxaNativeRegion}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -54,6 +66,8 @@ function TaxaNativeRegion({ data, loading, meta, fetchTaxaNativeRegions }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaNativeRegions: (page, filters) => dispatch(fetchTaxaNativeRegions(page, filters)),
+        createTaxaNativeRegion: (data) => dispatch(createTaxaNativeRegion(data)),
+        deleteTaxaNativeRegion: (id) => dispatch(deleteTaxaNativeRegion(id)),
     };
 };
 

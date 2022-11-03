@@ -91,6 +91,7 @@ const TableControls = styled.div`
     border-bottom: 1px solid #CDCDCD;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     .search {               
         height: 100%;
@@ -103,36 +104,44 @@ const TableControls = styled.div`
         margin: 0px 10px 0px 0px;
     }
 
-    .controls {
-        display: flex;
+
+        
+
+        button {
+            display: flex;
         justify-content: space-around;
         align-items: center;
-
-        p {
             height: 100%;
             padding: 15px 20px;
+            border: 0px;
             border-left: 1px solid #CDCDCD;
             box-sizing: border-box;
             margin: auto;
+            background-color: transparent;
+            box-shadow: none;
+
+            img {
+                margin: 0px 10px;
+            }
         }
 
-        img {
-            margin: 0px 10px;
-        }
+        
+
+        
 
         .dark-background {
             background-color: #333334;
             color: #fff;
             font-weight: bold;
-            
+            cursor: pointer;
         }
 
         
-    }
+    
 `;
 
 function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
-    showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch }) {
+    showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch, form, handleCreate }) {
 
     return (
         <div>
@@ -148,13 +157,17 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                     className="search"
                     prefix={<img src="/icons/search.svg" />}
                     style={{
-                        width: "50%",
+                        flex: "1",
                     }}
                 />
-                <div className="controls">
-                    <p><img src="/icons/export.svg" /> Export</p>
-                    <p className="dark-background"><img src="/icons/add.svg" /> Add record </p>
-                </div>
+                <button><img src="/icons/export.svg" /> Export</button>
+
+            </TableControls>
+            <TableControls>
+                {form}
+
+                <button onClick={handleCreate} className="dark-background"><img src="/icons/add.svg" /> Create </button>
+
             </TableControls>
             <Container>
                 <Table

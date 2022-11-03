@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchTaxaViabilities } from "../../../../../redux/taxaViability/actions";
+import { fetchTaxaViabilities, createTaxaViability, deleteTaxaViability  } from "../../../../../redux/taxaViability/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -19,8 +20,9 @@ const Container = styled.div`
 `;
 
 
-function TaxaViability({ data, loading, meta, fetchTaxaViabilities }) {
+function TaxaViability({ data, loading, meta, fetchTaxaViabilities, createTaxaViability, deleteTaxaViability  }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchTaxaViabilities();
@@ -35,12 +37,22 @@ function TaxaViability({ data, loading, meta, fetchTaxaViabilities }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createTaxaViability(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
+                    handleDelete={deleteTaxaViability}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     data={data}
                     loading={loading}
                     meta={meta}
@@ -53,6 +65,8 @@ function TaxaViability({ data, loading, meta, fetchTaxaViabilities }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTaxaViabilities: (page, filters) => dispatch(fetchTaxaViabilities(page, filters)),
+        createTaxaViability: (data) => dispatch(createTaxaViability(data)),
+        deleteTaxaViability: (id) => dispatch(deleteTaxaViability(id)),
     };
 };
 

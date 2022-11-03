@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DebrisMaterialRequest;
 use App\Http\Resources\DebrisMaterialResource;
 use App\Models\DebrisMaterial;
 use App\QueryFilters\DebrisMaterialFilters;
@@ -25,9 +26,12 @@ class DebrisMaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DebrisMaterialRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = DebrisMaterial::create($validator);
+
+        return new DebrisMaterialResource($record);
     }
 
     /**

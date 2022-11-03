@@ -2,12 +2,13 @@ import React from "react";
 import { Popconfirm } from 'antd';
 import styled from "styled-components";
 import TableComponent from "../../../Common/ModalTableComponent";
+import FormContainer from "./FormContainer";
 
 const Container = styled.div`
     width: 100%;
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange, handleDelete, handleSearch }) {
+function TableContainer({ loading, data, meta, handlePageChange, handleDelete, handleSearch, handleCreate, form }) {
 
     const columns = [
         {
@@ -40,8 +41,10 @@ function TableContainer({ loading, data, meta, handlePageChange, handleDelete, h
                 columns={columns}
                 meta={meta}
                 handleSearch={handleSearch}
+                handleCreate={handleCreate}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 title="Materials"
+                form={<FormContainer form={form} />}
             />
         </Container>
     )

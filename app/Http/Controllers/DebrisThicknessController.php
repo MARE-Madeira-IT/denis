@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DebrisThicknessRequest;
 use App\Http\Resources\DebrisThicknessResource;
 use App\Models\DebrisThickness;
 use App\QueryFilters\DebrisThicknessFilters;
@@ -20,24 +21,17 @@ class DebrisThicknessController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DebrisThicknessRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = DebrisThickness::create($validator);
+
+        return new DebrisThicknessResource($record);
     }
 
     /**

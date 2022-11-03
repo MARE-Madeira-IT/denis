@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisSubCategories } from "../../../../../redux/debrisSubCategory/actions";
+import { fetchDebrisSubCategories, createDebrisSubCategory, deleteDebrisSubCategory } from "../../../../../redux/debrisSubCategory/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
     margin: auto;
-    
-
 `;
 
 const Container = styled.div`
@@ -23,6 +22,7 @@ const Container = styled.div`
 
 function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisSubCategories();
@@ -37,6 +37,13 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisSubCategory(values);
+            form.resetFields();
+        })
+    }
+
     return (
         <Container>
             <ContentContainer>
@@ -44,7 +51,10 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleDelete={deleteDebrisSubCategory}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
                 />
@@ -56,6 +66,8 @@ function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisSubCategories: (page, filters) => dispatch(fetchDebrisSubCategories(page, filters)),
+        createDebrisSubCategory: (data) => dispatch(createDebrisSubCategory(data)),
+        deleteDebrisSubCategory: (id) => dispatch(deleteDebrisSubCategory(id)),
     };
 };
 

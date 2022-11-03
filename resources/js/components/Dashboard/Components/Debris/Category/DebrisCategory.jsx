@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchDebrisCategories } from "../../../../../redux/debrisCategory/actions";
+import { fetchDebrisCategories, createDebrisCategory, deleteDebrisCategory } from "../../../../../redux/debrisCategory/actions";
 import TableContainer from "./TableContainer";
+import { useForm } from "antd/es/form/Form";
 
 const ContentContainer = styled.div`
     width: 100%;
@@ -20,8 +21,9 @@ const Container = styled.div`
 
 
 
-function DebrisCategory({ data, loading, meta, fetchDebrisCategories }) {
+function DebrisCategory({ data, loading, meta, fetchDebrisCategories, createDebrisCategory, deleteDebrisCategory }) {
     const [filters, setFilters] = useState({});
+    const [form] = useForm();
 
     useEffect(() => {
         fetchDebrisCategories();
@@ -36,15 +38,27 @@ function DebrisCategory({ data, loading, meta, fetchDebrisCategories }) {
         setFilters({ search: e.target.value })
     }
 
+    function handleCreate() {
+        form.validateFields().then((values) => {
+            createDebrisCategory(values);
+            form.resetFields();
+        })
+    }
+
+
     return (
         <Container>
             <ContentContainer>
                 <TableContainer
                     handlePageChange={handlePageChange}
                     data={data}
+                    handleDelete={deleteDebrisCategory}
                     handleSearch={handleSearch}
+                    handleCreate={handleCreate}
+                    form={form}
                     loading={loading}
                     meta={meta}
+
                 />
             </ContentContainer>
         </Container>
@@ -54,6 +68,8 @@ function DebrisCategory({ data, loading, meta, fetchDebrisCategories }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchDebrisCategories: (page, filters) => dispatch(fetchDebrisCategories(page, filters)),
+        createDebrisCategory: (data) => dispatch(createDebrisCategory(data)),
+        deleteDebrisCategory: (id) => dispatch(deleteDebrisCategory(id)),
     };
 };
 

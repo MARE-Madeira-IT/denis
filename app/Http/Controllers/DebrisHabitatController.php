@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DebrisHabitatRequest;
 use App\Http\Resources\DebrisHabitatResource;
 use App\Models\DebrisHabitat;
 use App\QueryFilters\DebrisHabitatFilters;
@@ -20,24 +21,17 @@ class DebrisHabitatController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DebrisHabitatRequest $request)
     {
-        //
+        $validator = $request->validated();
+        $record = DebrisHabitat::create($validator);
+
+        return new DebrisHabitatResource($record);
     }
 
     /**
