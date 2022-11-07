@@ -14,6 +14,7 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_REPORT}_PENDING`:
         case `${types.UPDATE_REPORT}_PENDING`:
         case `${types.DELETE_REPORT}_PENDING`:
+        case `${types.UPDATE_STATE}_PENDING`:
             return {
                 ...state,
                 loading: true
@@ -25,9 +26,21 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_REPORT}_REJECTED`:
         case `${types.UPDATE_REPORT}_REJECTED`:
         case `${types.DELETE_REPORT}_REJECTED`:
+        case `${types.UPDATE_STATE}_PENDING`:
             return {
                 ...state,
                 loading: false,
+            };
+
+        case `${types.UPDATE_STATE}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                data: state.data.map((record) =>
+                    record.id === action.payload.data.data.id
+                        ? action.payload.data.data
+                        : record
+                )
             };
 
         case `${types.FETCH_REPORTS}_FULFILLED`:

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MinimalReportResource;
+use App\Models\Report;
 use App\Models\Validation;
 use Illuminate\Http\Request;
 
@@ -18,16 +20,6 @@ class ValidationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +27,10 @@ class ValidationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $report = Report::find($request->report_id);
+        $report->validation()->attach($request->validation_id);
+
+        return new MinimalReportResource($report);
     }
 
     /**
@@ -45,17 +40,6 @@ class ValidationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Validation $validation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Validation  $validation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Validation $validation)
     {
         //
     }
