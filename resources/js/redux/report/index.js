@@ -3,6 +3,8 @@ import { types } from "./types";
 export const initialState = {
     data: [],
     meta: {},
+    selfData: [],
+    selfMeta: {},
     loading: false,
     current: {},
 }
@@ -15,6 +17,8 @@ export default (state = initialState, action = {}) => {
         case `${types.UPDATE_REPORT}_PENDING`:
         case `${types.DELETE_REPORT}_PENDING`:
         case `${types.UPDATE_STATE}_PENDING`:
+        case `${types.FETCH_SELF_REPORTS}_PENDING`:
+
             return {
                 ...state,
                 loading: true
@@ -27,6 +31,7 @@ export default (state = initialState, action = {}) => {
         case `${types.UPDATE_REPORT}_REJECTED`:
         case `${types.DELETE_REPORT}_REJECTED`:
         case `${types.UPDATE_STATE}_PENDING`:
+        case `${types.FETCH_SELF_REPORTS}_PENDING`:
             return {
                 ...state,
                 loading: false,
@@ -41,6 +46,14 @@ export default (state = initialState, action = {}) => {
                         ? action.payload.data.data
                         : record
                 )
+            };
+
+        case `${types.FETCH_SELF_REPORTS}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                selfData: action.payload.data.data,
+                selfMeta: action.payload.data.meta
             };
 
         case `${types.FETCH_REPORTS}_FULFILLED`:

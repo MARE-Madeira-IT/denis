@@ -7,7 +7,8 @@ import Homepage from "./components/Homepage";
 import DashboardLayout from "./components/Dashboard/DashboardLayout";
 import Layout from "./components/Layout";
 import MapView from "./components/MapView";
-import PrivateRoute from "./components/Dashboard/PrivateRoute";
+
+import PrivateRoute from "./components/Dashboard/Common/PrivateRoute";
 
 import DashboardHomepage from "./components/Dashboard/Components/Homepage";
 
@@ -16,6 +17,7 @@ import Ecosystem from "./components/Dashboard/Components/Ecosystem/EcosystemMain
 import Report from "./components/Dashboard/Components/Report/Report";
 import Validation from "./components/Dashboard/Components/Validation/Validation";
 import User from "./components/Dashboard/Components/User/User";
+import Login from "./components/Login";
 
 export const history = createBrowserHistory();
 
@@ -25,14 +27,23 @@ const Router = () => {
 
             <Routes>
                 <Route exact path="/map" element={<Layout><MapView /></Layout>} />
+                <Route exact path="/login" element={<Layout><Login /></Layout>} />
                 <Route exact path="/" element={<Layout><Homepage /></Layout>} />
 
-                <Route exact path="/dashboard/debris" element={<DashboardLayout><PrivateRoute Component={Debris} /></DashboardLayout>} />
-                <Route exact path="/dashboard/ecosystems" element={<DashboardLayout><PrivateRoute Component={Ecosystem} /></DashboardLayout>} />
-                <Route exact path="/dashboard/reports" element={<DashboardLayout><PrivateRoute Component={Report} /></DashboardLayout>} />
-                <Route exact path="/dashboard/validation" element={<DashboardLayout><PrivateRoute Component={Validation} /></DashboardLayout>} />
-                <Route exact path="/dashboard/users" element={<DashboardLayout><PrivateRoute Component={User} /></DashboardLayout>} />
-                <Route exact path="/dashboard/" element={<DashboardLayout><PrivateRoute Component={DashboardHomepage} /></DashboardLayout>} />
+
+                <Route exact path="/dashboard/debris" element={<DashboardLayout><Debris /></DashboardLayout>} />
+                <Route exact path="/dashboard/ecosystems" element={<DashboardLayout><Ecosystem /></DashboardLayout>} />
+                <Route exact path="/dashboard/reports" element={<DashboardLayout><Report /></DashboardLayout>} />
+                <Route exact path="/dashboard/validation" element={<DashboardLayout><Validation /></DashboardLayout>} />
+                <Route exact path="/dashboard/users" element={<DashboardLayout redirectPath="/dashboard" permissionLevel={2}><User /></DashboardLayout>} />
+
+                <Route
+                    exact
+                    path="/dashboard"
+                    element={
+                        <DashboardLayout><DashboardHomepage /></DashboardLayout>
+                    }
+                />
             </Routes>
 
 

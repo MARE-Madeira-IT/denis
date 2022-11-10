@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Homepage from './Components/Homepage';
 import Navbar from './Navbar'
 import { maxWidth } from './dashboardHelper';
+import PrivateRoute from './Common/PrivateRoute';
 
 const Container = styled.div`
     width: 100%;
@@ -23,13 +24,15 @@ const Content = styled.section`
 
 
 
-function DashboardLayout({ children }) {
+function DashboardLayout({ children, permissionLevel = 0, redirectPath = "/login" }) {
     return (
-        <Container>
-            <Navbar />
-            <Content>{children}</Content>
+        <PrivateRoute treshold={permissionLevel} to={redirectPath}>
+            <Container>
+                <Navbar />
+                <Content>{children}</Content>
 
-        </Container>
+            </Container>
+        </PrivateRoute>
     )
 }
 

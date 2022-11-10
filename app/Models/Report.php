@@ -11,11 +11,12 @@ class Report extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["date", "latitude", "longitude", "notes", "ongoing_survey", "debris_id", "site_id"];
+    protected $fillable = ["user_id", "date", "latitude", "longitude", "notes", "ongoing_survey", "debris_id", "site_id"];
 
     public static function store($data)
     {
         return Report::create([
+            "user_id" => $data["user_id"],
             "date" => $data["date"],
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
@@ -34,6 +35,11 @@ class Report extends Model
     public function debris()
     {
         return $this->belongsTo(Debris::class, 'debris_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function site()

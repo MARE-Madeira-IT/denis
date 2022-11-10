@@ -16,6 +16,7 @@ class MinimalReportResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user' => $this->user,
             'status' => $this->validation,
             'date' => $this->date,
             'latitude' => $this->latitude,

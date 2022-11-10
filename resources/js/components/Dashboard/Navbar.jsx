@@ -2,13 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { maxWidth } from './dashboardHelper';
+import { connect } from "react-redux";
 
 const navbarItems = [
-    { to: "/dashboard/", title: "Profile" },
-    { to: "/dashboard/reports", title: "Reports" },
-    { to: "/dashboard/users", title: "Users" },
-    { to: "/dashboard/debris", title: "Debris" },
-    { to: "/dashboard/ecosystems", title: "Ecosystems" },
+    { to: "/dashboard/", title: "Profile", treshold: 0 },
+    { to: "/dashboard/reports", title: "Reports", treshold: 0 },
+    { to: "/dashboard/users", title: "Users", treshold: 2 },
+    { to: "/dashboard/debris", title: "Debris", treshold: 0 },
+    { to: "/dashboard/ecosystems", title: "Ecosystems", treshold: 0 },
 ];
 
 const Container = styled.div`
@@ -93,7 +94,7 @@ const PageContainer = styled(NavLink)`
 `;
 
 
-function Navbar() {
+function Navbar({ permissionLevel }) {
     return (
         <Container>
             <Content>
@@ -103,12 +104,15 @@ function Navbar() {
                 </Title>
                 <PagesContainer>
                     {navbarItems.map((item, index) => (
-                        <PageContainer
-                            className={({ isActive }) => isActive ? "link--active" : undefined}
-                            key={index}
-                            to={item.to}>
-                            <span>{item.title}</span>
-                        </PageContainer>
+                        <>
+                            {permissionLevel >= item.treshold &&
+                                <PageContainer
+                                    className={({ isActive }) => isActive ? "link--active" : undefined}
+                                    key={index}
+                                    to={item.to}>
+                                    <span>{item.title}</span>
+                                </PageContainer>}
+                        </>
                     ))}
                 </PagesContainer>
             </Content>
@@ -116,4 +120,10 @@ function Navbar() {
     )
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+    return {
+        permissionLevel: state.auth.permissionLevel,
+    };
+};
+
+export default connect(mapStateToProps, null)(Navbar);

@@ -28,7 +28,7 @@ class Debris extends Model
     public static function store($data)
     {
         return self::create([
-            "depth" => $data["debris_depth"],
+            "depth" => array_key_exists("debris_depth", $data) ? $data["debris_depth"] : null,
             "debris_habitat_id" => $data["debris_habitat"],
             "debris_material_id" => $data["debris_material"],
             "debris_type_id" => $data["debris_type"],

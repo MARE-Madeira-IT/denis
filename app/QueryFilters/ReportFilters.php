@@ -22,6 +22,14 @@ class ReportFilters extends QueryFilters
         });
     }
 
+    public function user($string)
+    {
+        $this->query->whereHas('user', function ($query) use ($string) {
+            $query->where('name', 'like', '%' . $string . '%');
+        });
+    }
+
+
     public function taxas($string)
     {
         $this->query->whereHas('taxas', function ($query) use ($string) {

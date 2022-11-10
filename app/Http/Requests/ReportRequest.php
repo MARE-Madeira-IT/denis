@@ -15,7 +15,15 @@ class ReportRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if ($this->header('Authorization'))
+            return auth()->user()->id;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => auth()->user()->id,
+        ]);
     }
 
     /**
@@ -26,6 +34,7 @@ class ReportRequest extends FormRequest
     public function rules()
     {
         return [
+            'user_id' => 'required|integer|exists:users,id',
             'country' => 'required|integer|exists:countries,id',
             'lme' => 'required|integer|exists:lmes,id',
             'region' => 'required',

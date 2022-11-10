@@ -3,7 +3,8 @@ import { types } from "./types";
 export const initialState = {
     isAuthenticated: false,
     loading: false,
-    currentUser: {}
+    currentUser: {},
+    permissionLevel: 0,
 }
 
 export default (state = initialState, action = {}) => {
@@ -41,14 +42,22 @@ export default (state = initialState, action = {}) => {
                 isAuthenticated: true,
             };
 
-
-
-        case `${types.ME}_FULFILLED`:
         case `${types.LOGIN}_FULFILLED`:
             return {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
+            };
+
+
+
+        case `${types.ME}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                currentUser: action.payload.data.data,
+                permissionLevel: action.payload.data.data.permissionLevel
             };
         default:
             return state

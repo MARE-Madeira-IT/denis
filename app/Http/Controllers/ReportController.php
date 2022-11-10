@@ -26,6 +26,16 @@ class ReportController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function selfIndex(ReportFilters $filters)
+    {
+        return MinimalReportResource::collection(Report::filterBy($filters)->where('user_id', auth()->user()->id)->paginate(10));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

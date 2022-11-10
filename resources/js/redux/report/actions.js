@@ -9,6 +9,13 @@ export const fetchReports = (page = 1, filters = {}) => ({
     })}&page=${page}`)
 });
 
+export const fetchSelfReports = (page = 1, filters = {}) => ({
+    type: types.FETCH_SELF_REPORTS,
+    payload: axios.get(`${window.location.origin}/api/self-reports/?${stringify(filters, {
+        arrayFormat: "index"
+    })}&page=${page}`)
+});
+
 export const fetchReport = id => ({
     type: types.FETCH_REPORT,
     payload: axios.get(`${window.location.origin}/api/reports/${id}`),

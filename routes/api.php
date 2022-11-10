@@ -18,10 +18,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
+    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
+    Route::get('me', 'App\Http\Controllers\AuthController@me');
+});
+
+
 Route::apiResource('/reports', 'App\Http\Controllers\ReportController');
 Route::apiResource('/users', 'App\Http\Controllers\UserController');
 
 Route::post('/validation', 'App\Http\Controllers\ValidationController@store');
+Route::get('/self-reports', 'App\Http\Controllers\ReportController@selfIndex');
 
 Route::prefix('debris')->group(function () {
     Route::apiResource('/materials', 'App\Http\Controllers\DebrisMaterialController');

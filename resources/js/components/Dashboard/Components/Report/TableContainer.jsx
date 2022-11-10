@@ -54,6 +54,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
             title: 'Name of Assessor',
             dataIndex: 'user',
             ...getColumnSearchProps('user', searchInput, handleFilter, handleFilterClear),
+            render: (record) => record.name
         },
         {
             title: 'Date of survey (dd-mm-yyyy)',

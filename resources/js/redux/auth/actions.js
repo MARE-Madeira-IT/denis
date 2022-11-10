@@ -7,7 +7,7 @@ export const login = data => {
     return (dispatch) => {
         const response = dispatch({
             type: types.LOGIN,
-            payload: axios.post(`${window.location.origin}/api/login`, data)
+            payload: axios.post(`${window.location.origin}/api/auth/login`, data)
         })
 
         response.then(
@@ -15,7 +15,7 @@ export const login = data => {
                 const token = res.value.data.access_token;
                 localStorage.setItem("token", token);
                 setAuthorizationToken(token);
-                history.push("/painel");
+                history.push("/dashboard");
                 location.reload();
             },
             err => {
@@ -29,7 +29,7 @@ export const login = data => {
 
 export const me = () => ({
     type: types.ME,
-    payload: axios.get(`${window.location.origin}/api/me`)
+    payload: axios.get(`${window.location.origin}/api/auth/me`)
 });
 
 export function loginSuccess(token) {
@@ -42,7 +42,7 @@ export const logout = data => {
     return (dispatch) => {
         const response = dispatch({
             type: types.LOGOUT,
-            payload: axios.post(`${window.location.origin}/api/logout`, data)
+            payload: axios.post(`${window.location.origin}/api/auth/logout`, data)
         })
 
         response.then((res) => {
@@ -55,7 +55,7 @@ export const logout = data => {
 export function refreshAuthorizationToken(token) {
     return dispatch => {
         return axios.get({
-            url: `${window.location.origin}/api/refresh`,
+            url: `${window.location.origin}/api/auth/refresh`,
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => {

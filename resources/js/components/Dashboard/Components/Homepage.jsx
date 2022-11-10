@@ -1,78 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar'
+import { connect } from "react-redux";
 import styled from 'styled-components';
-import { Tag, Table, Space } from 'antd';
+import { fetchSelfReports, fetchReport, updateState } from "../../../redux/report/actions";
+import TableContainer from "./TableContainer";
+import { setDrawerState } from "../../../redux/drawer/actions";
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-            <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
-            </Space>
-        ),
-    },
-];
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '4',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-    {
-        key: '5',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: 'London No. 1 Lake Park'
-    },
-];
 
 const Container = styled.div`
     width: 100%;
@@ -198,6 +131,7 @@ const Role = styled(Button)`
     color: #002548;;
     border: 2px solid #002548;
     margin-right: 10px;
+    text-transform: capitalize;
 `;
 
 const Edit = styled(Button)`
@@ -213,42 +147,75 @@ const ProfileField = ({ label, value }) => (
         <p className='label'>{label} <br /> reports</p>
     </div>
 )
-function Homepage() {
+function Homepage({ fetchSelfReports,
+    fetchReport,
+    setDrawerState, data, loading, meta, current, user }) {
+    const [filters, setFilters] = useState({});
+    const [activeForm, setFormModal] = useState(false)
+
+    function handlePageChange(pagination) {
+        fetchSelfReports(pagination.current, filters);
+    }
+
+    function handleRowClick(row) {
+        fetchReport(row.id).then((response) => {
+            setDrawerState(1, response.action.payload.data.data);
+        })
+    }
+
+    useEffect(() => {
+        if (!loading) {
+            fetchSelfReports(1, filters);
+        }
+
+    }, [filters])
+    console.log(user);
     return (
         <div>
             <Container>
 
                 <SectionContainer>
-                    <Section>
+                    {user.id && <Section>
                         <div className='image-container'>
                             <img src="/placeholder.webp" alt="profile " />
                         </div>
                         <div className='information-container'>
                             <Welcome>
                                 <div className='flex'>
-                                    <h2>Carla Fernandes</h2>
-                                    <p>Madeira, Portugal</p>
+                                    <h2>{user.name}</h2>
                                 </div>
                                 <div className='flex button-container'>
-                                    <Role>Validator</Role>
+                                    {Object.entries(user.roles).map((value) => (
+                                        <span key={value[0]}>
+                                            {value[1] && <Role>{value[0]}</Role>}
+                                        </ span>
+                                    ))}
                                     <Edit>Edit Profile</Edit>
                                 </div>
                             </Welcome>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum laborum est quibusdam iusto nulla cumque maiores, alias quasi, sit veniam expedita accusamus, possimus eveniet similique ipsum molestiae in maxime. Dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus accusamus magni, perspiciatis, itaque earum excepturi, veritatis doloremque inventore facilis nemo ullam maiores perferendis quasi porro fugiat voluptas reprehenderit harum eum.</p>
+                            <p>{user.description}</p>
 
 
                             <div className='field-container'>
-                                <ProfileField label="accepted" value={14} />
-                                <ProfileField label="pending" value={2} />
-                                <ProfileField label="rejected" value={2} />
+                                <ProfileField label="approved" value={user.metrics?.approved} />
+                                <ProfileField label="pending" value={user.metrics?.pending} />
+                                <ProfileField label="rejected" value={user.metrics?.rejected} />
                             </div>
                         </div>
 
-                    </Section>
+                    </Section>}
                     <Section>
                         <div>
                             <h2>Your Reports</h2>
-                            <Table columns={columns} dataSource={data} />
+                            <TableContainer
+                                handlePageChange={handlePageChange}
+                                data={data}
+                                loading={loading}
+                                meta={meta}
+                                handleRowClick={handleRowClick}
+                                setFilters={setFilters}
+                                filters={filters}
+                            />
                         </div>
                     </Section>
                 </SectionContainer>
@@ -258,5 +225,22 @@ function Homepage() {
         </div>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchSelfReports: (page, filters) => dispatch(fetchSelfReports(page, filters)),
+        fetchReport: (id) => dispatch(fetchReport(id)),
+        setDrawerState: (state, object) => dispatch(setDrawerState(state, object)),
+    };
+};
 
-export default Homepage
+const mapStateToProps = (state) => {
+    return {
+        loading: state.report.loading,
+        data: state.report.selfData,
+        user: state.auth.currentUser,
+        meta: state.report.selfMeta,
+        current: state.drawer.current,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

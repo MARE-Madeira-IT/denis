@@ -8,6 +8,7 @@ import reducer from './reducer'
 import ReactDOM from 'react-dom';
 import Router from './router';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import { loginSuccess, me, refreshAuthorizationToken, setAuthorizationToken } from './redux/auth/actions';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,6 +32,9 @@ if (localStorage.token) {
     } else {
         store.dispatch(loginSuccess());
         setAuthorizationToken(localStorage.token);
+        store.dispatch(me());
+        
+        
     }
 }
 
