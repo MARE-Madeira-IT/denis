@@ -1,15 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-const positions = [
-    [32.427876, -17.011401],
-    [32.572217, -16.986117],
-    [32.58945, -16.8105],
-    [32.606383, -16.514717],
-    [32.622217, -17.025],
-    [32.632217, -16.82305]
-]
+import { connect } from "react-redux";
+import { fetchReportsCoordinates } from '../redux/report/actions';
+
 
 const Container = styled.div`
     width: 100vw;
@@ -40,21 +35,62 @@ const StyledMapContainer = styled(MapContainer)`
     height: 100%;
 `;
 
-function MapView() {
+const Field = styled.div`
+    padding: 5px 5px 5px 0px;
+    box-sizing: border-box;
+    font-family: "Lato";
+
+    p {
+        margin: 0px;
+    }
+
+    .value {
+    }
+
+    .name {
+        opacity: .5;
+    }
+`;
+
+function MapView({ fetchReportsCoordinates, data }) {
+
+    useEffect(() => {
+        fetchReportsCoordinates();
+    }, [])
+
+    const FieldContainer = ({ name, value }) => (
+        <Field className='field-width'>
+            <p className='value'>{value}</p>
+            <p className='name'>{name}</p>
+        </Field>
+    )
+
+
+
     return (
         <Container>
             <BackButton to="/">
                 <img src="/images/map/back-button.svg" alt="back-button" loading='eager' />
             </BackButton>
-            <StyledMapContainer center={positions[0]} zoom={9} zoomControl={false}>
+            <StyledMapContainer center={[32.427876, -17.011401]} zoom={9} zoomControl={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {positions.map((coordinates, index) =>
-                    <Marker key={index} position={coordinates}>
+                {data.map((report, index) =>
+                    <Marker key={report.id} position={[report.latitude, report.longitude]}>
                         <Popup>
-                            Lorem Ipsum
+                            <FieldContainer name="Date of survey" value={report.date} />
+                            <FieldContainer name="Debris" value={report.debris?.name} />
+
+                            <Field className='field-width'>
+                                {report.taxas.map((taxa => (
+
+                                    <p key={"taxa_" + taxa.id} className='value'>{taxa.identification} ({taxa.level})</p>
+
+                                )))}
+                                <p className='name'>Taxa</p>
+                            </Field>
                         </Popup>
                     </Marker>
                 )}
@@ -64,4 +100,18 @@ function MapView() {
     )
 }
 
-export default MapView
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchReportsCoordinates: () => dispatch(fetchReportsCoordinates()),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.report.loading,
+        data: state.report.mapData,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapView);

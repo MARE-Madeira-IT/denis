@@ -75,24 +75,5 @@ class PermissionSeeder extends Seeder
         foreach ($userPermissions as $permission) {
             $userRole->givePermissionTo($permission);
         }
-
-        // create demo users
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Example User',
-            'email' => 'test@example.com',
-        ]);
-        $user->assignRole($userRole);
-
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Example Admin User',
-            'email' => 'admin@example.com',
-        ]);
-        $user->assignRole($adminRole);
-
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Example Validator User',
-            'email' => 'superadmin@example.com',
-        ]);
-        $user->assignRole($validatorRole);
     }
 }

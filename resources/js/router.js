@@ -18,6 +18,8 @@ import Report from "./components/Dashboard/Components/Report/Report";
 import Validation from "./components/Dashboard/Components/Validation/Validation";
 import User from "./components/Dashboard/Components/User/User";
 import Login from "./components/Login";
+import Registration from "./components/Registration";
+import Authentication from "./components/Authentication";
 
 export const history = createBrowserHistory();
 
@@ -27,7 +29,8 @@ const Router = () => {
 
             <Routes>
                 <Route exact path="/map" element={<Layout><MapView /></Layout>} />
-                <Route exact path="/login" element={<Layout><Login /></Layout>} />
+                <Route exact path="/login" element={<Layout><Authentication title="sign in"><Login /></Authentication></Layout>} />
+                <Route exact path="/register" element={<Layout><Authentication title="sign up"><Registration /></Authentication></Layout>} />
                 <Route exact path="/" element={<Layout><Homepage /></Layout>} />
 
 

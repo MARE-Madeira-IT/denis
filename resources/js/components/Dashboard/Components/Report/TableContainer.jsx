@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Input, Popconfirm, Radio, Row, Space, Tag } from 'antd';
 import styled from "styled-components";
 import TableComponent from "../../Common/TableComponent";
 import { getColumnSearchProps } from "./Search";
 import StopPropagation from "../../Common/StopPropagation";
+import { connect } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
@@ -24,8 +25,9 @@ const colorDecoder = {
     "rejected": "magenta",
 }
 
-function TableContainer({ loading, data, meta, handlePageChange, handleRowClick, filters, setFilters, updateState }) {
+function TableContainer({ permissionLevel, loading, data, meta, handlePageChange, handleRowClick, filters, setFilters, updateState }) {
     const [status, setStatus] = useState(undefined);
+    const [permissionColumns, setPermissionColumns] = useState([]);
     const searchInput = useRef(null);
     const handleFilter = (value, field) => {
         var newFilters = {};
@@ -43,6 +45,9 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
     const handleStateUpdate = (state, report) => {
         updateState({ report_id: report, validation_id: state });
     };
+
+
+
 
     const columns = [
         {
@@ -166,13 +171,22 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
         },
     ];
 
+    useEffect(() => {
+        var newColumns = columns;
+        if (permissionLevel == 0) {
+            newColumns = columns.filter((val, index) => index !== 7);
+        }
+
+        setPermissionColumns(newColumns);
+    }, [permissionLevel])
+
 
     return (
         <Container>
             <TableComponent
                 loading={loading}
                 data={data}
-                columns={columns}
+                columns={permissionColumns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 onRow={(record) => ({
@@ -185,4 +199,11 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
     )
 }
 
-export default TableContainer;
+
+const mapStateToProps = (state) => {
+    return {
+        permissionLevel: state.auth.permissionLevel,
+    };
+};
+
+export default connect(mapStateToProps, null)(TableContainer);

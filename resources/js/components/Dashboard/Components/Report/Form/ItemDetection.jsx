@@ -9,17 +9,17 @@ function ItemDetection() {
     return (
         <Row type="flex" gutter={32}>
             <Col xs={24} md={6}>
-                <Form.Item label="Date of survey" name="date" rules={requiredRule}>
+                <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
                     <DatePicker style={{ width: "100%" }} placeholder="Date" />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Latitude" name="latitude" rules={requiredRule}>
+                <Form.Item label="Latitude*" name="latitude" rules={requiredRule}>
                     <Input placeholder="Latitude" />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Longitude" name="longitude" rules={requiredRule}>
+                <Form.Item label="Longitude*" name="longitude" rules={requiredRule}>
                     <Input placeholder="Longitude" />
                 </Form.Item>
             </Col>
@@ -29,22 +29,22 @@ function ItemDetection() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Site name" name="site" rules={requiredRule}>
+                <Form.Item label="Site name*" name="site" rules={requiredRule}>
                     <Input placeholder="Site" />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Region/Province" name="region" rules={requiredRule}>
+                <Form.Item label="Region/Province*" name="region" rules={requiredRule}>
                     <Input placeholder="Region/Province" />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Country" name="country" rules={requiredRule}>
+                <Form.Item label="Country*" name="country" rules={requiredRule}>
                     <CountryRemoteSelectContainer />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Large marine ecosystem" name="lme" rules={requiredRule}>
+                <Form.Item label="Large marine ecosystem*" name="lme" rules={requiredRule}>
                     <LmeRemoteSelectContainer />
                 </Form.Item>
             </Col>

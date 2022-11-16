@@ -21,8 +21,37 @@ class ReportRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        $otherHabitat = null;
+        $habitat = $this->debris_habitat;
+        $otherMaterial = null;
+        $material = $this->debris_material;
+        $otherRugosity = null;
+        $rugosity = $this->debris_rugosity;
+
+        if (gettype($this->debris_habitat == "string")) {
+            $habitat = 12;
+            $otherHabitat = $this->debris_habitat;
+        }
+
+        if (gettype($this->debris_material == "string")) {
+            $material = 12;
+            $otherMaterial = $this->debris_material;
+        }
+
+        if (gettype($this->debris_rugosity == "string")) {
+            $rugosity = 7;
+            $otherRugosity = $this->debris_rugosity;
+        }
+
         $this->merge([
             'user_id' => auth()->user()->id,
+            'debris_habitat' => $habitat,
+            'debris_otherHabitat' => $otherHabitat,
+            'debris_material' => $material,
+            'debris_otherMaterial' => $otherMaterial,
+            'debris_rugosity' => $rugosity,
+            'debris_otherRugosity' => $otherRugosity,
+            'debris_depth' => $this->debris_depth == "" ? 0 : $this->debris_depth,
         ]);
     }
 

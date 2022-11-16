@@ -31,7 +31,7 @@ function FormContainer({ form }) {
             <Row>
                 <Col span={24}>
                     <Form.Item name="name" rules={requiredRule}>
-                        <Input className='input' bordered={false} placeholder='name' />
+                        <Input prefix={<img src="/icons/form/fish.svg" />} className='input' bordered={false} placeholder='Name' />
                     </Form.Item>
                 </Col>
             </Row>

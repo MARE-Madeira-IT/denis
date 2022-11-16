@@ -37,6 +37,7 @@ Route::apiResource('/users', 'App\Http\Controllers\UserController');
 
 Route::post('/validation', 'App\Http\Controllers\ValidationController@store');
 Route::get('/self-reports', 'App\Http\Controllers\ReportController@selfIndex');
+Route::get('/map-reports', 'App\Http\Controllers\ReportController@mapIndex');
 
 Route::prefix('debris')->group(function () {
     Route::apiResource('/materials', 'App\Http\Controllers\DebrisMaterialController');

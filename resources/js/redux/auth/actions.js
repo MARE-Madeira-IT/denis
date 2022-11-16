@@ -38,6 +38,12 @@ export function loginSuccess(token) {
     };
 }
 
+export function setCurrentUser(user) {
+    return {
+        type: types.SET_CURRENT_USER, payload: user
+    };
+}
+
 export const logout = data => {
     return (dispatch) => {
         const response = dispatch({

@@ -9,6 +9,12 @@ export const fetchReports = (page = 1, filters = {}) => ({
     })}&page=${page}`)
 });
 
+export const fetchReportsCoordinates = () => ({
+    type: types.FETCH_REPORTS_COORDINATES,
+    payload: axios.get(`${window.location.origin}/api/map-reports`)
+});
+
+
 export const fetchSelfReports = (page = 1, filters = {}) => ({
     type: types.FETCH_SELF_REPORTS,
     payload: axios.get(`${window.location.origin}/api/self-reports/?${stringify(filters, {

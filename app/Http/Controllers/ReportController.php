@@ -36,6 +36,16 @@ class ReportController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mapIndex(ReportFilters $filters)
+    {
+        return MinimalReportResource::collection(Report::filterBy($filters)->get());
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

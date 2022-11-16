@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import jwtDecode from "jwt-decode";
@@ -33,8 +33,8 @@ if (localStorage.token) {
         store.dispatch(loginSuccess());
         setAuthorizationToken(localStorage.token);
         store.dispatch(me());
-        
-        
+
+
     }
 }
 

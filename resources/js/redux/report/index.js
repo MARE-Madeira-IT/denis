@@ -5,6 +5,7 @@ export const initialState = {
     meta: {},
     selfData: [],
     selfMeta: {},
+    mapData: [],
     loading: false,
     current: {},
 }
@@ -18,7 +19,7 @@ export default (state = initialState, action = {}) => {
         case `${types.DELETE_REPORT}_PENDING`:
         case `${types.UPDATE_STATE}_PENDING`:
         case `${types.FETCH_SELF_REPORTS}_PENDING`:
-
+        case `${types.FETCH_REPORTS_COORDINATES}_PENDING`:
             return {
                 ...state,
                 loading: true
@@ -30,8 +31,9 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_REPORT}_REJECTED`:
         case `${types.UPDATE_REPORT}_REJECTED`:
         case `${types.DELETE_REPORT}_REJECTED`:
-        case `${types.UPDATE_STATE}_PENDING`:
-        case `${types.FETCH_SELF_REPORTS}_PENDING`:
+        case `${types.UPDATE_STATE}_REJECTED`:
+        case `${types.FETCH_SELF_REPORTS}_REJECTED`:
+        case `${types.FETCH_REPORTS_COORDINATES}_REJECTED`:
             return {
                 ...state,
                 loading: false,
@@ -46,6 +48,13 @@ export default (state = initialState, action = {}) => {
                         ? action.payload.data.data
                         : record
                 )
+            };
+
+        case `${types.FETCH_REPORTS_COORDINATES}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                mapData: action.payload.data.data,
             };
 
         case `${types.FETCH_SELF_REPORTS}_FULFILLED`:
@@ -81,6 +90,7 @@ export default (state = initialState, action = {}) => {
         case `${types.CREATE_REPORT}_FULFILLED`:
             return {
                 ...state,
+                loading: false,
                 data: [action.payload.data.data, ...state.data]
             };
 

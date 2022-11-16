@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
 import { Link } from 'react-router-dom';
+import { dimensions } from '../Dashboard/dashboardHelper';
 
 const StyledContent = styled(Content)`
     h2 {
         font-size: 40px;
         margin: 50px 0px;
-        font-family: 'Cormorant Garamond', serif;
+        font-family: 'Lato', sans-serif;
         font-weight: bold;
+        line-height: 94%;
+        text-align: left;
     }
     
     p, li {
@@ -21,11 +24,14 @@ const StyledContent = styled(Content)`
 const TutorialContainer = styled.div`
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 
     div {
         width: 33%;
         padding: 10px;
         box-sizing: border-box;
+
+        
 
         img {
             width: 60%;
@@ -39,16 +45,31 @@ const TutorialContainer = styled.div`
             margin-top: 10px;
         }
     }
+
+    @media (max-width: ${dimensions.sm}) {
+        justify-content: flex-start;
+
+        div {
+            width: 50%;
+        }
+        
+    }
     
 `;
 
 const UsersContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
 
     p {
         width: 50%;
         padding: 10px;
         box-sizing: border-box;
+
+        @media (max-width: ${dimensions.md}) {
+            width: 100%;
+            
+        }
     }
     
 `;
@@ -56,10 +77,18 @@ const UsersContainer = styled.div`
 const ProtocolContainer = styled.div`
     display: flex;
 
+    ul {
+        @media (max-width: ${dimensions.md}) {
+            padding-left: 10px;
+        }
+    }
+
     .column {
         width: 50%;
         padding: 10px;
         box-sizing: border-box;
+
+        
     }
     
 `;
@@ -94,7 +123,7 @@ function About() {
             </Title>
             <StyledContent>
                 <div className="content-width">
-                    <h2>About Us</h2>
+                    <h2>About us</h2>
                     <p>
                         Marine debris is considered among the major threats to marine life, biodiversity, and ecosystems and causes particular concern due to its abundance, durability, and persistence in the marine environment. Moreover, marine debris contributes to the transfer of Non-Indigenous Species - NIS, acting as a vector for both first introductions in a new region and secondary spread within an already affected region.
 
@@ -111,7 +140,7 @@ function About() {
                         <img src="/images/about/map-link.svg" alt="" />
                     </MapLink>
 
-                    <h2>How it Works</h2>
+                    <h2>How it works</h2>
                     <TutorialContainer>
                         <div>
                             <img src="/images/about/observation.svg" alt="" />
@@ -128,7 +157,7 @@ function About() {
                     </TutorialContainer>
 
 
-                    <h2>Who Is DATABASE For?</h2>
+                    <h2>Who is DATABASE for?</h2>
                     <UsersContainer>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!

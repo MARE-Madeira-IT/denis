@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../Navbar'
 import { connect } from "react-redux";
 import styled from 'styled-components';
-import { fetchSelfReports, fetchReport, updateState } from "../../../redux/report/actions";
+import { fetchSelfReports, fetchReport } from "../../../redux/report/actions";
 import TableContainer from "./TableContainer";
 import { setDrawerState } from "../../../redux/drawer/actions";
+import UserForm from './UserForm';
 
 
 const Container = styled.div`
@@ -20,8 +20,8 @@ const Welcome = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+    align-items: flex-start;
+    margin-bottom: 20px;
 
     .button-container{
         display: flex;
@@ -56,18 +56,14 @@ const Section = styled.div`
     align-items: center;
     box-sizing: border-box;
     margin-bottom: 100px;
-    
-
 
         .image-container{
-            width: 330px;
-            height: 330px;
+            width: 300px;
 
             img {
                 width: 100%;
-                height: 100%;
+                max-height: 100%;
                 object-fit: cover;
-                border-radius: 330px;
                 
             }
         }
@@ -92,6 +88,7 @@ const Section = styled.div`
             .field-container {
                 display: flex;
                 flex-wrap: wrap;
+                margin-top: 50px;
 
                 .profile-field {
                     display: flex;
@@ -121,10 +118,10 @@ const Section = styled.div`
     }
 `;
 
-const Button = styled.div`
-    padding: 10px 25px;
+const Button = styled.button`
+    padding: 6px 13px;
     font-weight: 700;
-    border-radius: 16px;  
+    border-radius: 6px;  
 `;
 
 const Role = styled(Button)`
@@ -132,6 +129,7 @@ const Role = styled(Button)`
     border: 2px solid #002548;
     margin-right: 10px;
     text-transform: capitalize;
+    background-color: white;
 `;
 
 const Edit = styled(Button)`
@@ -139,6 +137,17 @@ const Edit = styled(Button)`
     color: white;
     border: 2px solid #002548;
     cursor: pointer;
+`;
+
+const Parameters = styled.div`
+    span {
+        opacity: .7;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin: 0px;
+    }
 `;
 
 const ProfileField = ({ label, value }) => (
@@ -152,6 +161,7 @@ function Homepage({ fetchSelfReports,
     setDrawerState, data, loading, meta, current, user }) {
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false)
+    const [visible, setVisible] = useState(false)
 
     function handlePageChange(pagination) {
         fetchSelfReports(pagination.current, filters);
@@ -169,32 +179,40 @@ function Homepage({ fetchSelfReports,
         }
 
     }, [filters])
-    console.log(user);
+    
     return (
         <div>
             <Container>
-
+                <UserForm visible={visible} setVisible={setVisible} user={user} />
                 <SectionContainer>
                     {user.id && <Section>
                         <div className='image-container'>
-                            <img src="/placeholder.webp" alt="profile " />
+                            <img src={user.image} alt="profile " />
                         </div>
                         <div className='information-container'>
                             <Welcome>
                                 <div className='flex'>
                                     <h2>{user.name}</h2>
-                                </div>
-                                <div className='flex button-container'>
+                                    <p>{user.country}</p>
                                     {Object.entries(user.roles).map((value) => (
                                         <span key={value[0]}>
                                             {value[1] && <Role>{value[0]}</Role>}
                                         </ span>
                                     ))}
-                                    <Edit>Edit Profile</Edit>
+                                </div>
+                                <div className='flex button-container'>
+
+                                    <Edit onClick={() => setVisible(true)}>Edit</Edit>
                                 </div>
                             </Welcome>
-                            <p>{user.description}</p>
-
+                            <Parameters>
+                                <p>{user.email}</p>
+                                <span>Email</span>
+                                <p>{user.phone}</p>
+                                <span>{user.phone ? "Phone" : ""}</span>
+                                <p>{user.institution}</p>
+                                <span>Institution</span>
+                            </Parameters>
 
                             <div className='field-container'>
                                 <ProfileField label="approved" value={user.metrics?.approved} />

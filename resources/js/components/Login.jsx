@@ -3,145 +3,106 @@ import styled from "styled-components";
 import { login } from "../redux/auth/actions";
 import { connect } from "react-redux";
 import { dimensions } from "./Dashboard/dashboardHelper";
+import { Link } from "react-router-dom";
 
-const Container = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    background: white;
+const FormItem = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
-`;
+    align-items: flex-start;
+    margin: 20px 0px 50px 0px;
+    flex-wrap: wrap;
 
-const Input = styled.input`
-    width: 60%;
-    box-sizing: border-box;
-    margin: 15px 0;
-    border: none;
-    border-bottom: 2px solid #777;
-    padding: 8px;
+    span {
+        font-size: 16px;
+        opacity: .8;
+        min-width: 100px;
+    }
 
-    &:focus,
-    &:active {
-        outline: none;
+    input {
+        flex: 1;
+        box-sizing: border-box;
+        margin: 0px;
         border: none;
-        border-bottom: 2px solid red;
-        background-color: white !important;
-        appearance: none;
-    }
+        border-bottom: 1px solid #acacac;
+        padding: 0px 8px 8px 8px;
+        transition: all .3s ease;
+        opacity: .4;
+        font-size: 14px;
 
-    ::placeholder {
-        font-size: 1.2em;
-        display: inline-block;
-        margin-left: 10px;
-    }
-`;
+        &:focus,
+        &:active, &:hover {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid  black;
+            background-color: white !important;
+            appearance: none;
+        }
 
-const FormContainer = styled.div`
-    z-index: 1;
-	position: relative;	
-	height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-`;
-
-const Card = styled.div`
-    width: 50%;
-    max-width: 500px;
-    min-width: 120px;
-    min-height: 500px;
-    display: block;
-    padding: 20px;
-    background: linear-gradient(90deg, #4d73f1, #0c2968);		
-	position: relative;	
-    border-radius: 8px;
-	box-shadow: 0px 0px 24px #0000005a;
-
-    @media (max-width: ${dimensions.lg}) {
-        width: 70%;
+        ::placeholder {
+            font-size: 14px;
+            display: inline-block;
+            margin-left: 10px;
+           
+        }
     }
 
     @media (max-width: ${dimensions.md}) {
-        width: 90%;
-    }
+        span {
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
-    @media (max-width: ${dimensions.sm}) {
-        width: 100%;
+        input {
+            width: 100%;
+        }
     }
-
-
-    .screen__background {		
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 0;
-        -webkit-clip-path: inset(0 0 0 0);
-        clip-path: inset(0 0 0 0);	
-    }
-
-    .screen__background__shape {
-        transform: rotate(45deg);
-        position: absolute;
-    }
-
-    .screen__background__shape1 {
-        height: 520px;
-        width: 520px;
-        background: #FFF;	
-        top: -50px;
-        right: 180px;	
-        border-radius: 0 72px 0 0;
-    }
-
-    .screen__background__shape2 {
-        height: 220px;
-        width: 220px;
-        background: #0144af;	
-        top: -172px;
-        right: 0;	
-        border-radius: 32px;
-    }
-
-    .screen__background__shape3 {
-        height: 540px;
-        width: 190px;
-        background: linear-gradient(270deg, #2d6df8, rgb(34, 93, 255));
-        top: -24px;
-        right: 0;	
-        border-radius: 32px;
-    }
-
-    .screen__background__shape4 {
-        height: 400px;
-        width: 200px;
-        background: #0138af;	
-        top: 420px;
-        right: 50px;	
-        border-radius: 60px;
-    }
+    
 `;
 
 
-const Button = styled.button`
-    margin-top: 30px;
-    display: block;
-    padding: 10px 26px;
-    border: none;
-    background: rgb(33, 33, 255);
-    color: white;
-    cursor: pointer;
-    font-size: 1.2em;
-    border-radius: 8px;
+const Submit = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    flex-wrap: wrap;
 
-    &:hover {
-        background: rgb(22, 22, 173);
+    p {
+        font-size: 16px;
+        margin: 0px;
+        opacity: .8;
+
+        a {
+            font-weight: bold;
+            color: black;
+        }
     }
+
+
+    button {
+        display: block;
+        padding: 8px 16px;
+        border: none;
+        background: #3C6466;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all .2s ease;
+
+        &:hover {
+            background: #385b5e;
+        }
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        p {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+        
 `;
+
+
 
 class Login extends Component {
     state = {
@@ -158,43 +119,42 @@ class Login extends Component {
 
         this.props.login(formData);
     };
+
     render() {
         return (
-            <Container>
-                <Card>
-                    <FormContainer>
-                        <div>
-                            <Input
-                                name="email"
-                                placeholder="Email"
-                                type="email"
-                                value={this.state.email}
-                                onChange={(e) =>
-                                    this.setState({ email: e.target.value })
-                                }
-                            />
+            <>
+                <FormItem>
+                    <span>Email</span>
+                    <input
+                        name="email"
+                        placeholder="Enter email"
+                        type="email"
+                        label="Email"
+                        value={this.state.email}
+                        onChange={(e) =>
+                            this.setState({ email: e.target.value })
+                        }
+                    />
+                </FormItem>
+                <FormItem>
+                    <span>Password</span>
+                    <input
+                        name="password"
+                        placeholder="Enter password"
+                        type="password"
+                        label="Password"
+                        value={this.state.password}
+                        onChange={(e) =>
+                            this.setState({ password: e.target.value })
+                        }
+                    />
+                </FormItem>
+                <Submit>
+                    <p> Don't have an account yet? <Link to="/register">Sign Up</Link> </p>
 
-                            <Input
-                                name="password"
-                                placeholder="Password"
-                                type="password"
-                                value={this.state.password}
-                                onChange={(e) =>
-                                    this.setState({ password: e.target.value })
-                                }
-                            />
-                            <Button onClick={this.submitForm}>Login</Button>
-                        </div>
-                    </FormContainer>
-                    <div className="screen__background">
-                        <span className="screen__background__shape screen__background__shape4"></span>
-                        <span className="screen__background__shape screen__background__shape3"></span>
-                        <span className="screen__background__shape screen__background__shape2"></span>
-                        <span className="screen__background__shape screen__background__shape1"></span>
-                    </div>
-
-                </Card>
-            </Container>
+                    <button onClick={this.submitForm}>Login</button>
+                </Submit>
+            </>
         );
     }
 }

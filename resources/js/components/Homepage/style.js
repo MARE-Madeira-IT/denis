@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { dimensions } from '../Dashboard/dashboardHelper';
 
 export const Container = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 `;
 
 export const Title = styled.div`
@@ -14,15 +16,6 @@ export const Title = styled.div`
     position: sticky;
     top: 0;
     overflow: hidden;
-    
-    div {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        height: 30%;
-        z-index: 2;
-        background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));
-    }
 
     img {
         position: absolute;
@@ -35,17 +28,43 @@ export const Title = styled.div`
         object-fit: cover;
         transition: .2s ease;
     }
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+        height: 50vh;
+        top: auto;
+        position: static;
+
+        img {
+            position: static;
+        }
+    }
 `;
 
 export const Content = styled.div`
     width: 50%;
     min-height: 100vh;
-    padding: 100px 48px;
+    padding: 100px 0px;
     box-sizing: border-box;
     text-align: justify;
 
     .content-width {
-        width: 80%;
-        margin: auto;
+        width: 100%;
+        padding: 0px 100px;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: ${dimensions.xl}) {
+        .content-width {
+            padding: 0px 50px;
+        }
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+
+        .content-width {
+            padding: 0px 20px;
+        }
     }
 `;

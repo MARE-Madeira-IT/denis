@@ -20,6 +20,9 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'image' => $this->image,
             'metrics' => $this->metrics,
+            'institution' => $this->institution,
+            'country' => $this->country,
+            'phone' => $this->phone,
             'permissionLevel' => $this->permissionLevel,
             'roles' => [
                 'validator' => $this->hasRole('validator'),

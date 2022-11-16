@@ -2,20 +2,21 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
+import { dimensions } from '../Dashboard/dashboardHelper';
 
 const StyledContent = styled(Content)`
     h2 {
-        font-weight: 400;
         font-size: 40px;
-        margin: 40px 0px;
-        text-align:center;
+        margin: 50px 0px;
+        font-family: 'Lato', sans-serif;
+        font-weight: bold;
+        line-height: 94%;
+        text-align: left;
     }
     
     p {
         font-weight: lighter;
-        width: 80%;
         margin: auto;
-        text-align: center;
     }
     
 `;
@@ -31,6 +32,16 @@ const Flex = styled.div`
         width: 50%;
         padding: 40px;
         box-sizing: border-box;
+
+        @media (max-width: ${dimensions.lg}) {
+            width: 80%;
+            margin: auto;
+        }
+
+        @media (max-width: ${dimensions.md}) {
+            width: 50%;
+            padding: 10px;
+        }
 
         img {
             width: 100%;

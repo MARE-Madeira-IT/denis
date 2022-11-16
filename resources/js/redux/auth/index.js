@@ -35,6 +35,14 @@ export default (state = initialState, action = {}) => {
                 isAuthenticated: false,
             };
 
+
+        case `${types.SET_CURRENT_USER}`:
+            return {
+                ...state,
+                currentUser: action.payload.data.data,
+                permissionLevel: action.payload.data.data.permissionLevel
+            };
+
         case `${types.LOGIN_SUCCESS}`:
             return {
                 ...state,
