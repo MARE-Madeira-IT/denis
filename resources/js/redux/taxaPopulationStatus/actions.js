@@ -11,7 +11,7 @@ export const fetchTaxaPopulationStatuses = (page = 1, filters = {}) => ({
 
 export const fetchTaxaPopulationStatusSelector = (filters = {}) => ({
     type: types.FETCH_TAXA_POPULATION_STATUS_SELECTOR,
-    payload: axios.get(`${window.location.origin}/api/selector/taxa/speciesstatuses?${stringify(filters, {
+    payload: axios.get(`${window.location.origin}/api/selector/taxa/populationstatuses?${stringify(filters, {
         arrayFormat: "index"
     })}`)
 });

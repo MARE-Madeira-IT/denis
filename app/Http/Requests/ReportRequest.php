@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ReportRequest extends FormRequest
 {
@@ -21,28 +22,29 @@ class ReportRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $otherHabitat = null;
+        $otherHabitat = "";
         $habitat = $this->debris_habitat;
-        $otherMaterial = null;
+        $otherMaterial = "";
         $material = $this->debris_material;
-        $otherRugosity = null;
+        $otherRugosity = "";
         $rugosity = $this->debris_rugosity;
 
-        if (gettype($this->debris_habitat == "string")) {
+        if (gettype($this->debris_habitat) == "string") {
             $habitat = 12;
             $otherHabitat = $this->debris_habitat;
         }
 
-        if (gettype($this->debris_material == "string")) {
+        if (gettype($this->debris_material) == "string") {
             $material = 12;
             $otherMaterial = $this->debris_material;
         }
 
-        if (gettype($this->debris_rugosity == "string")) {
+        if (gettype($this->debris_rugosity) == "string") {
             $rugosity = 7;
             $otherRugosity = $this->debris_rugosity;
         }
-
+        $output = new ConsoleOutput();
+        $output->writeln($otherRugosity);
         $this->merge([
             'user_id' => auth()->user()->id,
             'debris_habitat' => $habitat,

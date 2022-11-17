@@ -20,7 +20,7 @@ const colorDecoder = {
     "validator": "cyan",
 }
 
-function TableContainer({ loading, data, meta, handlePageChange }) {
+function TableContainer({ loading, data, meta, handlePageChange, setCurrentUser, setVisible }) {
 
     const columns = [
         {
@@ -65,6 +65,12 @@ function TableContainer({ loading, data, meta, handlePageChange }) {
                 columns={columns}
                 meta={meta}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
+                onRow={(record) => ({
+                    onClick: () => {
+                        setCurrentUser(record);
+                        setVisible(true);
+                    },
+                })}
             />
         </Container>
     )

@@ -12,6 +12,7 @@ use App\Models\Taxa;
 use App\QueryFilters\ReportFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ReportController extends Controller
 {
@@ -22,7 +23,16 @@ class ReportController extends Controller
      */
     public function index(ReportFilters $filters)
     {
-        return MinimalReportResource::collection(Report::filterBy($filters)->paginate(10));
+        $user = auth()->user();
+        $query = Report::filterBy($filters);
+        $out = new ConsoleOutput();
+        $out->writeln($user->hasRole('validator'));
+        if (!$user->hasRole('validator') && !$user->hasRole('admin')) {
+            $query = $query->where('user_id', auth()->user()->id)->orWhereHas('latestValidation', function ($q) {
+                $q->where('validation_id', 2);
+            });
+        }
+        return MinimalReportResource::collection($query->paginate(10));
     }
 
     /**

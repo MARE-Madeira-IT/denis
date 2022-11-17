@@ -86,12 +86,9 @@ function FormContainer({ activeForm, setFormModal, createReport }) {
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
             submitData.date = moment(submitData.date).format("YYYY-MM-DD");
-            createReport(submitData);
-            // if (!err) {
-            //     createMareDepth(values).then(data => {
-            //         handleCancel();
-            //     });
-            // }
+            createReport(submitData).then(() => {
+                handleCancel();
+            });
         });
     };
 

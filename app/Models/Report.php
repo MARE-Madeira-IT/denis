@@ -32,6 +32,14 @@ class Report extends Model
         return $this->belongsToMany(Validation::class, 'report_has_validations', 'report_id', 'validation_id');
     }
 
+    /**
+     * Get the user's most recent order.
+     */
+    public function latestValidation()
+    {
+        return $this->hasOne(ReportHasValidation::class)->latestOfMany();
+    }
+
     public function debris()
     {
         return $this->belongsTo(Debris::class, 'debris_id');
