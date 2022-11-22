@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 import List from '../../Common/List';
 import { font } from '../../dashboardHelper';
+import Tour from '../../Hooks/Tour';
 import TaxaAbundance from './Abundance/TaxaAbundance';
 import TaxaLevel from './Level/TaxaLevel';
 import TaxaMaturity from './Maturity/TaxaMaturity';
@@ -59,7 +60,7 @@ function EcosystemMain() {
     };
 
     return (
-        <div>
+        <Tour itemName="ecosystemTour">
             <TableContainer
                 width={960}
                 footer={null}
@@ -76,9 +77,14 @@ function EcosystemMain() {
                 <h1>Ecosystems characterization</h1>
                 <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. </h2>
             </TitleContainer>
+            
+            <div data-intro="Click on any of the following sections to visualize existing data."
+                data-title="Ecosystems characterization"
+                data-step='1'>
+                <List items={items} setActiveModal={setActiveModal} />
+            </div>
 
-            <List items={items} setActiveModal={setActiveModal} />
-        </div>
+        </Tour>
     )
 }
 

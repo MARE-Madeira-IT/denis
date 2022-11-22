@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 import List from '../../Common/List';
 import { font } from '../../dashboardHelper';
+import Tour from '../../Hooks/Tour';
 import DebrisCategory from './Category/DebrisCategory';
 import DebrisHabitat from './Habitat/DebrisHabitat'
 import DebrisMaterial from './Material/DebrisMaterial'
@@ -61,7 +62,7 @@ function Main() {
     };
 
     return (
-        <div>
+        <Tour itemName="debrisTour">
             <TableContainer
                 width={1200}
                 footer={null}
@@ -74,13 +75,21 @@ function Main() {
                 {activeModal != undefined && items[activeModal].component}
             </TableContainer>
 
-            <TitleContainer>
+            <TitleContainer >
                 <h1>Marine Debris characterization</h1>
                 <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. </h2>
             </TitleContainer>
 
-            <List items={items} setActiveModal={setActiveModal} />
-        </div>
+            <div data-intro="Click on any of the following sections to visualize existing data."
+                data-title="Marine Debris characterization"
+                data-step='1'>
+                <List
+
+                    items={items}
+                    setActiveModal={setActiveModal} />
+            </div>
+
+        </Tour>
     )
 }
 

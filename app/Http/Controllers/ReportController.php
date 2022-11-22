@@ -7,6 +7,7 @@ use App\Http\Resources\MinimalReportResource;
 use App\Http\Resources\ReportResource;
 use App\Models\Debris;
 use App\Models\Report;
+use App\Models\ReportHasValidation;
 use App\Models\Site;
 use App\Models\Taxa;
 use App\QueryFilters\ReportFilters;
@@ -121,9 +122,40 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Report $report)
+    public function update(ReportRequest $request, Report $report)
     {
-        //
+        $validator = $request->validated();
+        $validator['validator_id'] = $validator['user_id'];
+        $validator['user_id'] = $report->user_id;
+
+        $site = $report->site;
+        $site->update([
+            "name" => $validator["site"],
+            "region" => $validator["region"],
+            "country_id" => $validator["country"],
+            "lme_id" => $validator["lme"],
+        ]);
+
+        $debris = $report->debris;
+        $debrisData = Debris::generateDataArray($validator);
+        $debris->update($debrisData);
+
+        $validator['site_id'] = $site->id;
+        $validator['debris_id'] = $debris->id;
+        $reportData = Report::generateDataArray($validator);
+        $report->update($reportData);
+
+        $validator["report_id"] = $report->id;
+        $existingTaxas = $report->taxas()->get();
+        foreach ($existingTaxas as $key => $taxa) {
+            $taxa->delete();
+        }
+        Taxa::store($validator);
+
+
+        $report->validation()->attach([1 => ['validator_id' => $validator['validator_id']]]);
+
+        return new ReportResource($report);
     }
 
     /**

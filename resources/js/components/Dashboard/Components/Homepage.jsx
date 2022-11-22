@@ -5,7 +5,7 @@ import { fetchSelfReports, fetchReport } from "../../../redux/report/actions";
 import TableContainer from "./TableContainer";
 import { setDrawerState } from "../../../redux/drawer/actions";
 import UserForm from './UserForm';
-
+import Tour from '../Hooks/Tour';
 
 const Container = styled.div`
     width: 100%;
@@ -51,6 +51,7 @@ const SectionContainer = styled.div`
 
 const Section = styled.div`
     width: 100%;
+    min-height: 400px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -173,28 +174,32 @@ function Homepage({ fetchSelfReports,
         })
     }
 
+
+
+
     useEffect(() => {
         if (!loading) {
             fetchSelfReports(1, filters);
         }
 
+
     }, [filters])
-    
+
     return (
-        <div>
+        <Tour updateCriteria={[user]} itemName="profileTour" >
             <Container>
                 <UserForm visible={visible} setVisible={setVisible} user={user} />
-                <SectionContainer>
-                    {user.id && <Section>
+                <SectionContainer >
+                    <Section data-intro="This is your profile!" data-title="Welcome!" data-step='1' >
                         <div className='image-container'>
-                            <img src={user.image} alt="profile " />
+                            <img src={user?.image} alt="profile " />
                         </div>
-                        <div className='information-container'>
+                        <div className='information-container' >
                             <Welcome>
                                 <div className='flex'>
-                                    <h2>{user.name}</h2>
-                                    <p>{user.country}</p>
-                                    {Object.entries(user.roles).map((value) => (
+                                    <h2>{user?.name}</h2>
+                                    <p>{user?.country}</p>
+                                    {user.id && Object.entries(user?.roles).map((value) => (
                                         <span key={value[0]}>
                                             {value[1] && <Role>{value[0]}</Role>}
                                         </ span>
@@ -202,15 +207,15 @@ function Homepage({ fetchSelfReports,
                                 </div>
                                 <div className='flex button-container'>
 
-                                    <Edit onClick={() => setVisible(true)}>Edit</Edit>
+                                    <Edit data-intro="You can edit it here!" data-title="Edit the profile" data-step='2' onClick={() => setVisible(true)}>Edit</Edit>
                                 </div>
                             </Welcome>
                             <Parameters>
-                                <p>{user.email}</p>
+                                <p>{user?.email}</p>
                                 <span>Email</span>
-                                <p>{user.phone}</p>
-                                <span>{user.phone ? "Phone" : ""}</span>
-                                <p>{user.institution}</p>
+                                <p>{user?.phone}</p>
+                                <span>{user?.phone ? "Phone" : ""}</span>
+                                <p>{user?.institution}</p>
                                 <span>Institution</span>
                             </Parameters>
 
@@ -221,10 +226,10 @@ function Homepage({ fetchSelfReports,
                             </div>
                         </div>
 
-                    </Section>}
-                    <Section>
+                    </Section>
+                    <Section data-intro="Reports you've submitted will be visible here" data-title="Your reports" data-step='3' >
                         <div>
-                            <h2>Your Reports</h2>
+                            <h2 id="selector3">Your Reports</h2>
                             <TableContainer
                                 handlePageChange={handlePageChange}
                                 data={data}
@@ -240,7 +245,7 @@ function Homepage({ fetchSelfReports,
 
             </Container>
 
-        </div>
+        </Tour >
     )
 }
 const mapDispatchToProps = (dispatch) => {

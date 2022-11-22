@@ -36,7 +36,8 @@ const Create = styled.button`
 
 function Report({ data, loading, meta, current, fetchReports, fetchReport, setDrawerState, updateState }) {
     const [filters, setFilters] = useState({});
-    const [activeForm, setFormModal] = useState(false)
+    const [activeForm, setFormModal] = useState(false);
+    const [updateMode, setUpdateMode] = useState(false);
 
     useEffect(() => {
         fetchReports();
@@ -52,6 +53,19 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
         })
     }
 
+    function handleCreateClick() {
+        setFormModal(true);
+        setUpdateMode(false);
+    }
+
+    function handleUpdateClick() {
+
+        setUpdateMode(true);
+        setFormModal(true);
+        setDrawerState(0, {});
+    }
+
+
     useEffect(() => {
         if (!loading) {
             fetchReports(1, filters);
@@ -62,10 +76,10 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
     return (
         <Container>
             <ContentContainer>
-                <FormContainer activeForm={activeForm} setFormModal={setFormModal} />
-                <Drawer data={current} />
+                <FormContainer setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
+                <Drawer handleUpdateClick={handleUpdateClick} data={current} setUpdateMode={setUpdateMode} />
                 <Row type="flex" justify="end">
-                    <Create onClick={() => setFormModal(true)}>Create</Create>
+                    <Create onClick={handleCreateClick}>Create</Create>
                 </Row>
                 <TableContainer
                     handlePageChange={handlePageChange}

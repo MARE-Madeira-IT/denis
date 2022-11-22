@@ -22,6 +22,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@100;400;700&display=swap"
         rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -40,6 +41,9 @@
         </div>
 
         <script src="{{mix('js/app.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"
+            integrity="sha512-i3JuyB+yXgX08haAnY9OnbCuv+a0aB6eLeKh970IOC3XOeWVnOtZlcla55VztDzqCHbl2zn9gpeNu2VBNdvmdQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>

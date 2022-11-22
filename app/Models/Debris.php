@@ -25,6 +25,26 @@ class Debris extends Model
         "otherRugosity"
     ];
 
+    public static function generateDataArray($data)
+    {
+        return [
+            "depth" => array_key_exists("debris_depth", $data) ? $data["debris_depth"] : null,
+            "debris_habitat_id" => $data["debris_habitat"],
+            "debris_material_id" => $data["debris_material"],
+            "debris_type_id" => $data["debris_type"],
+            "debris_size_id" => $data["debris_size"],
+            "weight" => $data["debris_weight"],
+            "debris_thickness_id" => $data["debris_thickness"],
+            "debris_rugosity_id" => $data["debris_rugosity"],
+            "debris_subcategory_id" => $data["debris_sub_category"][1],
+            "marks" => $data["debris_marks"],
+            "origin" => $data["debris_origin"],
+            "otherHabitat" => array_key_exists("debris_otherHabitat", $data) ? $data["debris_otherHabitat"] : null,
+            "otherMaterial" => array_key_exists("debris_otherMaterial", $data) ? $data["debris_otherMaterial"] : null,
+            "otherRugosity" => array_key_exists("debris_otherRugosity", $data) ? $data["debris_otherRugosity"] : null,
+        ];
+    }
+
     public static function store($data)
     {
         return self::create([

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Table from "antd/es/table"
 import { Input } from "antd";
 import debounce from 'lodash/debounce';
+import Tour from "../Hooks/Tour";
 
 const Container = styled.div`
     background: transparent;
@@ -144,13 +145,16 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
     showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch, form, handleCreate }) {
 
     return (
-        <div>
+        <Tour itemName="formTour" updateCriteria={[data]} condition={data.length && !loading}>
             <TitleContainer>
                 <h2>{title}</h2>
                 <span><img src="/icons/fullscreen.svg" /> Open as page</span>
             </TitleContainer>
             <TableControls>
                 <Input
+                    data-intro="Type for any keywords to dynamically update the table content and fit your search criteria"
+                    data-title="Search any content you wish"
+                    data-step='1'
                     placeholder="Search"
                     bordered={false}
                     onChange={debounce(handleSearch, 800)}
@@ -160,16 +164,22 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                         flex: "1",
                     }}
                 />
-                <button><img src="/icons/export.svg" /> Export</button>
+                <button data-intro="Export data on the table below as a CSV file"
+                    data-title="Export data"
+                    data-step='2'><img src="/icons/export.svg" /> Export</button>
 
             </TableControls>
-            <TableControls>
+            <TableControls data-intro="Fill the form and create a new entry which will be directly usable on the report form"
+                data-title="Create row"
+                data-step='3'>
                 {form}
 
                 <button onClick={handleCreate} className="dark-background"><img src="/icons/add.svg" /> Create </button>
 
             </TableControls>
-            <Container>
+            <Container data-intro="All operations on the controls above filter the data shown here"
+                data-title="Visualize the data"
+                data-step='4'>
                 <Table
                     rowClassName={() => 'editable-row'}
                     bordered={bordered}
@@ -191,7 +201,7 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                 />
             </Container>
 
-        </div>
+        </Tour>
     );
 }
 

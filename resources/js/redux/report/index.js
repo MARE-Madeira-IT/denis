@@ -93,10 +93,18 @@ export default (state = initialState, action = {}) => {
                 loading: false,
                 data: [action.payload.data.data, ...state.data]
             };
+        case `${types.SET_CURRENT_STATE}`:
+            return {
+                ...state,
+                loading: false,
+                current: action.payload
+            };
+
 
         case `${types.UPDATE_REPORT}_FULFILLED`:
             return {
                 ...state,
+                loading: false,
                 data: state.data.map((record) =>
                     record.id === action.payload.data.data.id
                         ? action.payload.data.data

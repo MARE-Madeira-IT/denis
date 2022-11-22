@@ -41,8 +41,17 @@ const FieldsContainer = styled.div`
     }
 `;
 
+const Button = styled.button`
+    padding: 12px 15px;
+    background-color: #0C4C88;
+    border: 0px;
+    box-shadow: none;
+    color: white;
+    margin-right: auto;
+    cursor: pointer;
+`;
 
-function Drawer({ data }) {
+function Drawer({ data, handleUpdateClick }) {
 
     const FieldContainer = ({ name, value }) => (
         <Field className='field-width'>
@@ -108,9 +117,11 @@ function Drawer({ data }) {
 
                 </Col>
             </Row>
+            <br></br>
 
-
-
+            <Row type="flex" >
+                <Button onClick={handleUpdateClick}>Update</Button>
+            </Row>
 
 
 

@@ -47,7 +47,8 @@ class DebrisResource extends JsonResource
             'litter_category' => [
                 'id' => $this->subcategory->id,
                 'name' => $this->subcategory->name,
-                'mdi_code' => $this->subcategory->mdi_code
+                'mdi_code' => $this->subcategory->mdi_code,
+                'category' => $this->subcategory->category
             ],
 
         ];

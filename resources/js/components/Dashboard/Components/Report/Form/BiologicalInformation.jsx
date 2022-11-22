@@ -48,7 +48,7 @@ function BiologicalInformation({ last, handleDelete }) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Authority*" name="authority" rules={[{ ...requiredRule, message: "'authority' is required" }]}>
+                    <Form.Item label="Authority*" name="authority" rules={[{ required: false }]}>
                         <Input placeholder="Authority" />
                     </Form.Item>
                 </Col>
