@@ -6,6 +6,7 @@ import TableContainer from "./TableContainer";
 import { setDrawerState } from "../../../redux/drawer/actions";
 import UserForm from './UserForm';
 import Tour from '../Hooks/Tour';
+import { dimensions } from '../dashboardHelper';
 
 const Container = styled.div`
     width: 100%;
@@ -14,6 +15,11 @@ const Container = styled.div`
     color: #000;
     padding: 48px;
     box-sizing: border-box;
+
+    @media (max-width: ${dimensions.md}) {
+        padding: 0px 20px;
+    }
+
 `;
 
 const Welcome = styled.div`
@@ -55,11 +61,21 @@ const Section = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     box-sizing: border-box;
     margin-bottom: 100px;
 
         .image-container{
             width: 300px;
+
+            @media (max-width: ${dimensions.md}) {
+                width: 80%;
+                margin-bottom: 30px;
+            }
+
+            @media (max-width: ${dimensions.sm}) {
+                width: 100%;
+            }
 
             img {
                 width: 100%;
@@ -74,6 +90,11 @@ const Section = styled.div`
             padding: 0px 30px;
             box-sizing: border-box;
             position: relative;
+
+            @media (max-width: ${dimensions.md}) {
+                width: 100%;
+                padding: 0px;
+            }
             
 
             .name, .label, .value {

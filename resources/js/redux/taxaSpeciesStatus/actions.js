@@ -23,9 +23,9 @@ export const fetchTaxaSpeciesStatus = id => ({
 });
 
 export const deleteTaxaSpeciesStatus = id => ({
-    type: types.DELETE_TAXA_SPECIES_STATUS
-    ,
+    type: types.DELETE_TAXA_SPECIES_STATUS,
     payload: axios.delete(`${window.location.origin}/api/taxa/speciesstatuses/${id}`),
+    meta: { id }
 });
 
 export const createTaxaSpeciesStatus = data => ({

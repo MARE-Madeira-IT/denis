@@ -91,32 +91,24 @@ function Timeline() {
                             </p>
                         </TimelineItem>
 
-
                         <TimelineItem >
-                            <h3>June, 2022</h3>
-                            <p>
-                                Design revisions and final design approval, cross browser support and responsive design
-                            </p>
-                        </TimelineItem>
-
-                        <TimelineItem >
-                            <h3>August, 2022</h3>
+                            <h3>September, 2022</h3>
                             <p>
                                 Database and interface integration
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>September, 2022</h3>
+                            <h3>November, 2022</h3>
                             <p>
                                 Staging QA, Release validation, and platform launch
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>October, 2022</h3>
+                            <h3>January, 2023</h3>
                             <p>
-                                Support and maintenance
+                                Worldwide release
                             </p>
                         </TimelineItem>
 

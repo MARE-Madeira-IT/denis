@@ -25,6 +25,7 @@ export const fetchDebrisHabitat = id => ({
 export const deleteDebrisHabitat = id => ({
     type: types.DELETE_DEBRIS_HABITAT,
     payload: axios.delete(`${window.location.origin}/api/debris/habitats/${id}`),
+    meta: { id }
 });
 
 export const createDebrisHabitat = data => ({

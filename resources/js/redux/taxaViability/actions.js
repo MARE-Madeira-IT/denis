@@ -24,6 +24,7 @@ export const fetchTaxaViability = id => ({
 export const deleteTaxaViability = id => ({
     type: types.DELETE_TAXA_VIABILITY,
     payload: axios.delete(`${window.location.origin}/api/taxa/viabilities/${id}`),
+    meta: { id }
 });
 
 export const createTaxaViability = data => ({

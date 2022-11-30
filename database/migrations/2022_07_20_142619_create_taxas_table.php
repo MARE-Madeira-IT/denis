@@ -29,12 +29,12 @@ class CreateTaxasTable extends Migration
             $table->timestamps();
 
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
-            $table->foreign('taxa_level_id')->references('id')->on('taxa_levels');
-            $table->foreign('taxa_species_status_id')->references('id')->on('taxa_species_statuses');
-            $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses');
-            $table->foreign('taxa_abundance_id')->references('id')->on('taxa_abundances');
-            $table->foreign('taxa_viability_id')->references('id')->on('taxa_viabilities');
-            $table->foreign('taxa_native_region_id')->references('id')->on('taxa_native_regions');
+            $table->foreign('taxa_level_id')->references('id')->on('taxa_levels')->onDelete('cascade');
+            $table->foreign('taxa_species_status_id')->references('id')->on('taxa_species_statuses')->onDelete('cascade');
+            $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses')->onDelete('cascade');
+            $table->foreign('taxa_abundance_id')->references('id')->on('taxa_abundances')->onDelete('cascade');
+            $table->foreign('taxa_viability_id')->references('id')->on('taxa_viabilities')->onDelete('cascade');
+            $table->foreign('taxa_native_region_id')->references('id')->on('taxa_native_regions')->onDelete('cascade');
         });
     }
 

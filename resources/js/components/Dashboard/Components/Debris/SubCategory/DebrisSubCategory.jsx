@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 
 
-function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories }) {
+function DebrisSubCategory({ data, loading, meta, fetchDebrisSubCategories, deleteDebrisSubCategory }) {
     const [filters, setFilters] = useState({});
     const [form] = useForm();
 

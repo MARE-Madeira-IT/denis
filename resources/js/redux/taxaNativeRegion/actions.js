@@ -24,6 +24,7 @@ export const fetchTaxaNativeRegion = id => ({
 export const deleteTaxaNativeRegion = id => ({
     type: types.DELETE_TAXA_NATIVE_REGION,
     payload: axios.delete(`${window.location.origin}/api/taxa/nativeregions/${id}`),
+    meta: { id }
 });
 
 export const createTaxaNativeRegion = data => ({

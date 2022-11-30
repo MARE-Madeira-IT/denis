@@ -24,6 +24,7 @@ export const fetchDebrisSize = id => ({
 export const deleteDebrisSize = id => ({
     type: types.DELETE_DEBRIS_SIZE,
     payload: axios.delete(`${window.location.origin}/api/debris/sizes/${id}`),
+    meta: { id }
 });
 
 export const createDebrisSize = data => ({

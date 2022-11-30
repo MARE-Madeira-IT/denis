@@ -1,16 +1,21 @@
 import { Row } from 'antd';
 import React from 'react'
 import styled from "styled-components";
+import { dimensions } from '../dashboardHelper';
 
 const Item = styled.div`
     padding: 16px;
     width: 33%;
     box-sizing: border-box;
-    
 
-    
-    
+    @media (max-width: ${dimensions.lg}) {
+        width: 50%;
+    }
 
+    @media (max-width: ${dimensions.sm}) {
+        width: 100%;
+    }
+    
     .content {
         box-sizing: border-box;
         display: flex;

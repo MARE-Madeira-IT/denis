@@ -25,6 +25,7 @@ export const fetchDebrisType = id => ({
 export const deleteDebrisType = id => ({
     type: types.DELETE_DEBRIS_TYPE,
     payload: axios.delete(`${window.location.origin}/api/debris/types/${id}`),
+    meta: { id }
 });
 
 export const createDebrisType = data => ({

@@ -24,6 +24,7 @@ export const fetchTaxaAbundance = id => ({
 export const deleteTaxaAbundance = id => ({
     type: types.DELETE_TAXA_ABUNDANCE,
     payload: axios.delete(`${window.location.origin}/api/taxa/abundances/${id}`),
+    meta: { id }
 });
 
 export const createTaxaAbundance = data => ({

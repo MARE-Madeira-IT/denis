@@ -34,30 +34,18 @@ const FlexContainer = styled.section`
 
 const Logo = styled.div`
     width: 50%;
-    text-transform: uppercase;
     color: white;    
 
     h1 {
         width: 100%;
         box-sizing: border-box;
         margin:0px;
-        font-size: 70px;
+        font-size: 60px;
         color: inherit;
         font-weight: 900;
         line-height: 94%;
-        text-transform: uppercase;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Prata', serif;
         letter-spacing: 0.041em;
-    }
-
-    h2 {
-        font-family: 'Lato', sans-serif;
-        margin:0px;
-        font-weight: 300;
-        color: inherit;
-        letter-spacing: -0.04em;
-        font-size: 18px;
-        line-height: 18px;
     }
 
     @media (max-width: ${dimensions.xl}) {
@@ -71,10 +59,6 @@ const Logo = styled.div`
 
         h1 {
             font-size: 48px;
-        }
-
-        h2 {
-            font-size:16px;
         }
 
     }
@@ -168,8 +152,7 @@ function Navbar({ permissionLevel,
     return (
         <FlexContainer>
             <Logo>
-                <h1>DATABASE</h1>
-                <p>Marine debris & Non-Indigenous Species</p>
+                <h1>DeNIS</h1>
             </Logo>
             <Login>
 

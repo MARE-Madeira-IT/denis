@@ -24,6 +24,7 @@ export const fetchDebrisRugosity = id => ({
 export const deleteDebrisRugosity = id => ({
     type: types.DELETE_DEBRIS_RUGOSITY,
     payload: axios.delete(`${window.location.origin}/api/debris/rugosities/${id}`),
+    meta: { id }
 });
 
 export const createDebrisRugosity = data => ({

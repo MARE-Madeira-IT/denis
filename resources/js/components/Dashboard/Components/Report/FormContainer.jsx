@@ -77,7 +77,7 @@ const Add = styled.button`
     
 `;
 
-function FormContainer({ activeForm, setFormModal, createReport, data, updateMode, setUpdateMode, updateReport, currentReport }) {
+function FormContainer({ activeForm, setFormModal, createReport, data, updateMode, setUpdateMode, updateReport, currentReport, loading }) {
     const [form] = Form.useForm();
     const [currentStep, setCurrentStep] = useState(0)
     const [numSpecies, setNumSpecies] = useState(1)
@@ -134,9 +134,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
 
     useEffect(() => {
         if (updateMode) {
-            console.log("will update")
             var taxaData = [];
-
             data.taxas.map((currentTaxa) => {
                 var currentObject = {
                     level: currentTaxa.level.id,
@@ -202,7 +200,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
                 <h2>Item Detection</h2>
                 <p style={{ marginBottom: "30px" }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sapiente aliquam tempora nobis modi, assumenda pariatur illo debitis in doloribus? Sed sit explicabo reiciendis nisi quas, placeat vero consequuntur eveniet!</p>
             </div>
-            <ItemDetection />
+            <ItemDetection currentReport={currentReport} updateMode={updateMode} form={form} />
 
         </>,
         <>
@@ -243,7 +241,6 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
     return (
 
         <CustomModal
-
             width={1200}
             title="Create report"
             visible={activeForm}
@@ -254,7 +251,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
                     <Button key="back" disabled={currentStep == 0} onClick={previous}>
                         Return
                     </Button>,
-                    <Button key="submit" type="primary" onClick={currentStep == steps.length - 1 ? submit : next}>
+                    <Button loading={loading} key="submit" type="primary" onClick={currentStep == steps.length - 1 ? submit : next}>
                         {currentStep == steps.length - 1 ? "Submit" : "Next"}
                     </Button>,
                 ]

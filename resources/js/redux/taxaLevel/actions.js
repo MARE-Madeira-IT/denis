@@ -25,6 +25,7 @@ export const fetchTaxaLevel = id => ({
 export const deleteTaxaLevel = id => ({
     type: types.DELETE_TAXA_LEVEL,
     payload: axios.delete(`${window.location.origin}/api/taxa/levels/${id}`),
+    meta: { id }
 });
 
 export const createTaxaLevel = data => ({

@@ -24,6 +24,7 @@ export const fetchTaxaMaturity = id => ({
 export const deleteTaxaMaturity = id => ({
     type: types.DELETE_TAXA_MATURITY,
     payload: axios.delete(`${window.location.origin}/api/taxa/maturities/${id}`),
+    meta: { id }
 });
 
 export const createTaxaMaturity = data => ({

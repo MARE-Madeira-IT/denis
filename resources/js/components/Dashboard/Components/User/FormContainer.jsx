@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Col, Form, Input, Modal, Row, Select } from 'antd'
-import { createReport } from "../../../../redux/report/actions";
+import { updateUser } from "../../../../redux/user/actions";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
@@ -13,15 +13,25 @@ const CustomModal = styled(Modal)`
 
 const requiredRule = { required: true };
 
-function FormContainer({ visible, setVisible, currentUser, createReport }) {
+function FormContainer({ visible, setVisible, currentUser, updateUser }) {
     const [form] = Form.useForm();
 
     const update = () => {
         form.validateFields().then(values => {
-            createReport(values).then(() => {
+            const formData = new FormData();
+            formData.append("name", values.name);
+            formData.append("email", values.email);
+            formData.append("institution", values.institution);
+            formData.append("country", values.country);
+            formData.append("phone", values.phone);
+
+            formData.append("_method", "PATCH");
+
+            updateUser(currentUser.id, formData).then(() => {
                 handleCancel();
             });
         });
+
     };
 
     const handleCancel = () => {
@@ -29,6 +39,18 @@ function FormContainer({ visible, setVisible, currentUser, createReport }) {
         form.resetFields();
     };
 
+    useEffect(() => {
+        if (currentUser) {
+            form.setFieldsValue({
+                name: currentUser.name,
+                email: currentUser.email,
+                institution: currentUser.institution,
+                phone: currentUser.phone,
+                country: currentUser.country,
+            });
+        }
+
+    }, [currentUser])
 
 
     return (
@@ -42,26 +64,20 @@ function FormContainer({ visible, setVisible, currentUser, createReport }) {
         >
 
 
-            <Form initialValues={{
-                name: currentUser.name,
-                email: currentUser.email,
-                institution: currentUser.institution,
-                phone: currentUser.phone,
-                country: currentUser.country,
-            }} style={{ margin: "50px auto" }} layout="vertical" hideRequiredMark form={form}
+            <Form style={{ margin: "50px auto" }} layout="vertical" hideRequiredMark form={form}
             >
                 <Row gutter={32}>
-                    <Col xs={24} md={8}>
+                    <Col xs={24} md={12}>
                         <Form.Item label="Name*" name="name" rules={[{ ...requiredRule, message: "'name' is required" }]}>
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={8}>
+                    <Col xs={24} md={12}>
                         <Form.Item label="Email*" name="email" rules={[{ ...requiredRule, message: "'email' is required" }]}>
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={8}>
+                    {/* <Col xs={24} md={8}>
                         <Form.Item label="Role*" name="role" rules={[{ ...requiredRule, message: "'role' is required" }]}>
                             <Select>
                                 <Select.Option value={1}>admin</Select.Option>
@@ -69,7 +85,7 @@ function FormContainer({ visible, setVisible, currentUser, createReport }) {
                                 <Select.Option value={3}>user</Select.Option>
                             </Select>
                         </Form.Item>
-                    </Col>
+                    </Col> */}
                     <Col xs={24} md={8}>
                         <Form.Item label="Institution*" name="institution" rules={[{ ...requiredRule, message: "'institution' is required" }]}>
                             <Input />
@@ -95,7 +111,7 @@ function FormContainer({ visible, setVisible, currentUser, createReport }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createReport: (data) => dispatch(createReport(data)),
+        updateUser: (id, data) => dispatch(updateUser(id, data)),
     };
 };
 

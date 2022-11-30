@@ -25,6 +25,7 @@ export const fetchDebrisThickness = id => ({
 export const deleteDebrisThickness = id => ({
     type: types.DELETE_DEBRIS_THICKNESS,
     payload: axios.delete(`${window.location.origin}/api/debris/thicknesses/${id}`),
+    meta: { id }
 });
 
 export const createDebrisThickness = data => ({

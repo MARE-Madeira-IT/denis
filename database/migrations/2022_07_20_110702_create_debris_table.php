@@ -31,13 +31,13 @@ class CreateDebrisTable extends Migration
             $table->unsignedBigInteger('debris_subcategory_id');
             $table->timestamps();
 
-            $table->foreign('debris_size_id')->references('id')->on('debris_sizes');
-            $table->foreign('debris_rugosity_id')->references('id')->on('debris_rugosities');
-            $table->foreign('debris_habitat_id')->references('id')->on('debris_habitats');
-            $table->foreign('debris_thickness_id')->references('id')->on('debris_thicknesses');
-            $table->foreign('debris_material_id')->references('id')->on('debris_materials');
-            $table->foreign('debris_type_id')->references('id')->on('debris_types');
-            $table->foreign('debris_subcategory_id')->references('id')->on('debris_sub_categories');
+            $table->foreign('debris_size_id')->references('id')->on('debris_sizes')->onDelete('cascade');
+            $table->foreign('debris_rugosity_id')->references('id')->on('debris_rugosities')->onDelete('cascade');
+            $table->foreign('debris_habitat_id')->references('id')->on('debris_habitats')->onDelete('cascade');
+            $table->foreign('debris_thickness_id')->references('id')->on('debris_thicknesses')->onDelete('cascade');
+            $table->foreign('debris_material_id')->references('id')->on('debris_materials')->onDelete('cascade');
+            $table->foreign('debris_type_id')->references('id')->on('debris_types')->onDelete('cascade');
+            $table->foreign('debris_subcategory_id')->references('id')->on('debris_sub_categories')->onDelete('cascade');
         });
     }
 

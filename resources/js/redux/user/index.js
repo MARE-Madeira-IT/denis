@@ -61,6 +61,7 @@ export default (state = initialState, action = {}) => {
         case `${types.UPDATE_USER}_FULFILLED`:
             return {
                 ...state,
+                loading: false,
                 data: state.data.map((record) =>
                     record.id === action.payload.data.data.id
                         ? action.payload.data.data

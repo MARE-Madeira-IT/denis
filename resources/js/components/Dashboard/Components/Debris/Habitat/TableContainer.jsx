@@ -1,15 +1,15 @@
-import React from "react";
-import { Popconfirm } from 'antd';
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import TableComponent from "../../../Common/ModalTableComponent";
 import FormContainer from "./FormContainer";
+import { connect } from "react-redux";
+import { handleTableDelete } from "../../../Common/HandleTableDelete";
 
 const Container = styled.div`
     width: 100%;
 `;
 
-function TableContainer({ loading, data, meta, handlePageChange, handleSearch, handleCreate, form, handleDelete }) {
-
+function TableContainer({ loading, data, meta, handlePageChange, handleSearch, handleCreate, form, handleDelete, permissionLevel }) {
     const columns = [
         {
             title: 'ID',
@@ -20,17 +20,13 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch, h
             dataIndex: 'name',
             editable: true,
         },
-        {
-            title: 'Operation',
-            dataIndex: 'Operation',
-            render: (_, record) =>
-                data.length >= 1 ? (
-                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
-                        <a>Delete</a>
-                    </Popconfirm>
-                ) : null,
-        },
     ];
+
+    useEffect(() => {
+        if (permissionLevel === 2) {
+            columns.push(handleTableDelete(handleDelete));
+        }
+    }, [permissionLevel])
 
 
     return (
@@ -50,4 +46,10 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch, h
     )
 }
 
-export default TableContainer;
+const mapStateToProps = (state) => {
+    return {
+        permissionLevel: state.auth.permissionLevel,
+    };
+};
+
+export default connect(mapStateToProps, null)(TableContainer);

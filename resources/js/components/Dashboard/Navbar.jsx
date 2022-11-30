@@ -28,56 +28,19 @@ const Content = styled.div`
 `;
 
 const Title = styled(NavLink)`
-    padding: 10px 50px 10px 0px;
+    padding: 20px 50px 20px 0px;
     box-sizing: border-box;
 
     h1 {
         width: 100%;
         box-sizing: border-box;
         margin:0px;
-        font-size: 64px;
+        font-size: clamp(28px, 4vw, 62px);
         color: white;
         font-weight: 900;
         line-height: 64px;
-        text-transform: uppercase;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Prata', serif;
         letter-spacing: 0.041em;
-    }
-
-    h2 {
-        font-family: 'Lato', sans-serif;
-        margin:0px;
-        font-weight: 300;
-        color: white;
-        letter-spacing: -0.04em;
-        font-size: 18px;
-        line-height: 18px;
-    }
-
-    @media (max-width: ${dimensions.xl}) {
-        h1 {
-            font-size: 62px;
-        }        
-    }
-
-    @media (max-width: ${dimensions.lg}) {
-        h1 {
-            font-size: 48px;
-        }
-
-        h2 {
-            font-size:16px;
-        }
-    }
-
-    @media (max-width: ${dimensions.md}) {
-        h1 {
-            font-size: 28px;
-        } 
-        
-        h2 {
-            display: none;
-        }
     }
 `;
 
@@ -95,6 +58,9 @@ const PagesContainer = styled.div`
         }
     }
     
+    @media (max-width: ${dimensions.xl}) {
+        display: none;
+    }
 `;
 
 const PageContainer = styled(NavLink)`
@@ -136,20 +102,21 @@ const Logout = styled.div`
 const MenuIcon = styled.div`
     display: none;
     cursor: pointer;
+    align-items: center;
 
     img {
         width: 40px;
         float: right;
-        margin-top: 10px;
+        margin: auto;
     }
 
     @media (max-width: ${dimensions.xl}) {
-        display: block;
+        display: flex;
     }
 
     @media (max-width: ${dimensions.lg}) {
         img {
-            width: 30px;
+            width: 35px;
         }
     }
 `;
@@ -200,8 +167,7 @@ function Navbar({ permissionLevel, setAuthorizationToken, logout }) {
         <Container>
             <Content>
                 <Title to="/">
-                    <h1>Database</h1>
-                    <h2>MARINE DEBRIS & NON-INDIGENOUS SPECIES</h2>
+                    <h1>DeNIS</h1>
                 </Title>
                 <PagesContainer>
                     {navbarItems.map((item, index) => (
@@ -221,7 +187,7 @@ function Navbar({ permissionLevel, setAuthorizationToken, logout }) {
                 </PagesContainer>
                 <MenuIcon>
                     <Dropdown overlay={menu}>
-                        <img src="/icons/menu.svg" alt="menu" />
+                        <img src="/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
                 </MenuIcon>
             </Content>

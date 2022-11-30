@@ -30,9 +30,9 @@ class DebrisSubCategoryController extends Controller
     {
         $validator = $request->validated();
         $record = DebrisSubCategory::create([
-            'name' => $request->name,
-            'mdi_code' => $request->mdi_code,
-            'debris_category_id' => $request->debris_category_id[0]
+            'name' => $validator['name'],
+            'mdi_code' => $validator['mdi_code'],
+            'debris_category_id' => $validator['debris_category_id']
         ]);
 
         return new DebrisSubCategoryResource($record);

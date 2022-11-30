@@ -60,7 +60,7 @@ function Partners() {
             <StyledContent>
                 <div className="content-width">
                     <h2>Our Partners & Supporters</h2>
-                    <p>DATABASE partners are the barebones that make this platform available for the scientific community.</p>
+                    <p>DeNIS partners are the barebones that make this platform available for the scientific community.</p>
 
                     <Flex>
                         <div><img src="/images/partners/arditi.jpg" alt="ARDITI" /></div>

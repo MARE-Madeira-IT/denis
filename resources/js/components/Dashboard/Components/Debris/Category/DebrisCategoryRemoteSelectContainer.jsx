@@ -12,22 +12,21 @@ function DebrisCategoryRemoteSelectContainer({ fetchDebrisCategorySelector, data
         path.some((option) => option.name.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
 
     return (
-        <Cascader
+        <Select
             value={value}
             onChange={onChange}
-            options={data}
             loading={loading}
-            fieldNames={{
-                label: 'name',
-                value: 'id',
-                children: 'subcategories',
-            }}
-            placeholder="Master List of Categories of Litter Items"
-            showSearch={{
-                filter,
-            }}
-            onSearch={(value) => console.log(value)}
-        />
+            showSearch
+            bordered={false}
+            prefix={<img src="/icons/form/bottle.svg" />}
+            placeholder="Select the debris category"
+            optionFilterProp="name"
+            filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
+        >
+            {data.map((element) => (
+                <Select.Option key={element.id} value={element.id}>{element.name}</Select.Option>
+            ))}
+        </Select>
     )
 }
 

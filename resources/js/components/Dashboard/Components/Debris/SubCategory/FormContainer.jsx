@@ -22,28 +22,25 @@ const Container = styled(Form)`
     }
 `;
 
-
-const requiredRule = [{ required: true, message: "Name is required" }];
-
 function FormContainer({ form }) {
 
     return (
         <Container form={form}>
             <Row>
                 <Col span={8}>
-                    <Form.Item name="name" rules={requiredRule}>
-                        <Input className='input' bordered={false} placeholder='Name' />
+                    <Form.Item name="name" rules={[{ required: true, message: "Name is required" }]}>
+                        <Input prefix={<img src="/icons/form/bottle.svg" />} className='input' bordered={false} placeholder='Name' />
                     </Form.Item>
                 </Col>
 
                 <Col span={8}>
-                    <Form.Item name="mdi_code" rules={requiredRule}>
-                        <Input className='input' bordered={false} placeholder='MDI code' />
+                    <Form.Item name="mdi_code" rules={[{ required: true, message: "MDI code is required" }]}>
+                        <Input prefix={<img src="/icons/form/code.svg" />} className='input' bordered={false} placeholder='MDI code' />
                     </Form.Item>
                 </Col>
 
                 <Col span={8}>
-                    <Form.Item name="debris_category_id" rules={requiredRule}>
+                    <Form.Item name="debris_category_id" rules={[{ required: true, message: "Category is required" }]}>
                         <DebrisCategoryRemoteSelectContainer placeholder='Category' />
                     </Form.Item>
                 </Col>

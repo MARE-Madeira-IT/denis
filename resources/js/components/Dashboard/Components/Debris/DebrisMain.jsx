@@ -2,7 +2,7 @@ import { Col, Modal, Row } from 'antd'
 import React, { useState } from 'react'
 import styled from "styled-components";
 import List from '../../Common/List';
-import { font } from '../../dashboardHelper';
+import { dimensions, font } from '../../dashboardHelper';
 import Tour from '../../Hooks/Tour';
 import DebrisCategory from './Category/DebrisCategory';
 import DebrisHabitat from './Habitat/DebrisHabitat'
@@ -30,16 +30,24 @@ const TitleContainer = styled.div`
 
     h1 {
         font-weight: 900;
-        font-size: 54px;
-        margin: 0px auto ;
+        font-size: clamp(28px, 6vw, 54px);
+        margin: 0px auto 10px auto;
     }
 
     h2 {
-        font-size: 20px;
+        font-size: clamp(18px, 2vw, 20px);
         font-weight: 400;
         opacity: .7;
-        width: 40%;
+        width: 50%;
         margin: 0px auto ;
+
+        @media (max-width: ${dimensions.lg}) {
+            width: 60%;
+        }
+
+        @media (max-width: ${dimensions.md}) {
+            width: 90%;
+        }
     }
 `;
 

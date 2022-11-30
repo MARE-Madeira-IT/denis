@@ -25,6 +25,7 @@ export const fetchDebrisCategory = id => ({
 export const deleteDebrisCategory = id => ({
     type: types.DELETE_DEBRIS_CATEGORY,
     payload: axios.delete(`${window.location.origin}/api/debris/categories/${id}`),
+    meta: { id }
 });
 
 export const createDebrisCategory = data => ({

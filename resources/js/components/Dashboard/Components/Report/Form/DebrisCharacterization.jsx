@@ -1,6 +1,6 @@
 import { Col, Form, Input, InputNumber, Row } from 'antd'
 import React, { useState } from 'react'
-import DebrisCategoryRemoteSelectContainer from '../../Debris/Category/DebrisCategoryRemoteSelectContainer'
+import DebrisCategoryRemoteCascadeContainer from '../../Debris/Category/DebrisCategoryRemoteCascadeContainer'
 import DebrisHabitatRemoteSelectContainer from '../../Debris/Habitat/DebrisHabitatRemoteSelectContainer'
 import DebrisMaterialRemoteSelectContainer from '../../Debris/Material/DebrisMaterialRemoteSelectContainer'
 import DebrisRugosityRemoteSelectContainer from '../../Debris/Rugosity/DebrisRugosityRemoteSelectContainer'
@@ -69,7 +69,7 @@ function DebrisCharacterization() {
             </Col>
             <Col xs={24} md={6}>
                 <Form.Item label="Categories of Litter Items*" name="debris_sub_category" rules={requiredRule}>
-                    <DebrisCategoryRemoteSelectContainer />
+                    <DebrisCategoryRemoteCascadeContainer />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>

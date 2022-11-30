@@ -30,6 +30,7 @@ export const fetchReport = id => ({
 export const deleteReport = id => ({
     type: types.DELETE_REPORT,
     payload: axios.delete(`${window.location.origin}/api/reports/${id}`),
+    meta: { id }
 });
 
 export const createReport = data => ({

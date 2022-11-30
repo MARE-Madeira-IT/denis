@@ -157,7 +157,7 @@ function About() {
                     </TutorialContainer>
 
 
-                    <h2>Who is DATABASE for?</h2>
+                    <h2>Who is DeNIS for?</h2>
                     <UsersContainer>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!

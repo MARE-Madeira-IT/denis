@@ -4,6 +4,7 @@ import Table from "antd/es/table"
 import { Input } from "antd";
 import debounce from 'lodash/debounce';
 import Tour from "../Hooks/Tour";
+import { connect } from "react-redux";
 
 const Container = styled.div`
     background: transparent;
@@ -72,12 +73,17 @@ const TitleContainer = styled.div`
     }
 
     span {
+        color: transparent;
         flex: 1;
         background-color: #DFDFDF;
         padding: 15px 20px;
         box-sizing: border-box;
         margin: 0px;
         text-align: right;
+        -webkit-user-select: none; /* Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
 
         img {
             width: 15px;
@@ -126,10 +132,6 @@ const TableControls = styled.div`
             }
         }
 
-        
-
-        
-
         .dark-background {
             background-color: #333334;
             color: #fff;
@@ -137,18 +139,24 @@ const TableControls = styled.div`
             cursor: pointer;
         }
 
-        
+    .export {
+        opacity: 0;
+        -webkit-user-select: none; /* Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+    }
     
 `;
 
 function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
-    showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch, form, handleCreate }) {
+    showQuickJumper = false, handleExpandable, bordered = false, title, handleSearch, form, handleCreate, permissionLevel }) {
 
     return (
         <Tour itemName="formTour" updateCriteria={[data]} condition={data.length && !loading}>
             <TitleContainer>
                 <h2>{title}</h2>
-                <span><img src="/icons/fullscreen.svg" /> Open as page</span>
+                <span>Open as page</span>
             </TitleContainer>
             <TableControls>
                 <Input
@@ -164,19 +172,22 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                         flex: "1",
                     }}
                 />
-                <button data-intro="Export data on the table below as a CSV file"
+                <button className="export" data-intro="Export data on the table below as a CSV file"
                     data-title="Export data"
                     data-step='2'><img src="/icons/export.svg" /> Export</button>
 
             </TableControls>
-            <TableControls data-intro="Fill the form and create a new entry which will be directly usable on the report form"
-                data-title="Create row"
-                data-step='3'>
-                {form}
+            {permissionLevel === 2 &&
+                <TableControls data-intro="Fill the form and create a new entry which will be directly usable on the report form"
+                    data-title="Create row"
+                    data-step='3'>
+                    {form}
 
-                <button onClick={handleCreate} className="dark-background"><img src="/icons/add.svg" /> Create </button>
+                    <button onClick={handleCreate} className="dark-background"><img src="/icons/add.svg" /> Create </button>
 
-            </TableControls>
+                </TableControls>
+            }
+
             <Container data-intro="All operations on the controls above filter the data shown here"
                 data-title="Visualize the data"
                 data-step='4'>
@@ -205,4 +216,10 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
     );
 }
 
-export default TableComponent;
+const mapStateToProps = (state) => {
+    return {
+        permissionLevel: state.auth.permissionLevel,
+    };
+};
+
+export default connect(mapStateToProps, null)(TableComponent);

@@ -47,14 +47,16 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
         {
             title: 'ID',
             dataIndex: 'id',
+            fixed: 'left',
+            width: 80,
             ...getColumnSearchProps('id', searchInput, handleFilter, handleFilterClear),
         },
         {
-            title: 'Date of survey (dd-mm-yyyy)',
+            title: 'Date of survey',
             dataIndex: 'date',
         },
         {
-            title: 'Location (site, region, country, lme)',
+            title: 'Location',
             dataIndex: 'site',
             ...getColumnSearchProps('location', searchInput, handleFilter, handleFilterClear),
             render: (record) => <span>{record.name}, {record.region}, {record.country.name}, {record.lme.name}</span>
@@ -71,7 +73,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
             ...getColumnSearchProps('taxas', searchInput, handleFilter, handleFilterClear),
             render: (records) => records.map((record, index) => (
                 <span key={index}>{record.identification} {records.length > index + 1 && ","} </span>
-            ))
+            )),
         },
         {
             title: 'Status',

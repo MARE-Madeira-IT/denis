@@ -26,8 +26,8 @@ class CreateReportsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('site_id')->references('id')->on('sites');
-            $table->foreign('debris_id')->references('id')->on('debris');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+            $table->foreign('debris_id')->references('id')->on('debris')->onDelete('cascade');
         });
     }
 

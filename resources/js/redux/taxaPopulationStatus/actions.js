@@ -23,9 +23,9 @@ export const fetchTaxaPopulationStatus = id => ({
 });
 
 export const deleteTaxaPopulationStatus = id => ({
-    type: types.DELETE_TAXA_POPULATION_STATUS
-    ,
+    type: types.DELETE_TAXA_POPULATION_STATUS,
     payload: axios.delete(`${window.location.origin}/api/taxa/populationstatuses/${id}`),
+    meta: { id }
 });
 
 export const createTaxaPopulationStatus = data => ({
