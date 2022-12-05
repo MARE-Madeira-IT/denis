@@ -31,7 +31,7 @@ export const deleteTaxaPopulationStatus = id => ({
 export const createTaxaPopulationStatus = data => ({
     type: types.CREATE_TAXA_POPULATION_STATUS
     ,
-    payload: axios.post(`${window.location.origin}/api/taxa/populationstatuses/`, data),
+    payload: axios.post(`${window.location.origin}/api/taxa/populationstatuses`, data),
 });
 
 export const updateTaxaPopulationStatus = (id, data) => ({

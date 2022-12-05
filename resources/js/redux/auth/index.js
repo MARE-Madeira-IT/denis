@@ -5,6 +5,7 @@ export const initialState = {
     loading: false,
     currentUser: {},
     permissionLevel: 0,
+    hasError: false,
 }
 
 export default (state = initialState, action = {}) => {
@@ -26,8 +27,15 @@ export default (state = initialState, action = {}) => {
                 loading: false
             };
 
-        case `${types.ME}_REJECTED`:
         case `${types.LOGIN}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: false,
+                hasError: true,
+            };
+
+        case `${types.ME}_REJECTED`:
         case `${types.LOGOUT}_FULFILLED`:
             return {
                 ...state,
@@ -55,6 +63,7 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
+                hasError: false,
             };
 
 

@@ -29,7 +29,7 @@ export const deleteTaxaMaturity = id => ({
 
 export const createTaxaMaturity = data => ({
     type: types.CREATE_TAXA_MATURITY,
-    payload: axios.post(`${window.location.origin}/api/taxa/maturities/`, data),
+    payload: axios.post(`${window.location.origin}/api/taxa/maturities`, data),
 });
 
 export const updateTaxaMaturity = (id, data) => ({

@@ -29,7 +29,7 @@ export const deleteTaxaNativeRegion = id => ({
 
 export const createTaxaNativeRegion = data => ({
     type: types.CREATE_TAXA_NATIVE_REGION,
-    payload: axios.post(`${window.location.origin}/api/taxa/nativeregions/`, data),
+    payload: axios.post(`${window.location.origin}/api/taxa/nativeregions`, data),
 });
 
 export const updateTaxaNativeRegion = (id, data) => ({

@@ -30,7 +30,7 @@ export const deleteTaxaLevel = id => ({
 
 export const createTaxaLevel = data => ({
     type: types.CREATE_TAXA_LEVEL,
-    payload: axios.post(`${window.location.origin}/api/taxa/levels/`, data),
+    payload: axios.post(`${window.location.origin}/api/taxa/levels`, data),
 });
 
 export const updateTaxaLevel = (id, data) => ({

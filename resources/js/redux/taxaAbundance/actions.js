@@ -29,7 +29,7 @@ export const deleteTaxaAbundance = id => ({
 
 export const createTaxaAbundance = data => ({
     type: types.CREATE_TAXA_ABUNDANCE,
-    payload: axios.post(`${window.location.origin}/api/taxa/abundances/`, data),
+    payload: axios.post(`${window.location.origin}/api/taxa/abundances`, data),
 });
 
 export const updateTaxaAbundance = (id, data) => ({

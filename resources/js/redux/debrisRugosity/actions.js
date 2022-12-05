@@ -29,7 +29,7 @@ export const deleteDebrisRugosity = id => ({
 
 export const createDebrisRugosity = data => ({
     type: types.CREATE_DEBRIS_RUGOSITY,
-    payload: axios.post(`${window.location.origin}/api/debris/rugosities/`, data),
+    payload: axios.post(`${window.location.origin}/api/debris/rugosities`, data),
 });
 
 export const updateDebrisRugosity = (id, data) => ({

@@ -35,7 +35,7 @@ export const deleteReport = id => ({
 
 export const createReport = data => ({
     type: types.CREATE_REPORT,
-    payload: axios.post(`${window.location.origin}/api/reports/`, data),
+    payload: axios.post(`${window.location.origin}/api/reports`, data),
 });
 
 export const updateReport = (id, data) => ({

@@ -30,7 +30,7 @@ export const deleteDebrisThickness = id => ({
 
 export const createDebrisThickness = data => ({
     type: types.CREATE_DEBRIS_THICKNESS,
-    payload: axios.post(`${window.location.origin}/api/debris/thicknesses/`, data),
+    payload: axios.post(`${window.location.origin}/api/debris/thicknesses`, data),
 });
 
 export const updateDebrisThickness = (id, data) => ({

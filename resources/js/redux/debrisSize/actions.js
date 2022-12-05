@@ -29,7 +29,7 @@ export const deleteDebrisSize = id => ({
 
 export const createDebrisSize = data => ({
     type: types.CREATE_DEBRIS_SIZE,
-    payload: axios.post(`${window.location.origin}/api/debris/sizes/`, data),
+    payload: axios.post(`${window.location.origin}/api/debris/sizes`, data),
 });
 
 export const updateDebrisSize = (id, data) => ({

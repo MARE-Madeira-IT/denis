@@ -4,6 +4,7 @@ import { login } from "../redux/auth/actions";
 import { connect } from "react-redux";
 import { dimensions } from "./Dashboard/dashboardHelper";
 import { Link } from "react-router-dom";
+import { Alert } from "antd";
 
 const FormItem = styled.div`
     display: flex;
@@ -108,6 +109,7 @@ class Login extends Component {
     state = {
         password: "",
         email: "",
+        error: undefined
     };
 
     submitForm = (e) => {
@@ -119,6 +121,22 @@ class Login extends Component {
 
         this.props.login(formData);
     };
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.hasError != this.props.hasError) {
+            if (this.props.hasError) {
+                this.setState({
+                    error: "The credentials used do not match any on our database. If the problem persists contact us."
+                });
+            }
+            else {
+                this.setState({
+                    error: undefined
+                });
+            }
+
+        }
+    }
 
     render() {
         return (
@@ -149,6 +167,13 @@ class Login extends Component {
                         }
                     />
                 </FormItem>
+
+                {this.state.error ? <Alert
+                    message="Login failed"
+                    description={this.state.error}
+                    type="error"
+                    closable
+                /> : <></>}
                 <Submit>
                     <p> Don't have an account yet? <Link to="/register">Sign Up</Link> </p>
 
@@ -165,4 +190,10 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (state) => {
+    return {
+        hasError: state.auth.hasError,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

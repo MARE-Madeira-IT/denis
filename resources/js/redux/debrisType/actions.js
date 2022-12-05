@@ -30,7 +30,7 @@ export const deleteDebrisType = id => ({
 
 export const createDebrisType = data => ({
     type: types.CREATE_DEBRIS_TYPE,
-    payload: axios.post(`${window.location.origin}/api/debris/types/`, data),
+    payload: axios.post(`${window.location.origin}/api/debris/types`, data),
 });
 
 export const updateDebrisType = (id, data) => ({

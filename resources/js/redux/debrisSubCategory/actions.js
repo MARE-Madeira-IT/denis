@@ -22,7 +22,7 @@ export const deleteDebrisSubCategory = id => ({
 
 export const createDebrisSubCategory = data => ({
     type: types.CREATE_DEBRIS_SUB_CATEGORY,
-    payload: axios.post(`${window.location.origin}/api/debris/subcategories/`, data),
+    payload: axios.post(`${window.location.origin}/api/debris/subcategories`, data),
 });
 
 export const updateDebrisSubCategory = (id, data) => ({

@@ -56,13 +56,13 @@ function Main() {
 
     const items = [
         { title: "Categories", description: "Master list of categories of debris items by materials", image: "debris_categories", component: <DebrisCategory /> },
-        { title: "Sub Categories", description: "Master list of categories of debris items by materials", image: "debris_subcategories", component: <DebrisSubCategory /> },
-        { title: "Materials", description: "Master list of categories of debris items by materials", image: "debris_materials", component: <DebrisMaterial /> },
-        { title: "Size classes", description: "Master list of categories of debris items by materials", image: "debris_sizes", component: <DebrisSize /> },
-        { title: "Habitats", description: "Master list of categories of debris items by materials", image: "debris_habitats", component: <DebrisHabitat /> },
-        { title: "Thickness classes", description: "Master list of categories of debris items by materials", image: "debris_thickness", component: <DebrisThickness /> },
-        { title: "Rugosity classes", description: "Master list of categories of debris items by materials", image: "debris_rugosity", component: <DebrisRugosity /> },
-        { title: "Type", description: "Master list of categories of debris items by materials", image: "debris_type", component: <DebrisType /> }
+        { title: "Sub Categories", description: "Listing of items which belong to the categories of debris items", image: "debris_subcategories", component: <DebrisSubCategory /> },
+        { title: "Materials", description: "Debris Materials generalized to create a report", image: "debris_materials", component: <DebrisMaterial /> },
+        { title: "Size classes", description: "Categories of items size ranges to characterize items", image: "debris_sizes", component: <DebrisSize /> },
+        { title: "Habitats", description: "Aquatic-based habitats in which the debris was found", image: "debris_habitats", component: <DebrisHabitat /> },
+        { title: "Thickness classes", description: "Flexibility of the material found", image: "debris_thickness", component: <DebrisThickness /> },
+        { title: "Rugosity classes", description: "Description on the surface of the debris", image: "debris_rugosity", component: <DebrisRugosity /> },
+        { title: "Type", description: "Location in which the debris can be found", image: "debris_type", component: <DebrisType /> }
     ];
 
     const handleCancel = () => {
@@ -85,7 +85,7 @@ function Main() {
 
             <TitleContainer >
                 <h1>Marine Debris characterization</h1>
-                <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. </h2>
+                <h2>Each entry below represents a table which is required to characterize marine debris.</h2>
             </TitleContainer>
 
             <div data-intro="Click on any of the following sections to visualize existing data."

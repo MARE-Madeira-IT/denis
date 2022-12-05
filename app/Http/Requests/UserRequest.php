@@ -41,6 +41,18 @@ class UserRequest extends FormRequest
         ];
     }
 
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.unique' => 'An account with that email already exists on our database',
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

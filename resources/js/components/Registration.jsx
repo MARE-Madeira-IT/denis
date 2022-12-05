@@ -4,12 +4,14 @@ import { createUser } from "../redux/user/actions";
 import { connect } from "react-redux";
 import { dimensions } from "./Dashboard/dashboardHelper";
 import { Link, useNavigate } from "react-router-dom";
+import { Alert } from "antd";
 
 const FormItem = styled.div`
     display: flex;
     align-items: flex-start;
     margin: 20px 0px 50px 0px;
     flex-wrap: wrap;
+    position: relative;
 
     span {
         font-size: 16px;
@@ -55,6 +57,17 @@ const FormItem = styled.div`
             width: 100%;
         }
     }
+
+
+        img {
+            width: 25px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            cursor: pointer;
+        }
+    
     
 `;
 
@@ -106,8 +119,11 @@ const Submit = styled.div`
 
 
 function Registration({ createUser }) {
+    const [passwordType, setPasswordType] = useState("password");
+    const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         password: "",
+        confirm_password: "",
         email: "",
         institution: "",
         country: "",
@@ -120,6 +136,8 @@ function Registration({ createUser }) {
             if (response.value.status == 201) {
                 navigate("/login");
             }
+        }).catch((err) => {
+            setErrors(err.response.data.errors);
         });
     };
 
@@ -153,32 +171,20 @@ function Registration({ createUser }) {
             <FormItem>
                 <span>Password</span>
                 <input
-                    name="password"
                     placeholder="Enter password"
-                    type="password"
+                    type={passwordType}
                     label="Password"
                     value={formData.password}
                     onChange={(e) =>
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
-            </FormItem>
-            <FormItem>
-                <span>Confirm password</span>
-                <input
-                    name="password"
-                    placeholder="Confirm password"
-                    type="password"
-                    label="Password"
-                    value={formData.password}
-                    onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                    }
-                />
+                <img onClick={() => setPasswordType(passwordType == "password" ? "text" : "password")} src="/icons/password.svg" alt="show password" />
             </FormItem>
             <FormItem>
                 <span>Institution</span>
                 <input
+                    className="password"
                     name="institution"
                     placeholder="Enter institution"
                     value={formData.institution}
@@ -198,6 +204,15 @@ function Registration({ createUser }) {
                     }
                 />
             </FormItem>
+
+            {Object.values(errors).length ? <Alert
+                message="Registration failed"
+                description={Object.entries(errors).map((error, index) => (
+                    <p key={index}>{error[1]}</p>
+                ))}
+                type="error"
+                closable
+            /> : <></>}
             <Submit>
                 <p> Already have an account? <Link to="/login">Sign In</Link> </p>
 
