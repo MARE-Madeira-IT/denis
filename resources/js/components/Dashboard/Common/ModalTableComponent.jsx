@@ -172,9 +172,11 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                         flex: "1",
                     }}
                 />
-                <button className="export" data-intro="Export data on the table below as a CSV file"
+                {/* <button className="export" data-intro="Export data on the table below as a CSV file"
                     data-title="Export data"
-                    data-step='2'><img src="/icons/export.svg" /> Export</button>
+                    data-step='2'><img src="/icons/export.svg" /> Export</button> */}
+
+                <button className="export" ><img src="/icons/export.svg" /> Export</button>
 
             </TableControls>
             {permissionLevel === 2 &&
