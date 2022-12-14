@@ -1,8 +1,8 @@
-import { Col, Modal } from 'antd'
+import { Modal } from 'antd'
 import React, { useState } from 'react'
 import styled from "styled-components";
 import List from '../../Common/List';
-import { dimensions, font } from '../../dashboardHelper';
+import PageHeader from '../../Common/PageHeader';
 import Tour from '../../Hooks/Tour';
 import TaxaAbundance from './Abundance/TaxaAbundance';
 import TaxaLevel from './Level/TaxaLevel';
@@ -19,34 +19,6 @@ const TableContainer = styled(Modal)`
 
     .ant-modal-content {
         background-color: transparent !important;
-    }
-`;
-
-const TitleContainer = styled.div`
-    font-family: ${font};
-    text-align: center;
-    margin-bottom: 50px;
-
-    h1 {
-        font-weight: 900;
-        font-size: clamp(28px, 6vw, 54px);
-        margin: 0px auto 10px auto;
-    }
-
-    h2 {
-        font-size: clamp(18px, 2vw, 20px);
-        font-weight: 400;
-        opacity: .7;
-        width: 50%;
-        margin: 0px auto ;
-
-        @media (max-width: ${dimensions.lg}) {
-            width: 60%;
-        }
-
-        @media (max-width: ${dimensions.md}) {
-            width: 90%;
-        }
     }
 `;
 
@@ -81,10 +53,7 @@ function EcosystemMain() {
                 {activeModal != undefined && items[activeModal].component}
             </TableContainer>
 
-            <TitleContainer>
-                <h1>Ecosystems characterization</h1>
-                <h2>Each entry below represents a table which is required to characterize an ecosystem.</h2>
-            </TitleContainer>
+            <PageHeader title="Ecosystems characterization" subtitle="Each entry below represents a table which is required to characterize an ecosystem." />
 
             <div data-intro="Click on any of the following sections to visualize existing data."
                 data-title="Ecosystems characterization"

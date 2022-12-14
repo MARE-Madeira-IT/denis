@@ -15,8 +15,13 @@ const FlexContainer = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 50px 100px 0px 30px;
+    padding: 50px 100px 0px 100px;
     box-sizing: border-box;
+
+    .link {
+        color: black; 
+        cursor: pointer;  
+    }  
 
     @media (max-width: ${dimensions.xl}) {
         padding: 50px 50px 0px 50px;
@@ -27,45 +32,58 @@ const FlexContainer = styled.section`
     }
 
     @media (max-width: ${dimensions.md}) {
-        justify-content: flex-end;
+        justify-content: space-around;
         padding: 20px;
+        position: absolute;
+        align-items: center;
+
+        .link {
+            display: none;
+        }
     }
 `;
 
 const Logo = styled.div`
     width: 50%;
     color: white;    
+    position: relative;
 
+    
     h1 {
         width: 100%;
         box-sizing: border-box;
         margin:0px;
-        font-size: 60px;
+        font-size: clamp(32px, 6vw, 50px);
         color: inherit;
-        font-weight: 900;
+        font-weight: 100;
         line-height: 94%;
         font-family: 'Prata', serif;
         letter-spacing: 0.041em;
     }
 
-    @media (max-width: ${dimensions.xl}) {
+    .menu {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: none;
+        cursor: pointer;
 
-        h1 {
-            font-size: 62px;
-        }        
-    }
-
-    @media (max-width: ${dimensions.lg}) {
-
-        h1 {
-            font-size: 48px;
+        img {
+            width: 20px;
         }
-
     }
 
     @media (max-width: ${dimensions.md}) {
-        display: none;
+        text-align: center;
+        margin-top: 10px;
+        width: 100%;
+
+        .menu {
+            display: block;
+        }
     }
+
+
     
 `;
 
@@ -76,36 +94,28 @@ const Login = styled.div`
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
+    background-color: white;
 
-    .link {
-        color: black; 
-        cursor: pointer;
-    }   
+    
 
-    @media (max-width: ${dimensions.xl}) {
-        display: none;
-    }
-`;
+    a {
+        color: white;
 
-const MenuIcon = styled.div`
-    display: none;
-    cursor: pointer;
-
-    img {
-        width: 40px;
-        float: right;
-        margin-top: 10px;
+        &:hover {
+            color: white;
+        }
     }
 
     @media (max-width: ${dimensions.xl}) {
-        display: block;
+        font-size: 14px;
+        gap: 10px;
     }
 
     @media (max-width: ${dimensions.lg}) {
-        img {
-            width: 30px;
-        }
+        display: none;
     }
+
+    
 `;
 
 const navbarItems = [
@@ -153,42 +163,53 @@ function Navbar({ permissionLevel,
         <FlexContainer>
             <Logo>
                 <h1>DeNIS</h1>
-            </Logo>
-            <Login>
 
-                {isAuthenticated ?
-                    <>
-                        {navbarItems.map((item, index) => (
-                            <>
-                                {
-                                    permissionLevel >= item.treshold &&
-                                    <Link key={index} className='link' to={item.to}>
-                                        {item.title}
-                                    </Link>
-                                }
-
-
-                            </>
-
-                        ))}
-
-                        <div onClick={handleLogout} className='link'>
-                            Logout
-                        </div>
-                    </>
-                    : <Link className='link' to="/login">Login</Link>}
-
-            </Login>
-
-            <MenuIcon>
-                {isAuthenticated ?
-                    <Dropdown overlay={menu}>
-                        <img src="/icons/menu.svg" alt="menu" />
+                <div className='menu'>
+                    <Dropdown overlay={!isAuthenticated ?
+                        <Menu>
+                            <Menu.Item>
+                                <Link to="/login">
+                                    Login
+                                </Link>
+                            </Menu.Item>
+                        </Menu>
+                        : menu}>
+                        <img src="/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
+                </div>
+            </Logo>
 
-                    : <Link className='link' to="/login">Login</Link>}
 
-            </MenuIcon>
+            {isAuthenticated ?
+                <Login>
+                    {navbarItems.map((item, index) => (
+                        <>
+                            {
+                                permissionLevel >= item.treshold &&
+                                <Link key={index} className='link' to={item.to}>
+                                    {item.title}
+                                </Link>
+                            }
+
+
+                        </>
+
+                    ))}
+
+                    <div onClick={handleLogout} className='link'>
+                        Logout
+                    </div>
+                </Login> : <Link className='link' to="/login">Login</Link>
+            }
+            {/* 
+            {isAuthenticated &&
+                <MenuIcon>
+                    <Dropdown overlay={menu}>
+                        <img src="/icons/menu_white.svg" alt="menu" />
+                    </Dropdown>
+                </MenuIcon>
+            } */}
+
         </FlexContainer>
     )
 }

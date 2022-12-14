@@ -54,7 +54,6 @@ const TitleContainer = styled.div`
         background-color: #DFDFDF;
         
         margin-bottom: 0px;
-        font-family: 'Lato';
         padding: 25px 60px 25px 20px;
         min-width: 55%;
         font-size: 26px;

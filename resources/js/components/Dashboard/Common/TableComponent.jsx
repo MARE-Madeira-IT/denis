@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Table from "antd/es/table"
+import { maxWidth } from "../dashboardHelper";
 
 const Container = styled.div`
     background: transparent;
@@ -48,6 +49,7 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
 
         <Container>
             <Table
+                scroll={{ x: "100%" }}
                 rowClassName={() => 'editable-row'}
                 bordered={bordered}
                 onRow={onRow}

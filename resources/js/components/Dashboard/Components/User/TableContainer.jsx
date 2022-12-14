@@ -1,15 +1,15 @@
 import React from "react";
-import { Popconfirm, Tag } from 'antd';
+import { Avatar, Popconfirm, Tag } from 'antd';
 import styled from "styled-components";
 import TableComponent from "../../Common/TableComponent";
+import { maxWidthStyle } from "../../dashboardHelper";
 
 const Container = styled.div`
     width: 100%;
-
-    .ant-table-thead > tr > th {
-        background-color: white;
-    }
-
+    
+.editable-row {
+    cursor: pointer;
+}
     .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
         display: none;
     }
@@ -28,12 +28,30 @@ function TableContainer({ loading, data, meta, handlePageChange, setCurrentUser,
             dataIndex: 'id',
         },
         {
+            title: '',
+            dataIndex: 'image',
+            render: (image) => <Avatar size="large" icon={<img src={image} alt="profile" />} />
+        },
+
+        {
             title: 'Name',
             dataIndex: 'name',
         },
         {
             title: 'Email',
             dataIndex: 'email',
+        },
+        {
+            title: 'Institution',
+            dataIndex: 'institution',
+        },
+        {
+            title: 'Localization',
+            dataIndex: 'country',
+        },
+        {
+            title: 'Phone',
+            dataIndex: 'phone',
         },
         {
             title: 'Roles',

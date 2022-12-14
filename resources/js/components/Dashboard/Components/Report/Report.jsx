@@ -7,20 +7,49 @@ import TableContainer from "./TableContainer";
 import Drawer from "./Drawer";
 import FormContainer from "./FormContainer";
 import { Row } from "antd";
+import MapView from "../../../MapView";
+import { Link } from "react-router-dom";
+import PageHeader from "../../Common/PageHeader";
+import { maxWidthStyle } from "../../dashboardHelper";
 
-const ContentContainer = styled.div`
+const Content = styled.div`
     width: 100%;
     margin: auto;
+`;
+
+const ContentContainer = styled.div`
+    background-color: white;
+    ${maxWidthStyle}
+`;
+
+const MapContainer = styled.div`
+    position: relative;
+
+    .background {
+        position: absolute;
+        height: 50%;
+        width: 100vw;
+        z-index: -1;
+        background-color: white;
+        left: 0;
+        bottom: 0;
+    }
+    .map-container {
+        ${maxWidthStyle}
+        border-radius: 12px;
+    }
+    
 `;
 
 const Container = styled.div`
     width: 100%;
     display: flex;
-    align-items: center;width: 100%;
+    align-items: center;
+    width: 100%;
     margin: auto;
     justify-content: center;
     box-sizing: border-box;
-    font-family: 'Lato';
+    position: relative;
 `;
 
 
@@ -33,6 +62,7 @@ const Create = styled.button`
     margin-left: auto;
     cursor: pointer;
 `;
+
 
 function Report({ data, loading, meta, current, fetchReports, fetchReport, setDrawerState, updateState }) {
     const [filters, setFilters] = useState({});
@@ -75,23 +105,31 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
 
     return (
         <Container>
-            <ContentContainer>
+            <Content>
+                <PageHeader title="Reports overview" />
+
                 <FormContainer setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
                 <Drawer handleUpdateClick={handleUpdateClick} data={current} setUpdateMode={setUpdateMode} />
-                <Row type="flex" justify="end">
-                    <Create onClick={handleCreateClick}>Create</Create>
-                </Row>
-                <TableContainer
-                    handlePageChange={handlePageChange}
-                    data={data}
-                    loading={loading}
-                    meta={meta}
-                    handleRowClick={handleRowClick}
-                    setFilters={setFilters}
-                    filters={filters}
-                    updateState={updateState}
-                />
-            </ContentContainer>
+                <MapContainer>
+                    <div className="background"></div>
+                    <MapView customData={data} />
+                </MapContainer>
+                <ContentContainer>
+                    <Row style={{ paddingTop: "50px" }} type="flex" justify="end">
+                        <Create onClick={handleCreateClick}>Create</Create>
+                    </Row>
+                    <TableContainer
+                        handlePageChange={handlePageChange}
+                        data={data}
+                        loading={loading}
+                        meta={meta}
+                        handleRowClick={handleRowClick}
+                        setFilters={setFilters}
+                        filters={filters}
+                        updateState={updateState}
+                    />
+                </ContentContainer>
+            </Content>
         </Container>
     )
 }

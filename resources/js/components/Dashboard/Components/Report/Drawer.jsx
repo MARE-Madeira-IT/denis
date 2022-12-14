@@ -16,7 +16,6 @@ const Section = styled.h3`
 const Field = styled.div`
     padding: 5px 5px 5px 0px;
     box-sizing: border-box;
-    font-family: "Lato";
 
     p {
         margin: 0px;

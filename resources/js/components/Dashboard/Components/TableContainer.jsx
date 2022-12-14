@@ -7,12 +7,8 @@ import StopPropagation from "../Common/StopPropagation";
 
 const Container = styled.div`
     width: 100%;
-    border-top: 1px solid black;
-
-    .ant-table-thead > tr > th {
-        background-color: white;
-    }
-
+    margin-top: 50px;
+    
     .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
         display: none;
     }
@@ -47,8 +43,6 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
         {
             title: 'ID',
             dataIndex: 'id',
-            fixed: 'left',
-            width: 80,
             ...getColumnSearchProps('id', searchInput, handleFilter, handleFilterClear),
         },
         {

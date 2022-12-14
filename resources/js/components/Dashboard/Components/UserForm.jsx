@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form, Input, Modal, Upload } from 'antd';
+import { Alert, Button, Form, Input, message, Modal, Upload } from 'antd';
 import styled from 'styled-components';
 import { connect } from "react-redux";
 import { updateUser } from "../../../redux/user/actions";
@@ -29,6 +29,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
     const [form] = Form.useForm();
     const [previewImage, setPreviewImage] = useState(user.image)
     const [initialValues, setInitialValues] = useState({})
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         setPreviewImage(user.image);
@@ -63,7 +64,15 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
 
         updateUser(user.id, formData).then((response) => {
             onCancel();
+            setErrors([]);
             setCurrentUser(response.action.payload);
+        }).catch((err) => {
+            var response = err.response.data.errors;
+            var aErrors = [];
+            Object.values(response).map((item) => {
+                aErrors.push(item);
+            })
+            setErrors(aErrors);
         });
     };
 
@@ -114,7 +123,15 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item name="image"
                 >
                     <Upload
+                        accept=".jpeg, .jpg"
                         customRequest={dummyRequest}
+                        beforeUpload={(file) => {
+                            const isJPEG = file.type === 'image/jpeg';
+                            if (!isJPEG) {
+                                message.error(`${file.name} is not a jpeg file`);
+                            }
+                            return isJPEG || Upload.LIST_IGNORE;
+                        }}
                         onChange={handleChange}
                         style={{ width: "100%" }}
                     >
@@ -124,7 +141,14 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                     </Upload>
                 </Form.Item>
 
-
+                {errors.length ? <Alert
+                    message="Request failed"
+                    description={errors.map((error, index) => (
+                        <p key={index}>{error}</p>
+                    ))}
+                    type="error"
+                    closable
+                /> : <></>}
                 <Form.Item
                     name="name"
                     label="Name"
@@ -167,7 +191,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
 
 
             </Form >
-        </Container>
+        </Container >
     )
 }
 

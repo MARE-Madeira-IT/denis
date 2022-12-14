@@ -7,6 +7,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    position: relative;
 `;
 
 export const Title = styled.div`
@@ -50,11 +51,14 @@ export const Content = styled.div`
 
     .content-width {
         width: 100%;
+        max-width: 960px;
+        margin: auto;
         padding: 0px 100px;
         box-sizing: border-box;
     }
 
     @media (max-width: ${dimensions.xl}) {
+        
         .content-width {
             padding: 0px 50px;
         }
@@ -62,7 +66,8 @@ export const Content = styled.div`
 
     @media (max-width: ${dimensions.md}) {
         width: 100%;
-
+        padding: 50px 0px;
+        
         .content-width {
             padding: 0px 20px;
         }

@@ -15,7 +15,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    font-family: 'Lato';
+    
 `;
 
 

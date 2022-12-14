@@ -6,17 +6,18 @@ import { dimensions } from '../Dashboard/dashboardHelper';
 
 const StyledContent = styled(Content)`
     h2 {
-        font-size: 40px;
-        margin: 50px 0px;
-        font-family: 'Lato', sans-serif;
-        font-weight: bold;
-        line-height: 94%;
+        margin-top: 30px;
+        margin-bottom: 12px;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 400;
         text-align: left;
     }
     
-    p {
+    p, li {
         font-weight: lighter;
-        margin: auto;
+        font-size: 16px;
+        opacity: .8;
     }
     
 `;

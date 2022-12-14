@@ -50,7 +50,7 @@ function FormContainer({ visible, setVisible, currentUser, updateUser }) {
             });
         }
 
-    }, [currentUser])
+    }, [visible])
 
 
     return (

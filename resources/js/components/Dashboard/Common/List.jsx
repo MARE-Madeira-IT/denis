@@ -1,19 +1,34 @@
 import { Row } from 'antd';
 import React from 'react'
 import styled from "styled-components";
-import { dimensions } from '../dashboardHelper';
+import { dimensions, maxWidthStyle } from '../dashboardHelper';
+
+const Container = styled.section`
+    ${maxWidthStyle}
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+`;
+
 
 const Item = styled.div`
     padding: 16px;
-    width: 33%;
+    width: 25%;
     box-sizing: border-box;
+
+    @media (max-width: ${dimensions.xl}) {
+        width: 33%;
+    }
+    
 
     @media (max-width: ${dimensions.lg}) {
         width: 50%;
+        
     }
 
     @media (max-width: ${dimensions.sm}) {
         width: 100%;
+        padding: 10px 0px;
     }
     
     .content {
@@ -21,12 +36,19 @@ const Item = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-family: 'Lato';
         padding: 32px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,.2);
+        height: 100%;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
         transition: box-shadow .3s ease;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
         cursor: pointer;
         position: relative;
+        background-color: white;
+
+        @media (max-width: ${dimensions.sm}) {
+            padding: 16px;
+        }
 
         .status-bar {
             position: absolute;
@@ -36,6 +58,8 @@ const Item = styled.div`
             height: 3px;
             background-color: #B7DAFB;
             transition: background-color .3s ease;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
 
         &:hover {
@@ -53,11 +77,11 @@ const Item = styled.div`
 
             h3 {
                 font-weight: bold;
-                font-size: 20px;
+                font-size: clamp(18px,4vw,  20px);
             }
 
             p {
-                font-size: 16px;
+                font-size: clamp(14px,4vw,  16px);
             }
         }
 
@@ -71,7 +95,7 @@ function List({ setActiveModal, items }) {
 
 
     return (
-        <Row type="flex" justify='start'>
+        <Container>
             {items.map((item, index) => (
                 <Item key={index}>
                     <div className='content' onClick={() => setActiveModal(index)}>
@@ -84,7 +108,7 @@ function List({ setActiveModal, items }) {
                     </div>
                 </Item>
             ))}
-        </Row>
+        </Container>
     )
 }
 

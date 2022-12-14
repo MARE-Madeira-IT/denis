@@ -1,125 +1,105 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { dimensions, maxWidth } from './dashboardHelper';
+import { dimensions } from './dashboardHelper';
 import { connect } from "react-redux";
 import { logout, setAuthorizationToken } from '../../redux/auth/actions';
 import { Dropdown, Menu } from 'antd';
 
-const Container = styled.div`
+const FlexContainer = styled.section`
+    position: static;
+    z-index: 990;
     width: 100%;
-    background-color: #0C4C88;
     display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
-    padding: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 100px 0px 100px;
     box-sizing: border-box;
 
+    @media (max-width: ${dimensions.maxWidth}) {
+        padding: 50px 50px 0px 50px;
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        padding: 50px 50px;
+    }
+
     @media (max-width: ${dimensions.md}) {
-        padding: 10px 20px;        
+        justify-content:space-between;
+        align-items: center;
+        padding: 20px;
     }
 `;
 
-const Content = styled.div`
-    width: 100%;
-    max-width: ${maxWidth};
-    display: flex;
-    justify-content: space-between;
-`;
-
-const Title = styled(NavLink)`
-    padding: 20px 50px 20px 0px;
-    box-sizing: border-box;
+const Logo = styled(Link)`
+    width: 50%;
+    color: white;   
 
     h1 {
         width: 100%;
         box-sizing: border-box;
         margin:0px;
-        font-size: clamp(28px, 4vw, 62px);
-        color: white;
+        font-size: clamp(40px, 6vw, 50px);
+        color: inherit;
         font-weight: 900;
-        line-height: 64px;
+        line-height: 94%;
         font-family: 'Prata', serif;
         letter-spacing: 0.041em;
+        color: white; 
     }
-`;
 
-const PagesContainer = styled.div`
-    margin: auto;
-    padding: 0px;
-    flex: 1;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: flex-end;
-
-    .link--active{
-        span {
-            font-weight: bold;
+    &:hover {
+        h1 {
+            color: white; 
         }
     }
     
+`;
+
+
+const Login = styled.div`
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    
+    .link {
+        color: white; 
+        cursor: pointer;
+    }   
+
     @media (max-width: ${dimensions.xl}) {
         display: none;
-    }
-`;
-
-const PageContainer = styled(NavLink)`
-    font-size: 18px;
-    text-decoration: none;
-    color: white;
-
-    span {
-        margin: 0px 20px;
-        transition: all .3s ease;
-    }
-
-    &:hover {
-        color: white;
-
-        span {
-            font-weight: bold;
-        }
-        
-    }
-`;
-
-const Logout = styled.div`
-    font-size: 18px;
-    text-decoration: none;
-    color: white;
-    margin: 0px 20px;
-    transition: all .3s ease;
-    cursor: pointer;
-
-    &:hover {
-        color: white;
-        font-weight: bold;
-        
-        
     }
 `;
 
 const MenuIcon = styled.div`
     display: none;
     cursor: pointer;
-    align-items: center;
 
     img {
         width: 40px;
         float: right;
-        margin: auto;
+        margin-top: 10px;
     }
 
     @media (max-width: ${dimensions.xl}) {
-        display: flex;
+        display: block;
+
+        img {
+            margin: auto;
+        }
     }
 
     @media (max-width: ${dimensions.lg}) {
         img {
-            width: 35px;
+            width: 30px;
         }
     }
 `;
+
 
 const navbarItems = [
     { to: "/dashboard/", title: "Profile", treshold: 0 },
@@ -129,17 +109,16 @@ const navbarItems = [
     { to: "/dashboard/ecosystems", title: "Ecosystems", treshold: 0 },
 ];
 
-function Navbar({ permissionLevel, setAuthorizationToken, logout }) {
-    let navigate = useNavigate();
+
+function Navbar({ permissionLevel,
+    isAuthenticated, setAuthorizationToken, logout }) {
 
     const handleLogout = () => {
 
         logout().then((response) => {
             if (response.action.payload.status == 200) {
                 localStorage.removeItem("token");
-                navigate("/")
                 setAuthorizationToken(false);
-
             }
         });
     };
@@ -150,7 +129,7 @@ function Navbar({ permissionLevel, setAuthorizationToken, logout }) {
                 <>
                     {permissionLevel >= item.treshold &&
                         <Menu.Item key={index}>
-                            <NavLink className='link' to={item.to}>{item.title}</NavLink>
+                            <Link className='link' to={item.to}>{item.title}</Link>
                         </Menu.Item>
                     }
                 </>
@@ -162,36 +141,47 @@ function Navbar({ permissionLevel, setAuthorizationToken, logout }) {
             </Menu.Item>
         </Menu>
     );
-
     return (
-        <Container>
-            <Content>
-                <Title to="/">
-                    <h1>DeNIS</h1>
-                </Title>
-                <PagesContainer>
-                    {navbarItems.map((item, index) => (
-                        <>
-                            {permissionLevel >= item.treshold &&
-                                <PageContainer
-                                    className={({ isActive }) => isActive ? "link--active" : undefined}
-                                    key={index}
-                                    to={item.to}>
-                                    <span>{item.title}</span>
-                                </PageContainer>}
-                        </>
-                    ))}
-                    <Logout onClick={handleLogout} className='link'>
-                        Logout
-                    </Logout>
-                </PagesContainer>
-                <MenuIcon>
+        <FlexContainer>
+            <Logo to="/">
+                <h1>DeNIS</h1>
+            </Logo>
+            <Login>
+
+                {isAuthenticated ?
+                    <>
+                        {navbarItems.map((item, index) => (
+                            <>
+                                {
+                                    permissionLevel >= item.treshold &&
+                                    <Link key={index} className='link' to={item.to}>
+                                        {item.title}
+                                    </Link>
+                                }
+
+
+                            </>
+
+                        ))}
+
+                        <div onClick={handleLogout} className='link'>
+                            Logout
+                        </div>
+                    </>
+                    : <Link className='link' to="/login">Login</Link>}
+
+            </Login>
+
+            <MenuIcon>
+                {isAuthenticated ?
                     <Dropdown overlay={menu}>
                         <img src="/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
-                </MenuIcon>
-            </Content>
-        </Container >
+
+                    : <Link className='link' to="/login">Login</Link>}
+
+            </MenuIcon>
+        </FlexContainer>
     )
 }
 
@@ -204,6 +194,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         permissionLevel: state.auth.permissionLevel,
+        isAuthenticated: state.auth.isAuthenticated,
     };
 };
 

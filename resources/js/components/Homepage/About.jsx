@@ -1,22 +1,42 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect } from 'react'
+import styled, { keyframes } from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
 import { Link } from 'react-router-dom';
 import { dimensions } from '../Dashboard/dashboardHelper';
+import MapView from '../MapView';
+import { connect } from 'react-redux';
+import { fetchReportsCoordinates } from '../../redux/report/actions';
+
+const scroll = keyframes`
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+`;
+
 
 const StyledContent = styled(Content)`
     h2 {
-        font-size: 40px;
-        margin: 50px 0px;
-        font-family: 'Lato', sans-serif;
-        font-weight: bold;
-        line-height: 94%;
+        margin-top: 30px;
+        margin-bottom: 12px;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 400;
         text-align: left;
     }
     
     p, li {
         font-weight: lighter;
+        font-size: 16px;
+        opacity: .8;
     }
     
 `;
@@ -57,6 +77,11 @@ const TutorialContainer = styled.div`
     
 `;
 
+const MapContainer = styled.div`
+    width: 100%;    
+    margin-top: 30px;
+`;
+
 const UsersContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -72,6 +97,16 @@ const UsersContainer = styled.div`
         }
     }
     
+`;
+
+const Scroll = styled.img`
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    top: calc(50vh - 40px);
+    z-index: 999;
+    transform: translate(-50%, 0%);
+    animation: ${scroll} 3s ease infinite 
 `;
 
 const ProtocolContainer = styled.div`
@@ -113,17 +148,27 @@ const MapLink = styled(Link)`
     
 `;
 
-function About() {
+function About({ fetchReportsCoordinates }) {
     const scrollParameters = handleScroll("aboutContainer");
+
+    useEffect(() => {
+        fetchReportsCoordinates();
+    }, [])
 
     return (
         <Container id="aboutContainer">
+
+
+            <Scroll src="/icons/scroll.svg" alt="scroll" />
+
             <Title>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />
+
             </Title>
             <StyledContent>
                 <div className="content-width">
-                    <h2>About us</h2>
+                    <p>Impedit officia velit nihil debitis commodi. Itaque natus laudantium. Laudantium sed quasi ut non fugiat. Atque impedit est voluptatem sit qui.</p>
+                    <h2>Global database on marine Debris and Non-Indigenous Species</h2>
                     <p>
                         Marine debris is considered among the major threats to marine life, biodiversity, and ecosystems and causes particular concern due to its abundance, durability, and persistence in the marine environment. Moreover, marine debris contributes to the transfer of Non-Indigenous Species - NIS, acting as a vector for both first introductions in a new region and secondary spread within an already affected region.
 
@@ -135,26 +180,16 @@ function About() {
                         <li> Credibility from experts validation</li>
                     </ul>}
 
+                    <MapContainer>
+                        <MapView />
+                    </MapContainer>
+
                     <MapLink to="/map">
-                        <p>Check The Lastest Reports</p>
+                        <p>Check More Reports</p>
                         <img src="/images/about/map-link.svg" alt="" />
                     </MapLink>
 
-                    <h2>How it works</h2>
-                    <TutorialContainer>
-                        <div>
-                            <img src="/images/about/observation.svg" alt="" />
-                            <p>Follow the protocol</p>
-                        </div>
-                        <div>
-                            <img src="/images/about/add.svg" alt="" />
-                            <p>Insert into the database</p>
-                        </div>
-                        <div>
-                            <img src="/images/about/visualize.svg" alt="" />
-                            <p>Visualize obervations</p>
-                        </div>
-                    </TutorialContainer>
+
 
 
                     <h2>Who is DeNIS for?</h2>
@@ -213,7 +248,21 @@ function About() {
 
                     <p>All sessile and mobile macroalgae and macroinvertebrates colonizing litter items should be identified to the lowest possible taxonomic group, using the microscope if necessary. Indicate the abundance of each species (number or percent cover), their Viability (alive or dead) and their Maturity stage (e.g. Egg, Larvae, Juvenile, Mature).</p>
 
-
+                    <h2>How it works</h2>
+                    <TutorialContainer>
+                        <div>
+                            <img src="/images/about/observation.svg" alt="" />
+                            <p>Follow the protocol</p>
+                        </div>
+                        <div>
+                            <img src="/images/about/add.svg" alt="" />
+                            <p>Insert into the database</p>
+                        </div>
+                        <div>
+                            <img src="/images/about/visualize.svg" alt="" />
+                            <p>Visualize obervations</p>
+                        </div>
+                    </TutorialContainer>
 
                 </div >
             </StyledContent >
@@ -221,4 +270,10 @@ function About() {
     )
 }
 
-export default About
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchReportsCoordinates: () => dispatch(fetchReportsCoordinates()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(About);

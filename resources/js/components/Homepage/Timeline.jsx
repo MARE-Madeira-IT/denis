@@ -5,17 +5,21 @@ import handleScroll from "../Helper/handleScroll";
 
 const TimelineContainer = styled.div`
     h2 {
-        font-size: 40px;
-        margin: 50px 0px;
-        font-family: 'Lato', sans-serif;
-        font-weight: bold;
-        line-height: 94%;
+        margin-top: 30px;
+        margin-bottom: 12px;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 400;
         text-align: left;
     }
-
-    p {
+    
+    p, li {
+        font-weight: lighter;
+        font-size: 16px;
+        opacity: .8;
         margin: 0px 0px 50px 0px;
     }
+
 `;
 
 const TimelineItem = styled.div`

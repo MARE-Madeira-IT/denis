@@ -6,7 +6,6 @@ import { createBrowserHistory } from "history";
 import Homepage from "./components/Homepage";
 import DashboardLayout from "./components/Dashboard/DashboardLayout";
 import Layout from "./components/Layout";
-import MapView from "./components/MapView";
 
 import PrivateRoute from "./components/Dashboard/Common/PrivateRoute";
 
@@ -20,6 +19,7 @@ import User from "./components/Dashboard/Components/User/User";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import Authentication from "./components/Authentication";
+import MapContainer from "./components/MapContainer";
 
 export const history = createBrowserHistory();
 
@@ -28,7 +28,7 @@ const Router = () => {
         <BrowserRouter history={history}>
 
             <Routes>
-                <Route exact path="/map" element={<Layout><MapView /></Layout>} />
+                <Route exact path="/map" element={<Layout><MapContainer /></Layout>} />
                 <Route exact path="/login" element={<Layout><Authentication title="sign in"><Login /></Authentication></Layout>} />
                 <Route exact path="/register" element={<Layout><Authentication title="sign up"><Registration /></Authentication></Layout>} />
                 <Route exact path="/" element={<Layout><Homepage /></Layout>} />
