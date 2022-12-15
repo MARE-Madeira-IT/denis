@@ -168,7 +168,7 @@ function About({ fetchReportsCoordinates }) {
             <StyledContent>
                 <div className="content-width">
                     <p>Impedit officia velit nihil debitis commodi. Itaque natus laudantium. Laudantium sed quasi ut non fugiat. Atque impedit est voluptatem sit qui.</p>
-                    <h2>Global database on marine Debris and Non-Indigenous Species</h2>
+                    <h2>Global Database on Marine Debris and Non-Indigenous Species</h2>
                     <p>
                         Marine debris is considered among the major threats to marine life, biodiversity, and ecosystems and causes particular concern due to its abundance, durability, and persistence in the marine environment. Moreover, marine debris contributes to the transfer of Non-Indigenous Species - NIS, acting as a vector for both first introductions in a new region and secondary spread within an already affected region.
 

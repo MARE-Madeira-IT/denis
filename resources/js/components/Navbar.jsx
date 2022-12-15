@@ -222,7 +222,7 @@ function Navbar({ permissionLevel,
                     <div onClick={handleLogout} className='link'>
                         Logout
                     </div>
-                </Login> : <Link className='link' to="/login">Login</Link>
+                </Login> : <Login><Link className='link' to="/login">Login</Link></Login>
             }
             {/* 
             {isAuthenticated &&
