@@ -19,8 +19,14 @@ const FlexContainer = styled.section`
     box-sizing: border-box;
 
     .link {
-        color: black; 
+        color: rgba(0,0,0, .8); 
+        transition: color .3s ease;
         cursor: pointer;  
+        font-size: 16px;
+
+        &:hover {
+            color: black;
+        }
     }  
 
     @media (max-width: ${dimensions.xl}) {
@@ -29,6 +35,10 @@ const FlexContainer = styled.section`
 
     @media (max-width: ${dimensions.lg}) {
         padding: 50px 20px;
+
+        .link {
+            display: none;
+        }
     }
 
     @media (max-width: ${dimensions.md}) {
@@ -69,7 +79,16 @@ const Logo = styled.div`
         cursor: pointer;
 
         img {
-            width: 20px;
+            width: 30px;
+        }
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        width: 100%;
+
+        .menu {
+            filter: invert(100%);
+            display: block;
         }
     }
 
@@ -80,6 +99,11 @@ const Logo = styled.div`
 
         .menu {
             display: block;
+            filter: invert(0%);
+
+            img {
+                width: 20px;
+            }
         }
     }
 
@@ -94,16 +118,17 @@ const Login = styled.div`
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
-    background-color: white;
+    position:relative;
 
-    
-
-    a {
-        color: white;
-
-        &:hover {
-            color: white;
-        }
+    &:before {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 200px;
+        z-index: -1;
+        background-color: white;
     }
 
     @media (max-width: ${dimensions.xl}) {
@@ -113,9 +138,7 @@ const Login = styled.div`
 
     @media (max-width: ${dimensions.lg}) {
         display: none;
-    }
-
-    
+    }    
 `;
 
 const navbarItems = [

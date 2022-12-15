@@ -66,8 +66,13 @@ const Login = styled.div`
     font-size: 18px;
     
     .link {
-        color: white; 
         cursor: pointer;
+        font-size: 16px;
+        color: rgba(255,255,255, .8); 
+
+        &:hover {
+            color: white;
+        }
     }   
 
     @media (max-width: ${dimensions.xl}) {

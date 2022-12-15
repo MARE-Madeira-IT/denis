@@ -2,6 +2,8 @@ import React from 'react'
 import DataDrawer from '../../Common/DataDrawer'
 import styled from "styled-components";
 import { Col, Row } from 'antd';
+import { connect } from 'react-redux';
+import MapViewModal from '../../../MapViewModal';
 
 const Title = styled.h2`
     //
@@ -22,10 +24,11 @@ const Field = styled.div`
     }
 
     .value {
+        opacity: .7;
     }
 
     .name {
-        opacity: .5;
+        
     }
 `;
 
@@ -50,12 +53,12 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-function Drawer({ data, handleUpdateClick }) {
+function Drawer({ current, handleUpdateClick }) {
 
     const FieldContainer = ({ name, value }) => (
         <Field className='field-width'>
-            <p className='value'>{value}</p>
             <p className='name'>{name}</p>
+            <p className='value'>{value}</p>
         </Field>
     )
 
@@ -65,40 +68,40 @@ function Drawer({ data, handleUpdateClick }) {
 
     return (
         <DataDrawer>
-            <Row type="flex" dire>
-                <Col xs={24} md={12}>
+            <Row type="flex" dire="true">
+
+                <Col span={24}>
                     <Section>Item detection</Section>
-                    <FieldsContainer width="50%">
-                        <FieldContainer name="Date of survey (dd-mm-yyyy)" value={data.date} />
-                        <FieldContainer name="Site name" value={data.site?.name} />
-                        <FieldContainer name="Region/Province" value={data.site?.region} />
-                        <FieldContainer name="Country" value={data.site?.country?.name} />
-                        <FieldContainer name="LME" value={data.site?.lme?.name} />
-                        <FieldContainer name="Latitude" value={data.latitude} />
-                        <FieldContainer name="Longitude" value={data.longitude} />
-                        <FieldContainer name="Ongoing Surveys" value={data.ongoing_survey ? data.ongoing_survey : "No"} />
+                    <Row style={{ marginBottom: "30px" }}>
+                        <MapViewModal customData={{ id: 1, latitude: current.latitude, longitude: current.longitude }} />
+                    </Row>
+
+                    <FieldsContainer width="33%">
+                        <FieldContainer name="Date of survey (dd-mm-yyyy)" value={current.date} />
+                        <FieldContainer name="Localization" value={current.site?.name + ", " + current.site?.region + ", " + current.site?.country?.name + ", " + current.site?.lme?.name} />
+                        <FieldContainer name="Ongoing Surveys" value={current.ongoing_survey ? current.ongoing_survey : "No"} />
                     </FieldsContainer>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col span={24}>
                     <Section>Debris characterization</Section>
-                    <FieldsContainer width="50%">
-                        <FieldContainer name="Debris type" value={data.debris?.type?.name} />
-                        <FieldContainer name="If &quot;Seafloor&quot;, specify depth (m)" value={EmptyField(data.debris?.type?.depth)} />
-                        <FieldContainer name="Habitat of the finding" value={data.debris?.habitat?.name} />
-                        <FieldContainer name="Debris material" value={data.debris?.material?.name} />
-                        <FieldContainer name="Debris size class " value={data.debris?.size?.name} />
-                        <FieldContainer name="Debris weight (Kg)" value={EmptyField(data.weight)} />
-                        <FieldContainer name="Debris thickness" value={data.debris?.thickness?.name} />
-                        <FieldContainer name="Debris surface rugosity" value={data.debris?.rugosity?.name} />
-                        <FieldContainer name="Master List of Categories of Litter Items" value={data.debris?.litter_category?.mdi_code} />
-                        <FieldContainer name="Debris identification marks " value={EmptyField(data.debris?.marks)} />
-                        <FieldContainer name="Probable debris origin" value={EmptyField(data.debris?.origin)} />
+                    <FieldsContainer width="33%">
+                        <FieldContainer name="Debris type" value={current.debris?.type?.name} />
+                        <FieldContainer name="If &quot;Seafloor&quot;, specify depth (m)" value={EmptyField(current.debris?.type?.depth)} />
+                        <FieldContainer name="Habitat of the finding" value={current.debris?.habitat?.name} />
+                        <FieldContainer name="Debris material" value={current.debris?.material?.name} />
+                        <FieldContainer name="Debris size class " value={current.debris?.size?.name} />
+                        <FieldContainer name="Debris weight (Kg)" value={EmptyField(current.weight)} />
+                        <FieldContainer name="Debris thickness" value={current.debris?.thickness?.name} />
+                        <FieldContainer name="Debris surface rugosity" value={current.debris?.rugosity?.name} />
+                        <FieldContainer name="Master List of Categories of Litter Items" value={current.debris?.litter_category?.mdi_code} />
+                        <FieldContainer name="Debris identification marks " value={EmptyField(current.debris?.marks)} />
+                        <FieldContainer name="Probable debris origin" value={EmptyField(current.debris?.origin)} />
                     </FieldsContainer>
                 </Col>
 
                 <Col span={24}>
                     <Section>Biological identification & samples information</Section>
-                    {data.taxas && data.taxas.map((taxa, index) => (
+                    {current.taxas && current.taxas.map((taxa, index) => (
                         <FieldsContainer key={"taxa-" + index} width="25%">
                             <FieldContainer name="Highest taxonomic level" value={taxa.level?.name} />
                             <FieldContainer name="Specify it" value={taxa.identification} />
@@ -118,9 +121,13 @@ function Drawer({ data, handleUpdateClick }) {
             </Row>
             <br></br>
 
-            <Row type="flex" >
-                <Button onClick={handleUpdateClick}>Update</Button>
-            </Row>
+            {handleUpdateClick ?
+                <Row type="flex" >
+                    <Button onClick={handleUpdateClick}>Update</Button>
+                </Row>
+                : <></>
+            }
+
 
 
 
@@ -128,4 +135,10 @@ function Drawer({ data, handleUpdateClick }) {
     )
 }
 
-export default Drawer
+const mapStateToProps = (state) => {
+    return {
+        current: state.drawer.current,
+    };
+};
+
+export default connect(mapStateToProps, null)(Drawer);

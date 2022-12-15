@@ -26,7 +26,7 @@ const Container = styled.section`
         color: white;
         background-color: rgba(255,255,255,.3);
         padding: 6px 14px;
-        margin-bottom: 40px;
+        margin-bottom: 45px;
         border-radius: 12px;
 
         img {
@@ -37,7 +37,20 @@ const Container = styled.section`
 
     @media (max-width: ${maxWidth}) {
         padding: 100px 50px 50px 50px;
+        h4 {
+            width: 70%
+        }
+
     }
+    @media (max-width: ${dimensions.lg}) {
+        padding: 50px 50px 50px 50px;
+
+        h4 {
+            width: 100%
+            font-size: 16px;
+        }
+    }
+
 
     @media (max-width: ${dimensions.md}) {
         padding: 50px 20px 50px 20px;

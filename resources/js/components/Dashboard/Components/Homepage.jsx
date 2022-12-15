@@ -9,6 +9,7 @@ import Tour from '../Hooks/Tour';
 import { dimensions } from '../dashboardHelper';
 import PageHeader from '../Common/PageHeader';
 import MapView from '../../MapView';
+import Drawer from './Report/Drawer';
 
 const Container = styled.div`
     width: 100%;
@@ -28,44 +29,43 @@ const Container = styled.div`
 
 const Welcome = styled.div`
     width: 100%;
-
     margin: 20px 0px 0px 0px;
 
+    h2 {
+        margin-bottom: 0px;
+        font-size: 26px;
+        color: black;
+    }
 
-        h2 {
-            margin-bottom: 0px;
-            font-size: 26px;
-            color: black;
-        }
-
-        p {
-            font-size: 16px;
-            opacity: .7;
-        }
-    
-
-    
+    p {
+        font-size: 16px;
+        opacity: .7;
+    }  
 `;
 
 const DataSection = styled.div`
-   flex: 1;
+    flex: 1;
 
-   @media (max-width: ${dimensions.md}) {
-    width: 100%;
-   }
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+    }
 
-   h2 {
-    font-size: 36px;
-    margin-bottom: 50px;
-   }
+    h2 {
+        font-size: 36px;
+        margin-bottom: 50px;
+    }
 `;
 
 const SectionContainer = styled.div`
     width: 100%;
     gap: 50px;
     display: flex;
-    flex-wrap: wrap;
     margin-top: 50px;
+
+    @media (max-width: ${dimensions.xl}) {
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
 `;
 
 const Section = styled.div`
@@ -74,6 +74,7 @@ const Section = styled.div`
     .image-container{
         width: 100%;
         max-width: 350px;
+
         img {
             width: 100%;
             max-height: 100%;
@@ -100,11 +101,31 @@ const Section = styled.div`
         
     
     }
-    @media (max-width: ${dimensions.md}) {
+    @media (max-width: ${dimensions.xl}) {
         width: 100%;
+        display: flex;
+        gap: 50px;
 
         .image-container{ 
-            width: 60%;
+            width: 30%;
+            max-width: 3050px;
+
+            img {
+                height: 100%;
+            }
+        }
+
+        .information-container {
+            width: 70%;
+            max-width: 1500px;  
+        }
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        display: block;
+
+        .image-container { 
+            width: 100%;
             margin: auto;
             display: block;
             margin-bottom: 30px;
@@ -113,8 +134,8 @@ const Section = styled.div`
 
         .information-container {
             width: 100%;
-                padding: 0px;
-                max-width: 1000px;
+            padding: 0px;
+            max-width: 1000px;
         }
     }
 
@@ -132,15 +153,6 @@ const Button = styled.button`
     padding: 6px 50px;
     border-radius: 6px;  
     font-size: 16px;
-`;
-
-const Role = styled(Button)`
-    background-color: transparent;
-    border: 2px solid white;
-    margin-right: 10px;
-    text-transform: capitalize;
-    border: 2px solid white;
-    color:white;
 `;
 
 const Edit = styled(Button)`
@@ -171,13 +183,15 @@ const Parameters = styled.div`
         margin: 0px;
     }
 
-    @media (max-width: ${dimensions.md}) {
-        font-size: 14px;
-
+    @media (max-width: ${dimensions.xl}) {
         div {
             width: 33%;
         }
         
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        font-size: 14px;        
     }
 
     @media (max-width: ${dimensions.sm}) {
@@ -224,7 +238,8 @@ function Homepage({ fetchSelfReports,
 
     return (
         <Tour updateCriteria={[user]} itemName="profileTour" >
-            <PageHeader link={false} title="Welcome to your dashboard" subtitle="Here you can track your reports and find all suitable information you need about marine Debris and Non-Indigenous Species" />
+            <Drawer />
+            <PageHeader link={false} title="Welcome to your dashboard" subtitle="Track your reports and find all information you need about marine Debris and Non-Indigenous Species" />
             <Container>
                 <UserForm visible={visible} setVisible={setVisible} user={user} />
 
@@ -238,14 +253,6 @@ function Homepage({ fetchSelfReports,
                                 <div className='flex'>
                                     <h2>{user?.name}</h2>
                                     <p>{user?.country}</p>
-                                </div>
-                                <div className='flex button-container'>
-                                    {user.id && Object.entries(user?.roles).map((value) => (
-                                        <span key={value[0]}>
-                                            {value[1] && <Role>{value[0]}</Role>}
-                                        </ span>
-                                    ))}
-
                                 </div>
                             </Welcome>
                             <Parameters>

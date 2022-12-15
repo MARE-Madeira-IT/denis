@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from 'react-leaflet'
 import styled from 'styled-components';
 import { connect } from "react-redux";
@@ -39,7 +39,7 @@ const Field = styled.div`
 `;
 
 function MapView({ data, customData }) {
-
+    const [map, setMap] = useState(null);
 
     const FieldContainer = ({ name, value }) => (
         <Field className='field-width'>
@@ -49,10 +49,15 @@ function MapView({ data, customData }) {
         </Field>
     )
 
+    useEffect(() => {
+        if (map) {
+            map.invalidateSize();
+        }
+    }, [map])
 
     return (
         <Container className='map-container'>
-            <StyledMapContainer center={[32.427876, -17.011401]} zoom={2} zoomControl={false}>
+            <StyledMapContainer whenCreated={(mapInstance) => { setMap(mapInstance) }} center={[32.427876, -17.011401]} zoom={2} zoomControl={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -61,18 +66,19 @@ function MapView({ data, customData }) {
                     <Marker key={report.id} position={[report.latitude, report.longitude]}>
                         <Popup>
                             <FieldContainer name="Date of survey" value={report.date} />
-                            <FieldContainer name="Debris" value={report.debris?.name} />
+
+                            <FieldContainer name="Debris" value={report.debris.name} />
 
                             <Field className='field-width'>
                                 <p className='name'>Taxa</p>
-                                {report.taxas.map((taxa => (
+                                {report?.taxas.map((taxa => (
 
                                     <p key={"taxa_" + taxa.id} className='value'>{taxa.identification} ({taxa.level})</p>
 
                                 )))}
 
                             </Field>
-                        </Popup>
+                        </Popup> : <></>
                     </Marker>
                 ) : data.map((report, index) =>
                     <Marker key={report.id} position={[report.latitude, report.longitude]}>
@@ -94,7 +100,7 @@ function MapView({ data, customData }) {
                 )}
                 <ZoomControl position='bottomright'></ZoomControl>
             </StyledMapContainer>
-        </Container>
+        </Container >
     )
 }
 

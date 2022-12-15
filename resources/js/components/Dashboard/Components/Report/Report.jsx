@@ -109,7 +109,7 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
                 <PageHeader title="Reports overview" />
 
                 <FormContainer setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
-                <Drawer handleUpdateClick={handleUpdateClick} data={current} setUpdateMode={setUpdateMode} />
+                <Drawer handleUpdateClick={handleUpdateClick} />
                 <MapContainer>
                     <div className="background"></div>
                     <MapView customData={data} />
