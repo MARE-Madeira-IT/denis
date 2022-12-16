@@ -69,9 +69,9 @@ function Timeline() {
                 <div className="content-width">
                     <TimelineContainer>
                         <h2>Timeline</h2>
-                        <p>
+                        {/* <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
-                        </p>
+                        </p> */}
 
 
                         <TimelineItem >
