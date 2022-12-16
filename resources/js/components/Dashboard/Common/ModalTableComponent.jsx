@@ -166,16 +166,16 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                     bordered={false}
                     onChange={debounce(handleSearch, 800)}
                     className="search"
-                    prefix={<img src="/icons/search.svg" />}
+                    prefix={<img src="/images/icons/search.svg" />}
                     style={{
                         flex: "1",
                     }}
                 />
                 {/* <button className="export" data-intro="Export data on the table below as a CSV file"
                     data-title="Export data"
-                    data-step='2'><img src="/icons/export.svg" /> Export</button> */}
+                    data-step='2'><img src="/images/icons/export.svg" /> Export</button> */}
 
-                <button className="export" ><img src="/icons/export.svg" /> Export</button>
+                <button className="export" ><img src="/images/icons/export.svg" /> Export</button>
 
             </TableControls>
             {permissionLevel === 2 &&
@@ -184,7 +184,7 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                     data-step='3'>
                     {form}
 
-                    <button onClick={handleCreate} className="dark-background"><img src="/icons/add.svg" /> Create </button>
+                    <button onClick={handleCreate} className="dark-background"><img src="/images/icons/add.svg" /> Create </button>
 
                 </TableControls>
             }

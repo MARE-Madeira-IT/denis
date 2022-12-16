@@ -69,7 +69,7 @@ const Container = styled.section`
 function PageHeader({ title, link = true, subtitle }) {
     return (
         <Container>
-            {link && <Link to="/dashboard"> <img src="/icons/dashboard/back.svg" alt="back" /> Back to profile</Link>}
+            {link && <Link to="/dashboard"> <img src="/images/icons/dashboard/back.svg" alt="back" /> Back to profile</Link>}
 
             <h2>{title}</h2>
             <h4>{subtitle}</h4>

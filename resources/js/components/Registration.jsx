@@ -179,7 +179,7 @@ function Registration({ createUser }) {
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
-                <img onClick={() => setPasswordType(passwordType == "password" ? "text" : "password")} src="/icons/password.svg" alt="show password" />
+                <img onClick={() => setPasswordType(passwordType == "password" ? "text" : "password")} src="/images/icons/password.svg" alt="show password" />
             </FormItem>
             <FormItem>
                 <span>Institution</span>

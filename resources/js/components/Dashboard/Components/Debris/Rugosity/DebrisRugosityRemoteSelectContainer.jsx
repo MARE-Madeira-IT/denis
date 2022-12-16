@@ -49,7 +49,7 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
                             onChange={(e) => setOther(e.target.value)}
                         />
                         <Button type="text" onClick={() => setSelected(true)}>
-                            <Add alt="add" src="/icons/add_black.svg" />
+                            <Add alt="add" src="/images/icons/add_black.svg" />
                         </Button>
                     </Space>
                 </>

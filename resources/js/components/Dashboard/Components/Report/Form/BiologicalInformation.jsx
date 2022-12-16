@@ -32,7 +32,7 @@ function BiologicalInformation({ last, handleDelete }) {
         <>
             <Row type="flex" style={{ marginBottom: "20px" }}>
                 <Subtitle>Biological identification & samples information</Subtitle>
-                {last && <Delete onClick={handleDelete} src="/icons/delete.svg" alt="delete" />}
+                {last && <Delete onClick={handleDelete} src="/images/icons/delete.svg" alt="delete" />}
 
             </Row>
 

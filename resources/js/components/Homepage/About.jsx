@@ -164,7 +164,7 @@ function About({ fetchReportsCoordinates }) {
         <Container id="aboutContainer">
 
 
-            <Scroll src="/icons/scroll.svg" alt="scroll" />
+            <Scroll src="/images/icons/scroll.svg" alt="scroll" />
 
             <Title>
                 <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />

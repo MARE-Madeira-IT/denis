@@ -180,7 +180,7 @@ function Navbar({ permissionLevel,
             <MenuIcon>
                 {isAuthenticated ?
                     <Dropdown overlay={menu}>
-                        <img src="/icons/menu_white.svg" alt="menu" />
+                        <img src="/images/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
 
                     : <Link className='link' to="/login">Login</Link>}

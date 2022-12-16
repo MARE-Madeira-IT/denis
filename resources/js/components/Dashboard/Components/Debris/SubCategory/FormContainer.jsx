@@ -29,13 +29,13 @@ function FormContainer({ form }) {
             <Row>
                 <Col span={8}>
                     <Form.Item name="name" rules={[{ required: true, message: "Name is required" }]}>
-                        <Input prefix={<img src="/icons/form/bottle.svg" />} className='input' bordered={false} placeholder='Name' />
+                        <Input prefix={<img src="/images/icons/form/bottle.svg" />} className='input' bordered={false} placeholder='Name' />
                     </Form.Item>
                 </Col>
 
                 <Col span={8}>
                     <Form.Item name="mdi_code" rules={[{ required: true, message: "MDI code is required" }]}>
-                        <Input prefix={<img src="/icons/form/code.svg" />} className='input' bordered={false} placeholder='MDI code' />
+                        <Input prefix={<img src="/images/icons/form/code.svg" />} className='input' bordered={false} placeholder='MDI code' />
                     </Form.Item>
                 </Col>
 

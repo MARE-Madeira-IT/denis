@@ -18,7 +18,7 @@ function DebrisCategoryRemoteSelectContainer({ fetchDebrisCategorySelector, data
             loading={loading}
             showSearch
             bordered={false}
-            prefix={<img src="/icons/form/bottle.svg" />}
+            prefix={<img src="/images/icons/form/bottle.svg" />}
             placeholder="Select the debris category"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}

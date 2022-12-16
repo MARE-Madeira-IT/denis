@@ -197,7 +197,7 @@ function Navbar({ permissionLevel,
                             </Menu.Item>
                         </Menu>
                         : menu}>
-                        <img src="/icons/menu_white.svg" alt="menu" />
+                        <img src="/images/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
                 </div>
             </Logo>
@@ -228,7 +228,7 @@ function Navbar({ permissionLevel,
             {isAuthenticated &&
                 <MenuIcon>
                     <Dropdown overlay={menu}>
-                        <img src="/icons/menu_white.svg" alt="menu" />
+                        <img src="/images/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
                 </MenuIcon>
             } */}
