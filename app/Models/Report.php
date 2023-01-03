@@ -43,7 +43,7 @@ class Report extends Model
 
     public function validation()
     {
-        return $this->belongsToMany(Validation::class, 'report_has_validations', 'report_id', 'validation_id')->withPivot('validator_id');
+        return $this->belongsToMany(Validation::class, 'report_has_validations', 'report_id', 'validation_id')->withPivot('validator_id')->withTimestamps();
     }
 
     /**

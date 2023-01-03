@@ -7,16 +7,18 @@ function Tour({ itemName, children, updateCriteria = [], condition = true }) {
     useEffect(() => {
 
         if (condition) {
-            console.log(condition)
             var hasTour = parseInt(localStorage.getItem(itemName));
 
             if (!hasTour) {
-                introJs()
-                introJs().setOptions({
-                    showBullets: false
-                }).start()
+                setTimeout(() => {
+                    introJs()
+                    introJs().setOptions({
+                        showBullets: false
+                    }).start()
 
-                localStorage.setItem(itemName, 1);
+                    localStorage.setItem(itemName, 1);
+                }, 1000);
+
             }
 
         }

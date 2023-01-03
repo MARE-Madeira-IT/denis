@@ -104,7 +104,7 @@ function List({ setActiveModal, items }) {
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                         </div>
-                        <img src={"/icons/" + item.image + ".svg"} />
+                        <img src={"/images/icons/" + item.image + ".svg"} />
                     </div>
                 </Item>
             ))}

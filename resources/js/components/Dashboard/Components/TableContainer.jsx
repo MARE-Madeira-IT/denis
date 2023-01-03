@@ -112,19 +112,19 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
             filterSearch: true,
             render: (record) => <Tag color={colorDecoder[record[record.length - 1].name]}> {record[record.length - 1].name} </Tag>
         },
-        {
-            title: '',
-            dataIndex: '',
-            render: (_, record) =>
-                <StopPropagation> {
-                    data.length >= 1 ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
-                            <a>Delete</a>
-                        </Popconfirm>
-                    ) : null
-                }</StopPropagation>
-            ,
-        },
+        // {
+        //     title: '',
+        //     dataIndex: '',
+        //     render: (_, record) =>
+        //         <StopPropagation> {
+        //             data.length >= 1 ? (
+        //                 <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+        //                     <a>Delete</a>
+        //                 </Popconfirm>
+        //             ) : null
+        //         }</StopPropagation>
+        //     ,
+        // },
     ];
 
 

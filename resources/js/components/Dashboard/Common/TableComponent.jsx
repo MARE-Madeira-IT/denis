@@ -49,7 +49,7 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
 
         <Container>
             <Table
-                scroll={{ x: "100%" }}
+                // scroll={{ x: "100%" }}
                 rowClassName={() => 'editable-row'}
                 bordered={bordered}
                 onRow={onRow}
