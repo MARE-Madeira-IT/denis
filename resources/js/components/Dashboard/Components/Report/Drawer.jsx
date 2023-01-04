@@ -49,11 +49,20 @@ const Button = styled.button`
     border: 0px;
     box-shadow: none;
     color: white;
-    margin-right: auto;
     cursor: pointer;
 `;
 
-function Drawer({ current, handleUpdateClick }) {
+const SecundaryButton = styled.button`
+    padding: 12px 15px;
+    border: 2px solid #0C4C88;
+    background-color: white;
+    box-shadow: none;
+    color: #0C4C88;
+    cursor: pointer;
+    margin-left: 20px;
+`;
+
+function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
 
     const FieldContainer = ({ name, value }) => (
         <Field className='field-width'>
@@ -121,12 +130,17 @@ function Drawer({ current, handleUpdateClick }) {
             </Row>
             <br></br>
 
-            {handleUpdateClick ?
-                <Row type="flex" >
+
+            <Row type="flex" justify='start' gutter={16}>
+                {handleUpdateClick ?
                     <Button onClick={handleUpdateClick}>Update</Button>
-                </Row>
-                : <></>
-            }
+                    : <></>
+                }
+                {handleDuplicateClick ?
+                    <SecundaryButton onClick={handleDuplicateClick}>Duplicate</SecundaryButton>
+                    : <></>
+                }
+            </Row>
 
 
 

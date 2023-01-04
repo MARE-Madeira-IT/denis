@@ -68,6 +68,7 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false);
     const [updateMode, setUpdateMode] = useState(false);
+    const [hasInitialData, setHasInitialData] = useState(false);
 
     useEffect(() => {
         fetchReports();
@@ -86,15 +87,22 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
     function handleCreateClick() {
         setFormModal(true);
         setUpdateMode(false);
+        setHasInitialData(false);
     }
 
     function handleUpdateClick() {
-
         setUpdateMode(true);
+        setHasInitialData(true);
         setFormModal(true);
         setDrawerState(0, {});
     }
 
+    function handleDuplicateClick() {
+        setUpdateMode(false);
+        setHasInitialData(true);
+        setFormModal(true);
+        setDrawerState(0, {});
+    }
 
     useEffect(() => {
         if (!loading) {
@@ -108,8 +116,8 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
             <Content>
                 <PageHeader title="Reports overview" />
 
-                <FormContainer setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
-                <Drawer handleUpdateClick={handleUpdateClick} />
+                <FormContainer hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
+                <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
                 <MapContainer>
                     <div className="background"></div>
                     <MapView customData={data} />

@@ -77,7 +77,7 @@ const Add = styled.button`
     
 `;
 
-function FormContainer({ activeForm, setFormModal, createReport, data, updateMode, setUpdateMode, updateReport, currentReport, loading }) {
+function FormContainer({ activeForm, setFormModal, createReport, data, updateMode, setUpdateMode, hasInitialData, updateReport, currentReport, loading }) {
     const [form] = Form.useForm();
     const [currentStep, setCurrentStep] = useState(0)
     const [numSpecies, setNumSpecies] = useState(1)
@@ -133,7 +133,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
     };
 
     useEffect(() => {
-        if (updateMode) {
+        if (hasInitialData) {
             var taxaData = [];
             data.taxas.map((currentTaxa) => {
                 var currentObject = {
@@ -189,7 +189,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
                 taxas: taxaData
             });
         }
-    }, [updateMode])
+    }, [hasInitialData])
 
 
     const steps = [
