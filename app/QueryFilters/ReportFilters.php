@@ -15,6 +15,11 @@ class ReportFilters extends QueryFilters
         $this->query->where('id', $int);
     }
 
+    public function customid($int)
+    {
+        $this->query->where('custom_id',  $int);
+    }
+
     public function status($int)
     {
         $this->query->whereHas('validation', function ($query) use ($int) {

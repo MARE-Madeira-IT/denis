@@ -173,6 +173,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 region: data.site.region,
                 country: data.site.country.id,
                 lme: data.site.lme.id,
+                custom_id: data.custom_id,
 
                 debris_type: data.debris.type.id,
                 debris_depth: data.debris.type.depth,
@@ -234,7 +235,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     ]
 
     const fieldsPerSteps = [
-        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme"],
+        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id'],
         ["debris_type", "debris_depth", "debris_habitat", "debris_material", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
         ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region"]
     ]

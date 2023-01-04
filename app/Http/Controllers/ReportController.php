@@ -26,8 +26,8 @@ class ReportController extends Controller
     {
         $user = auth()->user();
         $query = Report::filterBy($filters);
-        $out = new ConsoleOutput();
-        $out->writeln($user->hasRole('validator'));
+        // $out = new ConsoleOutput();
+        // $out->writeln($user->hasRole('validator'));
         if (!$user->hasRole('validator') && !$user->hasRole('admin')) {
             $query = $query->where('user_id', auth()->user()->id)->orWhereHas('latestValidation', function ($q) {
                 $q->where('validation_id', 2);

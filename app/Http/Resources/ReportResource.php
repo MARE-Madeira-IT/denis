@@ -18,6 +18,7 @@ class ReportResource extends JsonResource
             'id' => $this->id,
             'user' => $this->user,
             'date' => $this->date,
+            'custom_id' => $this->custom_id,
             'status' => $this->validation,
             'ongoing_survey' => $this->ongoing_survey,
             'latitude' => $this->latitude,

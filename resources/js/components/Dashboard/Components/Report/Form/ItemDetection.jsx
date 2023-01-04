@@ -43,7 +43,6 @@ function ItemDetection({ form, updateMode, currentReport }) {
     )
 
     useEffect(() => {
-
         if (updateMode) {
             setTimeout(() => {
                 var coords = form.getFieldsValue(['latitude', 'longitude']);
@@ -58,18 +57,24 @@ function ItemDetection({ form, updateMode, currentReport }) {
             setLongitude(-17.011401);
         }
     }, [currentReport.id])
+
     return (
         <>
             <Row type="flex" gutter={32}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
                         <DatePicker style={{ width: "100%" }} placeholder="Date" />
                     </Form.Item>
                 </Col>
 
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Ongoing Surveys Modality" name="on_going_survey" rules={[{ required: false }]}>
                         <Input placeholder="Ex.: Diving transect (25 m)" />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={8}>
+                    <Form.Item label="Custom identifier" name="custom_id" rules={[{ required: false }]}>
+                        <Input placeholder="Ex.: 00001" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>

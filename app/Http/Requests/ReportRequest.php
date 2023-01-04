@@ -72,6 +72,7 @@ class ReportRequest extends FormRequest
             'site' => 'required',
             'notes' => 'nullable',
             'ongoing_survey' => 'nullable',
+            'custom_id' => 'nullable',
             'date' => 'required|date',
             'latitude' => ['required', 'regex:/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
             'longitude' => ['required', 'regex:/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,20})?))$/'],

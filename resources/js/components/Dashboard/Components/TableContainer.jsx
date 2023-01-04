@@ -41,9 +41,15 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
 
     const columns = [
         {
-            title: 'ID',
+            title: 'DB_ID',
             dataIndex: 'id',
             ...getColumnSearchProps('id', searchInput, handleFilter, handleFilterClear),
+        },
+        {
+            title: 'Custom identifier',
+            dataIndex: 'custom_id',
+            render: (record) => record ? record : "---",
+            ...getColumnSearchProps('customid', searchInput, handleFilter, handleFilterClear),
         },
         {
             title: 'Date of survey',

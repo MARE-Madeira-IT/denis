@@ -11,12 +11,13 @@ class Report extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["user_id", "date", "latitude", "longitude", "notes", "ongoing_survey", "debris_id", "site_id"];
+    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "notes", "ongoing_survey", "debris_id", "site_id"];
 
     public static function generateDataArray($data)
     {
         return [
             "user_id" => $data["user_id"],
+            "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
@@ -31,6 +32,7 @@ class Report extends Model
     {
         return Report::create([
             "user_id" => $data["user_id"],
+            "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],

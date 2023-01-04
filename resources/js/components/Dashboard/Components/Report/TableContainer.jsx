@@ -51,9 +51,15 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
 
     const columns = [
         {
-            title: 'ID',
+            title: '#',
             dataIndex: 'id',
             ...getColumnSearchProps('id', searchInput, handleFilter, handleFilterClear),
+        },
+        {
+            title: 'Custom identifier',
+            dataIndex: 'custom_id',
+            render: (record) => record ? record : "---",
+            ...getColumnSearchProps('customid', searchInput, handleFilter, handleFilterClear),
         },
         {
             title: 'Name of Assessor',
