@@ -115,6 +115,6 @@ class SelectorController extends Controller
 
     public function taxaNativeRegions()
     {
-        return TaxaNativeRegionResource::collection(TaxaNativeRegion::all());
+        return TaxaNativeRegionResource::collection(TaxaNativeRegion::orderBy('name')->get());
     }
 }

@@ -33,7 +33,7 @@ class ReportController extends Controller
                 $q->where('validation_id', 2);
             });
         }
-        return MinimalReportResource::collection($query->paginate(10));
+        return MinimalReportResource::collection($query->latest()->paginate(10));
     }
 
     /**
@@ -43,7 +43,7 @@ class ReportController extends Controller
      */
     public function selfIndex(ReportFilters $filters)
     {
-        return MinimalReportResource::collection(Report::filterBy($filters)->where('user_id', auth()->user()->id)->paginate(10));
+        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->where('user_id', auth()->user()->id)->paginate(10));
     }
 
     /**
@@ -53,7 +53,7 @@ class ReportController extends Controller
      */
     public function mapIndex(ReportFilters $filters)
     {
-        return MinimalReportResource::collection(Report::filterBy($filters)->get());
+        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->get());
     }
 
     /**
