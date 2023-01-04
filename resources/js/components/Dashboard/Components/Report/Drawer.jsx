@@ -90,7 +90,7 @@ function Drawer({ current, handleUpdateClick }) {
                         <FieldContainer name="Habitat of the finding" value={current.debris?.habitat?.name} />
                         <FieldContainer name="Debris material" value={current.debris?.material?.name} />
                         <FieldContainer name="Debris size class " value={current.debris?.size?.name} />
-                        <FieldContainer name="Debris weight (Kg)" value={EmptyField(current.weight)} />
+                        <FieldContainer name="Debris weight (Kg)" value={EmptyField(current.debris?.weight)} />
                         <FieldContainer name="Debris thickness" value={current.debris?.thickness?.name} />
                         <FieldContainer name="Debris surface rugosity" value={current.debris?.rugosity?.name} />
                         <FieldContainer name="Master List of Categories of Litter Items" value={current.debris?.litter_category?.mdi_code} />

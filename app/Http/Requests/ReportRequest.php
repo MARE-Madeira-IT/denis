@@ -77,11 +77,11 @@ class ReportRequest extends FormRequest
             'longitude' => ['required', 'regex:/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
 
             'debris_type' => 'required|integer|exists:debris_types,id',
-            'debris_depth' => 'required_if:debris_type,2|integer',
+            'debris_depth' => 'required_if:debris_type,2|numeric',
             'debris_habitat' => 'required|integer|exists:debris_habitats,id',
             'debris_material' => 'required|integer|exists:debris_materials,id',
             'debris_size' => 'required|integer|exists:debris_sizes,id',
-            'debris_weight' => 'nullable|integer',
+            'debris_weight' => 'nullable|numeric',
             'debris_thickness' => 'required|integer|exists:debris_thicknesses,id',
             'debris_rugosity' => 'required|integer|exists:debris_rugosities,id',
             'debris_sub_category' => 'required|array|size:2',
