@@ -62,7 +62,7 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
             render: (record) => record.name
         },
         {
-            title: 'Date of survey (dd-mm-yyyy)',
+            title: 'Date of survey (yyyy-mm-dd)',
             dataIndex: 'date',
         },
         {

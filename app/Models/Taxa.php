@@ -28,9 +28,9 @@ class Taxa extends Model
 
         foreach ($data["taxas"] as $taxa) {
             $newTaxa = Taxa::create([
-                "authority" => array_key_exists("authority", $data) ? $data["authority"] : null,
-                "year_first_report" => array_key_exists("year_first_report", $data) ? $data["year_first_report"] : null,
-                "reference" => array_key_exists("reference", $data) ? $data["reference"] : null,
+                "authority" => array_key_exists("authority", $taxa) ? $taxa["authority"] : null,
+                "year_first_report" => array_key_exists("year_first_report", $taxa) ? $taxa["year_first_report"] : null,
+                "reference" => array_key_exists("reference", $taxa) ? $taxa["reference"] : null,
                 "identification" => $taxa["identification"],
                 "report_id" => $data["report_id"],
                 "taxa_level_id" => $taxa["level"],

@@ -53,7 +53,7 @@ function DebrisCharacterization() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris weight (Kg)*" name="debris_weight" rules={requiredRule}>
+                <Form.Item label="Debris weight (Kg)" name="debris_weight">
                     <InputNumber style={{ width: "100%" }} placeholder='Debris weight' />
                 </Form.Item>
             </Col>
@@ -73,12 +73,12 @@ function DebrisCharacterization() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris identification marks*" name="debris_marks" rules={requiredRule}>
+                <Form.Item label="Debris identification marks" name="debris_marks">
                     <Input placeholder="Debris identification marks" />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Probable debris origin*" name="debris_origin" rules={requiredRule}>
+                <Form.Item label="Probable debris origin" name="debris_origin">
                     <Input placeholder="Probable debris origin" />
                 </Form.Item>
             </Col>

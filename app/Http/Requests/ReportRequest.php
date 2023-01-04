@@ -98,7 +98,6 @@ class ReportRequest extends FormRequest
             'taxas.*.identification' => 'required|string',
             'taxas.*.authority' => 'nullable|string',
             'taxas.*.year_first_report' => 'nullable|string',
-            'taxas.*.authority' => 'nullable|string',
             'taxas.*.species_status' => 'required|integer|exists:taxa_species_statuses,id',
             'taxas.*.population_status' => 'required|integer|exists:taxa_population_statuses,id',
             'taxas.*.abundance' => 'required|integer|exists:taxa_abundances,id',
