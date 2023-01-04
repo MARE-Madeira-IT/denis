@@ -77,7 +77,7 @@ const Add = styled.button`
     
 `;
 
-function FormContainer({ activeForm, setFormModal, createReport, data, updateMode, setUpdateMode, hasInitialData, updateReport, currentReport, loading }) {
+function FormContainer({ activeForm, setFormModal, createReport, data, setHasInitialData, updateMode, setUpdateMode, hasInitialData, updateReport, currentReport, loading }) {
     const [form] = Form.useForm();
     const [currentStep, setCurrentStep] = useState(0)
     const [numSpecies, setNumSpecies] = useState(1)
@@ -117,6 +117,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, updateMod
         setNumSpecies(1);
         setCurrentStep(0);
         setUpdateMode(false);
+        setHasInitialData(false);
         form.resetFields();
     };
 

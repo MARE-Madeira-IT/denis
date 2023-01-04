@@ -116,7 +116,7 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
             <Content>
                 <PageHeader title="Reports overview" />
 
-                <FormContainer hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
+                <FormContainer setHasInitialData={setHasInitialData} hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
                 <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
                 <MapContainer>
                     <div className="background"></div>
