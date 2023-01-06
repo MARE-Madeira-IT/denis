@@ -29,6 +29,10 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch, h
             dataIndex: 'name',
         },
         {
+            title: 'MDI',
+            dataIndex: 'mdi_code',
+        },
+        {
             title: 'Category',
             dataIndex: 'category',
             render: (category) => <span>{category.name}</span>
