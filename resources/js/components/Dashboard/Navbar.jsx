@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { dimensions } from './dashboardHelper';
+import { dimensions, maxWidth } from './dashboardHelper';
 import { connect } from "react-redux";
 import { logout, setAuthorizationToken } from '../../redux/auth/actions';
 import { Dropdown, Menu } from 'antd';
@@ -15,6 +15,8 @@ const FlexContainer = styled.section`
     align-items: flex-start;
     padding: 50px 100px 0px 100px;
     box-sizing: border-box;
+    margin: auto;
+    max-width: ${maxWidth};
 
     @media (max-width: ${dimensions.maxWidth}) {
         padding: 50px 50px 0px 50px;
@@ -111,7 +113,7 @@ const navbarItems = [
     { to: "/dashboard/reports", title: "Reports", treshold: 0 },
     { to: "/dashboard/users", title: "Users", treshold: 2 },
     { to: "/dashboard/debris", title: "Debris", treshold: 0 },
-    { to: "/dashboard/ecosystems", title: "Ecosystems", treshold: 0 },
+    { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
 ];
 
 

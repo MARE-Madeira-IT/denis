@@ -35,7 +35,7 @@ const Router = () => {
 
 
                 <Route exact path="/dashboard/debris" element={<DashboardLayout><Debris /></DashboardLayout>} />
-                <Route exact path="/dashboard/ecosystems" element={<DashboardLayout><Ecosystem /></DashboardLayout>} />
+                <Route exact path="/dashboard/biodiversity" element={<DashboardLayout><Ecosystem /></DashboardLayout>} />
                 <Route exact path="/dashboard/reports" element={<DashboardLayout><Report /></DashboardLayout>} />
                 <Route exact path="/dashboard/validation" element={<DashboardLayout><Validation /></DashboardLayout>} />
                 <Route exact path="/dashboard/users" element={<DashboardLayout redirectPath="/dashboard" permissionLevel={2}><User /></DashboardLayout>} />

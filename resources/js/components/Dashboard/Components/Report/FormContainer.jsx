@@ -148,15 +148,20 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                     abundance: currentTaxa.abundance.id,
                     viability: currentTaxa.viability.id,
                     maturity: currentTaxa,
-                    native_region: currentTaxa.nativeRegion.id,
+                    native_region: currentTaxa,
                 }
-                var maturities = [];
+                var maturities = [], nativeRegions = [];
 
                 currentTaxa.maturities.map((maturity) => {
                     maturities.push(maturity.id);
                 })
 
+                currentTaxa.nativeRegions.map((nativeRegion) => {
+                    nativeRegions.push(nativeRegion.id);
+                })
+
                 currentObject.maturity = maturities;
+                currentObject.native_region = nativeRegions;
 
                 taxaData.push(currentObject);
             });

@@ -12,7 +12,6 @@ const ContentContainer = styled.div`
     width: 100%;
     margin: auto;
     ${maxWidthStyle}
-    margin-top: 100px;
 `;
 
 const Container = styled.div`

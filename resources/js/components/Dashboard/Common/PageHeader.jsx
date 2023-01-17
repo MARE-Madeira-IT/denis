@@ -1,17 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
-import { dimensions, maxWidth } from '../dashboardHelper';
+import { dimensions, maxWidth, maxWidthStyle } from '../dashboardHelper';
 
 const Container = styled.section`
-    box-sizing: border-box;
-    padding: 100px 100px 50px 100px;
-    width: 100%;
+    min-height: calc(50vh - 50px);
+    
+    ${maxWidthStyle}
+    padding-top: 10vh;
 
     h2 {
         color: white;
         font-size: clamp(26px, 6vw, 40px);
-        line-height: 110%;
+        margin-bottom: 0px;
+        margin-top: 20px;
     }
 
     h4 {
@@ -20,13 +22,13 @@ const Container = styled.section`
         width: 40%;
         font-weight: 400;
         opacity: .8;
+        margin-top: 0px;
     }
 
     a {
         color: white;
         background-color: rgba(255,255,255,.3);
         padding: 6px 14px;
-        margin-bottom: 45px;
         border-radius: 12px;
 
         img {
@@ -36,25 +38,22 @@ const Container = styled.section`
     }
 
     @media (max-width: ${maxWidth}) {
-        padding: 100px 50px 50px 50px;
+
         h4 {
             width: 70%
         }
 
     }
     @media (max-width: ${dimensions.lg}) {
-        padding: 50px 50px 50px 50px;
 
         h4 {
-            width: 100%
+            width: 100%;
             font-size: 16px;
         }
     }
 
 
     @media (max-width: ${dimensions.md}) {
-        padding: 50px 20px 50px 20px;
-
         h2 {
             margin-top: 10px;
         }
@@ -69,7 +68,11 @@ const Container = styled.section`
 function PageHeader({ title, link = true, subtitle }) {
     return (
         <Container>
-            {link && <Link to="/dashboard"> <img src="/images/icons/dashboard/back.svg" alt="back" /> Back to profile</Link>}
+            {link &&
+                <Link to="/dashboard">
+                    <img src="/images/icons/dashboard/back.svg" alt="back" /> Back to profile
+                </Link>
+            }
 
             <h2>{title}</h2>
             <h4>{subtitle}</h4>

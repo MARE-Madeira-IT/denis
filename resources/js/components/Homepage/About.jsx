@@ -261,7 +261,7 @@ function About({ fetchReportsCoordinates }) {
                         </div>
                         <div>
                             <img src="/images/about/add.svg" alt="" />
-                            <p>Insert into the database</p>
+                            <p>Add reports to the database</p>
                         </div>
                         <div>
                             <img src="/images/about/visualize.svg" alt="" />

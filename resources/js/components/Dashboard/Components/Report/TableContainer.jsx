@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
-    border-top: 1px solid black;
 
     .ant-table-thead > tr > th {
         background-color: white;
@@ -62,13 +61,13 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
             ...getColumnSearchProps('customid', searchInput, handleFilter, handleFilterClear),
         },
         {
-            title: 'Name of Assessor',
+            title: 'Assessor',
             dataIndex: 'user',
             ...getColumnSearchProps('user', searchInput, handleFilter, handleFilterClear),
             render: (record) => record.name
         },
         {
-            title: 'Date of survey (yyyy-mm-dd)',
+            title: 'Date of survey',
             dataIndex: 'date',
         },
         {
@@ -78,13 +77,13 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
             render: (record) => <span>{record.name}, {record.region}, {record.country.name}, {record.lme.name}</span>
         },
         {
-            title: 'Marine Debris',
+            title: 'Debris',
             dataIndex: 'debris',
             ...getColumnSearchProps('debris', searchInput, handleFilter, handleFilterClear),
             render: (record) => record.mdi_code
         },
         {
-            title: 'Biological identifications',
+            title: 'Biodiversity',
             dataIndex: 'taxas',
             ...getColumnSearchProps('taxas', searchInput, handleFilter, handleFilterClear),
             render: (records) => records.map((record, index) => (
@@ -180,7 +179,7 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
     useEffect(() => {
         var newColumns = columns;
         if (permissionLevel == 0) {
-            newColumns = columns.filter((val, index) => index !== 7);
+            newColumns = columns.filter((val, index) => index !== 8);
         }
 
         setPermissionColumns(newColumns);

@@ -18,6 +18,8 @@ class DebrisSubCategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'mdi_code' => $this->mdi_code,
+            'ospar_code' => $this->ospar_code,
+            'unep_code' => $this->unep_code,
             'category' => [
                 'id' => $this->category->id,
                 'name' => $this->category->name,

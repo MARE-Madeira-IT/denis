@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Taxa extends Model
 {
@@ -20,7 +21,6 @@ class Taxa extends Model
         "taxa_population_status_id",
         "taxa_abundance_id",
         "taxa_viability_id",
-        "taxa_native_region_id",
     ];
 
     public static function store($data)
@@ -28,9 +28,9 @@ class Taxa extends Model
 
         foreach ($data["taxas"] as $taxa) {
             $newTaxa = Taxa::create([
-                "authority" => array_key_exists("authority", $taxa) ? $taxa["authority"] : null,
-                "year_first_report" => array_key_exists("year_first_report", $taxa) ? $taxa["year_first_report"] : null,
-                "reference" => array_key_exists("reference", $taxa) ? $taxa["reference"] : null,
+                "authority" => Arr::get($taxa, "authority"),
+                "year_first_report" => Arr::get($taxa, "year_first_report"),
+                "reference" => Arr::get($taxa, "reference"),
                 "identification" => $taxa["identification"],
                 "report_id" => $data["report_id"],
                 "taxa_level_id" => $taxa["level"],
@@ -38,9 +38,9 @@ class Taxa extends Model
                 "taxa_population_status_id" => $taxa["population_status"],
                 "taxa_abundance_id" => $taxa["abundance"],
                 "taxa_viability_id" => $taxa["viability"],
-                "taxa_native_region_id" => $taxa["native_region"],
             ]);
 
+            $newTaxa->nativeRegions()->sync($taxa["native_region"]);
             $newTaxa->maturities()->sync($taxa["maturity"]);
         }
     }
@@ -60,9 +60,9 @@ class Taxa extends Model
         return $this->belongsTo(TaxaAbundance::class, 'taxa_abundance_id');
     }
 
-    public function nativeRegion()
+    public function nativeRegions()
     {
-        return $this->belongsTo(TaxaNativeRegion::class, 'taxa_native_region_id');
+        return $this->belongsToMany(TaxaNativeRegion::class, 'taxa_has_native_regions');
     }
 
     public function viability()

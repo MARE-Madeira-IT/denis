@@ -14,6 +14,12 @@ export const fetchReportsCoordinates = () => ({
     payload: axios.get(`${window.location.origin}/api/map-reports`)
 });
 
+export const fetchReportGraph = () => ({
+    type: types.FETCH_REPORT_GRAPH,
+    payload: axios.get(`${window.location.origin}/api/reports/graph`)
+});
+
+
 
 export const fetchSelfReports = (page = 1, filters = {}) => ({
     type: types.FETCH_SELF_REPORTS,

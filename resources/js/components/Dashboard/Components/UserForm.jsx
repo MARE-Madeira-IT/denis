@@ -49,31 +49,34 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
 
 
     const onFinish = () => {
-        let values = form.getFieldsValue();
-        const formData = new FormData();
-        formData.append("name", values.name);
-        formData.append("email", values.email);
-        formData.append("institution", values.institution);
-        formData.append("country", values.country);
-        formData.append("phone", values.phone);
-        if (values.image) {
-            formData.append("image", values.image);
-        }
+        form.validateFields().then((values) => {
+            const formData = new FormData();
+            formData.append("name", values.name);
+            formData.append("email", values.email);
+            formData.append("institution", values.institution);
+            formData.append("country", values.country);
+            values.phone &&
+                formData.append("phone", values.phone);
+            if (values.image) {
+                formData.append("image", values.image);
+            }
 
-        formData.append("_method", "PATCH");
+            formData.append("_method", "PATCH");
 
-        updateUser(user.id, formData).then((response) => {
-            onCancel();
-            setErrors([]);
-            setCurrentUser(response.action.payload);
-        }).catch((err) => {
-            var response = err.response.data.errors;
-            var aErrors = [];
-            Object.values(response).map((item) => {
-                aErrors.push(item);
-            })
-            setErrors(aErrors);
-        });
+            updateUser(user.id, formData).then((response) => {
+                onCancel();
+                setErrors([]);
+                setCurrentUser(response.action.payload);
+            }).catch((err) => {
+                var response = err.response.data.errors;
+                var aErrors = [];
+                Object.values(response).map((item) => {
+                    aErrors.push(item);
+                })
+                setErrors(aErrors);
+            });
+        })
+
     };
 
     function getBase64(img, callback) {
@@ -152,7 +155,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item
                     name="name"
                     label="Name"
-                    rules={[{ required: true }]}
+                    rules={[{ required: true, message: "Name is required" }]}
                 >
                     <Input />
                 </Form.Item>
@@ -160,7 +163,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item
                     name="email"
                     label="Email"
-                    rules={[{ required: true, type: "email" }]}
+                    rules={[{ required: true, message: "Email is required" }, { type: "email", }]}
                 >
                     <Input />
                 </Form.Item>
@@ -168,7 +171,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item
                     name="institution"
                     label="Institution"
-                    rules={[{ required: true }]}
+                    rules={[{ required: true, message: "Institution is required" }]}
                 >
                     <Input />
                 </Form.Item>
@@ -176,7 +179,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item
                     name="country"
                     label="Localization"
-                    rules={[{ required: true }]}
+                    rules={[{ required: true, message: "Localization is required" }]}
                 >
                     <Input />
                 </Form.Item>
@@ -184,7 +187,7 @@ function UserForm({ visible, setVisible, user, updateUser, setCurrentUser }) {
                 <Form.Item
                     name="phone"
                     label="Phone"
-                    rules={[{ required: true }]}
+                    rules={[{ required: false }]}
                 >
                     <Input />
                 </Form.Item>

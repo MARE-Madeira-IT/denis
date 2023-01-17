@@ -34,9 +34,9 @@ function Main() {
         { title: "Materials", description: "Debris Materials generalized to create a report", image: "debris_materials", component: <DebrisMaterial /> },
         { title: "Size classes", description: "Categories of items size ranges to characterize items", image: "debris_sizes", component: <DebrisSize /> },
         { title: "Habitats", description: "Aquatic-based habitats in which the debris was found", image: "debris_habitats", component: <DebrisHabitat /> },
-        { title: "Thickness classes", description: "Flexibility of the material found", image: "debris_thickness", component: <DebrisThickness /> },
+        { title: "Stiffness classes", description: "Flexibility of the material found", image: "debris_thickness", component: <DebrisThickness /> },
         { title: "Rugosity classes", description: "Description on the surface of the debris", image: "debris_rugosity", component: <DebrisRugosity /> },
-        { title: "Type", description: "Location in which the debris can be found", image: "debris_type", component: <DebrisType /> }
+        { title: "Type", description: "Location in which the debris was found", image: "debris_type", component: <DebrisType /> }
     ];
 
     const handleCancel = () => {
@@ -45,6 +45,8 @@ function Main() {
 
     return (
         <Tour itemName="debrisTour">
+            <PageHeader title="Marine Debris characterization" subtitle="Each entry below represents a table which is required to characterize marine debris." />
+
             <TableContainer
                 width={1200}
                 footer={null}
@@ -57,7 +59,7 @@ function Main() {
                 {activeModal != undefined && items[activeModal].component}
             </TableContainer>
 
-            <PageHeader title="Marine Debris characterization" subtitle="Each entry below represents a table which is required to characterize marine debris." />
+
 
 
             <div data-intro="Click on any of the following sections to visualize existing data."

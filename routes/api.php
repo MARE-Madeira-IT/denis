@@ -31,6 +31,7 @@ Route::group([
     Route::get('me', 'App\Http\Controllers\AuthController@me');
 });
 
+Route::get('/reports/graph', 'App\Http\Controllers\FetchReportGraph');
 
 Route::apiResource('/reports', 'App\Http\Controllers\ReportController');
 Route::apiResource('/users', 'App\Http\Controllers\UserController');

@@ -1,5 +1,5 @@
 import { Dropdown, Menu } from 'antd';
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -146,7 +146,7 @@ const navbarItems = [
     { to: "/dashboard/reports", title: "Reports", treshold: 0 },
     { to: "/dashboard/users", title: "Users", treshold: 2 },
     { to: "/dashboard/debris", title: "Debris", treshold: 0 },
-    { to: "/dashboard/ecosystems", title: "Ecosystems", treshold: 0 },
+    { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
 ];
 
 

@@ -6,24 +6,17 @@ import TableContainer from "./TableContainer";
 import { setDrawerState } from "../../../redux/drawer/actions";
 import UserForm from './UserForm';
 import Tour from '../Hooks/Tour';
-import { dimensions } from '../dashboardHelper';
+import { Create, dimensions, maxWidthStyle } from '../dashboardHelper';
 import PageHeader from '../Common/PageHeader';
 import MapView from '../../MapView';
 import Drawer from './Report/Drawer';
+import { Row } from 'antd';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
     box-sizing: border-box;
-    padding: 100px 100px 50px 100px;
-    box-sizing: border-box;
-
-    @media (max-width: ${dimensions.maxWidth}) {
-        padding: 50px 50px 0px 50px;
-    }
-
-    @media (max-width: ${dimensions.md}) {
-        padding: 0px 20px;
-    }
+    ${maxWidthStyle}
 
 `;
 
@@ -50,9 +43,12 @@ const DataSection = styled.div`
         width: 100%;
     }
 
+    .ant-row {
+        margin-bottom: 30px;
+    }
+
     h2 {
         font-size: 36px;
-        margin-bottom: 50px;
     }
 `;
 
@@ -60,7 +56,6 @@ const SectionContainer = styled.div`
     width: 100%;
     gap: 50px;
     display: flex;
-    margin-top: 50px;
 
     @media (max-width: ${dimensions.xl}) {
         flex-wrap: wrap;
@@ -170,8 +165,8 @@ const Parameters = styled.div`
     font-size: 16px;
 
     div {
-        width: 50%;
-        margin: 10px 0px;        
+        width: 100%;
+        margin: 0px;        
     }
 
     span {
@@ -280,7 +275,12 @@ function Homepage({ fetchSelfReports,
                     </Section>
                     <DataSection data-intro="Reports you've submitted will be visible here" data-title="Your reports" data-step='3' >
                         <div>
-                            <h2 id="selector3">Your Reports</h2>
+                            <Row type="flex" justify='space-between' align='middle'>
+                                <h2 id="selector3">Your Reports</h2>
+                                <Link to="/dashboard/reports?create=1"><Create>Add a report to the database</Create></Link>
+
+                            </Row>
+
                             <MapView customData={data} />
                             <TableContainer
                                 handlePageChange={handlePageChange}

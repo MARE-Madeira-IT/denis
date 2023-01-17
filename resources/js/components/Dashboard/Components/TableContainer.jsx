@@ -41,7 +41,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
 
     const columns = [
         {
-            title: 'DB_ID',
+            title: '#',
             dataIndex: 'id',
             ...getColumnSearchProps('id', searchInput, handleFilter, handleFilterClear),
         },

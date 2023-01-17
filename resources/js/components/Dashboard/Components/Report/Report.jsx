@@ -1,77 +1,73 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchReports, fetchReport, updateState } from "../../../../redux/report/actions";
+import { fetchReports, fetchReport, updateState, fetchReportGraph } from "../../../../redux/report/actions";
 import { setDrawerState } from "../../../../redux/drawer/actions";
 import TableContainer from "./TableContainer";
 import Drawer from "./Drawer";
 import FormContainer from "./FormContainer";
 import { Row } from "antd";
 import MapView from "../../../MapView";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import PageHeader from "../../Common/PageHeader";
-import { maxWidthStyle } from "../../dashboardHelper";
+import { Create, maxWidthStyle } from "../../dashboardHelper";
+import GraphContainer from "./GraphContainer";
 
 const Content = styled.div`
     width: 100%;
     margin: auto;
+    ${maxWidthStyle}
 `;
 
 const ContentContainer = styled.div`
     background-color: white;
-    ${maxWidthStyle}
+    width: 100%;
+    
+`;
+
+const FlexContainer = styled.section`
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 50px;
 `;
 
 const MapContainer = styled.div`
     position: relative;
+    width: 50%;
 
-    .background {
-        position: absolute;
-        height: 50%;
-        width: 100vw;
-        z-index: -1;
-        background-color: white;
-        left: 0;
-        bottom: 0;
-    }
     .map-container {
-        ${maxWidthStyle}
         border-radius: 12px;
+    }
+
+    #chart-1 {
+        height: 100% !important;
     }
     
 `;
 
 const Container = styled.div`
     width: 100%;
-    display: flex;
-    align-items: center;
-    width: 100%;
     margin: auto;
-    justify-content: center;
     box-sizing: border-box;
     position: relative;
 `;
 
 
-const Create = styled.button`
-    padding: 12px 15px;
-    background-color: #0C4C88;
-    border: 0px;
-    box-shadow: none;
-    color: white;
-    margin-left: auto;
-    cursor: pointer;
-`;
-
-
-function Report({ data, loading, meta, current, fetchReports, fetchReport, setDrawerState, updateState }) {
+function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchReport, setDrawerState, updateState }) {
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false);
     const [updateMode, setUpdateMode] = useState(false);
     const [hasInitialData, setHasInitialData] = useState(false);
+    let [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         fetchReports();
+        fetchReportGraph();
+        console.log(searchParams.get("create"));
+        if (searchParams.get("create")) {
+            handleCreateClick();
+        }
     }, [])
 
     function handlePageChange(pagination) {
@@ -113,19 +109,26 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
 
     return (
         <Container>
+            <PageHeader title="Reports overview" />
             <Content>
-                <PageHeader title="Reports overview" />
+
 
                 <FormContainer setHasInitialData={setHasInitialData} hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
                 <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
-                <MapContainer>
-                    <div className="background"></div>
-                    <MapView customData={data} />
-                </MapContainer>
+                <Row style={{ padding: "50px 0px 20px 0px" }} type="flex" justify="end">
+                    <Create onClick={handleCreateClick}>Add a report to the database</Create>
+                </Row>
+                <FlexContainer type="flex">
+                    <MapContainer>
+                        <div className="background"></div>
+                        <MapView customData={data} />
+                    </MapContainer>
+                    <MapContainer>
+                        <GraphContainer />
+                    </MapContainer>
+                </FlexContainer>
                 <ContentContainer>
-                    <Row style={{ paddingTop: "50px" }} type="flex" justify="end">
-                        <Create onClick={handleCreateClick}>Create</Create>
-                    </Row>
+
                     <TableContainer
                         handlePageChange={handlePageChange}
                         data={data}
@@ -137,6 +140,7 @@ function Report({ data, loading, meta, current, fetchReports, fetchReport, setDr
                         updateState={updateState}
                     />
                 </ContentContainer>
+
             </Content>
         </Container>
     )
@@ -148,6 +152,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchReport: (id) => dispatch(fetchReport(id)),
         setDrawerState: (state, object) => dispatch(setDrawerState(state, object)),
         updateState: (data) => dispatch(updateState(data)),
+        fetchReportGraph: (filters) => dispatch(fetchReportGraph(filters)),
     };
 };
 

@@ -27,19 +27,33 @@ function FormContainer({ form }) {
     return (
         <Container form={form}>
             <Row>
-                <Col span={8}>
+                <Col span={6}>
                     <Form.Item name="name" rules={[{ required: true, message: "Name is required" }]}>
                         <Input prefix={<img src="/images/icons/form/bottle.svg" />} className='input' bordered={false} placeholder='Name' />
                     </Form.Item>
                 </Col>
 
-                <Col span={8}>
+                <Col span={4}>
                     <Form.Item name="mdi_code" rules={[{ required: true, message: "MDI code is required" }]}>
                         <Input prefix={<img src="/images/icons/form/code.svg" />} className='input' bordered={false} placeholder='MDI code' />
                     </Form.Item>
                 </Col>
 
-                <Col span={8}>
+                <Col span={4}>
+                    <Form.Item name="ospar_code">
+                        <Input prefix={<img src="/images/icons/form/code.svg" />} className='input' bordered={false} placeholder='OSPAR code' />
+                    </Form.Item>
+                </Col>
+
+
+                <Col span={4}>
+                    <Form.Item name="unep_code">
+                        <Input prefix={<img src="/images/icons/form/code.svg" />} className='input' bordered={false} placeholder='UNEP code' />
+                    </Form.Item>
+                </Col>
+
+
+                <Col span={6}>
                     <Form.Item name="debris_category_id" rules={[{ required: true, message: "Category is required" }]}>
                         <DebrisCategoryRemoteSelectContainer placeholder='Category' />
                     </Form.Item>

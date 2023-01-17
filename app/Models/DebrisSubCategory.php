@@ -9,7 +9,10 @@ class DebrisSubCategory extends Model
 {
     use FiltersRecords;
 
-    protected $fillable = ['name', 'mdi_code', 'debris_category_id'];
+    protected $fillable = [
+        'name', 'mdi_code', 'debris_category_id', 'ospar_code',
+        'unep_code'
+    ];
 
     public function category()
     {

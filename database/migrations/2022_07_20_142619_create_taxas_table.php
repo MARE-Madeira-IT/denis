@@ -25,7 +25,6 @@ class CreateTaxasTable extends Migration
             $table->unsignedBigInteger('taxa_population_status_id');
             $table->unsignedBigInteger('taxa_abundance_id');
             $table->unsignedBigInteger('taxa_viability_id');
-            $table->unsignedBigInteger('taxa_native_region_id');
             $table->timestamps();
 
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
@@ -34,7 +33,6 @@ class CreateTaxasTable extends Migration
             $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses')->onDelete('cascade');
             $table->foreign('taxa_abundance_id')->references('id')->on('taxa_abundances')->onDelete('cascade');
             $table->foreign('taxa_viability_id')->references('id')->on('taxa_viabilities')->onDelete('cascade');
-            $table->foreign('taxa_native_region_id')->references('id')->on('taxa_native_regions')->onDelete('cascade');
         });
     }
 

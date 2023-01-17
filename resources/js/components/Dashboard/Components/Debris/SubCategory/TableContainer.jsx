@@ -33,6 +33,14 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch, h
             dataIndex: 'mdi_code',
         },
         {
+            title: 'OSPAR',
+            dataIndex: 'ospar_code',
+        },
+        {
+            title: 'UNEP',
+            dataIndex: 'unep_code',
+        },
+        {
             title: 'Category',
             dataIndex: 'category',
             render: (category) => <span>{category.name}</span>

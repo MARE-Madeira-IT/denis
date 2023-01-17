@@ -1,4 +1,4 @@
-import { Button, Divider, Input, Select, Space } from 'antd';
+import { Button, Divider, Input, Tooltip, Select, Space, Row } from 'antd';
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -10,6 +10,18 @@ const Add = styled.img`
     display: block;
 `;
 
+const CustomTooltip = styled(Tooltip)`
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+`;
+
+
 function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data, loading, value, onChange }) {
     const inputRef = useRef(null);
     const [other, setOther] = useState(undefined)
@@ -19,6 +31,13 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
         fetchDebrisRugositySelector()
     }, [])
 
+    const PopoverContent = ({ id }) => (
+        <div>
+            <p>Content</p>
+            <p>Content</p>
+        </div>
+    );
+
 
     return (
         <Select
@@ -26,7 +45,7 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
             onChange={onChange}
             loading={loading}
             showSearch
-            placeholder="Select the habitat of the finding"
+            placeholder="Select the rugosity of the debris"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
             dropdownRender={(menu) => (
@@ -57,7 +76,16 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
         >
             {selected && <Select.Option value={other}>{other}</Select.Option>}
             {data.map((element) => (
-                <Select.Option key={element.id} value={element.id}>{element.name}</Select.Option>
+                <Select.Option key={element.id} value={element.id}>
+                    <Row type="flex" justify='space-between'>
+                        {element.name}
+
+                        {/* {element.name != "other" &&
+                            <CustomTooltip placement='right' title={(<img src={"/images/rugosity/" + element.id + ".jpg"} />)}><img src="/images/icons/form/tooltip.svg" /></CustomTooltip>
+                        } */}
+
+                    </Row>
+                </Select.Option>
             ))}
         </Select>
     )

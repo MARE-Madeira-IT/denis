@@ -105,7 +105,8 @@ class ReportRequest extends FormRequest
             'taxas.*.viability' => 'required|integer|exists:taxa_viabilities,id',
             'taxas.*.maturity' => 'required|array|min:1',
             'taxas.*.maturity.*' => 'required|integer|exists:taxa_maturities,id',
-            'taxas.*.native_region' => 'required|integer|exists:taxa_native_regions,id',
+            'taxas.*.native_region' => 'required|array|min:1',
+            'taxas.*.native_region.*' => 'required|integer|exists:taxa_native_regions,id',
         ];
     }
 

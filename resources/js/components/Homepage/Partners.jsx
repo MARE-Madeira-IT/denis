@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
 import { dimensions } from '../Dashboard/dashboardHelper';
+import { Collapse } from 'antd';
 
 const StyledContent = styled(Content)`
     h2 {
@@ -50,6 +51,37 @@ const Flex = styled.div`
     }
 `;
 
+const StyledCollapse = styled(Collapse)`
+
+    margin-top: 30px;
+    
+    .ant-collapse-content {
+        p {
+            border-left: 2px solid #0C4C88;
+            padding: 5px 0px 5px 20px;
+            box-sizing: border-box;
+        }
+        
+    }
+
+    .ant-collapse-arrow {
+        width: 15px;
+        height: 15px;
+    }
+
+    .ant-collapse-item {
+        padding: 15px 0px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #e1e1e1;
+    }
+`;
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
 function Partners() {
     const scrollParameters = handleScroll("partnerContainer");
 
@@ -70,9 +102,33 @@ function Partners() {
                         <div><img src="/images/partners/wave.png" alt="wave" /></div>
                     </Flex>
 
-                    <p> Want to help? Contact us and we'll work together!</p>
+                    {/* <h2>Frequently asked questions</h2>
+                    <p>Below you'll find answers to the most common questions you may have on DeNIS</p>
+
+                    <StyledCollapse
+                        defaultActiveKey={['1']}
+                        ghost
+                        accordion
+                        expandIcon={({ isActive }) => isActive ? <img src="images/icons/minus.svg" /> : <img src="images/icons/plus.svg" />}
+                    >
+                        <Collapse.Panel header="This is panel header 1" key="1">
+                            <p>{text}</p>
+                        </Collapse.Panel>
+                        <Collapse.Panel header="This is panel header 2" key="2">
+                            <p>{text}</p>
+                        </Collapse.Panel>
+                        <Collapse.Panel header="This is panel header 3" key="3">
+                            <p>{text}</p>
+                        </Collapse.Panel>
+                    </StyledCollapse> */}
+
+                    <br />
+                    <p style={{ marginTop: "50px" }}> Want to help or still have questions? Contact us at <a href="">email@email.com</a> </p>
                 </div>
+
             </StyledContent>
+
+
         </Container>
     )
 }

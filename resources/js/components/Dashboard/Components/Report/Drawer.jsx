@@ -100,7 +100,7 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
                         <FieldContainer name="Debris material" value={current.debris?.material?.name} />
                         <FieldContainer name="Debris size class " value={current.debris?.size?.name} />
                         <FieldContainer name="Debris weight (Kg)" value={EmptyField(current.debris?.weight)} />
-                        <FieldContainer name="Debris thickness" value={current.debris?.thickness?.name} />
+                        <FieldContainer name="Debris stiffness" value={current.debris?.thickness?.name} />
                         <FieldContainer name="Debris surface rugosity" value={current.debris?.rugosity?.name} />
                         <FieldContainer name="Master List of Categories of Litter Items" value={current.debris?.litter_category?.mdi_code} />
                         <FieldContainer name="Debris identification marks " value={EmptyField(current.debris?.marks)} />
@@ -111,19 +111,22 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
                 <Col span={24}>
                     <Section>Biological identification & samples information</Section>
                     {current.taxas && current.taxas.map((taxa, index) => (
-                        <FieldsContainer key={"taxa-" + index} width="25%">
-                            <FieldContainer name="Highest taxonomic level" value={taxa.level?.name} />
-                            <FieldContainer name="Specify it" value={taxa.identification} />
-                            <FieldContainer name="Authority" value={EmptyField(taxa.authority)} />
-                            <FieldContainer name="Year of first report" value={EmptyField(taxa.year_first_report)} />
-                            <FieldContainer name="Reference" value={EmptyField(taxa.reference)} />
-                            <FieldContainer name="Species Status" value={taxa.speciesStatus?.name} />
-                            <FieldContainer name="Population status" value={taxa.populationStatus?.name} />
-                            <FieldContainer name="Species abundance" value={taxa.abundance?.name} />
-                            <FieldContainer name="Viability" value={taxa.viability?.name} />
-                            <FieldContainer name="Maturity stage" value={taxa.maturities.map((maturity, index) => (<span key={"maturity-" + index}>{maturity.name}, </span>))} />
-                            <FieldContainer name="Native Region" value={taxa.nativeRegion?.name} />
-                        </FieldsContainer>
+                        <>
+                            <FieldsContainer key={"taxa-" + index} width="25%">
+                                <FieldContainer name="Highest taxonomic level" value={taxa.level?.name} />
+                                <FieldContainer name="Specify it" value={taxa.identification} />
+                                <FieldContainer name="Authority" value={EmptyField(taxa.authority)} />
+                                <FieldContainer name="Year of first report" value={EmptyField(taxa.year_first_report)} />
+                                <FieldContainer name="Reference" value={EmptyField(taxa.reference)} />
+                                <FieldContainer name="Species Status" value={taxa.speciesStatus?.name} />
+                                <FieldContainer name="Population status" value={taxa.populationStatus?.name} />
+                                <FieldContainer name="Species abundance" value={taxa.abundance?.name} />
+                                <FieldContainer name="Viability" value={taxa.viability?.name} />
+                                <FieldContainer name="Maturity stage" value={taxa.maturities.map((maturity, index) => (<span key={"maturity-" + index}>{maturity.name}, </span>))} />
+                                <FieldContainer name="Native Region" value={taxa.nativeRegions.map((nativeRegion, index) => (<span key={"nr-" + index}>{nativeRegion.name}, </span>))} />
+                            </FieldsContainer>
+                            <br />
+                        </>
                     ))}
 
                 </Col>

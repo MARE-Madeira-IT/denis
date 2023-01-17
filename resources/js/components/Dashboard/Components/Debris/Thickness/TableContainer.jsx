@@ -48,7 +48,7 @@ function TableContainer({ loading, data, meta, handlePageChange, handleSearch, h
                 handleCreate={handleCreate}
                 form={<FormContainer form={form} />}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
-                title="Thickness classes"
+                title="Stiffness classes"
             />
         </Container>
     )

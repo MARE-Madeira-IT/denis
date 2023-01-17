@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { Col, Form, Input, DatePicker, Row } from 'antd'
+import { Col, Form, Input, DatePicker, Row, Tooltip } from 'antd'
 import CountryRemoteSelectContainer from '../../Site/Country/CountryRemoteSelectContainer'
 import LmeRemoteSelectContainer from '../../Site/Lme/LmeRemoteSelectContainer'
 import { MapContainer, Marker, TileLayer, ZoomControl } from 'react-leaflet'
@@ -12,6 +12,13 @@ const StyledMapContainer = styled(MapContainer)`
     width: 100%;
     height: 100%;
     min-height: 400px;
+`;
+
+const CustomTooltip = styled(Tooltip)`
+    margin-left: 10px;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
 `;
 
 function ItemDetection({ form, updateMode, currentReport }) {
@@ -60,7 +67,7 @@ function ItemDetection({ form, updateMode, currentReport }) {
 
     return (
         <>
-            <Row type="flex" gutter={32}>
+            <Row align='bottom' type="flex" gutter={32}>
                 <Col xs={24} md={8}>
                     <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
                         <DatePicker style={{ width: "100%" }} placeholder="Date" />
@@ -73,7 +80,11 @@ function ItemDetection({ form, updateMode, currentReport }) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Custom identifier" name="custom_id" rules={[{ required: false }]}>
+                    <Form.Item label={(
+                        <>
+                            <span>Custom identifier</span>
+                            <CustomTooltip title="The platform generates it's own identifier, however you may add a custom one which will help you identify each report"><img src="/images/icons/form/tooltip.svg" /></CustomTooltip>
+                        </>)} name="custom_id" rules={[{ required: false }]}>
                         <Input placeholder="Ex.: 00001" />
                     </Form.Item>
                 </Col>

@@ -13,6 +13,6 @@ class TaxaNativeRegion extends Model
 
     public function taxas()
     {
-        return $this->hasMany(Taxa::class);
+        return $this->belongsToMany(Taxa::class, 'taxa_has_native_regions');
     }
 }

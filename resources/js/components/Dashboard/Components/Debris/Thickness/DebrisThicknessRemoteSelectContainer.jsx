@@ -15,7 +15,7 @@ function DebrisThicknessRemoteSelectContainer({ fetchDebrisThicknessSelector, da
             onChange={onChange}
             loading={loading}
             showSearch
-            placeholder="Select the debris thickness"
+            placeholder="Select the debris stiffness"
             optionFilterProp="name"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >

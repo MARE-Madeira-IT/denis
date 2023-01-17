@@ -28,6 +28,8 @@ class DebrisSubCategoryRequest extends FormRequest
         return [
             'name' => 'required|string|unique:debris_sub_categories,name',
             'mdi_code' => 'required|string|unique:debris_sub_categories,mdi_code',
+            'ospar_code' => 'nullable|string',
+            'unep_code' => 'nullable|string',
             'debris_category_id' => 'required|integer|exists:debris_categories,id',
         ];
     }

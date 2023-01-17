@@ -41,6 +41,8 @@ function EcosystemMain() {
 
     return (
         <Tour itemName="ecosystemTour">
+            <PageHeader title="Biodiversity characterization" subtitle="Each entry below represents a table which is required to characterize an ecosystem." />
+
             <TableContainer
                 width={960}
                 footer={null}
@@ -53,10 +55,10 @@ function EcosystemMain() {
                 {activeModal != undefined && items[activeModal].component}
             </TableContainer>
 
-            <PageHeader title="Ecosystems characterization" subtitle="Each entry below represents a table which is required to characterize an ecosystem." />
+
 
             <div data-intro="Click on any of the following sections to visualize existing data."
-                data-title="Ecosystems characterization"
+                data-title="Biodiversity characterization"
                 data-step='1'>
                 <List items={items} setActiveModal={setActiveModal} />
             </div>

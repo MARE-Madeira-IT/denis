@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { connect } from "react-redux";
 
 
-
 const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -19,7 +18,7 @@ const Container = styled.div`
 const StyledMapContainer = styled(MapContainer)`
     width: 100%;
     height: 100%;
-    min-height: 400px;
+    min-height: 350px;
 `;
 
 const Field = styled.div`
@@ -57,12 +56,13 @@ function MapView({ data, customData }) {
 
     return (
         <Container className='map-container'>
-            <StyledMapContainer whenCreated={(mapInstance) => { setMap(mapInstance) }} center={[32.427876, -17.011401]} zoom={2} zoomControl={false}>
+            <StyledMapContainer whenCreated={(mapInstance) => { setMap(mapInstance) }} center={[32.427876, -17.011401]} zoom={2} minZoom={2} zoomControl={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {customData ? customData.map((report, index) =>
+
                     <Marker key={report.id} position={[report.latitude, report.longitude]}>
                         <Popup>
                             <FieldContainer name="Date of survey" value={report.date} />

@@ -32,6 +32,8 @@ class DebrisSubCategoryController extends Controller
         $record = DebrisSubCategory::create([
             'name' => $validator['name'],
             'mdi_code' => $validator['mdi_code'],
+            'ospar_code' => $validator['ospar_code'],
+            'unep_code' => $validator['unep_code'],
             'debris_category_id' => $validator['debris_category_id']
         ]);
 

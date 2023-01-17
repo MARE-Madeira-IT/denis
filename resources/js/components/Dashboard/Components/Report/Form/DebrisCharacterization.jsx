@@ -18,9 +18,9 @@ function DebrisCharacterization() {
     }
 
     return (
-        <Row type="flex" gutter={32}>
+        <Row type="flex" align='bottom' gutter={32}>
             <Col xs={24} md={12}>
-                <Row type="flex" gutter={32}>
+                <Row align='bottom' type="flex" gutter={32}>
                     <Col span={12}>
                         <Form.Item label="Debris Type*" name="debris_type" rules={requiredRule}>
                             <DebrisTypeRemoteSelectContainer onChange={handleTypeChange} />
@@ -28,7 +28,7 @@ function DebrisCharacterization() {
                     </Col>
                     <Col span={12}>
                         <Form.Item
-                            label="If 'Seafloor' debris type, specify depth"
+                            label="If 'Seafloor', specify depth"
                             name="debris_depth"
                             rules={[{ required: requiredDepth, message: "'depth' is required for seafloor reports" }]}
                         >
@@ -58,7 +58,7 @@ function DebrisCharacterization() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris thickness*" name="debris_thickness" rules={requiredRule}>
+                <Form.Item label="Debris stiffness*" name="debris_thickness" rules={requiredRule}>
                     <DebrisThicknessRemoteSelectContainer />
                 </Form.Item>
             </Col>

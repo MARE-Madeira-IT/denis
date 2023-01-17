@@ -18,6 +18,13 @@ class UpdateUserRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'phone' => $this->phone ? $this->phone : null
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

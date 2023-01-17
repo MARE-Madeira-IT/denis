@@ -8,6 +8,8 @@ export const initialState = {
     mapData: [],
     loading: false,
     current: {},
+    loadingGraph: false,
+    dataGraph: [],
 }
 
 export default (state = initialState, action = {}) => {
@@ -23,6 +25,22 @@ export default (state = initialState, action = {}) => {
             return {
                 ...state,
                 loading: true
+            };
+        case `${types.FETCH_REPORT_GRAPH}_PENDING`:
+            return {
+                ...state,
+                loadingGraph: true
+            };
+        case `${types.FETCH_REPORT_GRAPH}_REJECTED`:
+            return {
+                ...state,
+                loadingGraph: false
+            };
+        case `${types.FETCH_REPORT_GRAPH}_FULFILLED`:
+            return {
+                ...state,
+                loadingGraph: false,
+                dataGraph: action.payload.data
             };
 
         case `${types.ME}_REJECTED`:

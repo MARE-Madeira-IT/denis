@@ -17,6 +17,8 @@ class CreateDebrisSubCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('mdi_code')->unique();
+            $table->string('ospar_code')->nullable();
+            $table->string('unep_code')->nullable();
             $table->unsignedBigInteger('debris_category_id');
             $table->timestamps();
 

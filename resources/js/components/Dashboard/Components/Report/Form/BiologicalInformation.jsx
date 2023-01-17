@@ -36,7 +36,7 @@ function BiologicalInformation({ last, handleDelete }) {
 
             </Row>
 
-            <Row type="flex" gutter={32}>
+            <Row type="flex" align='bottom' gutter={32}>
                 <Col xs={24} md={8}>
                     <Form.Item label="Highest taxonomic level*" name='level' rules={[{ ...requiredRule, message: "'taxonomic level' is required" }]}>
                         <TaxaLevelRemoteSelectContainer />
@@ -48,13 +48,8 @@ function BiologicalInformation({ last, handleDelete }) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Authority*" name="authority" rules={[{ required: false }]}>
+                    <Form.Item label="Authority" name="authority" rules={[{ required: false }]}>
                         <Input placeholder="Authority" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Year of first report" name="year_first_report" rules={[{ required: false }]}>
-                        <Input placeholder="Year of first report" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
@@ -65,6 +60,11 @@ function BiologicalInformation({ last, handleDelete }) {
                 <Col xs={24} md={6}>
                     <Form.Item label="Species Status*" name="species_status" rules={[{ ...requiredRule, message: "'species status' is required" }]}>
                         <TaxaSpeciesStatusRemoteSelectContainer />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Year of the first record (if NIS or cryptogenic)" name="year_first_report" rules={[{ required: false }]}>
+                        <Input placeholder="Year of the first record (if NIS or cryptogenic)" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>

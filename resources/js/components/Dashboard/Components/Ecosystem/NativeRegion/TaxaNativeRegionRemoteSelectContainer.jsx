@@ -17,6 +17,7 @@ function TaxaNativeRegionRemoteSelectContainer({ fetchTaxaNativeRegionSelector, 
             showSearch
             placeholder="Select the biological sample native region"
             optionFilterProp="name"
+            mode="multiple"
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
             {data.map((element) => (

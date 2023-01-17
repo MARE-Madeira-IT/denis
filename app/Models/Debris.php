@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Debris extends Model
 {
@@ -28,40 +29,40 @@ class Debris extends Model
     public static function generateDataArray($data)
     {
         return [
-            "depth" => array_key_exists("debris_depth", $data) ? $data["debris_depth"] : null,
+            "depth" => Arr::get($data, "debris_depth"),
             "debris_habitat_id" => $data["debris_habitat"],
             "debris_material_id" => $data["debris_material"],
             "debris_type_id" => $data["debris_type"],
             "debris_size_id" => $data["debris_size"],
-            "weight" => array_key_exists("debris_weight", $data) ? $data["debris_weight"] : null,
+            "weight" => Arr::get($data, "debris_weight"),
             "debris_thickness_id" => $data["debris_thickness"],
             "debris_rugosity_id" => $data["debris_rugosity"],
             "debris_subcategory_id" => $data["debris_sub_category"][1],
-            "marks" => array_key_exists("debris_marks", $data) ? $data["debris_marks"] : null,
-            "origin" => array_key_exists("debris_origin", $data) ? $data["debris_origin"] : null,
-            "otherHabitat" => array_key_exists("debris_otherHabitat", $data) ? $data["debris_otherHabitat"] : null,
-            "otherMaterial" => array_key_exists("debris_otherMaterial", $data) ? $data["debris_otherMaterial"] : null,
-            "otherRugosity" => array_key_exists("debris_otherRugosity", $data) ? $data["debris_otherRugosity"] : null,
+            "marks" => Arr::get($data, "debris_marks"),
+            "origin" => Arr::get($data, "debris_origin"),
+            "otherHabitat" => Arr::get($data, "debris_otherHabitat"),
+            "otherMaterial" => Arr::get($data, "debris_otherMaterial"),
+            "otherRugosity" => Arr::get($data, "debris_otherRugosity"),
         ];
     }
 
     public static function store($data)
     {
         return self::create([
-            "depth" => array_key_exists("debris_depth", $data) ? $data["debris_depth"] : null,
+            "depth" => Arr::get($data, "debris_depth"),
             "debris_habitat_id" => $data["debris_habitat"],
             "debris_material_id" => $data["debris_material"],
             "debris_type_id" => $data["debris_type"],
             "debris_size_id" => $data["debris_size"],
-            "weight" => array_key_exists("debris_weight", $data) ? $data["debris_weight"] : null,
+            "weight" => Arr::get($data, "debris_weight"),
             "debris_thickness_id" => $data["debris_thickness"],
             "debris_rugosity_id" => $data["debris_rugosity"],
             "debris_subcategory_id" => $data["debris_sub_category"][1],
-            "marks" => array_key_exists("debris_marks", $data) ? $data["debris_marks"] : null,
-            "origin" => array_key_exists("debris_origin", $data) ? $data["debris_origin"] : null,
-            "otherHabitat" => array_key_exists("debris_otherHabitat", $data) ? $data["debris_otherHabitat"] : null,
-            "otherMaterial" => array_key_exists("debris_otherMaterial", $data) ? $data["debris_otherMaterial"] : null,
-            "otherRugosity" => array_key_exists("debris_otherRugosity", $data) ? $data["debris_otherRugosity"] : null,
+            "marks" => Arr::get($data, "debris_marks"),
+            "origin" => Arr::get($data, "debris_origin"),
+            "otherHabitat" => Arr::get($data, "debris_otherHabitat"),
+            "otherMaterial" => Arr::get($data, "debris_otherMaterial"),
+            "otherRugosity" => Arr::get($data, "debris_otherRugosity"),
         ]);
     }
 
