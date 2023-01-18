@@ -15,6 +15,11 @@ class ReportFilters extends QueryFilters
         $this->query->where('id', $int);
     }
 
+    public function date($string)
+    {
+        $this->query->where('date', 'like', '%' . $string . '%');
+    }
+
     public function customid($int)
     {
         $this->query->where('custom_id',  $int);

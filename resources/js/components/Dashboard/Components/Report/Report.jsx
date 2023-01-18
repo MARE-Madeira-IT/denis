@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchReports, fetchReport, updateState, fetchReportGraph } from "../../../../redux/report/actions";
+import { fetchReports, fetchReport, updateState, fetchReportGraph, fetchReportsCoordinates } from "../../../../redux/report/actions";
 import { setDrawerState } from "../../../../redux/drawer/actions";
 import TableContainer from "./TableContainer";
 import Drawer from "./Drawer";
@@ -54,29 +54,37 @@ const Container = styled.div`
 `;
 
 
-function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchReport, setDrawerState, updateState }) {
+function Report(props, { data, loading, meta, mapData }) {
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false);
     const [updateMode, setUpdateMode] = useState(false);
     const [hasInitialData, setHasInitialData] = useState(false);
+    var { data, loading, meta, mapData } = props;
     let [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        fetchReports();
-        fetchReportGraph();
-        console.log(searchParams.get("create"));
+
+        props.fetchReports(1, filters);
+
+
+    }, [filters])
+
+    useEffect(() => {
+        props.fetchReportGraph();
+        props.fetchReportsCoordinates();
+
         if (searchParams.get("create")) {
             handleCreateClick();
         }
     }, [])
 
     function handlePageChange(pagination) {
-        fetchReports(pagination.current, filters);
+        props.fetchReports(pagination.current, filters);
     }
 
     function handleRowClick(row) {
-        fetchReport(row.id).then((response) => {
-            setDrawerState(1, response.action.payload.data.data);
+        props.fetchReport(row.id).then((response) => {
+            props.setDrawerState(1, response.action.payload.data.data);
         })
     }
 
@@ -90,22 +98,17 @@ function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchRepo
         setUpdateMode(true);
         setHasInitialData(true);
         setFormModal(true);
-        setDrawerState(0, {});
+        props.setDrawerState(0, {});
     }
 
     function handleDuplicateClick() {
         setUpdateMode(false);
         setHasInitialData(true);
         setFormModal(true);
-        setDrawerState(0, {});
+        props.setDrawerState(0, {});
     }
 
-    useEffect(() => {
-        if (!loading) {
-            fetchReports(1, filters);
-        }
 
-    }, [filters])
 
     return (
         <Container>
@@ -121,7 +124,7 @@ function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchRepo
                 <FlexContainer type="flex">
                     <MapContainer>
                         <div className="background"></div>
-                        <MapView customData={data} />
+                        <MapView customData={mapData} />
                     </MapContainer>
                     <MapContainer>
                         <GraphContainer />
@@ -137,7 +140,7 @@ function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchRepo
                         handleRowClick={handleRowClick}
                         setFilters={setFilters}
                         filters={filters}
-                        updateState={updateState}
+                        updateState={props.updateState}
                     />
                 </ContentContainer>
 
@@ -149,6 +152,7 @@ function Report({ data, loading, meta, fetchReportGraph, fetchReports, fetchRepo
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchReports: (page, filters) => dispatch(fetchReports(page, filters)),
+        fetchReportsCoordinates: () => dispatch(fetchReportsCoordinates()),
         fetchReport: (id) => dispatch(fetchReport(id)),
         setDrawerState: (state, object) => dispatch(setDrawerState(state, object)),
         updateState: (data) => dispatch(updateState(data)),
@@ -162,6 +166,7 @@ const mapStateToProps = (state) => {
         data: state.report.data,
         meta: state.report.meta,
         current: state.drawer.current,
+        mapData: state.report.mapData
     };
 };
 

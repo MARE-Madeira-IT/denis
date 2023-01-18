@@ -28,6 +28,7 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
     const [status, setStatus] = useState(undefined);
     const [permissionColumns, setPermissionColumns] = useState([]);
     const searchInput = useRef(null);
+
     const handleFilter = (value, field) => {
         var newFilters = {};
         newFilters[field] = value;
@@ -69,6 +70,7 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
         {
             title: 'Date of survey',
             dataIndex: 'date',
+            ...getColumnSearchProps('date', searchInput, handleFilter, handleFilterClear),
         },
         {
             title: 'Location (site, region, country, lme)',

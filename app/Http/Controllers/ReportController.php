@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
 use App\Http\Resources\MinimalReportResource;
+use App\Http\Resources\ReportCoordinateResource;
 use App\Http\Resources\ReportResource;
 use App\Models\Debris;
 use App\Models\Report;
@@ -51,9 +52,9 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function mapIndex(ReportFilters $filters)
+    public function mapIndex()
     {
-        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->get());
+        return ReportCoordinateResource::collection(Report::latest()->limit(100)->get());
     }
 
     /**
