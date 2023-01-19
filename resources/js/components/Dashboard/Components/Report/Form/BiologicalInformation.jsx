@@ -27,68 +27,69 @@ const Subtitle = styled.h2`
 
 
 
-function BiologicalInformation({ last, handleDelete }) {
+function BiologicalInformation({ name, handleDelete, length }) {
     return (
         <>
             <Row type="flex" style={{ marginBottom: "20px" }}>
                 <Subtitle>Biological identification & samples information</Subtitle>
-                {last && <Delete onClick={handleDelete} src="/images/icons/delete.svg" alt="delete" />}
+                {length > 1 && <Delete onClick={handleDelete} src="/images/icons/delete.svg" alt="delete" />}
+
 
             </Row>
 
             <Row type="flex" align='bottom' gutter={32}>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Highest taxonomic level*" name='level' rules={[{ ...requiredRule, message: "'taxonomic level' is required" }]}>
+                    <Form.Item label="Highest taxonomic level*" name={[name, 'level']} rules={[{ ...requiredRule, message: "'taxonomic level' is required" }]}>
                         <TaxaLevelRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Specify it*" name='identification' rules={[{ ...requiredRule, message: "'identification' is required" }]}>
+                    <Form.Item label="Specify it*" name={[name, 'identification']} rules={[{ ...requiredRule, message: "'identification' is required" }]}>
                         <Input placeholder='Identification based on the highest taxonomic level' />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Authority" name="authority" rules={[{ required: false }]}>
+                    <Form.Item label="Authority" name={[name, 'authority']} rules={[{ required: false }]}>
                         <Input placeholder="Authority" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Reference" name="reference" rules={[{ required: false }]}>
-                        <Input placeholder="Reference" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Species Status*" name="species_status" rules={[{ ...requiredRule, message: "'species status' is required" }]}>
+                    <Form.Item label="Species Status*" name={[name, 'species_status']} rules={[{ ...requiredRule, message: "'species status' is required" }]}>
                         <TaxaSpeciesStatusRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Year of the first record (if NIS or cryptogenic)" name="year_first_report" rules={[{ required: false }]}>
+                    <Form.Item label="Year of the first record (if NIS or cryptogenic)" name={[name, 'year_first_report']} rules={[{ required: false }]}>
                         <Input placeholder="Year of the first record (if NIS or cryptogenic)" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Population Status*" name="population_status" rules={[{ ...requiredRule, message: "'population status' is required" }]}>
+                    <Form.Item label="Reference" name={[name, 'reference']} rules={[{ required: false }]}>
+                        <Input placeholder="Reference" />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Population Status*" name={[name, 'population_status']} rules={[{ ...requiredRule, message: "'population status' is required" }]}>
                         <TaxaPopulationStatusRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Species abundance*" name="abundance" rules={[{ ...requiredRule, message: "'abundance' is required" }]}>
+                    <Form.Item label="Species abundance*" name={[name, 'abundance']} rules={[{ ...requiredRule, message: "'abundance' is required" }]}>
                         <TaxaAbundanceRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Viability*" name="viability" rules={[{ ...requiredRule, message: "'viability' is required" }]}>
+                    <Form.Item label="Viability*" name={[name, 'viability']} rules={[{ ...requiredRule, message: "'viability' is required" }]}>
                         <TaxaViabilityRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Maturity stage*" name="maturity" rules={[{ ...requiredRule, message: "'maturity stages' are required" }]}>
+                    <Form.Item label="Maturity stage*" name={[name, 'maturity']} rules={[{ ...requiredRule, message: "'maturity stages' are required" }]}>
                         <TaxaMaturityRemoteSelectContainer />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={6}>
-                    <Form.Item label="Native region*" name="native_region" rules={[{ ...requiredRule, message: "'native region' is required" }]}>
+                    <Form.Item label="Native region*" name={[name, 'native_region']} rules={[{ ...requiredRule, message: "'native region' is required" }]}>
                         <TaxaNativeRegionRemoteSelectContainer />
                     </Form.Item>
                 </Col>

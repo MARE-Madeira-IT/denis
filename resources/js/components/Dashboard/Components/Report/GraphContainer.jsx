@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 export const GraphContainer = ({ data, loading }) => {
     return (
-        <LineChart style={{ height: "100%" }} data={data} />
+        <LineChart xtitle="Date per month" ytitle="Number of reports" style={{ height: "100%" }} data={data} />
     )
 }
 

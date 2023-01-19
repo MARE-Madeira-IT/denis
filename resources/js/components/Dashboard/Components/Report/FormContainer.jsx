@@ -218,23 +218,24 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
         <>
             <p style={{ marginBottom: "30px" }}><b>IMPORTANT</b>: When multiple species grow on the same debris item, fill the "Biological identification & samples information" corresponding to the number of species. Each section corresponds to one species.</p>
             <Form.List name="taxas">
-                {() => (
+                {(fields, { add, remove }) => (
                     <>
-                        {[...Array(numSpecies)].map((p, index) =>
-                            <Form.List key={index} name={index}>
-                                {() => (
-                                    <>
-                                        <BiologicalInformation handleDelete={() => setNumSpecies(numSpecies - 1)} last={index == numSpecies - 1 && index != 0} />
-                                    </>
-                                )}
-                            </Form.List>
+                        {fields.map((key, name) =>
+                            <BiologicalInformation
+                                key={key}
+                                name={name}
+                                handleDelete={() => remove(name)}
+                                length={fields.length}
+                            />
                         )}
+
+                        <Row type="flex" justify='center'>
+                            <Add onClick={add}> Add another species</Add>
+                        </Row>
                     </>
                 )}
             </Form.List>
-            <Row type="flex" justify='center'>
-                <Add onClick={() => setNumSpecies(numSpecies + 1)}> Add another species</Add>
-            </Row>
+
 
         </>
     ]
@@ -273,13 +274,21 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                         data-step='1'>
 
 
-                        <Form style={{ margin: "10px auto 50px auto" }} layout="vertical" hideRequiredMark form={form}>
+                        <Form
+                            style={{ margin: "10px auto 50px auto" }}
+                            layout="vertical"
+                            requiredMark={false}
+                            form={form}
+                            initialValues={{
+                                taxas: [""]
+                            }}
+                        >
                             {steps[currentStep]}
                         </Form>
 
                         <CustomSteps data-intro="You can visualize your progress using this bar"
                             data-title="Progress bar"
-                            data-step='3' size="small" current={currentStep} onChange={(step) => setCurrentStep(step)}>
+                            data-step='3' size="small" current={currentStep} >
                             <Step title="Item detection" />
                             <Step title="Marine Debris characterization" />
                             <Step title="Biological information" />
