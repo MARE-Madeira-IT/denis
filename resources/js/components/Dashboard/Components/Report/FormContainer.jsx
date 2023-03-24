@@ -82,12 +82,47 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     const [currentStep, setCurrentStep] = useState(0)
     const [numSpecies, setNumSpecies] = useState(1)
     const [formData, setFormData] = useState({})
+    const [debrisFile, setDebrisFile] = useState([])
+
+    const handleArrayToFormData = (formData, array, field) => {
+        console.log(array);
+        for (var i = 0; i < array.length; i++) {
+
+            if (array[i] != undefined) {
+
+                formData.append(`${field}[]`, array[i]);
+            }
+
+        }
+
+        return formData;
+    };
 
     const create = () => {
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
             submitData.date = moment(submitData.date).format("YYYY-MM-DD");
-            createReport(submitData).then(() => {
+            var formInfo = new FormData();
+
+            for (var key in submitData) {
+                if (submitData[key]) {
+                    if (Array.isArray(submitData[key])) {
+                        if (key == "taxas") {
+                            formInfo.append('taxas', JSON.stringify(submitData[key]));
+                        } else {
+                            handleArrayToFormData(formInfo, submitData[key], key);
+                        }
+
+                    } else {
+                        formInfo.append(key, submitData[key]);
+                    }
+
+                }
+            }
+            handleArrayToFormData(formInfo, debrisFile, 'images');
+
+
+            createReport(formInfo).then(() => {
                 handleCancel();
             });
         });
@@ -143,10 +178,12 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                     authority: currentTaxa.authority,
                     year_first_report: currentTaxa.year_first_report,
                     reference: currentTaxa.reference,
-                    species_status: currentTaxa.speciesStatus.id,
-                    population_status: currentTaxa.populationStatus.id,
-                    abundance: currentTaxa.abundance.id,
+                    species_status: currentTaxa?.speciesStatus?.id,
+                    population_status: currentTaxa?.populationStatus?.id,
+                    abundance: currentTaxa?.abundance?.id,
                     viability: currentTaxa.viability.id,
+                    asisk_score: currentTaxa.asisk_score,
+                    asisk_result: currentTaxa.asisk_result,
                     maturity: currentTaxa,
                     native_region: currentTaxa,
                 }
@@ -172,23 +209,22 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 date: moment(data.date),
                 latitude: data.latitude,
                 longitude: data.longitude,
-                longitude: data.longitude,
+                doi: data.doi,
                 on_going_survey: data.ongoing_survey,
                 site: data.site.name,
                 region: data.site.region,
-                country: data.site.country.id,
-                lme: data.site.lme.id,
+                country: data?.site?.country?.name,
+                lme: data?.site?.lme?.id,
                 custom_id: data.custom_id,
 
                 debris_type: data.debris.type.id,
                 debris_depth: data.debris.type.depth,
                 debris_habitat: data.debris.habitat.id,
-                debris_material: data.debris.material.id,
                 debris_size: data.debris.size.id,
-                debris_weight: data.debris.weight,
-                debris_thickness: data.debris.thickness.id,
-                debris_rugosity: data.debris.rugosity.id,
-                debris_sub_category: [data.debris.litter_category.category.id, data.debris.litter_category.id],
+                debris_weight: data?.debris?.weight,
+                debris_thickness: data?.debris?.thickness?.id,
+                debris_rugosity: data?.debris?.rugosity?.id,
+                debris_sub_category: [data.debris.litter_category.id, data?.debris?.subcategory?.id],
                 debris_marks: data.debris.marks,
                 debris_origin: data.debris.origin,
 
@@ -205,14 +241,12 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 data-title="The section"
                 data-step='2'>
                 <h2>Item Detection</h2>
-                <p style={{ marginBottom: "30px" }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sapiente aliquam tempora nobis modi, assumenda pariatur illo debitis in doloribus? Sed sit explicabo reiciendis nisi quas, placeat vero consequuntur eveniet!</p>
             </div>
-            <ItemDetection currentReport={currentReport} updateMode={updateMode} form={form} />
+            <ItemDetection hasInitialData={hasInitialData} setDebrisFile={setDebrisFile} debrisFile={debrisFile} currentReport={currentReport} updateMode={updateMode} active={activeForm} form={form} />
 
         </>,
         <>
-            <h2>Marine Debris Characterization</h2>
-            <p style={{ marginBottom: "30px" }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus sapiente aliquam tempora nobis modi, assumenda pariatur illo debitis in doloribus? Sed sit explicabo reiciendis nisi quas, placeat vero consequuntur eveniet!</p>
+            <h2 style={{ marginBottom: "30px" }}>Marine Debris Characterization</h2>
             <DebrisCharacterization />
         </>,
         <>
@@ -222,6 +256,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                     <>
                         {fields.map((key, name) =>
                             <BiologicalInformation
+                                form={form}
                                 key={key}
                                 name={name}
                                 handleDelete={() => remove(name)}
@@ -241,9 +276,9 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     ]
 
     const fieldsPerSteps = [
-        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id'],
-        ["debris_type", "debris_depth", "debris_habitat", "debris_material", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
-        ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region"]
+        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id', 'doi', 'images'],
+        ["debris_type", "debris_depth", "debris_habitat", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
+        ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region", 'asisk_score', 'asisk_result']
     ]
 
     return (

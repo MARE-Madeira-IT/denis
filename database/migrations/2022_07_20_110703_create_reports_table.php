@@ -16,9 +16,11 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->string('custom_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
+            $table->string('doi')->nullable();
             $table->text('notes')->nullable();
             $table->text('ongoing_survey')->nullable();
             $table->unsignedBigInteger('site_id');

@@ -10,8 +10,9 @@ import { Row } from "antd";
 import MapView from "../../../MapView";
 import { Link, useSearchParams } from "react-router-dom";
 import PageHeader from "../../Common/PageHeader";
-import { Create, maxWidthStyle } from "../../dashboardHelper";
+import { Create, dimensions, maxWidthStyle } from "../../dashboardHelper";
 import GraphContainer from "./GraphContainer";
+import ReportFilterContainer from "./ReportFilterContainer";
 
 const Content = styled.div`
     width: 100%;
@@ -30,11 +31,20 @@ const FlexContainer = styled.section`
     justify-content: space-between;
     gap: 50px;
     margin-bottom: 50px;
+
+    @media (max-width: ${dimensions.md}) {
+        flex-wrap: wrap;
+    }
+    
 `;
 
 const MapContainer = styled.div`
     position: relative;
     width: 50%;
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+    }
 
     .map-container {
         border-radius: 12px;
@@ -63,10 +73,7 @@ function Report(props, { data, loading, meta, mapData }) {
     let [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-
         props.fetchReports(1, filters);
-
-
     }, [filters])
 
     useEffect(() => {
@@ -114,13 +121,13 @@ function Report(props, { data, loading, meta, mapData }) {
         <Container>
             <PageHeader title="Reports overview" />
             <Content>
-
-
                 <FormContainer setHasInitialData={setHasInitialData} hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
                 <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
+
                 <Row style={{ padding: "50px 0px 20px 0px" }} type="flex" justify="end">
                     <Create onClick={handleCreateClick}>Add a report to the database</Create>
                 </Row>
+
                 <FlexContainer type="flex">
                     <MapContainer>
                         <div className="background"></div>
@@ -130,8 +137,10 @@ function Report(props, { data, loading, meta, mapData }) {
                         <GraphContainer />
                     </MapContainer>
                 </FlexContainer>
-                <ContentContainer>
 
+                <ContentContainer>
+                    <ReportFilterContainer />
+                    <br />
                     <TableContainer
                         handlePageChange={handlePageChange}
                         data={data}

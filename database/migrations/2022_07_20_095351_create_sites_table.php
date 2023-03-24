@@ -17,8 +17,8 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('region');
-            $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('lme_id');
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->unsignedBigInteger('lme_id')->nullable();
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries');

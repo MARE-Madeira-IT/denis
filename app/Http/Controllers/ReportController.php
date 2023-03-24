@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
+use App\Http\Requests\UpdateReportRequest;
 use App\Http\Resources\MinimalReportResource;
 use App\Http\Resources\ReportCoordinateResource;
 use App\Http\Resources\ReportResource;
 use App\Models\Debris;
 use App\Models\Report;
 use App\Models\ReportHasValidation;
+use App\Models\ReportImage;
 use App\Models\Site;
 use App\Models\Taxa;
 use App\QueryFilters\ReportFilters;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -76,15 +79,28 @@ class ReportController extends Controller
                 "name" => $validator["site"],
                 "region" => $validator["region"],
                 "country_id" => $validator["country"],
-                "lme_id" => $validator["lme"],
+                "lme_id" => Arr::get($validator, "lme"),
             ]);
 
             $validator["site_id"] = $site->id;
             $validator["debris_id"] = $debris->id;
 
             $report = Report::store($validator);
-            $report->validation()->attach(1);
 
+            if (Arr::get($validator, 'doi')) $report->validation()->attach(2);
+            else $report->validation()->attach(1);
+
+
+            if ($request->has('images')) {
+                foreach ($request->images as $image) {
+                    $imageName = $image->store("public");
+                    $imageName = str_replace('public', '/storage', $imageName);
+                    ReportImage::create([
+                        "path" => $imageName,
+                        "report_id" => $report->id
+                    ]);
+                }
+            }
             $validator["report_id"] = $report->id;
 
             Taxa::store($validator);
@@ -99,8 +115,6 @@ class ReportController extends Controller
                 'status' => 'failed'
             ], 400);
         }
-
-
 
         return $validator;
     }
@@ -123,7 +137,7 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(ReportRequest $request, Report $report)
+    public function update(UpdateReportRequest $request, Report $report)
     {
         $validator = $request->validated();
         $validator['validator_id'] = $validator['user_id'];
@@ -134,7 +148,7 @@ class ReportController extends Controller
             "name" => $validator["site"],
             "region" => $validator["region"],
             "country_id" => $validator["country"],
-            "lme_id" => $validator["lme"],
+            "lme_id" => Arr::get($validator, "lme"),
         ]);
 
         $debris = $report->debris;
@@ -165,8 +179,20 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Report $report)
+    public function destroy(Report $report, Request $request)
     {
-        //
+        $user = null;
+        if ($request->header('Authorization')) {
+            $user = auth()->user();
+
+            if ($user) {
+                if ($user->hasRole('admin') || $user->id == $report->user_id) {
+                    $report->delete();
+                }
+            }
+        }
+
+
+        return response()->noContent();
     }
 }

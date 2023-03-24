@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cerbero\QueryFilters\FiltersRecords;
+use Illuminate\Support\Arr;
 
 class Report extends Model
 {
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "notes", "ongoing_survey", "debris_id", "site_id"];
+    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id"];
 
     public static function generateDataArray($data)
     {
@@ -19,6 +20,7 @@ class Report extends Model
             "user_id" => $data["user_id"],
             "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
+            "doi" => Arr::get($data, 'doi'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
             "notes" => array_key_exists("notes", $data) ? $data["notes"] : null,
@@ -34,6 +36,7 @@ class Report extends Model
             "user_id" => $data["user_id"],
             "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
+            "doi" => Arr::get($data, 'doi'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
             "notes" => array_key_exists("notes", $data) ? $data["notes"] : null,
@@ -74,5 +77,10 @@ class Report extends Model
     public function taxas()
     {
         return $this->hasMany(Taxa::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ReportImage::class);
     }
 }

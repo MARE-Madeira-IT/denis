@@ -16,7 +16,7 @@ class CompleteDebrisSubCategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->mdi_code . " / " .  $this->unep_code . " / " . $this->ospar_code . " (" . $this->name . ")",
+            'name' => $this->name . " (" .  $this->mdi_code . ")",
         ];
     }
 }

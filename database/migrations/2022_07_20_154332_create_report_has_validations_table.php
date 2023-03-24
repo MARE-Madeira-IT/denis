@@ -20,8 +20,8 @@ class CreateReportHasValidationsTable extends Migration
             $table->unsignedBigInteger('validator_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('report_id')->references('id')->on('reports');
-            $table->foreign('validation_id')->references('id')->on('validations');
+            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
+            $table->foreign('validation_id')->references('id')->on('validations')->onDelete('cascade');
             $table->foreign('validator_id')->references('id')->on('users');
         });
     }

@@ -31,7 +31,7 @@ function Main() {
     const items = [
         { title: "Categories", description: "Master list of categories of debris items by materials", image: "debris_categories", component: <DebrisCategory /> },
         { title: "Sub Categories", description: "Listing of items which belong to the categories of debris items", image: "debris_subcategories", component: <DebrisSubCategory /> },
-        { title: "Materials", description: "Debris Materials generalized to create a report", image: "debris_materials", component: <DebrisMaterial /> },
+        // { title: "Materials", description: "Debris Materials generalized to create a report", image: "debris_materials", component: <DebrisMaterial /> },
         { title: "Size classes", description: "Categories of items size ranges to characterize items", image: "debris_sizes", component: <DebrisSize /> },
         { title: "Habitats", description: "Aquatic-based habitats in which the debris was found", image: "debris_habitats", component: <DebrisHabitat /> },
         { title: "Stiffness classes", description: "Flexibility of the material found", image: "debris_thickness", component: <DebrisThickness /> },

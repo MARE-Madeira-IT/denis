@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::group([
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::get('me', 'App\Http\Controllers\AuthController@me');
 });
+Route::get('export/reports/', ExportReportController::class);
 
 Route::get('/reports/graph', 'App\Http\Controllers\FetchReportGraph');
 

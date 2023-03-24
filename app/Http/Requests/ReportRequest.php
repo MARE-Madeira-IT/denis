@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Country;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
@@ -24,36 +25,30 @@ class ReportRequest extends FormRequest
     {
         $otherHabitat = "";
         $habitat = $this->debris_habitat;
-        $otherMaterial = "";
-        $material = $this->debris_material;
+
         $otherRugosity = "";
         $rugosity = $this->debris_rugosity;
 
-        if (gettype($this->debris_habitat) == "string") {
+        if (!is_numeric($this->debris_habitat)) {
             $habitat = 12;
             $otherHabitat = $this->debris_habitat;
         }
 
-        if (gettype($this->debris_material) == "string") {
-            $material = 12;
-            $otherMaterial = $this->debris_material;
-        }
-
-        if (gettype($this->debris_rugosity) == "string") {
+        if (!is_numeric($this->debris_rugosity)) {
             $rugosity = 7;
             $otherRugosity = $this->debris_rugosity;
         }
-        $output = new ConsoleOutput();
-        $output->writeln($otherRugosity);
+        $country = Country::where('name', 'like', '%' . $this->country . '%')->first();
+
         $this->merge([
             'user_id' => auth()->user()->id,
+            'country' => $country ? $country->id : null,
             'debris_habitat' => $habitat,
             'debris_otherHabitat' => $otherHabitat,
-            'debris_material' => $material,
-            'debris_otherMaterial' => $otherMaterial,
             'debris_rugosity' => $rugosity,
             'debris_otherRugosity' => $otherRugosity,
             'debris_depth' => $this->debris_depth == "" ? 0 : $this->debris_depth,
+            'taxas' => json_decode($this->taxas, true),
         ]);
     }
 
@@ -67,10 +62,11 @@ class ReportRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'country' => 'required|integer|exists:countries,id',
-            'lme' => 'required|integer|exists:lmes,id',
+            'lme' => 'nullable|integer|exists:lmes,id',
             'region' => 'required',
             'site' => 'required',
             'notes' => 'nullable',
+            'doi' => 'nullable',
             'ongoing_survey' => 'nullable',
             'custom_id' => 'nullable',
             'date' => 'required|date',
@@ -80,33 +76,36 @@ class ReportRequest extends FormRequest
             'debris_type' => 'required|integer|exists:debris_types,id',
             'debris_depth' => 'required_if:debris_type,2|numeric',
             'debris_habitat' => 'required|integer|exists:debris_habitats,id',
-            'debris_material' => 'required|integer|exists:debris_materials,id',
             'debris_size' => 'required|integer|exists:debris_sizes,id',
             'debris_weight' => 'nullable|numeric',
-            'debris_thickness' => 'required|integer|exists:debris_thicknesses,id',
-            'debris_rugosity' => 'required|integer|exists:debris_rugosities,id',
-            'debris_sub_category' => 'required|array|size:2',
+            'debris_thickness' => 'nullable|integer|exists:debris_thicknesses,id',
+            'debris_rugosity' => 'nullable|integer|exists:debris_rugosities,id',
+            'debris_sub_category' => 'required|array|max:2|min:1',
             'debris_sub_category.0' => 'required|integer|exists:debris_categories,id',
-            'debris_sub_category.1' => 'required|integer|exists:debris_sub_categories,id',
+            'debris_sub_category.1' => 'nullable|integer|exists:debris_sub_categories,id',
             'debris_marks' => 'nullable|string',
             'debris_origin' => 'nullable|string',
             'debris_otherHabitat' => 'required_without:debris_habitat|string',
-            'debris_otherMaterial' => 'required_without:debris_material|string',
-            'debris_otherRugosity' => 'required_without:debris_rugosity|string',
+            'debris_otherRugosity' => 'nullable:debris_rugosity|string',
 
             'taxas' => 'required|array|min:1',
             'taxas.*.level' => 'required|integer|exists:taxa_levels,id',
             'taxas.*.identification' => 'required|string',
             'taxas.*.authority' => 'nullable|string',
             'taxas.*.year_first_report' => 'nullable|string',
-            'taxas.*.species_status' => 'required|integer|exists:taxa_species_statuses,id',
-            'taxas.*.population_status' => 'required|integer|exists:taxa_population_statuses,id',
-            'taxas.*.abundance' => 'required|integer|exists:taxa_abundances,id',
+            'taxas.*.species_status' => 'nullable|integer|exists:taxa_species_statuses,id',
+            'taxas.*.population_status' => 'nullable|integer|exists:taxa_population_statuses,id',
+            'taxas.*.abundance' => 'nullable|integer|exists:taxa_abundances,id',
             'taxas.*.viability' => 'required|integer|exists:taxa_viabilities,id',
             'taxas.*.maturity' => 'required|array|min:1',
             'taxas.*.maturity.*' => 'required|integer|exists:taxa_maturities,id',
-            'taxas.*.native_region' => 'required|array|min:1',
-            'taxas.*.native_region.*' => 'required|integer|exists:taxa_native_regions,id',
+            'taxas.*.native_region' => 'nullable|array',
+            'taxas.*.native_region.*' => 'integer|exists:taxa_native_regions,id',
+            'taxas.*.asisk_score' => 'nullable|string',
+            'taxas.*.asisk_result' => 'nullable|string',
+
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png',
         ];
     }
 

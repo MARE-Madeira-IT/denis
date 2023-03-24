@@ -18,14 +18,8 @@ class SiteResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'region' => $this->region,
-            'country' => [
-                'id' => $this->country->id,
-                'name' => $this->country->name
-            ],
-            'lme' => [
-                'id' => $this->lme->id,
-                'name' => $this->lme->name
-            ],
+            'country' => $this->country,
+            'lme' => $this->lme,
         ];
     }
 }

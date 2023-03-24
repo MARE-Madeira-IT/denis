@@ -2,6 +2,7 @@
 
 namespace App\QueryFilters;
 
+use Carbon\Carbon;
 use Cerbero\QueryFilters\QueryFilters;
 
 /**
@@ -18,6 +19,14 @@ class ReportFilters extends QueryFilters
     public function date($string)
     {
         $this->query->where('date', 'like', '%' . $string . '%');
+    }
+
+    public function dates($dates)
+    {
+        $from = Carbon::parse($dates[0])->startOfDay();
+        $to = Carbon::parse($dates[1])->endOfDay();
+        
+        $this->query->whereBetween("date", [$from, $to]);
     }
 
     public function customid($int)
@@ -38,7 +47,6 @@ class ReportFilters extends QueryFilters
             $query->where('name', 'like', '%' . $string . '%');
         });
     }
-
 
     public function taxas($string)
     {

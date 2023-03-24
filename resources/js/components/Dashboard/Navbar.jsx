@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { dimensions, maxWidth } from './dashboardHelper';
 import { connect } from "react-redux";
 import { logout, setAuthorizationToken } from '../../redux/auth/actions';
-import { Dropdown, Menu } from 'antd';
+import { Divider, Dropdown, Menu, Space } from 'antd';
 
 const FlexContainer = styled.section`
     position: static;
@@ -58,6 +58,23 @@ const Logo = styled(Link)`
     
 `;
 
+const Avatar = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    .user-image {
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+    }
+
+    .dropdown-icon {
+        width: 12px;
+    }
+`;
 
 const Login = styled.div`
     width: 50%;
@@ -117,7 +134,7 @@ const navbarItems = [
 ];
 
 
-function Navbar({ permissionLevel,
+function Navbar({ permissionLevel, user,
     isAuthenticated, setAuthorizationToken, logout }) {
 
     const handleLogout = () => {
@@ -141,6 +158,8 @@ function Navbar({ permissionLevel,
                     }
                 </>
             ))}
+
+            <Divider />
             <Menu.Item key={index}>
                 <div onClick={handleLogout} className='link'>
                     Logout
@@ -148,6 +167,7 @@ function Navbar({ permissionLevel,
             </Menu.Item>
         </Menu>
     );
+
     return (
         <FlexContainer>
             <Logo to="/">
@@ -170,10 +190,13 @@ function Navbar({ permissionLevel,
                             </>
 
                         ))}
+                        <Dropdown overlay={menu}>
+                            <Avatar onClick={(e) => e.preventDefault()}>
+                                <img src={user?.image} alt="profile" className='user-image' />
+                                <img src="/images/icons/dashboard/dropdown_white.svg" alt="dropdown" className='dropdown-icon' />
+                            </Avatar>
+                        </Dropdown>
 
-                        <div onClick={handleLogout} className='link'>
-                            Logout
-                        </div>
                     </>
                     : <Link className='link' to="/login">Login</Link>}
 
@@ -185,7 +208,8 @@ function Navbar({ permissionLevel,
                         <img src="/images/icons/menu_white.svg" alt="menu" />
                     </Dropdown>
 
-                    : <Link className='link' to="/login">Login</Link>}
+                    :
+                    <Link className='link' to="/login">Login</Link>}
 
             </MenuIcon>
         </FlexContainer>
@@ -202,6 +226,7 @@ const mapStateToProps = (state) => {
     return {
         permissionLevel: state.auth.permissionLevel,
         isAuthenticated: state.auth.isAuthenticated,
+        user: state.auth.currentUser,
     };
 };
 

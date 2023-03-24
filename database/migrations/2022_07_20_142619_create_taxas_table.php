@@ -17,20 +17,22 @@ class CreateTaxasTable extends Migration
             $table->id();
             $table->string('authority')->nullable();
             $table->string('year_first_report')->nullable();
-            $table->string('reference')->nullable();
+            $table->text('reference')->nullable();
             $table->string('identification');
+            $table->string('asisk_score')->nullable();
+            $table->string('asisk_result')->nullable();
             $table->unsignedBigInteger('report_id');
             $table->unsignedBigInteger('taxa_level_id');
-            $table->unsignedBigInteger('taxa_species_status_id');
-            $table->unsignedBigInteger('taxa_population_status_id');
-            $table->unsignedBigInteger('taxa_abundance_id');
+            $table->unsignedBigInteger('taxa_species_status_id')->nullable();
+            $table->unsignedBigInteger('taxa_population_status_id')->nullable();
+            $table->unsignedBigInteger('taxa_abundance_id')->nullable();
             $table->unsignedBigInteger('taxa_viability_id');
             $table->timestamps();
 
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
             $table->foreign('taxa_level_id')->references('id')->on('taxa_levels')->onDelete('cascade');
-            $table->foreign('taxa_species_status_id')->references('id')->on('taxa_species_statuses')->onDelete('cascade');
-            $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses')->onDelete('cascade');
+            $table->foreign('taxa_species_status_id')->references('id')->on('taxa_species_statuses')->onDelete('set null');
+            $table->foreign('taxa_population_status_id')->references('id')->on('taxa_population_statuses')->onDelete('set null');
             $table->foreign('taxa_abundance_id')->references('id')->on('taxa_abundances')->onDelete('cascade');
             $table->foreign('taxa_viability_id')->references('id')->on('taxa_viabilities')->onDelete('cascade');
         });

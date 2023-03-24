@@ -1,10 +1,12 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { Col, Form, Input, DatePicker, Row, Tooltip } from 'antd'
+import { Col, Form, Input, DatePicker, Row, Tooltip, Upload } from 'antd'
 import CountryRemoteSelectContainer from '../../Site/Country/CountryRemoteSelectContainer'
 import LmeRemoteSelectContainer from '../../Site/Lme/LmeRemoteSelectContainer'
 import { MapContainer, Marker, TileLayer, ZoomControl } from 'react-leaflet'
 import styled from 'styled-components';
 import debounce from 'lodash/debounce';
+import axios from 'axios'
+import CustomTooltip from './CustomTooltip'
 
 const requiredRule = [{ required: true }];
 
@@ -14,25 +16,56 @@ const StyledMapContainer = styled(MapContainer)`
     min-height: 400px;
 `;
 
-const CustomTooltip = styled(Tooltip)`
-    margin-left: 10px;
-    cursor: pointer;
-    width: 15px;
-    height: 15px;
-`;
 
-function ItemDetection({ form, updateMode, currentReport }) {
-    const [latitude, setLatitude] = useState(32.427876);
-    const [longitude, setLongitude] = useState(-17.011401);
+function ItemDetection({ form, hasInitialData, updateMode, active, currentReport, setDebrisFile, debrisFile }) {
+    const [latitude, setLatitude] = useState(24.206889622);
+    const [longitude, setLongitude] = useState(-36.2109375);
+    const [hasTouched, setHasTouched] = useState([false, false]);
+    const [imageUrl, setImageUrl] = useState([]);
     const markerRef = useRef(null)
+    const GEOCODE_URL = "https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en";
 
     const handleLatitude = (e) => {
         setLatitude(e.target.value);
+        setHasTouched([true, hasTouched[1]]);
     }
+
+    const getBase64 = (img, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+    };
 
     const handleLongitude = (e) => {
         setLongitude(e.target.value);
+        setHasTouched([hasTouched[0], true]);
     }
+
+    const reverseGeoCoding = async () => {
+        var api_key = "yVN8zgFigYGIRgP-iUnlq506MygrKQJ8YJkRZ2z4Avs";
+
+        const data = await (await fetch(
+            `${GEOCODE_URL}&apiKey=${api_key}&in=circle:${latitude},${longitude};r=90000`
+        )).json();
+
+        if (data.items.length) {
+            var { address } = data.items[0];
+            form.setFieldsValue({
+                country: address.countryName,
+                region: address.county,
+                site: address.city
+            });
+        } else {
+            form.resetFields(['country', 'region', 'site']);
+        }
+    }
+
+    useEffect(() => {
+        if (hasTouched[0] && hasTouched[1]) {
+            reverseGeoCoding()
+        }
+    }, [hasTouched])
+
 
     const eventHandlers = useMemo(
         () => ({
@@ -43,6 +76,7 @@ function ItemDetection({ form, updateMode, currentReport }) {
                     form.setFieldsValue({ latitude: position.lat, longitude: position.lng });
                     setLatitude(position.lat);
                     setLongitude(position.lng);
+                    setHasTouched([true, true]);
                 }
             },
         }),
@@ -50,21 +84,20 @@ function ItemDetection({ form, updateMode, currentReport }) {
     )
 
     useEffect(() => {
-        if (updateMode) {
+        if (updateMode || currentReport?.id) {
             setTimeout(() => {
                 var coords = form.getFieldsValue(['latitude', 'longitude']);
 
                 setLatitude(coords.latitude);
                 setLongitude(coords.longitude);
             }, 500);
-
         }
         else {
-            setLatitude(32.427876);
-            setLongitude(-17.011401);
+            setLatitude(24.206889622);
+            setLongitude(-36.2109375);
         }
-    }, [currentReport.id])
-
+    }, [currentReport.id, active])
+    console.log(imageUrl);
     return (
         <>
             <Row align='bottom' type="flex" gutter={32}>
@@ -73,43 +106,33 @@ function ItemDetection({ form, updateMode, currentReport }) {
                         <DatePicker style={{ width: "100%" }} placeholder="Date" />
                     </Form.Item>
                 </Col>
-
-                <Col xs={24} md={8}>
-                    <Form.Item label="Ongoing Surveys Modality" name="on_going_survey" rules={[{ required: false }]}>
-                        <Input placeholder="Ex.: Diving transect (25 m)" />
-                    </Form.Item>
-                </Col>
                 <Col xs={24} md={8}>
                     <Form.Item label={(
                         <>
                             <span>Custom identifier</span>
-                            <CustomTooltip title="The platform generates it's own identifier, however you may add a custom one which will help you identify each report"><img src="/images/icons/form/tooltip.svg" /></CustomTooltip>
+                            <CustomTooltip text="The platform generates it's own identifier, however you may add a custom one which will help you identify each report" />
+
                         </>)} name="custom_id" rules={[{ required: false }]}>
                         <Input placeholder="Ex.: 00001" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Site name*" name="site" rules={requiredRule}>
-                        <Input placeholder="Site" />
+
+                <Col xs={24} md={8}>
+                    <Form.Item label={(
+                        <>
+                            <span>Digital object identifier</span>
+                            <CustomTooltip text="DeNIS is used as a data repository, for already published work and submitted papers. A DOI, or Digital Object Identifier, is an identifier of such content on the web." />
+
+                        </>)} name="doi" rules={[{ required: false }]}>
+                        <Input placeholder="Ex.: 10.1080/15588742.2015" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Region/Province*" name="region" rules={requiredRule}>
-                        <Input placeholder="Region/Province" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Country*" name="country" rules={requiredRule}>
-                        <CountryRemoteSelectContainer />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={6}>
-                    <Form.Item label="Large marine ecosystem*" name="lme" rules={requiredRule}>
-                        <LmeRemoteSelectContainer />
-                    </Form.Item>
-                </Col>
+
+
+
             </Row>
             <br />
+
             <Row align='middle' type="flex" gutter={32}>
                 <Col xs={24} md={12}>
                     <h3>Introduce coordinates using the inputs below or move the picker on the map to the desired position.</h3>
@@ -121,7 +144,7 @@ function ItemDetection({ form, updateMode, currentReport }) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <StyledMapContainer center={[32.427876, -17.011401]} zoom={9} zoomControl={false}>
+                    <StyledMapContainer center={[latitude, longitude]} zoom={2} zoomControl={false}>
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -133,6 +156,64 @@ function ItemDetection({ form, updateMode, currentReport }) {
                     </StyledMapContainer>
                 </Col>
             </Row>
+
+            <br />
+
+            {(hasTouched[0] && hasTouched[1]) &&
+                <Row align='middle' type="flex" gutter={32}>
+                    <Col xs={24} md={6}>
+                        <Form.Item label="Site name*" name="site">
+                            <Input placeholder="Site" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={6}>
+                        <Form.Item label="Region/Province*" name="region" rules={requiredRule}>
+                            <Input placeholder="Region/Province" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={6}>
+                        <Form.Item label="Country*" name="country" rules={requiredRule}>
+                            <CountryRemoteSelectContainer />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={6}>
+                        <Form.Item label="Large marine ecosystem" name="lme">
+                            <LmeRemoteSelectContainer />
+                        </Form.Item>
+                    </Col>
+                </Row>
+            }
+            {!updateMode &&
+
+                <Col span={24}>
+                    <p>Photographies of the debris and biological samples</p>
+                    <Upload
+                        name="images"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        multiple
+                        showUploadList
+                        maxCount={10}
+                        beforeUpload={(_, fileList) => {
+
+                            setDebrisFile(fileList);
+                            var imageUrlList = [];
+                            fileList.map((currentFile) => {
+                                getBase64(currentFile, (item) => {
+                                    imageUrlList.push(item);
+                                });
+                            })
+
+                            setImageUrl(imageUrlList);
+
+
+                            return false;
+                        }}
+                    >
+                        <div> + <div style={{ marginTop: 8 }}> Upload </div></div>
+                    </Upload>
+                </Col>
+            }
         </>
     )
 }

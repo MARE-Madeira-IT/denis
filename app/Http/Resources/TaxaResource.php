@@ -20,22 +20,15 @@ class TaxaResource extends JsonResource
             'year_first_report' => $this->year_first_report,
             'reference' => $this->reference,
             'identification' => $this->identification,
-            'speciesStatus' => [
-                'id' => $this->speciesStatus->id,
-                'name' => $this->speciesStatus->name
-            ],
-            'populationStatus' => [
-                'id' => $this->populationStatus->id,
-                'name' => $this->populationStatus->name
-            ],
+            'speciesStatus' => $this->speciesStatus,
+            'populationStatus' => $this->populationStatus,
+            'asisk_score' => $this->asisk_score,
+            'asisk_result' => $this->asisk_result,
             'level' => [
                 'id' => $this->level->id,
                 'name' => $this->level->name
             ],
-            'abundance' => [
-                'id' => $this->abundance->id,
-                'name' => $this->abundance->name
-            ],
+            'abundance' => $this->abundance,
             'viability' => [
                 'id' => $this->viability->id,
                 'name' => $this->viability->name

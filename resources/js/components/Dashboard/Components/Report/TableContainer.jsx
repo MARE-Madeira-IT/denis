@@ -5,6 +5,7 @@ import TableComponent from "../../Common/TableComponent";
 import { getColumnSearchProps } from "./Search";
 import StopPropagation from "../../Common/StopPropagation";
 import { connect } from "react-redux";
+import { deleteReport } from "../../../../redux/report/actions";
 
 const Container = styled.div`
     width: 100%;
@@ -24,7 +25,7 @@ const colorDecoder = {
     "rejected": "magenta",
 }
 
-function TableContainer({ permissionLevel, loading, data, meta, handlePageChange, handleRowClick, filters, setFilters, updateState }) {
+function TableContainer({ permissionLevel, currentUser, loading, data, meta, handlePageChange, handleRowClick, filters, setFilters, updateState, deleteReport }) {
     const [status, setStatus] = useState(undefined);
     const [permissionColumns, setPermissionColumns] = useState([]);
     const searchInput = useRef(null);
@@ -45,8 +46,6 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
     const handleStateUpdate = (state, report) => {
         updateState({ report_id: report, validation_id: state });
     };
-
-
 
 
     const columns = [
@@ -76,13 +75,13 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
             title: 'Location (site, region, country, lme)',
             dataIndex: 'site',
             ...getColumnSearchProps('location', searchInput, handleFilter, handleFilterClear),
-            render: (record) => <span>{record.name}, {record.region}, {record.country.name}, {record.lme.name}</span>
+            render: (record) => <span>{record.name}, {record.region}, {record?.country?.name}, {record?.lme?.name}</span>
         },
         {
             title: 'Debris',
             dataIndex: 'debris',
             ...getColumnSearchProps('debris', searchInput, handleFilter, handleFilterClear),
-            render: (record) => record.mdi_code
+            render: (record) => record.name
         },
         {
             title: 'Biodiversity',
@@ -168,11 +167,11 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
             dataIndex: '',
             render: (_, record) =>
                 <StopPropagation> {
-                    data.length >= 1 ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+                    (permissionLevel == 2 || currentUser.id == record.user.id) && (
+                        <Popconfirm title="Sure to delete?" onConfirm={() => deleteReport(record.id)}>
                             <a>Delete</a>
                         </Popconfirm>
-                    ) : null
+                    )
                 }</StopPropagation>
             ,
         },
@@ -206,11 +205,17 @@ function TableContainer({ permissionLevel, loading, data, meta, handlePageChange
     )
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteReport: (id) => dispatch(deleteReport(id)),
+    };
+};
 
 const mapStateToProps = (state) => {
     return {
         permissionLevel: state.auth.permissionLevel,
+        currentUser: state.auth.currentUser
     };
 };
 
-export default connect(mapStateToProps, null)(TableContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

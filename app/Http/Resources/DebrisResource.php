@@ -19,6 +19,7 @@ class DebrisResource extends JsonResource
             'weight' => $this->weight,
             'marks' => $this->marks,
             'origin' => $this->origin,
+            'image' => $this->debris_image,
             'type' => [
                 'id' => $this->type->id,
                 'name' => $this->type->name,
@@ -28,29 +29,20 @@ class DebrisResource extends JsonResource
                 'id' => $this->habitat->id,
                 'name' => $this->otherHabitat ? $this->otherHabitat : $this->habitat->name,
             ],
-            'material' => [
-                'id' => $this->material->id,
-                'name' => $this->otherMaterial ? $this->otherMaterial : $this->material->name,
-            ],
             'size' => [
                 'id' => $this->size->id,
                 'name' => $this->size->name,
             ],
-            'thickness' => [
-                'id' => $this->thickness->id,
-                'name' => $this->thickness->name,
-            ],
+            'thickness' => $this->thickness,
             'rugosity' => [
-                'id' => $this->rugosity->id,
-                'name' => $this->otherRugosity ? $this->otherRugosity : $this->rugosity->name,
+                'id' => $this->rugosity_id ? $this->rugosity->id : null,
+                'name' => $this->otherRugosity ? $this->otherRugosity : $this->rugosity_id ? $this->rugosity->name : null,
             ],
             'litter_category' => [
-                'id' => $this->subcategory->id,
-                'name' => $this->subcategory->name,
-                'mdi_code' => $this->subcategory->mdi_code,
-                'category' => $this->subcategory->category
+                'id' => $this->category->id,
+                'name' => $this->category->name,
+                'subcategory' => $this->subcategory
             ],
-
         ];
     }
 }

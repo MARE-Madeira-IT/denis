@@ -16,8 +16,8 @@ class MinimalDebrisResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'mdi_code' => $this->subcategory->mdi_code,
-            'name' => $this->subcategory->name
+            'mdi_code' => $this->subcategory ? $this->subcategory->mdi_code : null,
+            'name' => $this->subcategory ? $this->subcategory->name : $this->category->name,
         ];
     }
 }

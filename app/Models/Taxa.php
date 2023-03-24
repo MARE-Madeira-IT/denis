@@ -21,6 +21,8 @@ class Taxa extends Model
         "taxa_population_status_id",
         "taxa_abundance_id",
         "taxa_viability_id",
+        "asisk_score",
+        "asisk_result",
     ];
 
     public static function store($data)
@@ -34,13 +36,18 @@ class Taxa extends Model
                 "identification" => $taxa["identification"],
                 "report_id" => $data["report_id"],
                 "taxa_level_id" => $taxa["level"],
-                "taxa_species_status_id" => $taxa["species_status"],
-                "taxa_population_status_id" => $taxa["population_status"],
-                "taxa_abundance_id" => $taxa["abundance"],
+                "asisk_score" => Arr::get($taxa, "asisk_score"),
+                "asisk_result" => Arr::get($taxa, "asisk_result"),
+                "taxa_species_status_id" => Arr::get($taxa, "species_status"),
+                "taxa_population_status_id" => Arr::get($taxa, "population_status"),
+                "taxa_abundance_id" => Arr::get($taxa, "abundance"),
                 "taxa_viability_id" => $taxa["viability"],
             ]);
 
-            $newTaxa->nativeRegions()->sync($taxa["native_region"]);
+            if (Arr::get($taxa, "native_region")) {
+                $newTaxa->nativeRegions()->sync($taxa["native_region"]);
+            }
+
             $newTaxa->maturities()->sync($taxa["maturity"]);
         }
     }

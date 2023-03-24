@@ -17,6 +17,7 @@ function DebrisCategoryRemoteCascadeContainer({ fetchDebrisCategorySelector, dat
             onChange={onChange}
             options={data}
             loading={loading}
+            changeOnSelect
             fieldNames={{
                 label: 'name',
                 value: 'id',

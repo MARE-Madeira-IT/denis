@@ -10,6 +10,7 @@ export const initialState = {
     current: {},
     loadingGraph: false,
     dataGraph: [],
+    loadingExport: false,
 }
 
 export default (state = initialState, action = {}) => {
@@ -129,6 +130,19 @@ export default (state = initialState, action = {}) => {
                         : record
                 )
             };
+        case `${types.EXPORT_REPORTS}_PENDING`:
+            return {
+                ...state,
+                loadingExport: true
+            };
+
+        case `${types.EXPORT_REPORTS}_REJECTED`:
+        case `${types.EXPORT_REPORTS}_FULFILLED`:
+            return {
+                ...state,
+                loadingExport: false
+            };
+
 
         default:
             return state

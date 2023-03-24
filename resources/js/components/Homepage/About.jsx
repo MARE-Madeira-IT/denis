@@ -200,10 +200,10 @@ function About({ fetchReportsCoordinates }) {
                     <h2>Who is DeNIS for?</h2>
                     <UsersContainer>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
+                            DeNIS is designed to serve as a one-stop-shop for researchers, policymakers, and other stakeholders in the scientific community. The platform provides comprehensive information on marine debris and non-indigenous species, including their distribution, origin, and impact on marine ecosystems.
                         </p>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aliquid id deserunt earum libero, molestias, facilis assumenda eveniet a accusantium, delectus nobis iure aspernatur autem cum enim aut voluptates recusandae!
+                            We also offer various tools and resources such as data visualization tools, data analytics tools, and interactive maps to facilitate research and collaboration. By providing access to this information, we hope to foster collaboration and promote the development of solutions that address pressing issues.
                         </p>
                     </UsersContainer>
 

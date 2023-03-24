@@ -1,17 +1,20 @@
-import { Col, Form, Input, InputNumber, Row } from 'antd'
+import { Col, Form, Input, InputNumber, Row, Upload } from 'antd'
 import React, { useState } from 'react'
 import DebrisCategoryRemoteCascadeContainer from '../../Debris/Category/DebrisCategoryRemoteCascadeContainer'
 import DebrisHabitatRemoteSelectContainer from '../../Debris/Habitat/DebrisHabitatRemoteSelectContainer'
-import DebrisMaterialRemoteSelectContainer from '../../Debris/Material/DebrisMaterialRemoteSelectContainer'
 import DebrisRugosityRemoteSelectContainer from '../../Debris/Rugosity/DebrisRugosityRemoteSelectContainer'
 import DebrisSizeRemoteSelectContainer from '../../Debris/Size/DebrisSizeRemoteSelectContainer'
 import DebrisThicknessRemoteSelectContainer from '../../Debris/Thickness/DebrisThicknessRemoteSelectContainer'
 import DebrisTypeRemoteSelectContainer from '../../Debris/Type/DebrisTypeRemoteSelectContainer'
+import CustomTooltip from './CustomTooltip'
 
 const requiredRule = [{ required: true }];
 
 function DebrisCharacterization() {
     const [requiredDepth, setRequiredDepth] = useState(false)
+
+
+
 
     function handleTypeChange(e) {
         setRequiredDepth(e == 2)
@@ -22,7 +25,12 @@ function DebrisCharacterization() {
             <Col xs={24} md={12}>
                 <Row align='bottom' type="flex" gutter={32}>
                     <Col span={12}>
-                        <Form.Item label="Debris Type*" name="debris_type" rules={requiredRule}>
+                        <Form.Item label={(
+                            <>
+                                <span>Debris Type*</span>
+                                <CustomTooltip text="Location in which the debris was found" />
+
+                            </>)} name="debris_type" rules={requiredRule}>
                             <DebrisTypeRemoteSelectContainer onChange={handleTypeChange} />
                         </Form.Item>
                     </Col>
@@ -43,12 +51,12 @@ function DebrisCharacterization() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris material*" name="debris_material" rules={requiredRule}>
-                    <DebrisMaterialRemoteSelectContainer />
-                </Form.Item>
-            </Col>
-            <Col xs={24} md={6}>
-                <Form.Item label="Debris size class*" name="debris_size" rules={requiredRule}>
+                <Form.Item label={(
+                    <>
+                        <span>Debris size class*</span>
+                        <CustomTooltip text="Categories of items size ranges" />
+
+                    </>)} name="debris_size" rules={requiredRule}>
                     <DebrisSizeRemoteSelectContainer />
                 </Form.Item>
             </Col>
@@ -58,12 +66,22 @@ function DebrisCharacterization() {
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris stiffness*" name="debris_thickness" rules={requiredRule}>
+                <Form.Item label={(
+                    <>
+                        <span>Stiffness</span>
+                        <CustomTooltip text="Flexibility of the material found" />
+
+                    </>)} name="debris_thickness">
                     <DebrisThicknessRemoteSelectContainer />
                 </Form.Item>
             </Col>
             <Col xs={24} md={6}>
-                <Form.Item label="Debris surface rugosity*" name="debris_rugosity" rules={requiredRule}>
+                <Form.Item label={(
+                    <>
+                        <span>Surface rugosity</span>
+                        <CustomTooltip text="Description on the surface of the debris" />
+
+                    </>)} name="debris_rugosity">
                     <DebrisRugosityRemoteSelectContainer />
                 </Form.Item>
             </Col>

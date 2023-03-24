@@ -59,13 +59,13 @@ function TableContainer({ loading, data, meta, handlePageChange, handleRowClick,
             title: 'Location',
             dataIndex: 'site',
             ...getColumnSearchProps('location', searchInput, handleFilter, handleFilterClear),
-            render: (record) => <span>{record.name}, {record.region}, {record.country.name}, {record.lme.name}</span>
+            render: (record) => <span>{record.name}, {record.region}, {record.country.name}{record.lme ? ", " + record.lme.name : ""}</span>
         },
         {
             title: 'Marine Debris',
             dataIndex: 'debris',
             ...getColumnSearchProps('debris', searchInput, handleFilter, handleFilterClear),
-            render: (record) => record.mdi_code
+            render: (record) => record.name
         },
         {
             title: 'Biological identifications',

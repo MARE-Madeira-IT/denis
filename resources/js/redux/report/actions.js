@@ -1,6 +1,7 @@
 import { types } from "./types";
 import axios from "axios";
 import { stringify } from "query-string";
+import { download } from "../../helper";
 
 export const fetchReports = (page = 1, filters = {}) => ({
     type: types.FETCH_REPORTS,
@@ -58,4 +59,23 @@ export const updateState = data => ({
 export const setCurrentReport = data => ({
     type: types.SET_CURRENT_STATE,
     payload: data,
+});
+
+export const exportReports = (filters = {}) => ({
+    type: types.EXPORT_REPORTS,
+    payload: axios({
+        url: `${window.location.origin}/api/export/reports?${stringify(filters, {
+            arrayFormat: "index"
+        })}`,
+        method: "GET",
+        responseType: "blob",
+    }).then(
+        response => {
+            download(response, 'reports.csv')
+        },
+        error => {
+            return error.data;
+        }
+    ),
+    meta: { globalError: true }
 });
