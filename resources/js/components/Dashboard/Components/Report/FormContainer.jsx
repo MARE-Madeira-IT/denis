@@ -103,22 +103,40 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
             var submitData = { ...formData, ...values }
             submitData.date = moment(submitData.date).format("YYYY-MM-DD");
             var formInfo = new FormData();
-
-            for (var key in submitData) {
-                if (submitData[key]) {
-                    if (Array.isArray(submitData[key])) {
-                        if (key == "taxas") {
-                            formInfo.append('taxas', JSON.stringify(submitData[key]));
+            console.log(submitData);
+            Object.entries(submitData).map((entry) => {
+                if (entry[1]) {
+                    if (Array.isArray(entry[1])) {
+                        if (entry[0] == "taxas") {
+                            console.log(entry[1]);
+                            formInfo.append('taxas', JSON.stringify(entry[1]));
                         } else {
-                            handleArrayToFormData(formInfo, submitData[key], key);
+                            handleArrayToFormData(formInfo, entry[1], entry[0]);
                         }
 
                     } else {
-                        formInfo.append(key, submitData[key]);
+                        formInfo.append(entry[0], entry[1]);
                     }
 
                 }
-            }
+            })
+
+            // for (var key in submitData) {
+            //     if (submitData[key]) {
+            //         if (Array.isArray(submitData[key])) {
+            //             if (key == "taxas") {
+            //                 console.log(submitData[key]);
+            //                 formInfo.append('taxas', JSON.stringify(submitData[key]));
+            //             } else {
+            //                 handleArrayToFormData(formInfo, submitData[key], key);
+            //             }
+
+            //         } else {
+            //             formInfo.append(key, submitData[key]);
+            //         }
+
+            //     }
+            // }
             handleArrayToFormData(formInfo, debrisFile, 'images');
 
 
@@ -257,7 +275,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                         {fields.map((key, name) =>
                             <BiologicalInformation
                                 form={form}
-                                key={key}
+                                key={key.key}
                                 name={name}
                                 handleDelete={() => remove(name)}
                                 length={fields.length}
@@ -265,7 +283,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                         )}
 
                         <Row type="flex" justify='center'>
-                            <Add onClick={add}> Add another species</Add>
+                            <Add onClick={() => add()}> Add another species</Add>
                         </Row>
                     </>
                 )}
