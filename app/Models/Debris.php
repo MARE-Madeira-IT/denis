@@ -44,6 +44,7 @@ class Debris extends Model
         ];
     }
 
+
     public static function store($data)
     {
         return self::create([
@@ -62,6 +63,34 @@ class Debris extends Model
             "otherHabitat" => Arr::get($data, "debris_otherHabitat"),
             "otherRugosity" => Arr::get($data, "debris_otherRugosity"),
         ]);
+    }
+
+    public static function import($data)
+    {
+
+        try {
+            $has_habitat = Arr::get($data, 'habitat_of_the_finding');
+            $rugosity = DebrisHabitat::where('name', $data["debris_surface_rugosity"])->first();
+            $has_subcategory = Arr::get($data, 'debris_subcategory');
+
+            return self::create([
+                "debris_type_id" => DebrisType::where('name', $data["debris_type"])->first()->id,
+                "depth" => Arr::get($data, 'if_seafloor_specify_depth_(m)'),
+                "debris_habitat_id" => $has_habitat ? DebrisHabitat::where('name', $has_habitat)->first()->id : 12,
+                "otherHabitat" => $has_habitat ? null : $data["if_other_please_specify"],
+                "debris_size_id" => DebrisSize::where('name', $data["debris_size_class"])->first()->id,
+                "weight" => Arr::get($data, "debris_weight_(kg)"),
+                "debris_thickness_id" => DebrisThickness::where('name', $data["debris_thickness"])->first()->id,
+                "debris_rugosity_id" => $rugosity ? $rugosity->id : 7,
+                "otherRugosity" => $rugosity ? null : $data["if_other_please_specify"],
+                "marks" => Arr::get($data, "debris_identification_marks"),
+                "origin" => Arr::get($data, "probable_debris_origin"),
+                "debris_category_id" => DebrisCategory::where('name', $data["debris_category"])->first()->id,
+                "debris_subcategory_id" => $has_subcategory ? DebrisSubCategory::where('mdi_code', $data["debris_subcategory"])->first()->id : null,
+            ]);
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function material()

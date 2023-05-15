@@ -2,6 +2,7 @@ import { Row } from 'antd';
 import React from 'react'
 import styled from "styled-components";
 import { dimensions, maxWidthStyle } from '../dashboardHelper';
+import { colors } from '../../../helper';
 
 const Container = styled.section`
     ${maxWidthStyle}
@@ -66,7 +67,7 @@ const Item = styled.div`
             box-shadow: 0px 0px 13px 0px rgba(0,0,0,.3);
 
             .status-bar {
-                background-color: #0C4C88;
+                background-color: ${colors.main};
             }
         }
 

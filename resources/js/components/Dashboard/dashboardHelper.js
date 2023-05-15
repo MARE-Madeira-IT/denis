@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-
+import { colors } from "../../helper";
 export const maxWidth = "2400px";
 export const dimensions = {
     "xs": "575px",
@@ -29,35 +29,29 @@ export const font = "Poppins";
 
 
 export const Create = styled.button`
-    padding: 12px 15px;
+    padding: 8px 16px;
     min-width: 120px;
-    background-color: #0C4C88;
-    border: 0px;
+    background-color: ${colors.main};
+    border: 2px solid ${colors.main};
     box-shadow: none;
     color: white;
     cursor: pointer;
     border-radius: 6px;
-    transition: background-color .3s ease;
-
+    transition: all .3s ease;
+    font-weight: bold;
     &:hover {
-        background-color: #082d4f;
+        border-color: ${colors.mainHover};
+        background-color: ${colors.mainHover};
     }
 `;
 
-export const CreateSecundary = styled.button`
-    padding: 12px 15px;
-    min-width: 120px;
-    border-color: #0C4C88;
-    border: 2px solid;
+export const CreateSecundary = styled(Create)`
     background-color: transparent;
-    box-shadow: none;
-    color: #0C4C88;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all .3s ease;
+    color: ${colors.main};
 
     &:hover {
-        border-color: #082d4f;
-        color: #082d4f;
+        
+        color: ${colors.mainHover};
+        background-color: white;
     }
 `;

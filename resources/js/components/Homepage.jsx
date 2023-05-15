@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import About from './Homepage/About';
 import Partners from './Homepage/Partners';
 import Timeline from './Homepage/Timeline';
+import Faq from './Homepage/Faq';
 import Navbar from './Navbar';
 
 const Container = styled.div`
@@ -25,6 +26,7 @@ function Homepage() {
             <Navbar />
             <Content>
                 <About />
+                <Faq />
                 <Partners />
                 <Timeline />
             </Content>

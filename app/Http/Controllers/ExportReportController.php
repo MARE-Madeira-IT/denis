@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ReportExport;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use App\QueryFilters\ReportFilters;
 
 class ExportReportController extends Controller
 {
@@ -14,8 +13,8 @@ class ExportReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(ReportFilters $filters)
     {
-        return (new ReportExport)->download('reservas.csv', \Maatwebsite\Excel\Excel::CSV);
+        return (new ReportExport($filters))->download('reservas.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }

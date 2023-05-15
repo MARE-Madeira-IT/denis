@@ -97,7 +97,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
             setLongitude(-36.2109375);
         }
     }, [currentReport.id, active])
-    console.log(imageUrl);
+
     return (
         <>
             <Row align='bottom' type="flex" gutter={32}>
@@ -186,31 +186,40 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
             {!updateMode &&
 
                 <Col span={24}>
-                    <p>Photographies of the debris and biological samples</p>
+                    <p>Photographies of the debris and biological samples (.png, .jpeg, .tiff)</p>
                     <Upload
+                        defaultFileList={debrisFile}
                         name="images"
                         listType="picture-card"
                         className="avatar-uploader"
+                        accept='.png,.jpeg,.jpg,.tiff'
                         multiple
                         showUploadList
                         maxCount={10}
-                        beforeUpload={(_, fileList) => {
+                        onRemove={(file) => {
+                            var fileList = [...debrisFile];
+                            var newFileList = fileList.filter(record => record.uid !== file.uid);
 
-                            setDebrisFile(fileList);
-                            var imageUrlList = [];
-                            fileList.map((currentFile) => {
+                            setDebrisFile(newFileList);
+                        }}
+                        beforeUpload={(currentFile) => {
+                            const isValid = (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/tiff');
+
+                            if (isValid) {
+                                setDebrisFile([...debrisFile, currentFile]);
+                                var imageUrlList = [];
+
                                 getBase64(currentFile, (item) => {
-                                    imageUrlList.push(item);
+                                    imageUrlList = [...imageUrl, item];
                                 });
-                            })
 
-                            setImageUrl(imageUrlList);
-
+                                setImageUrl(imageUrlList);
+                            }
 
                             return false;
                         }}
                     >
-                        <div> + <div style={{ marginTop: 8 }}> Upload </div></div>
+                        <div> + <div> Upload </div></div>
                     </Upload>
                 </Col>
             }

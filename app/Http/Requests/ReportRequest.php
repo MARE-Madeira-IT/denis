@@ -105,7 +105,7 @@ class ReportRequest extends FormRequest
             'taxas.*.asisk_result' => 'nullable|string',
 
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png',
+            'images.*' => 'image|mimes:jpg,jpeg,png,tiff',
         ];
     }
 

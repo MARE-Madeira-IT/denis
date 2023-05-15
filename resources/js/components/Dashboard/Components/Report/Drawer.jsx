@@ -5,7 +5,7 @@ import { Col, Row } from 'antd';
 import { connect } from 'react-redux';
 import MapViewModal from '../../../MapViewModal';
 
-import { dimensions } from '../../dashboardHelper';
+import { Create, CreateSecundary, dimensions } from '../../dashboardHelper';
 
 const Title = styled.h2`
     //
@@ -70,25 +70,6 @@ const ImageContainer = styled.section`
    
 `;
 
-const Button = styled.button`
-    padding: 12px 15px;
-    background-color: #0C4C88;
-    border: 0px;
-    box-shadow: none;
-    color: white;
-    cursor: pointer;
-`;
-
-const SecundaryButton = styled.button`
-    padding: 12px 15px;
-    border: 2px solid #0C4C88;
-    background-color: white;
-    box-shadow: none;
-    color: #0C4C88;
-    cursor: pointer;
-    margin-left: 20px;
-`;
-
 function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
 
     const FieldContainer = ({ name, value }) => (
@@ -114,7 +95,7 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
 
                     <FieldsContainer width="25%">
                         <FieldContainer name="Date of survey (dd-mm-yyyy)" value={current.date} />
-                        <FieldContainer name="Localization" value={current.site?.name + ", " + current.site?.region + ", " + current.site?.country?.name + ", " + (current?.site?.lme ? current?.site?.lme?.name : "")} />
+                        <FieldContainer name="Localization" value={current.site?.value + ", " + current.site?.region + ", " + current.site?.country?.name + ", " + (current?.site?.lme ? current?.site?.lme?.name : "")} />
                         <FieldContainer name="Ongoing Surveys" value={current.ongoing_survey ? current.ongoing_survey : "No"} />
                         <FieldContainer name="DOI" value={EmptyField(current.doi)} />
                     </FieldsContainer>
@@ -173,11 +154,11 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
 
             <Row type="flex" justify='start' gutter={16}>
                 {handleUpdateClick ?
-                    <Button onClick={handleUpdateClick}>Update</Button>
+                    <Create style={{ marginRight: "10px" }} onClick={handleUpdateClick}>Update</Create>
                     : <></>
                 }
                 {handleDuplicateClick ?
-                    <SecundaryButton onClick={handleDuplicateClick}>Duplicate</SecundaryButton>
+                    <CreateSecundary onClick={handleDuplicateClick}>Duplicate</CreateSecundary>
                     : <></>
                 }
             </Row>

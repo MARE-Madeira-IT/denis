@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExportReportController;
+use App\Http\Controllers\ExportTemplateInvokable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,15 +32,21 @@ Route::group([
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::get('me', 'App\Http\Controllers\AuthController@me');
 });
+Route::post('success/', 'App\Http\Controllers\CollectionController@success');
+
 Route::get('export/reports/', ExportReportController::class);
+Route::get('export/template/', ExportTemplateInvokable::class);
+Route::get('export/collections/', ExportReportController::class);
 
 Route::get('/reports/graph', 'App\Http\Controllers\FetchReportGraph');
 
+Route::apiResource('/collections', 'App\Http\Controllers\CollectionController');
 Route::apiResource('/reports', 'App\Http\Controllers\ReportController');
 Route::apiResource('/users', 'App\Http\Controllers\UserController');
 
 Route::post('/validation', 'App\Http\Controllers\ValidationController@store');
 Route::get('/self-reports', 'App\Http\Controllers\ReportController@selfIndex');
+Route::get('/self-collections', 'App\Http\Controllers\CollectionController@selfIndex');
 Route::get('/map-reports', 'App\Http\Controllers\ReportController@mapIndex');
 
 Route::prefix('debris')->group(function () {
@@ -64,10 +71,12 @@ Route::prefix('taxa')->group(function () {
     Route::apiResource('/nativeregions', 'App\Http\Controllers\TaxaNativeRegionController');
 });
 
-
+Route::apiResource('/sites', 'App\Http\Controllers\SiteController');
 Route::prefix('selector')->group(function () {
+    Route::get('/site/regions', 'App\Http\Controllers\SelectorController@regions');
     Route::get('/site/countries', 'App\Http\Controllers\SelectorController@countries');
     Route::get('/site/lmes', 'App\Http\Controllers\SelectorController@lmes');
+    Route::get('/site', 'App\Http\Controllers\SelectorController@sites');
 
     Route::prefix('taxa')->group(function () {
         Route::get('/levels', 'App\Http\Controllers\SelectorController@taxaLevels');

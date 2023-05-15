@@ -75,7 +75,7 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
             title: 'Location (site, region, country, lme)',
             dataIndex: 'site',
             ...getColumnSearchProps('location', searchInput, handleFilter, handleFilterClear),
-            render: (record) => <span>{record.name}, {record.region}, {record?.country?.name}, {record?.lme?.name}</span>
+            render: (record) => <span>{record.value}, {record.region}, {record?.country?.name}, {record?.lme?.name}</span>
         },
         {
             title: 'Debris',

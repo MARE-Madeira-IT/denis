@@ -87,6 +87,7 @@ const Login = styled.div`
     .link {
         cursor: pointer;
         font-size: 16px;
+        font-weight: bold;
         color: rgba(255,255,255, .8); 
 
         &:hover {
@@ -127,6 +128,7 @@ const MenuIcon = styled.div`
 
 const navbarItems = [
     { to: "/dashboard/", title: "Profile", treshold: 0 },
+    { to: "/dashboard/collections", title: "Collections", treshold: 0 },
     { to: "/dashboard/reports", title: "Reports", treshold: 0 },
     { to: "/dashboard/users", title: "Users", treshold: 2 },
     { to: "/dashboard/debris", title: "Debris", treshold: 0 },
@@ -149,7 +151,7 @@ function Navbar({ permissionLevel, user,
 
     const menu = (
         <Menu>
-            {navbarItems.map((item, index) => (
+            {/* {navbarItems.map((item, index) => (
                 <>
                     {permissionLevel >= item.treshold &&
                         <Menu.Item key={index}>
@@ -157,9 +159,9 @@ function Navbar({ permissionLevel, user,
                         </Menu.Item>
                     }
                 </>
-            ))}
+            ))} 
 
-            <Divider />
+            <Divider />*/}
             <Menu.Item key={index}>
                 <div onClick={handleLogout} className='link'>
                     Logout

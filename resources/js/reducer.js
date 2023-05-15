@@ -23,8 +23,12 @@ import taxaNativeRegion from './redux/taxaNativeRegion'
 
 import siteCountry from './redux/siteCountry'
 import siteLme from './redux/siteLme'
+import siteRegion from './redux/siteRegion'
+import site from './redux/site'
 
 import report from './redux/report'
+import collection from './redux/collection'
+
 
 const reducer = combineReducers({
     auth,
@@ -33,6 +37,8 @@ const reducer = combineReducers({
 
     siteCountry,
     siteLme,
+    siteRegion,
+    site,
 
     debrisMaterial,
     debrisType,
@@ -52,7 +58,7 @@ const reducer = combineReducers({
     taxaNativeRegion,
 
     report,
-
+    collection
 
 })
 

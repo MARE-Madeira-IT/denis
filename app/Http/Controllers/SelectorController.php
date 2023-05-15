@@ -11,6 +11,8 @@ use App\Http\Resources\DebrisSizeResource;
 use App\Http\Resources\DebrisThicknessResource;
 use App\Http\Resources\DebrisTypeResource;
 use App\Http\Resources\LmeResource;
+use App\Http\Resources\RegionResource;
+use App\Http\Resources\SiteResource;
 use App\Http\Resources\TaxaAbundanceResource;
 use App\Http\Resources\TaxaLevelResource;
 use App\Http\Resources\TaxaMaturityResource;
@@ -27,6 +29,7 @@ use App\Models\DebrisSize;
 use App\Models\DebrisThickness;
 use App\Models\DebrisType;
 use App\Models\Lme;
+use App\Models\Site;
 use App\Models\TaxaAbundance;
 use App\Models\TaxaLevel;
 use App\Models\TaxaMaturity;
@@ -46,6 +49,16 @@ class SelectorController extends Controller
     public function countries()
     {
         return CountryResource::collection(Country::all());
+    }
+
+    public function regions()
+    {
+        return RegionResource::collection(Site::orderBy('region')->groupBy('region')->get());
+    }
+
+    public function sites()
+    {
+        return SiteResource::collection(Site::orderBy('name')->groupBy('name')->get());
     }
 
     public function debrisTypes()

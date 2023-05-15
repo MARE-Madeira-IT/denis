@@ -25,8 +25,13 @@ class ReportFilters extends QueryFilters
     {
         $from = Carbon::parse($dates[0])->startOfDay();
         $to = Carbon::parse($dates[1])->endOfDay();
-        
+
         $this->query->whereBetween("date", [$from, $to]);
+    }
+
+    public function collection($int)
+    {
+        $this->query->where('collection_id',  $int);
     }
 
     public function customid($int)
@@ -41,6 +46,39 @@ class ReportFilters extends QueryFilters
         });
     }
 
+    public function region($string)
+    {
+        $this->query->whereHas('site', function ($query) use ($string) {
+            $query->where('region', $string);
+        });
+    }
+
+    public function site($string)
+    {
+        $this->query->whereHas('site', function ($query) use ($string) {
+            $query->where('name', $string);
+        });
+    }
+
+    public function country($string)
+    {
+        $this->query->whereHas('site', function ($query) use ($string) {
+            $query->whereHas('country', function ($q) use ($string) {
+                $q->where('name', $string);
+            });
+        });
+    }
+
+    public function lme($string)
+    {
+        $this->query->whereHas('site', function ($query) use ($string) {
+            $query->whereHas('lme', function ($q) use ($string) {
+                $q->where('name', $string);
+            });
+        });
+    }
+
+
     public function user($string)
     {
         $this->query->whereHas('user', function ($query) use ($string) {
@@ -48,7 +86,7 @@ class ReportFilters extends QueryFilters
         });
     }
 
-    public function taxas($string)
+    public function biodiversity($string)
     {
         $this->query->whereHas('taxas', function ($query) use ($string) {
             $query->where('identification', 'like', '%' . $string . '%');
@@ -57,11 +95,13 @@ class ReportFilters extends QueryFilters
 
     public function debris($string)
     {
-        $this->query->whereHas('debris', function ($query) use ($string) {
-            $query->whereHas('subcategory', function ($query) use ($string) {
-                $query->where('mdi_code', 'like', '%' . $string . '%');
-            });
-        });
+        $this->query;
+
+        // ->whereHas('debris', function ($query) use ($string) {
+        //     $query->whereHas('subcategory', function ($query) use ($string) {
+        //         $query->where('mdi_code', 'like', '%' . $string . '%');
+        //     });
+        // });
     }
 
     public function location($string)

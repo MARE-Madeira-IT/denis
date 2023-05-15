@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import { Form, Row, Col, Input, Divider } from 'antd'
+import { Form, Row, Col, Input, Divider, Popover } from 'antd'
 import TaxaLevelRemoteSelectContainer from '../../Ecosystem/Level/TaxaLevelRemoteSelectContainer';
 import TaxaSpeciesStatusRemoteSelectContainer from '../../Ecosystem/SpeciesStatus/TaxaSpeciesStatusRemoteSelectContainer';
 import TaxaPopulationStatusRemoteSelectContainer from '../../Ecosystem/PopulationStatus/TaxaPopulationStatusRemoteSelectContainer';
@@ -10,6 +10,7 @@ import TaxaMaturityRemoteSelectContainer from '../../Ecosystem/Maturity/TaxaMatu
 import TaxaNativeRegionRemoteSelectContainer from '../../Ecosystem/NativeRegion/TaxaNativeRegionRemoteSelectContainer';
 import debounce from 'lodash/debounce';
 import CustomTooltip from './CustomTooltip';
+import Search from 'antd/es/transfer/search';
 
 const requiredRule = { required: true };
 
@@ -23,6 +24,17 @@ const Delete = styled.img`
     }
 `;
 
+const WormsOption = styled.p`
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: background-color .3s ease;
+
+    &:hover {
+        background-color: rgba(0,0,0,.1);
+    }
+`;
+
 const Subtitle = styled.h2`
     flex: 1;
 `;
@@ -31,6 +43,8 @@ const Subtitle = styled.h2`
 
 function BiologicalInformation({ name, handleDelete, length, form }) {
     const [speciesName, setSpeciesName] = useState(undefined)
+    const [loading, setLoading] = useState(false)
+    const [wormsContent, setWormsContent] = useState([])
 
     useEffect(() => {
         if (speciesName) {
@@ -39,35 +53,64 @@ function BiologicalInformation({ name, handleDelete, length, form }) {
 
     }, [speciesName])
 
+    const handleWormsApi = async (info) => {
+        var url = "https://www.marinespecies.org/rest";
+
+        const sources = await (await fetch(
+            `${url}/AphiaSourcesByAphiaID/${info?.AphiaID}`
+        )).json();
+
+        var ref = undefined;
+        sources.map((source) => {
+            if (source.use == "basis of record") {
+                ref = source.reference;
+            }
+        })
+        console.log("taxas[" + name + "].identification");
+        // form.setFieldsValue("taxas[" + name + "].identification", info.scientificname);
+        updateFields({ authority: info.valid_authority, identification: info.scientificname, reference: info.reference, reference: ref })
+        setWormsContent([])
+    }
+
 
     const handleSearch = async () => {
         var url = "https://www.marinespecies.org/rest";
 
-        const aphia_id = await (await fetch(
-            `${url}/AphiaIDByName/${speciesName}?marine_only=true`
+        const aphias = await (await fetch(
+            `${url}/AphiaRecordsByName/${speciesName}`
         )).json();
 
-        if (aphia_id) {
-            const info = await (await fetch(
-                `${url}/AphiaRecordByAphiaID/${aphia_id}`
-            )).json();
+        if (aphias) {
+            if (aphias.length) {
+                setWormsContent(aphias.slice(0, 5))
+            }
 
-            const sources = await (await fetch(
-                `${url}/AphiaSourcesByAphiaID/${aphia_id}`
-            )).json();
-
-            var ref = undefined;
-            sources.map((source) => {
-                if (source.use == "basis of record") {
-                    ref = source.reference;
-                }
-            })
-
-            updateFields({ authority: info.valid_authority, reference: info.reference, reference: ref })
-
-        } else {
-            updateFields({ authority: undefined, reference: undefined, reference: undefined })
         }
+        setLoading(false);
+
+
+
+        // if (aphias.length) {
+        //     const info = await (await fetch(
+        //         `${url}/AphiaRecordByAphiaID/${aphia_id}`
+        //     )).json();
+
+        //     const sources = await (await fetch(
+        //         `${url}/AphiaSourcesByAphiaID/${aphia_id}`
+        //     )).json();
+
+        //     var ref = undefined;
+        //     sources.map((source) => {
+        //         if (source.use == "basis of record") {
+        //             ref = source.reference;
+        //         }
+        //     })
+
+        //     updateFields({ authority: info.valid_authority, reference: info.reference, reference: ref })
+
+        // } else {
+        //     updateFields({ authority: undefined, reference: undefined, reference: undefined })
+        // }
 
 
     }
@@ -88,8 +131,19 @@ function BiologicalInformation({ name, handleDelete, length, form }) {
     }
 
     const handleIdentificationChange = (e) => {
-        setSpeciesName(e.target.value);
+        setLoading(true);
+        setSpeciesName(e);
     }
+
+    const content = (
+        <div>
+            {wormsContent.map((element) => (
+                <WormsOption key={element.AphiaID} onClick={() => handleWormsApi(element)}>
+                    {element.rank}, {element.scientificname} ({element.valid_authority})
+                </WormsOption>
+            ))}
+        </div>
+    );
 
     return (
         <>
@@ -107,9 +161,11 @@ function BiologicalInformation({ name, handleDelete, length, form }) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
-                    <Form.Item label="Scientific name*" name={[name, 'identification']} rules={[{ ...requiredRule, message: "'scientific name' is required" }]}>
-                        <Input onChange={debounce(handleIdentificationChange, 800)} placeholder='Identification based on the highest taxonomic level' />
-                    </Form.Item>
+                    <Popover visible={wormsContent.length} content={content} title="Would you like to use existing information for any of the following species?">
+                        <Form.Item label="Scientific name*" name={[name, 'identification']} rules={[{ ...requiredRule, message: "'scientific name' is required" }]}>
+                            <Input.Search loading={loading} enterButton onSearch={handleIdentificationChange} placeholder='Identification based on the highest taxonomic level' />
+                        </Form.Item>
+                    </Popover>
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item label="Authority" name={[name, 'authority']} rules={[{ required: false }]}>

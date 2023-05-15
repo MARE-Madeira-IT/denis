@@ -47,8 +47,8 @@ function ReportFilterContainer(props) {
                 <ButtonContainer>
                     <CreateSecundary onClick={handleSearchClick}>Search</CreateSecundary>
 
-                    <Create disabled={props.loading} onClick={() => props.exportReports(filters)}>
-                        {props.loading ? <Spin /> : "Export CSV"}
+                    <Create disabled={props.loading} onClick={() => props.setActiveForm(true)}>
+                        {props.loading ? <Spin /> : "Export"}
                     </Create>
                 </ButtonContainer>
             </Col>

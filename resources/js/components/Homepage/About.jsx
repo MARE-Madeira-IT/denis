@@ -34,48 +34,13 @@ const StyledContent = styled(Content)`
     }
     
     p, li {
-        font-weight: lighter;
+        font-weight: 200;
         font-size: 16px;
-        opacity: .8;
     }
     
 `;
 
-const TutorialContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
 
-    div {
-        width: 33%;
-        padding: 10px;
-        box-sizing: border-box;
-
-        
-
-        img {
-            width: 60%;
-            margin: auto;
-            display: block;
-        }
-
-        p {
-            text-align: center;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-    }
-
-    @media (max-width: ${dimensions.sm}) {
-        justify-content: flex-start;
-
-        div {
-            width: 50%;
-        }
-        
-    }
-    
-`;
 
 const MapContainer = styled.div`
     width: 100%;    
@@ -253,21 +218,7 @@ function About({ fetchReportsCoordinates }) {
 
                     <p>All sessile and mobile macroalgae and macroinvertebrates colonizing litter items should be identified to the lowest possible taxonomic group, using the microscope if necessary. Indicate the abundance of each species (number or percent cover), their Viability (alive or dead) and their Maturity stage (e.g. Egg, Larvae, Juvenile, Mature).</p>
 
-                    <h2>How it works</h2>
-                    <TutorialContainer>
-                        <div>
-                            <img src="/images/about/observation.svg" alt="" />
-                            <p>Follow the protocol</p>
-                        </div>
-                        <div>
-                            <img src="/images/about/add.svg" alt="" />
-                            <p>Add reports to the database</p>
-                        </div>
-                        <div>
-                            <img src="/images/about/visualize.svg" alt="" />
-                            <p>Visualize obervations</p>
-                        </div>
-                    </TutorialContainer>
+                    
 
                 </div >
             </StyledContent >

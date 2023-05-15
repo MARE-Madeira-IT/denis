@@ -4,6 +4,7 @@ import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
 import { dimensions } from '../Dashboard/dashboardHelper';
 import { Collapse } from 'antd';
+import { colors } from '../../helper';
 
 const StyledContent = styled(Content)`
     h2 {
@@ -16,16 +17,15 @@ const StyledContent = styled(Content)`
     }
     
     p, li {
-        font-weight: lighter;
+        font-weight: 200;
         font-size: 16px;
-        opacity: .8;
     }
     
 `;
 
 const Flex = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     margin: 50px 0px;
     flex-wrap: wrap;
@@ -57,7 +57,7 @@ const StyledCollapse = styled(Collapse)`
     
     .ant-collapse-content {
         p {
-            border-left: 2px solid #0C4C88;
+            border-left: 2px solid ${colors.main};
             padding: 5px 0px 5px 20px;
             box-sizing: border-box;
         }
@@ -88,42 +88,33 @@ function Partners() {
     return (
         <Container id="partnerContainer">
             <Title>
-                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
+                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/4.jpg" alt="" />
             </Title>
             <StyledContent>
                 <div className="content-width">
-                    <h2>Our Partners & Supporters</h2>
+                    <h2>Our Partners</h2>
                     <p>DeNIS partners are the barebones that make this platform available for the scientific community.</p>
 
                     <Flex>
                         <div><img src="/images/partners/arditi.jpg" alt="ARDITI" /></div>
                         <div><img src="/images/partners/mare.svg" alt="MARE" /></div>
-                        <div><img src="/images/partners/ICES.svg" alt="ICES" /></div>
+                        <div><img src="/images/partners/fct.png" alt="FCT" /></div>
+                        {/* <div><img src="/images/partners/ICES.svg" alt="ICES" /></div> */}
                         <div><img src="/images/partners/wave.png" alt="wave" /></div>
                     </Flex>
 
-                    {/* <h2>Frequently asked questions</h2>
-                    <p>Below you'll find answers to the most common questions you may have on DeNIS</p>
+                    <h2>Supported by</h2>
+                    <p>Our supporters provide funding towards the platform</p>
+                    <Flex>
+                        <div><img src="/images/partners/cleanatlantic.png" alt="clean atlantic" /></div>
+                    </Flex>
 
-                    <StyledCollapse
-                        defaultActiveKey={['1']}
-                        ghost
-                        accordion
-                        expandIcon={({ isActive }) => isActive ? <img src="images/icons/minus.svg" /> : <img src="images/icons/plus.svg" />}
-                    >
-                        <Collapse.Panel header="This is panel header 1" key="1">
-                            <p>{text}</p>
-                        </Collapse.Panel>
-                        <Collapse.Panel header="This is panel header 2" key="2">
-                            <p>{text}</p>
-                        </Collapse.Panel>
-                        <Collapse.Panel header="This is panel header 3" key="3">
-                            <p>{text}</p>
-                        </Collapse.Panel>
-                    </StyledCollapse> */}
-
-                    <br />
-                    <p style={{ marginTop: "50px" }}> Want to help or still have questions? Contact us at <a href="">email@email.com</a> </p>
+                    <h2>Integrations</h2>
+                    <p>These system are responsible for automating and easing interactions </p>
+                    <Flex>
+                        <div><img src="/images/partners/worms.jpg" alt="WoRMS" /></div>
+                        <div><img src="/images/partners/HERE.png" alt="HERE maps" /></div>
+                    </Flex>
                 </div>
 
             </StyledContent>

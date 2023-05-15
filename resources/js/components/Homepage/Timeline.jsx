@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
+import VideoContainer from './VideoContainer';
 
 const TimelineContainer = styled.div`
     h2 {
@@ -14,9 +15,8 @@ const TimelineContainer = styled.div`
     }
     
     p, li {
-        font-weight: lighter;
+        font-weight: 200;
         font-size: 16px;
-        opacity: .8;
         margin: 0px 0px 50px 0px;
     }
 
@@ -26,7 +26,7 @@ const TimelineItem = styled.div`
     padding: 30px;
     box-sizing: border-box;
 	position: relative;
-	color: rgba(black, .7);
+	color: black;
 	border-left: 2px solid rgba(0,0,0, .3);
     
 	p {
@@ -77,33 +77,40 @@ function Timeline() {
                         <TimelineItem >
                             <h3>February, 2022</h3>
                             <p>
-                                Marine debris & Non-Indigenous Species (NIS) Excel spreadsheet
+                                Marine debris & Non-Indigenous Species (NIS) data spreadsheet
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>March, 2022</h3>
+                            <h3>April, 2022</h3>
                             <p>
-                                Database architecture, model definition, and API endpoints
+                                Initial design concepts and strategy definitions
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>May, 2022</h3>
+                            <h3>June, 2022</h3>
                             <p>
-                                Initial design concepts, validation reviews, and strategy definitions
+                                Database architecture and back-office structure
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>September, 2022</h3>
+                            <h3>August, 2022</h3>
                             <p>
-                                Database and interface integration
+                                Design concepts, usability reviews, and consistency evaluation
                             </p>
                         </TimelineItem>
 
                         <TimelineItem >
-                            <h3>November, 2022</h3>
+                            <h3>October, 2022</h3>
+                            <p>
+                                Back-office and user interface integration
+                            </p>
+                        </TimelineItem>
+
+                        <TimelineItem >
+                            <h3>December, 2022</h3>
                             <p>
                                 Staging QA, Release validation, and platform launch
                             </p>
@@ -111,6 +118,20 @@ function Timeline() {
 
                         <TimelineItem >
                             <h3>January, 2023</h3>
+                            <p>
+                                User studies and feedback collection
+                            </p>
+                        </TimelineItem>
+
+                        <TimelineItem >
+                            <h3>March, 2023</h3>
+                            <p>
+                                System refactor and quality of data validations
+                            </p>
+                        </TimelineItem>
+
+                        <TimelineItem >
+                            <h3>May, 2023</h3>
                             <p>
                                 Worldwide release
                             </p>

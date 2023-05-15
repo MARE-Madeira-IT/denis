@@ -20,7 +20,7 @@ function LmeRemoteSelectContainer({ fetchSiteLmesSelector, data, loading, value,
             filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}
         >
             {data.map((element) => (
-                <Select.Option key={element.id} value={element.id}>{element.name}</Select.Option>
+                <Select.Option key={element.id} value={element.id}>{element.value}</Select.Option>
             ))}
         </Select>
     )

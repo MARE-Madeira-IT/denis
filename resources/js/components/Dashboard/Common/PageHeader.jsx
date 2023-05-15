@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
-import { dimensions, maxWidth, maxWidthStyle } from '../dashboardHelper';
+import { dimensions } from '../dashboardHelper';
 
 const Container = styled.section`
     min-height: calc(50vh - 50px);
-    
-    ${maxWidthStyle}
-    padding-top: 10vh;
+    padding: 50px 100px 0px 100px;
+    box-sizing: border-box;
 
     h2 {
         color: white;
@@ -37,13 +36,16 @@ const Container = styled.section`
         }
     }
 
-    @media (max-width: ${maxWidth}) {
+    @media (max-width: ${dimensions.maxWidth}) {
+        padding: 10vh 50px 0px 50px;
 
         h4 {
             width: 70%
         }
 
     }
+
+
     @media (max-width: ${dimensions.lg}) {
 
         h4 {
@@ -54,6 +56,8 @@ const Container = styled.section`
 
 
     @media (max-width: ${dimensions.md}) {
+        padding: 10vh 20px 0px 20px;
+
         h2 {
             margin-top: 10px;
         }

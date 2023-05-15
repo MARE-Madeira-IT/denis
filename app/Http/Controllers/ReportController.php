@@ -17,7 +17,7 @@ use App\QueryFilters\ReportFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Intervention\Image\Facades\Image;
 
 class ReportController extends Controller
 {
@@ -92,15 +92,20 @@ class ReportController extends Controller
 
 
             if ($request->has('images')) {
-                foreach ($request->images as $image) {
-                    $imageName = $image->store("public");
-                    $imageName = str_replace('public', '/storage', $imageName);
+                foreach ($request->images as $key => $image) {
+                    $imageName = time() . '_' . $key;
+                    Image::make($image)->resize(960, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save(storage_path('app/public/' . $imageName . "." . $image->extension()));
+
                     ReportImage::create([
-                        "path" => $imageName,
+                        "path" => '/storage/' . $imageName . "." . $image->extension(),
                         "report_id" => $report->id
                     ]);
                 }
             }
+
             $validator["report_id"] = $report->id;
 
             Taxa::store($validator);

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { dimensions } from './Dashboard/dashboardHelper';
 import { logout, setAuthorizationToken } from "../redux/auth/actions";
+import { colors } from '../helper';
 
 const FlexContainer = styled.section`
     position: fixed;
@@ -28,6 +29,17 @@ const FlexContainer = styled.section`
             color: black;
         }
     }  
+
+    .login {
+        background-color: ${colors.main};
+        color: white;
+        padding: 10px 20px;
+        box-sizing: border-box;
+
+        &:hover {
+            color: white;
+        }
+    }
 
     @media (max-width: ${dimensions.xl}) {
         padding: 50px 50px 0px 50px;
@@ -143,6 +155,7 @@ const Login = styled.div`
 
 const navbarItems = [
     { to: "/dashboard/", title: "Profile", treshold: 0 },
+    { to: "/dashboard/collections", title: "Collections", treshold: 0 },
     { to: "/dashboard/reports", title: "Reports", treshold: 0 },
     { to: "/dashboard/users", title: "Users", treshold: 2 },
     { to: "/dashboard/debris", title: "Debris", treshold: 0 },
@@ -192,7 +205,7 @@ function Navbar({ permissionLevel,
                         <Menu>
                             <Menu.Item>
                                 <Link to="/login">
-                                    Login
+                                    Account
                                 </Link>
                             </Menu.Item>
                         </Menu>
@@ -222,7 +235,7 @@ function Navbar({ permissionLevel,
                     <div onClick={handleLogout} className='link'>
                         Logout
                     </div>
-                </Login> : <Login><Link className='link' to="/login">Login</Link></Login>
+                </Login> : <Login><Link className='link login' to="/login">Account</Link></Login>
             }
             {/* 
             {isAuthenticated &&

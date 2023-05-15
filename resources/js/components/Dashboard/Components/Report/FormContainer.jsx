@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Modal, Steps, Button, Row } from 'antd'
+import { Form, Modal, Steps, Button, Row, Alert } from 'antd'
 import { createReport, updateReport } from "../../../../redux/report/actions";
 import styled from "styled-components";
 import BiologicalInformation from './Form/BiologicalInformation';
@@ -80,12 +80,12 @@ const Add = styled.button`
 function FormContainer({ activeForm, setFormModal, createReport, data, setHasInitialData, updateMode, setUpdateMode, hasInitialData, updateReport, currentReport, loading }) {
     const [form] = Form.useForm();
     const [currentStep, setCurrentStep] = useState(0)
-    const [numSpecies, setNumSpecies] = useState(1)
     const [formData, setFormData] = useState({})
     const [debrisFile, setDebrisFile] = useState([])
+    const [errors, setErrors] = useState([])
 
     const handleArrayToFormData = (formData, array, field) => {
-        console.log(array);
+
         for (var i = 0; i < array.length; i++) {
 
             if (array[i] != undefined) {
@@ -98,12 +98,21 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
         return formData;
     };
 
+    const catchError = (err) => {
+        var response = err.response.data.errors;
+        var aErrors = [];
+        Object.values(response).map((item) => {
+            aErrors.push(item);
+        })
+        setErrors(aErrors);
+    }
+
     const create = () => {
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
             submitData.date = moment(submitData.date).format("YYYY-MM-DD");
             var formInfo = new FormData();
-            console.log(submitData);
+
             Object.entries(submitData).map((entry) => {
                 if (entry[1]) {
                     if (Array.isArray(entry[1])) {
@@ -121,27 +130,13 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 }
             })
 
-            // for (var key in submitData) {
-            //     if (submitData[key]) {
-            //         if (Array.isArray(submitData[key])) {
-            //             if (key == "taxas") {
-            //                 console.log(submitData[key]);
-            //                 formInfo.append('taxas', JSON.stringify(submitData[key]));
-            //             } else {
-            //                 handleArrayToFormData(formInfo, submitData[key], key);
-            //             }
-
-            //         } else {
-            //             formInfo.append(key, submitData[key]);
-            //         }
-
-            //     }
-            // }
             handleArrayToFormData(formInfo, debrisFile, 'images');
 
 
             createReport(formInfo).then(() => {
                 handleCancel();
+            }).catch((err) => {
+                catchError(err);
             });
         });
     };
@@ -153,6 +148,8 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
 
             updateReport(currentReport.id, submitData).then(() => {
                 handleCancel();
+            }).catch((err) => {
+                catchError(err);
             });
         });
     };
@@ -167,7 +164,6 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
 
     const handleCancel = () => {
         setFormModal(false);
-        setNumSpecies(1);
         setCurrentStep(0);
         setUpdateMode(false);
         setHasInitialData(false);
@@ -220,8 +216,6 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
 
                 taxaData.push(currentObject);
             });
-
-            setNumSpecies(taxaData.length);
 
             form.setFieldsValue({
                 date: moment(data.date),
@@ -346,6 +340,15 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                             <Step title="Marine Debris characterization" />
                             <Step title="Biological information" />
                         </CustomSteps>
+                        {errors.length ? <Alert
+                            message="Report has failed"
+                            description={errors.map((error, index) => (
+                                <p key={index}>{error}</p>
+                            ))}
+                            style={{ margin: "20px 0px" }}
+                            type="error"
+                            closable
+                        /> : <></>}
                     </div>
                 </Tour>
 

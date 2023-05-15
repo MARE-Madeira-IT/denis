@@ -10,9 +10,11 @@ import { Row } from "antd";
 import MapView from "../../../MapView";
 import { Link, useSearchParams } from "react-router-dom";
 import PageHeader from "../../Common/PageHeader";
-import { Create, dimensions, maxWidthStyle } from "../../dashboardHelper";
+import { Create, CreateSecundary, dimensions, maxWidthStyle } from "../../dashboardHelper";
 import GraphContainer from "./GraphContainer";
 import ReportFilterContainer from "./ReportFilterContainer";
+import ExportContainer from "./ExportContainer";
+import ImportContainer from "./ImportContainer";
 
 const Content = styled.div`
     width: 100%;
@@ -67,8 +69,10 @@ const Container = styled.div`
 function Report(props, { data, loading, meta, mapData }) {
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false);
+    const [activeImport, setActiveImport] = useState(false);
     const [updateMode, setUpdateMode] = useState(false);
     const [hasInitialData, setHasInitialData] = useState(false);
+    const [activeExport, setActiveExport] = useState(false)
     var { data, loading, meta, mapData } = props;
     let [searchParams, setSearchParams] = useSearchParams();
 
@@ -121,10 +125,13 @@ function Report(props, { data, loading, meta, mapData }) {
         <Container>
             <PageHeader title="Reports overview" />
             <Content>
+                <ImportContainer setActiveImport={setActiveImport} activeImport={activeImport} />
+                <ExportContainer setActiveForm={setActiveExport} activeForm={activeExport} />
                 <FormContainer setHasInitialData={setHasInitialData} hasInitialData={hasInitialData} setUpdateMode={setUpdateMode} updateMode={updateMode} activeForm={activeForm} setFormModal={setFormModal} />
                 <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
 
                 <Row style={{ padding: "50px 0px 20px 0px" }} type="flex" justify="end">
+                    <CreateSecundary style={{marginRight: "15px"}} onClick={() => setActiveImport(true)}>Import collection</CreateSecundary>
                     <Create onClick={handleCreateClick}>Add a report to the database</Create>
                 </Row>
 
@@ -139,7 +146,7 @@ function Report(props, { data, loading, meta, mapData }) {
                 </FlexContainer>
 
                 <ContentContainer>
-                    <ReportFilterContainer />
+                    <ReportFilterContainer setActiveForm={setActiveExport} />
                     <br />
                     <TableContainer
                         handlePageChange={handlePageChange}

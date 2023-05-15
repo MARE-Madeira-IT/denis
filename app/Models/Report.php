@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cerbero\QueryFilters\FiltersRecords;
@@ -12,7 +13,7 @@ class Report extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id"];
+    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id", "collection_id"];
 
     public static function generateDataArray($data)
     {
@@ -46,6 +47,26 @@ class Report extends Model
         ]);
     }
 
+    public static function import($data, $collection, $debris, $site)
+    {
+        try {
+            return self::create([
+                "user_id" => $collection->user_id,
+                "collection_id" => $collection->id,
+                "doi" => $collection->doi ? $collection->doi : null,
+                "date" => Carbon::parse($data['date']),
+                "latitude" => $data['latitude'],
+                "longitude" => $data['longitude'],
+                "notes" => Arr::get($data, "notes"),
+                "ongoing_survey" => Arr::get($data, "if_yes_specify_the_modality"),
+                "site_id" => $site,
+                "debris_id" => $debris,
+            ]);
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
     public function validation()
     {
         return $this->belongsToMany(Validation::class, 'report_has_validations', 'report_id', 'validation_id')->withPivot('validator_id')->withTimestamps();
@@ -57,6 +78,11 @@ class Report extends Model
     public function latestValidation()
     {
         return $this->hasOne(ReportHasValidation::class)->latestOfMany();
+    }
+
+    public function collection()
+    {
+        return $this->belongsTo(Collection::class, 'collection_id');
     }
 
     public function debris()

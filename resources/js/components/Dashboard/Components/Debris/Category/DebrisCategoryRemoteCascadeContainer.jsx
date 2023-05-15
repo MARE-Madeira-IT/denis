@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { fetchDebrisCategorySelector } from "../../../../../redux/debrisCategory/actions";
 
-function DebrisCategoryRemoteCascadeContainer({ fetchDebrisCategorySelector, data, loading, value, onChange }) {
+function DebrisCategoryRemoteCascadeContainer({ fetchDebrisCategorySelector, data, loading, value, onChange, size = "normal", placeholder = "Master List of Categories of Litter Items" }) {
     useEffect(() => {
         fetchDebrisCategorySelector()
     }, [])
@@ -18,12 +18,14 @@ function DebrisCategoryRemoteCascadeContainer({ fetchDebrisCategorySelector, dat
             options={data}
             loading={loading}
             changeOnSelect
+            size={size}
+            style={{ width: "100%" }}
             fieldNames={{
                 label: 'name',
                 value: 'id',
                 children: 'subcategories',
             }}
-            placeholder="Master List of Categories of Litter Items"
+            placeholder={placeholder}
             showSearch={{
                 filter,
             }}

@@ -6,3 +6,8 @@ export function download(response, filename) {
     document.body.appendChild(link);
     link.click();
 };
+
+export const colors = {
+    main: "#385b5e",
+    mainHover: "#325154",
+}

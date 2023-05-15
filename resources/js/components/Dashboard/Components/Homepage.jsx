@@ -12,6 +12,7 @@ import MapView from '../../MapView';
 import Drawer from './Report/Drawer';
 import { Row } from 'antd';
 import { Link } from 'react-router-dom';
+import CollectionTableContainer from './CollectionTableContainer';
 
 const Container = styled.div`
     width: 100%;
@@ -144,19 +145,6 @@ const Section = styled.div`
 
 `;
 
-const Button = styled.button`
-    padding: 6px 50px;
-    border-radius: 6px;  
-    font-size: 16px;
-`;
-
-const Edit = styled(Button)`
-    color: white;
-    margin-top: 20px;
-    background-color: #0C4C88;
-    border: 2px solid #0C4C88;
-    cursor: pointer;
-`;
 
 const Parameters = styled.div`
     display: flex;
@@ -197,17 +185,10 @@ const Parameters = styled.div`
     }
 `;
 
-const ProfileField = ({ label, value }) => (
-    <div className='profile-field'>
-        <p className='value'>{value}</p>
-        <p className='label'>{label} <br /> reports</p>
-    </div>
-)
 function Homepage({ fetchSelfReports,
     fetchReport,
-    setDrawerState, data, loading, meta, current, user }) {
+    setDrawerState, data, loading, meta, user }) {
     const [filters, setFilters] = useState({});
-    const [activeForm, setFormModal] = useState(false)
     const [visible, setVisible] = useState(false)
 
     function handlePageChange(pagination) {
@@ -264,7 +245,7 @@ function Homepage({ fetchSelfReports,
                                     <p>{user?.institution}</p>
                                 </div>
                             </Parameters>
-                            <Edit data-intro="You can edit it here!" data-title="Edit the profile" data-step='2' onClick={() => setVisible(true)}>Edit profile</Edit>
+                            <Create style={{ marginTop: "20px" }} data-intro="You can edit it here!" data-title="Edit the profile" data-step='2' onClick={() => setVisible(true)}>Edit profile</Create>
                             {/* <div className='field-container'>
                                 <ProfileField label="approved" value={user.metrics?.approved} />
                                 <ProfileField label="pending" value={user.metrics?.pending} />
@@ -274,9 +255,11 @@ function Homepage({ fetchSelfReports,
 
                     </Section>
                     <DataSection data-intro="Reports you've submitted will be visible here" data-title="Your reports" data-step='3' >
+
+
                         <div>
                             <Row type="flex" justify='space-between' align='middle'>
-                                <h2 id="selector3">Your Reports</h2>
+                                <h2 id="selector3">Your reports</h2>
                                 <Link to="/dashboard/reports?create=1"><Create>Add a report to the database</Create></Link>
 
                             </Row>
@@ -291,6 +274,17 @@ function Homepage({ fetchSelfReports,
                                 setFilters={setFilters}
                                 filters={filters}
                             />
+                        </div>
+                        <br />
+                        <div>
+                            <Row type="flex" justify='space-between' align='middle'>
+                                <h2 id="selector3">Your collections</h2>
+                                <Link to="/dashboard/collections?create=1"><Create>Upload a collection</Create></Link>
+
+                            </Row>
+
+                            <CollectionTableContainer />
+
                         </div>
                     </DataSection>
                 </SectionContainer>

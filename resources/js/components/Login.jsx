@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { dimensions } from "./Dashboard/dashboardHelper";
 import { Link } from "react-router-dom";
 import { Alert } from "antd";
+import { colors } from "../helper";
 
 const FormItem = styled.div`
     display: flex;
@@ -83,14 +84,14 @@ const Submit = styled.div`
         display: block;
         padding: 8px 16px;
         border: none;
-        background: #3C6466;
+        background: ${colors.main};
         color: white;
         cursor: pointer;
         font-size: 16px;
         transition: all .2s ease;
 
         &:hover {
-            background: #385b5e;
+            background: ${colors.mainHover};
         }
     }
 

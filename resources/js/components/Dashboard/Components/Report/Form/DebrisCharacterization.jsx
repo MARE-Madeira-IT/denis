@@ -36,11 +36,11 @@ function DebrisCharacterization() {
                     </Col>
                     <Col span={12}>
                         <Form.Item
-                            label="If 'Seafloor', specify depth"
+                            label="If 'Seafloor', specify depth (m)"
                             name="debris_depth"
                             rules={[{ required: requiredDepth, message: "'depth' is required for seafloor reports" }]}
                         >
-                            <Input placeholder='Depth (m)' />
+                            <InputNumber style={{ width: "100%" }} placeholder='Depth (m)' />
                         </Form.Item>
                     </Col>
                 </Row>

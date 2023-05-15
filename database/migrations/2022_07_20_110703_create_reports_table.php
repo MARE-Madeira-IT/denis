@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->id();
             $table->date('date');
             $table->string('custom_id')->nullable();
+            $table->unsignedBigInteger('collection_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
@@ -27,6 +28,7 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('debris_id');
             $table->timestamps();
 
+            $table->foreign('collection_id')->references('id')->on('collections')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->foreign('debris_id')->references('id')->on('debris')->onDelete('cascade');

@@ -20,6 +20,7 @@ import Login from "./components/Login";
 import Registration from "./components/Registration";
 import Authentication from "./components/Authentication";
 import MapContainer from "./components/MapContainer";
+import Collection from "./components/Dashboard/Components/Collection/Collection";
 
 export const history = createBrowserHistory();
 
@@ -36,6 +37,7 @@ const Router = () => {
 
                 <Route exact path="/dashboard/debris" element={<DashboardLayout><Debris /></DashboardLayout>} />
                 <Route exact path="/dashboard/biodiversity" element={<DashboardLayout><Ecosystem /></DashboardLayout>} />
+                <Route exact path="/dashboard/collections" element={<DashboardLayout><Collection /></DashboardLayout>} />
                 <Route exact path="/dashboard/reports" element={<DashboardLayout><Report /></DashboardLayout>} />
                 <Route exact path="/dashboard/validation" element={<DashboardLayout><Validation /></DashboardLayout>} />
                 <Route exact path="/dashboard/users" element={<DashboardLayout redirectPath="/dashboard" permissionLevel={2}><User /></DashboardLayout>} />
