@@ -96,24 +96,27 @@ function Partners() {
                     <p>DeNIS partners are the barebones that make this platform available for the scientific community.</p>
 
                     <Flex>
-                        <div><img src="/images/partners/arditi.jpg" alt="ARDITI" /></div>
-                        <div><img src="/images/partners/mare.svg" alt="MARE" /></div>
-                        <div><img src="/images/partners/fct.png" alt="FCT" /></div>
+
+
+                        <div><a href="https://www.arditi.pt/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/arditi.jpg" alt="ARDITI" /></a></div>
+                        <div><a href="https://www.mare-centre.pt/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/mare.svg" alt="MARE" /></a></div>
+                        <div><a href="https://www.fct.pt/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/fct.png" alt="FCT" /></a></div>
                         {/* <div><img src="/images/partners/ICES.svg" alt="ICES" /></div> */}
-                        <div><img src="/images/partners/wave.png" alt="wave" /></div>
+                        <div><a href="https://wave-labs.org/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/wave.jpg" alt="WAVE" /></a></div>
                     </Flex>
 
                     <h2>Supported by</h2>
                     <p>Our supporters provide funding towards the platform</p>
                     <Flex>
-                        <div><img src="/images/partners/cleanatlantic.png" alt="clean atlantic" /></div>
+
+                        <div><a href="http://www.cleanatlantic.eu/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/cleanatlantic.png" alt="clean atlantic" /></a></div>
                     </Flex>
 
                     <h2>Integrations</h2>
                     <p>These system are responsible for automating and easing interactions </p>
                     <Flex>
-                        <div><img src="/images/partners/worms.jpg" alt="WoRMS" /></div>
-                        <div><img src="/images/partners/HERE.png" alt="HERE maps" /></div>
+                        <div><a href="https://www.marinespecies.org/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/worms.jpg" alt="WoRMS" /></a></div>
+                        <div><a href="https://www.here.com/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/HERE.png" alt="HERE maps" /></a></div>
                     </Flex>
                 </div>
 
