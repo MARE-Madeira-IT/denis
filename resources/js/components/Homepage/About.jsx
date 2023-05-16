@@ -219,6 +219,8 @@ function About({ fetchReportsCoordinates }) {
                     <p>All sessile and mobile macroalgae and macroinvertebrates colonizing litter items should be identified to the lowest possible taxonomic group, using the microscope if necessary. Indicate the abundance of each species (number or percent cover), their Viability (alive or dead) and their Maturity stage (e.g. Egg, Larvae, Juvenile, Mature).</p>
 
                     
+                    <h2>Data usage</h2>
+                    <p>If any data taken from DeNIS is used for scientific outputs it should be cited as <b>João Canning-Clode, Rúben Freitas, Peter Barry, et al. Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea. May 11, 2023.</b></p>
 
                 </div >
             </StyledContent >

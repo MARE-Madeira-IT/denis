@@ -34,7 +34,7 @@ function VideoContainer() {
             <p>Learn how to effectively generate comprehensive reports using DeNIS data, analysis tools, and interactive features to drive evidence-based decision-making and foster innovative solutions for marine debris and non-indigenous species</p>
 
             <video controls>
-                <source src="/images/tutorial.mp4" type="video/mp4" />
+                <source src="/images/denis_video.mp4" type="video/mp4" />
             </video>
         </Container>
     )
