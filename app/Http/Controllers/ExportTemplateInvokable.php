@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExportTemplateInvokable extends Controller
 {
@@ -14,6 +15,7 @@ class ExportTemplateInvokable extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->download(storage_path("app/template.xlsx"));
+        ob_end_clean();
+        return Storage::download("template.xlsx");
     }
 }
