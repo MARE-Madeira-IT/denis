@@ -159,30 +159,29 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
 
             <br />
 
-            {(hasTouched[0] && hasTouched[1]) &&
-                <Row align='middle' type="flex" gutter={32}>
-                    <Col xs={24} md={6}>
-                        <Form.Item label="Site name*" name="site">
-                            <Input placeholder="Site" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={6}>
-                        <Form.Item label="Region/Province*" name="region" rules={requiredRule}>
-                            <Input placeholder="Region/Province" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={6}>
-                        <Form.Item label="Country*" name="country" rules={requiredRule}>
-                            <CountryRemoteSelectContainer />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={6}>
-                        <Form.Item label="Large marine ecosystem" name="lme">
-                            <LmeRemoteSelectContainer />
-                        </Form.Item>
-                    </Col>
-                </Row>
-            }
+
+            <Row align='middle' type="flex" gutter={32}>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Site name*" name="site">
+                        <Input placeholder="Site" />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Region/Province*" name="region" rules={requiredRule}>
+                        <Input placeholder="Region/Province" />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Country*" name="country" rules={requiredRule}>
+                        <CountryRemoteSelectContainer />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={6}>
+                    <Form.Item label="Large marine ecosystem" name="lme">
+                        <LmeRemoteSelectContainer />
+                    </Form.Item>
+                </Col>
+            </Row>
             {!updateMode &&
 
                 <Col span={24}>

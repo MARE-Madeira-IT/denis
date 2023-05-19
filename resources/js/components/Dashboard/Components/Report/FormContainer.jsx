@@ -223,7 +223,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 longitude: data.longitude,
                 doi: data.doi,
                 on_going_survey: data.ongoing_survey,
-                site: data.site.name,
+                site: data.site.value,
                 region: data.site.region,
                 country: data?.site?.country?.name,
                 lme: data?.site?.lme?.id,
