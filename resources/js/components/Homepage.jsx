@@ -20,6 +20,12 @@ const Content = styled.div`
     z-index: 2;
 `;
 
+const Contact = styled.p`
+    margin: 10px auto !important;
+    font-size: 14px;
+    text-align: center;
+`;
+
 function Homepage() {
     return (
         <Container>
@@ -30,6 +36,7 @@ function Homepage() {
                 <Partners />
                 <Timeline />
             </Content>
+            <Contact style={{ marginTop: "50px" }}> Want to help or still have questions? Contact us at <a href="mailto:info@denis-db.com">info@denis-db.com</a> </Contact>
         </Container>
     )
 }

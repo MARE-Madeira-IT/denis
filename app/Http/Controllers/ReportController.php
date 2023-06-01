@@ -29,6 +29,8 @@ class ReportController extends Controller
     public function index(ReportFilters $filters)
     {
         $user = auth()->user();
+        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->paginate(10));
+
         $query = Report::filterBy($filters);
         // $out = new ConsoleOutput();
         // $out->writeln($user->hasRole('validator'));

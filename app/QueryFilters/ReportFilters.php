@@ -95,13 +95,12 @@ class ReportFilters extends QueryFilters
 
     public function debris($string)
     {
-        $this->query;
-
-        // ->whereHas('debris', function ($query) use ($string) {
-        //     $query->whereHas('subcategory', function ($query) use ($string) {
-        //         $query->where('mdi_code', 'like', '%' . $string . '%');
-        //     });
-        // });
+        $this->query->whereHas('debris', function ($query) use ($string) {
+            $query->whereHas('subcategory', function ($query) use ($string) {
+                $query->where('mdi_code', $string)
+                    ->orWhere('name', 'like', '%' . $string . '%');
+            });
+        });
     }
 
     public function location($string)

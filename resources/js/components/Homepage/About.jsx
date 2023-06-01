@@ -38,6 +38,18 @@ const StyledContent = styled(Content)`
         font-size: 16px;
     }
     
+    .citation {
+        margin-left: 30px;
+        padding: 10px 0px 10px 30px;
+        box-sizing: border-box;
+        border-left: 1px solid #777;
+        font-weight: 200;
+        font-size: 16px;
+
+        ul {
+            margin-top: 30px;
+        }
+    }
 `;
 
 
@@ -144,6 +156,7 @@ function About({ fetchReportsCoordinates }) {
 
                     </p>
                     <p>Opportunistic sampling methodologies provide an extensive range of information from all around the world, allowing increasing knowledge and filling the gaps in data.</p>
+
                     {false && <ul>
                         <li> Transparency of data publicly available on the platform</li>
                         <li> Historical information in dynamic views</li>
@@ -218,9 +231,17 @@ function About({ fetchReportsCoordinates }) {
 
                     <p>All sessile and mobile macroalgae and macroinvertebrates colonizing litter items should be identified to the lowest possible taxonomic group, using the microscope if necessary. Indicate the abundance of each species (number or percent cover), their Viability (alive or dead) and their Maturity stage (e.g. Egg, Larvae, Juvenile, Mature).</p>
 
-                    
+
                     <h2>Data usage</h2>
-                    <p>If any data taken from DeNIS is used for scientific outputs it should be cited as <b>João Canning-Clode, Rúben Freitas, Peter Barry, et al. Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea. May 11, 2023.</b></p>
+                    <p>If any data taken from DeNIS is used for scientific outputs it should be cited as:</p>
+                    <div className='citation'>
+                        João Canning-Clode, Rúben Freitas, Peter Barry, et al. Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea. May 11, 2023.
+                        <ul>
+                            <li><a target='_blank' href="https://doi.org/10.22541/au.168381770.04204050/v1">Download the paper</a> (1.3MB PDF)</li>
+                        </ul>
+
+                    </div>
+
 
                 </div >
             </StyledContent >

@@ -22,7 +22,7 @@ const ButtonContainer = styled.div`
 
 
 function ReportFilterContainer(props) {
-    const [filters, setFilters] = useState({ debris: undefined, taxas: undefined, date: [undefined, undefined] });
+    const [filters, setFilters] = useState({ debris: undefined, biodiversity: undefined, date: [undefined, undefined] });
 
     function handleSearchClick() {
         props.fetchReports(1, filters);
@@ -36,7 +36,7 @@ function ReportFilterContainer(props) {
                         <Input value={filters.debris} onChange={(e) => setFilters({ ...filters, debris: e.target.value })} size="large" placeholder='Debris' />
                     </Col>
                     <Col span={8}>
-                        <Input value={filters.taxas} onChange={(e) => setFilters({ ...filters, taxas: e.target.value })} size="large" placeholder='Biodiversity' />
+                        <Input value={filters.biodiversity} onChange={(e) => setFilters({ ...filters, biodiversity: e.target.value })} size="large" placeholder='Biodiversity' />
                     </Col>
                     <Col span={8}>
                         <RangePicker value={filters.date} size="large" style={{ width: "100%" }} placeholder='Date' />
