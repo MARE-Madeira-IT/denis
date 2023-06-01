@@ -53,7 +53,7 @@ export const updateReport = (id, data) => ({
 
 export const updateState = data => ({
     type: types.UPDATE_STATE,
-    payload: axios.post(`${window.location.origin}/api/validation/`, data),
+    payload: axios.post(`${window.location.origin}/api/validation`, data),
 });
 
 export const setCurrentReport = data => ({
