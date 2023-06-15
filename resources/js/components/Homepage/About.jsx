@@ -235,7 +235,8 @@ function About({ fetchReportsCoordinates }) {
                     <h2>Data usage</h2>
                     <p>If any data taken from DeNIS is used for scientific outputs it should be cited as:</p>
                     <div className='citation'>
-                        João Canning-Clode, Rúben Freitas, Peter Barry, et al. Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea. May 11, 2023.
+
+                        Canning-Clode, J. et al. (2023). Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea.
                         <ul>
                             <li><a target='_blank' href="https://doi.org/10.22541/au.168381770.04204050/v1">Download the paper</a> (1.3MB PDF)</li>
                         </ul>

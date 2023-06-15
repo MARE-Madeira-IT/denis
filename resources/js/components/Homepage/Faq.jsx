@@ -148,7 +148,7 @@ const questions = [
     },
     {
         question: "I used data from DeNIS, how should I reference it?",
-        answer: "You should cite DeNIS as follows: João Canning-Clode, Rúben Freitas, Peter Barry, et al. Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea. May 11, 2023."
+        answer: "You should cite DeNIS as follows: Canning-Clode, J. et al. (2023). Introducing 'DeNIS': a global database on anthropogenic marine Debris and Non-Indigenous Species. Authorea."
     }
 ];
 
