@@ -35,20 +35,21 @@ class Taxa extends Model
                 "reference" => Arr::get($taxa, "reference"),
                 "identification" => $taxa["identification"],
                 "report_id" => $data["report_id"],
-                "taxa_level_id" => $taxa["level"],
+                "taxa_level_id" => Arr::get($taxa, "level"),
                 "asisk_score" => Arr::get($taxa, "asisk_score"),
                 "asisk_result" => Arr::get($taxa, "asisk_result"),
                 "taxa_species_status_id" => Arr::get($taxa, "species_status"),
                 "taxa_population_status_id" => Arr::get($taxa, "population_status"),
                 "taxa_abundance_id" => Arr::get($taxa, "abundance"),
-                "taxa_viability_id" => $taxa["viability"],
+                "taxa_viability_id" => Arr::get($taxa, "viability"),
             ]);
 
             if (Arr::get($taxa, "native_region")) {
                 $newTaxa->nativeRegions()->sync($taxa["native_region"]);
             }
-
-            $newTaxa->maturities()->sync($taxa["maturity"]);
+            if (Arr::get($taxa, "maturity")) {
+                $newTaxa->maturities()->sync($taxa["maturity"]);
+            }
         }
     }
     public static function import($data, $report)
@@ -58,9 +59,11 @@ class Taxa extends Model
             $has_species_status = Arr::get($data, 'species_status');
             $has_population_status = Arr::get($data, 'population_status');
             $has_abundance = Arr::get($data, 'species_abundance');
+            $has_viability = Arr::get($data, 'viability');
+            $has_taxonomic_level = Arr::get($data, 'highest_taxonomic_level');
 
             $newTaxa  = self::create([
-                "taxa_level_id" => TaxaLevel::where('name', $data['highest_taxonomic_level'])->first()->id,
+                "taxa_level_id" => $has_taxonomic_level ? TaxaLevel::where('name', $data['highest_taxonomic_level'])->first()->id : null,
                 "identification" => $data["identification"],
                 "authority" => Arr::get($data, "authority"),
                 "year_first_report" => Arr::get($data, "year_of_first_report"),
@@ -68,18 +71,20 @@ class Taxa extends Model
                 "taxa_species_status_id" => $has_species_status ? TaxaSpeciesStatus::where('name', $has_species_status)->first()->id : null,
                 "taxa_population_status_id" => $has_population_status ? TaxaPopulationStatus::where('name', $has_population_status)->first()->id : null,
                 "taxa_abundance_id" => $has_abundance ? TaxaAbundance::where('name', $has_abundance)->first()->id : null,
-                "taxa_viability_id" => TaxaViability::where('name', $data['viability'])->first()->id,
+                "taxa_viability_id" => $has_viability ? TaxaViability::where('name', $data['viability'])->first()->id : null,
                 "report_id" =>  $report,
                 "asisk_score" => Arr::get($data, "asisk_score"),
                 "asisk_result" => Arr::get($data, "asisk_result"),
             ]);
 
-            $maturities = explode(",", $data["maturity_stage"]);
+            if (Arr::get($data, "maturity_stage")) {
+                $maturities = explode(",", $data["maturity_stage"]);
 
-            foreach ($maturities as $maturity) {
-                // $out = new ConsoleOutput();
-                // $out->writeln($maturity);
-                $newTaxa->maturities()->attach(TaxaMaturity::where('name', $maturity)->first()->id);
+                foreach ($maturities as $maturity) {
+                    // $out = new ConsoleOutput();
+                    // $out->writeln($maturity);
+                    $newTaxa->maturities()->attach(TaxaMaturity::where('name', $maturity)->first()->id);
+                }
             }
 
             if (Arr::get($data, "native_regions")) {

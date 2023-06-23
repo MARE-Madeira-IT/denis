@@ -24,15 +24,9 @@ class TaxaResource extends JsonResource
             'populationStatus' => $this->populationStatus,
             'asisk_score' => $this->asisk_score,
             'asisk_result' => $this->asisk_result,
-            'level' => [
-                'id' => $this->level->id,
-                'name' => $this->level->name
-            ],
+            'level' => $this->level,
             'abundance' => $this->abundance,
-            'viability' => [
-                'id' => $this->viability->id,
-                'name' => $this->viability->name
-            ],
+            'viability' => $this->viability,
             'nativeRegions' => $this->nativeRegions,
             'maturities' => $this->maturities,
         ];

@@ -17,7 +17,7 @@ class MinimalTaxaResource extends JsonResource
         return [
             'id' => $this->id,
             'identification' => $this->identification,
-            'level' => $this->level->name,
+            'level' => $this->level ? $this->level->name : "",
         ];
     }
 }
