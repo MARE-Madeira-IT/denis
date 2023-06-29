@@ -137,7 +137,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
             }
 
             $newData = [
-                $taxa->level->name,
+                $taxa->level ? $taxa->level->name : "---",
                 $taxa->identification,
                 $taxa->authority ? $taxa->authority : "---",
                 $taxa->year_first_report ? $taxa->year_first_report : "---",
