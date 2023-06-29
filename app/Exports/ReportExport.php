@@ -145,7 +145,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
                 $taxa->taxa_species_status_id ?  $taxa->speciesStatus->name : "---",
                 $taxa->taxa_population_status_id ? $taxa->populationStatus->name : "---",
                 $taxa->abundance_id ? $taxa->abundance->name : "---",
-                $taxa->viability->name,
+                $taxa->viability ? $taxa->viability->name : "---",
                 $maturityString,
                 $nativeRegionString,
                 $taxa->asisk_score,
