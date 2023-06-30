@@ -69,35 +69,35 @@ class Debris extends Model
     public static function import($data)
     {
 
+        try {
+            $has_habitat = Arr::get($data, 'habitat_of_the_finding');
+            $rugosity = DebrisHabitat::where('name', $data["debris_surface_rugosity"])->first();
+            $has_category = Arr::get($data, 'debris_category');
+            $has_thickness = Arr::get($data, 'debris_thickness');
+            $has_subcategory = Arr::get($data, 'debris_subcategory');
+            $has_size = Arr::get($data, 'debris_size_class');
+            $has_type = Arr::get($data, 'debris_type');
 
-        $has_habitat = Arr::get($data, 'habitat_of_the_finding');
-        $rugosity = DebrisHabitat::where('name', $data["debris_surface_rugosity"])->first();
-        $has_category = Arr::get($data, 'debris_category');
-        $has_thickness = Arr::get($data, 'debris_thickness');
-        $has_subcategory = Arr::get($data, 'debris_subcategory');
-        $has_size = Arr::get($data, 'debris_size_class');
-        $has_type = Arr::get($data, 'debris_type');
+            // $out = new ConsoleOutput();
+            // $out->writeln($has_size);
+            // $out->writeln(DebrisSize::where('name', $data["debris_size_class"])->first());
 
-        // $out = new ConsoleOutput();
-        // $out->writeln($has_size);
-        // $out->writeln(DebrisSize::where('name', $data["debris_size_class"])->first());
-
-        return self::create([
-            "debris_type_id" => $has_type ? DebrisType::where('name', $data["debris_type"])->first()->id : null,
-            "depth" => Arr::get($data, 'if_seafloor_specify_depth_(m)'),
-            "debris_habitat_id" => $has_habitat ? DebrisHabitat::where('name', $has_habitat)->first()->id : 12,
-            "otherHabitat" => $has_habitat ? null : Arr::get($data, 'if_other_habitat_specify(m)'),
-            "debris_size_id" =>  $has_size ? DebrisSize::where('name', $data["debris_size_class"])->first()->id : null,
-            "weight" => Arr::get($data, "debris_weight_(kg)"),
-            "debris_thickness_id" => $has_thickness ? DebrisThickness::where('name', $data["debris_thickness"])->first()->id : null,
-            "debris_rugosity_id" => $rugosity ? $rugosity->id : 7,
-            "otherRugosity" => $rugosity ? null : Arr::get($data, 'if_other_rugosity_specify(m)'),
-            "marks" => Arr::get($data, "debris_identification_marks"),
-            "origin" => Arr::get($data, "probable_debris_origin"),
-            "debris_category_id" => $has_category ? DebrisCategory::where('name', $data["debris_category"])->first()->id : null,
-            "debris_subcategory_id" => $has_subcategory ? DebrisSubCategory::where('mdi_code', $data["debris_subcategory"])->first()->id : null,
-        ]);
-        try { } catch (\Throwable $th) {
+            return self::create([
+                "debris_type_id" => $has_type ? DebrisType::where('name', $data["debris_type"])->first()->id : null,
+                "depth" => Arr::get($data, 'if_seafloor_specify_depth_(m)'),
+                "debris_habitat_id" => $has_habitat ? DebrisHabitat::where('name', $has_habitat)->first()->id : 12,
+                "otherHabitat" => $has_habitat ? null : Arr::get($data, 'if_other_habitat_specify(m)'),
+                "debris_size_id" =>  $has_size ? DebrisSize::where('name', $data["debris_size_class"])->first()->id : null,
+                "weight" => Arr::get($data, "debris_weight_(kg)"),
+                "debris_thickness_id" => $has_thickness ? DebrisThickness::where('name', $data["debris_thickness"])->first()->id : null,
+                "debris_rugosity_id" => $rugosity ? $rugosity->id : 7,
+                "otherRugosity" => $rugosity ? null : Arr::get($data, 'if_other_rugosity_specify(m)'),
+                "marks" => Arr::get($data, "debris_identification_marks"),
+                "origin" => Arr::get($data, "probable_debris_origin"),
+                "debris_category_id" => $has_category ? DebrisCategory::where('name', $data["debris_category"])->first()->id : null,
+                "debris_subcategory_id" => $has_subcategory ? DebrisSubCategory::where('mdi_code', $data["debris_subcategory"])->first()->id : null,
+            ]);
+        } catch (\Throwable $th) {
             return false;
         }
     }
