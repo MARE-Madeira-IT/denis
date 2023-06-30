@@ -24,10 +24,10 @@ class CreateDebrisTable extends Migration
             $table->string('origin')->nullable();
             $table->unsignedBigInteger('debris_size_id')->nullable();
             $table->unsignedBigInteger('debris_rugosity_id')->nullable();
-            $table->unsignedBigInteger('debris_habitat_id');
+            $table->unsignedBigInteger('debris_habitat_id')->nullable();
             $table->unsignedBigInteger('debris_thickness_id')->nullable();
             $table->unsignedBigInteger('debris_material_id')->nullable();
-            $table->unsignedBigInteger('debris_type_id');
+            $table->unsignedBigInteger('debris_type_id')->nullable();
             $table->unsignedBigInteger('debris_subcategory_id')->nullable();
             $table->unsignedBigInteger('debris_category_id')->nullable();
             $table->timestamps();

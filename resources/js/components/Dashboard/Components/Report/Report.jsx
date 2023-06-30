@@ -6,7 +6,7 @@ import { setDrawerState } from "../../../../redux/drawer/actions";
 import TableContainer from "./TableContainer";
 import Drawer from "./Drawer";
 import FormContainer from "./FormContainer";
-import { Row } from "antd";
+import { Row, Select } from "antd";
 import MapView from "../../../MapView";
 import { Link, useSearchParams } from "react-router-dom";
 import PageHeader from "../../Common/PageHeader";
@@ -66,7 +66,7 @@ const Container = styled.div`
 `;
 
 
-function Report(props, { data, loading, meta, mapData }) {
+function Report(props) {
     const [filters, setFilters] = useState({});
     const [activeForm, setFormModal] = useState(false);
     const [activeImport, setActiveImport] = useState(false);
@@ -75,14 +75,18 @@ function Report(props, { data, loading, meta, mapData }) {
     const [activeExport, setActiveExport] = useState(false)
     var { data, loading, meta, mapData } = props;
     let [searchParams, setSearchParams] = useSearchParams();
+    const [limit, setLimit] = useState(100)
 
     useEffect(() => {
         props.fetchReports(1, filters);
     }, [filters])
 
     useEffect(() => {
+        props.fetchReportsCoordinates({ limit: limit });
+    }, [limit])
+
+    useEffect(() => {
         props.fetchReportGraph();
-        props.fetchReportsCoordinates();
 
         if (searchParams.get("create")) {
             handleCreateClick();
@@ -131,10 +135,37 @@ function Report(props, { data, loading, meta, mapData }) {
                 <Drawer handleUpdateClick={handleUpdateClick} handleDuplicateClick={handleDuplicateClick} />
 
                 <Row style={{ padding: "50px 0px 20px 0px" }} type="flex" justify="end">
-                    <CreateSecundary style={{marginRight: "15px"}} onClick={() => setActiveImport(true)}>Import collection</CreateSecundary>
+                    <CreateSecundary style={{ marginRight: "15px" }} onClick={() => setActiveImport(true)}>Import collection</CreateSecundary>
                     <Create onClick={handleCreateClick}>Add a report to the database</Create>
                 </Row>
 
+                <Row type="flex" justify="start" align="middle">
+                    <p style={{ margin: "0px" }}>Number of records</p>
+                    <Select
+                        loading={loading}
+                        value={limit}
+                        onChange={setLimit}
+                        style={{ width: "150px", marginLeft: "20px" }}
+                        options={[
+                            {
+                                value: 100,
+                                label: '100',
+                            },
+                            {
+                                value: 300,
+                                label: '300',
+                            },
+                            {
+                                value: 1000,
+                                label: '1000',
+                            },
+                            {
+                                value: 99999999,
+                                label: 'All records',
+                            },
+                        ]} />
+                </Row>
+                <br />
                 <FlexContainer type="flex">
                     <MapContainer>
                         <div className="background"></div>
@@ -168,7 +199,7 @@ function Report(props, { data, loading, meta, mapData }) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchReports: (page, filters) => dispatch(fetchReports(page, filters)),
-        fetchReportsCoordinates: () => dispatch(fetchReportsCoordinates()),
+        fetchReportsCoordinates: (filters) => dispatch(fetchReportsCoordinates(filters)),
         fetchReport: (id) => dispatch(fetchReport(id)),
         setDrawerState: (state, object) => dispatch(setDrawerState(state, object)),
         updateState: (data) => dispatch(updateState(data)),

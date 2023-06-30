@@ -64,7 +64,7 @@ class Taxa extends Model
 
             $newTaxa  = self::create([
                 "taxa_level_id" => $has_taxonomic_level ? TaxaLevel::where('name', $data['highest_taxonomic_level'])->first()->id : null,
-                "identification" => $data["identification"],
+                "identification" => Arr::get($data, "identification"),
                 "authority" => Arr::get($data, "authority"),
                 "year_first_report" => Arr::get($data, "year_of_first_report"),
                 "reference" => Arr::get($data, "reference"),

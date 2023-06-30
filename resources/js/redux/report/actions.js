@@ -10,9 +10,11 @@ export const fetchReports = (page = 1, filters = {}) => ({
     })}&page=${page}`)
 });
 
-export const fetchReportsCoordinates = () => ({
+export const fetchReportsCoordinates = (filters = {}) => ({
     type: types.FETCH_REPORTS_COORDINATES,
-    payload: axios.get(`${window.location.origin}/api/map-reports`)
+    payload: axios.get(`${window.location.origin}/api/map-reports?${stringify(filters, {
+        arrayFormat: "index"
+    })}`)
 });
 
 export const fetchReportGraph = () => ({

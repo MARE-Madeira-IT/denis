@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { Container, Title, Content } from "./style"
 import handleScroll from "../Helper/handleScroll";
@@ -7,6 +7,7 @@ import { dimensions } from '../Dashboard/dashboardHelper';
 import MapView from '../MapView';
 import { connect } from 'react-redux';
 import { fetchReportsCoordinates } from '../../redux/report/actions';
+import { Select, Row } from 'antd';
 
 const scroll = keyframes`
   0% {
@@ -130,12 +131,13 @@ const MapLink = styled(Link)`
     
 `;
 
-function About({ fetchReportsCoordinates }) {
+function About({ loading, fetchReportsCoordinates }) {
     const scrollParameters = handleScroll("aboutContainer");
+    const [limit, setLimit] = useState(100)
 
     useEffect(() => {
-        fetchReportsCoordinates();
-    }, [])
+        fetchReportsCoordinates({ limit: limit });
+    }, [limit])
 
     return (
         <Container id="aboutContainer">
@@ -162,7 +164,32 @@ function About({ fetchReportsCoordinates }) {
                         <li> Historical information in dynamic views</li>
                         <li> Credibility from experts validation</li>
                     </ul>}
-
+                    <Row type="flex" justify="end" align="middle">
+                        <p style={{ margin: "0px" }}>Number of records</p>
+                        <Select
+                            loading={loading}
+                            value={limit}
+                            onChange={setLimit}
+                            style={{ width: "150px", marginLeft: "20px" }}
+                            options={[
+                                {
+                                    value: 100,
+                                    label: '100',
+                                },
+                                {
+                                    value: 300,
+                                    label: '300',
+                                },
+                                {
+                                    value: 1000,
+                                    label: '1000',
+                                },
+                                {
+                                    value: 99999999,
+                                    label: 'All records',
+                                },
+                            ]} />
+                    </Row>
                     <MapContainer>
                         <MapView />
                     </MapContainer>
@@ -252,8 +279,14 @@ function About({ fetchReportsCoordinates }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchReportsCoordinates: () => dispatch(fetchReportsCoordinates()),
+        fetchReportsCoordinates: (filters) => dispatch(fetchReportsCoordinates(filters)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(About);
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.report.loading,
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(About);

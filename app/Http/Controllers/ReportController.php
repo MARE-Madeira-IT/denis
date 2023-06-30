@@ -57,9 +57,9 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function mapIndex()
+    public function mapIndex(Request $request)
     {
-        return ReportCoordinateResource::collection(Report::latest()->limit(100)->get());
+        return ReportCoordinateResource::collection(Report::latest()->limit($request->limit ? $request->limit : 100)->get());
     }
 
     /**

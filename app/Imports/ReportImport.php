@@ -40,7 +40,7 @@ class ReportImport implements ToCollection, WithHeadingRow
             // $out->writeln($row);
             $identifier = $row["date"] .
                 $row["latitude"] . $row["longitude"] .
-                $row["debris_category"] . $row["debris_subcategory"];
+                Arr::get($row, "debris_category") .  Arr::get($row, "debris_subcategory");
 
             $keyExists = Arr::get($identifiers, $identifier);
 
