@@ -146,7 +146,7 @@ function About({ loading, fetchReportsCoordinates }) {
             <Scroll src="/images/icons/scroll.svg" alt="scroll" />
 
             <Title>
-                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />
+                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
 
             </Title>
             <StyledContent>

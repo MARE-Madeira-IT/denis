@@ -158,7 +158,7 @@ function Faq() {
     return (
         <Container id="faqContainer">
             <Title>
-                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
+                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/4.jpg" alt="" />
             </Title>
             <StyledContent>
                 <div className="content-width">

@@ -88,7 +88,7 @@ function Partners() {
     return (
         <Container id="partnerContainer">
             <Title>
-                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/4.jpg" alt="" />
+                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/1.jpg" alt="" />
             </Title>
             <StyledContent>
                 <div className="content-width">
