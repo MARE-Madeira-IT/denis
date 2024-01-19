@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button, Input, Popconfirm, Radio, Row, Space, Tag } from 'antd';
 import styled from "styled-components";
 import TableComponent from "../../Common/TableComponent";
-import { getColumnSearchProps } from "./Search";
+import { getColumnSearchProps } from "./SearchProps/Search";
+import { getColumnDateProps } from "./SearchProps/Date";
 import StopPropagation from "../../Common/StopPropagation";
 import { connect } from "react-redux";
 import { deleteReport } from "../../../../redux/report/actions";
@@ -29,8 +30,10 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
     const [status, setStatus] = useState(undefined);
     const [permissionColumns, setPermissionColumns] = useState([]);
     const searchInput = useRef(null);
+    const [currentPage, setCurrentPage] = useState(10)
 
     const handleFilter = (value, field) => {
+        console.log(value);
         var newFilters = {};
         newFilters[field] = value;
         setFilters({ ...filters, ...newFilters });
@@ -69,7 +72,7 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
         {
             title: 'Date of survey',
             dataIndex: 'date',
-            ...getColumnSearchProps('date', searchInput, handleFilter, handleFilterClear),
+            ...getColumnDateProps('date', searchInput, handleFilter, handleFilterClear),
         },
         {
             title: 'Location (site, region, country, lme)',
@@ -186,6 +189,10 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
         setPermissionColumns(newColumns);
     }, [permissionLevel])
 
+    const handleShowSizeChange = (current, pageSize) => {
+        setFilters({ ...filters, pagination: pageSize });
+    };
+
 
     return (
         <Container>
@@ -194,6 +201,7 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
                 data={data}
                 columns={permissionColumns}
                 meta={meta}
+                handleShowSizeChange={handleShowSizeChange}
                 handlePageChange={(aPage) => handlePageChange(aPage)}
                 onRow={(record) => ({
                     onClick: () => {

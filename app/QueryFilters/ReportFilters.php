@@ -11,6 +11,7 @@ use Cerbero\QueryFilters\QueryFilters;
  */
 class ReportFilters extends QueryFilters
 {
+
     public function id($int)
     {
         $this->query->where('id', $int);
@@ -41,7 +42,7 @@ class ReportFilters extends QueryFilters
 
     public function status($int)
     {
-        $this->query->whereHas('validation', function ($query) use ($int) {
+        $this->query->whereHas('latestValidation', function ($query) use ($int) {
             $query->where('validation_id', $int);
         });
     }

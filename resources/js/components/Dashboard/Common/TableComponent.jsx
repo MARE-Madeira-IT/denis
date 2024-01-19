@@ -43,7 +43,9 @@ const Container = styled.div`
 `;
 
 function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
-    showQuickJumper = false, handleExpandable, bordered = false, title }) {
+    showQuickJumper = false, handleExpandable, bordered = false, title, handleShowSizeChange }) {
+
+
 
     return (
 
@@ -56,6 +58,8 @@ function TableComponent({ onRow, columns, data, meta, handlePageChange, loading,
                 onChange={handlePageChange}
                 pagination={meta ? {
                     showQuickJumper: showQuickJumper,
+                    showSizeChanger: true,
+                    onShowSizeChange: handleShowSizeChange,
                     total: meta.total,
                     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} records`,
                     current: meta.current_page,

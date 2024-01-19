@@ -26,10 +26,12 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ReportFilters $filters)
+    public function index(Request $request)
     {
+        $filters = ReportFilters::hydrate($request->query());
+
         $user = auth()->user();
-        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->paginate(10));
+        return MinimalReportResource::collection(Report::filterBy($filters)->latest()->paginate($request->pagination ? $request->pagination : 10));
 
         $query = Report::filterBy($filters);
         // $out = new ConsoleOutput();
@@ -39,7 +41,7 @@ class ReportController extends Controller
                 $q->where('validation_id', 2);
             });
         }
-        return MinimalReportResource::collection($query->latest()->paginate(10));
+        return MinimalReportResource::collection($query->latest()->paginate($filters->pagination ? $filters->pagination : 10));
     }
 
     /**

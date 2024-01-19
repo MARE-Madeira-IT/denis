@@ -94,7 +94,10 @@ function Report(props) {
     }, [])
 
     function handlePageChange(pagination) {
-        props.fetchReports(pagination.current, filters);
+        if (!props.loading) {
+            props.fetchReports(pagination.current, filters);
+        }
+
     }
 
     function handleRowClick(row) {
