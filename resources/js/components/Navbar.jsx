@@ -16,7 +16,7 @@ const FlexContainer = styled.section`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 50px 100px 0px 100px;
+    padding: 50px 80px 0px 80px;
     box-sizing: border-box;
 
     .link {
@@ -47,10 +47,6 @@ const FlexContainer = styled.section`
 
     @media (max-width: ${dimensions.lg}) {
         padding: 50px 20px;
-
-        .link {
-            display: none;
-        }
     }
 
     @media (max-width: ${dimensions.md}) {
@@ -69,6 +65,12 @@ const Logo = styled.div`
     width: 50%;
     color: white;    
     position: relative;
+
+    .logo {
+        margin: 0px;
+        width: 40%;
+        display: none;
+    }
 
     
     h1 {
@@ -100,14 +102,13 @@ const Logo = styled.div`
 
         .menu {
             filter: invert(100%);
-            display: block;
         }
     }
 
     @media (max-width: ${dimensions.md}) {
         text-align: center;
         margin-top: 10px;
-        width: 100%;
+        display: block;
 
         .menu {
             display: block;
@@ -116,6 +117,10 @@ const Logo = styled.div`
             img {
                 width: 20px;
             }
+        }
+
+        .logo {
+            display: block;
         }
     }
 
@@ -127,10 +132,16 @@ const Logo = styled.div`
 const Login = styled.div`
     width: 50%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
     position:relative;
+
+    .logo {
+        max-width: 300px;
+        width: 40%;
+        margin-left: 100px;
+    }
 
     &:before {
         content: "";
@@ -146,9 +157,21 @@ const Login = styled.div`
     @media (max-width: ${dimensions.xl}) {
         font-size: 14px;
         gap: 10px;
+        
+
+        .logo {
+            margin-left: 50px;
+        }
+        
     }
 
     @media (max-width: ${dimensions.lg}) {
+        width: 100%;
+        margin: 0px 20px;
+        box-sizing: border-box;
+    } 
+
+    @media (max-width: ${dimensions.md}) {
         display: none;
     }    
 `;
@@ -198,9 +221,10 @@ function Navbar({ permissionLevel,
     return (
         <FlexContainer>
             <Logo>
-                <h1>DeNIS</h1>
+                <img className="logo" src='logo.svg' alt="DeNIS" />
 
                 <div className='menu'>
+                    {/* <img className="logo" src='logo.svg' alt="DeNIS" /> */}
                     <Dropdown overlay={!isAuthenticated ?
                         <Menu>
                             <Menu.Item>
@@ -218,6 +242,7 @@ function Navbar({ permissionLevel,
 
             {isAuthenticated ?
                 <Login>
+                    <img className="logo" src='logo.svg' alt="DeNIS" />
                     {navbarItems.map((item, index) => (
                         <>
                             {
@@ -235,7 +260,10 @@ function Navbar({ permissionLevel,
                     <div onClick={handleLogout} className='link'>
                         Logout
                     </div>
-                </Login> : <Login><Link className='link login' to="/login">Account</Link></Login>
+                </Login> : <Login>
+                    <img className="logo" src='logo.svg' alt="DeNIS" />
+                    <Link className='link login' to="/login">Account</Link>
+                </Login>
             }
             {/* 
             {isAuthenticated &&
