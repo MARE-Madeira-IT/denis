@@ -243,7 +243,7 @@ function Navbar({ permissionLevel,
             </Logo>
 
 
-            {!isAuthenticated ?
+            {isAuthenticated ?
                 <Login>
                     <img className="logo" src='logo.svg' alt="DeNIS" />
                     {navbarItems.map((item, index) => (
