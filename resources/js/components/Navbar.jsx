@@ -101,6 +101,7 @@ const Logo = styled.div`
         width: 100%;
 
         .menu {
+            
             filter: invert(100%);
         }
     }
@@ -140,6 +141,7 @@ const Login = styled.div`
     .logo {
         max-width: 300px;
         width: 40%;
+        min-width: 100px;
         margin-left: 100px;
     }
 
@@ -169,6 +171,7 @@ const Login = styled.div`
         width: 100%;
         margin: 0px 20px;
         box-sizing: border-box;
+  
     } 
 
     @media (max-width: ${dimensions.md}) {
@@ -180,9 +183,9 @@ const navbarItems = [
     { to: "/dashboard/", title: "Profile", treshold: 0 },
     { to: "/dashboard/collections", title: "Collections", treshold: 0 },
     { to: "/dashboard/reports", title: "Reports", treshold: 0 },
-    { to: "/dashboard/users", title: "Users", treshold: 2 },
-    { to: "/dashboard/debris", title: "Debris", treshold: 0 },
-    { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
+    // { to: "/dashboard/users", title: "Users", treshold: 2 },
+    // { to: "/dashboard/debris", title: "Debris", treshold: 0 },
+    // { to: "/dashboard/biodiversity", title: "Biodiversity", treshold: 0 },
 ];
 
 
@@ -240,7 +243,7 @@ function Navbar({ permissionLevel,
             </Logo>
 
 
-            {isAuthenticated ?
+            {!isAuthenticated ?
                 <Login>
                     <img className="logo" src='logo.svg' alt="DeNIS" />
                     {navbarItems.map((item, index) => (
