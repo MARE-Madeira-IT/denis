@@ -109,14 +109,23 @@ const Logo = styled.div`
     @media (max-width: ${dimensions.md}) {
         text-align: center;
         margin-top: 10px;
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(255,255,255,.6);
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 12px;
 
         .menu {
+            position: relative;
             display: block;
             filter: invert(0%);
+            
 
             img {
-                width: 20px;
+                width: 35px;
+                
             }
         }
 
@@ -224,7 +233,7 @@ function Navbar({ permissionLevel,
     return (
         <FlexContainer>
             <Logo>
-                <img className="logo" src='logo.svg' alt="DeNIS" />
+                <img className="logo" src='logo_mobile.svg' alt="DeNIS" />
 
                 <div className='menu'>
                     {/* <img className="logo" src='logo.svg' alt="DeNIS" /> */}
@@ -237,7 +246,7 @@ function Navbar({ permissionLevel,
                             </Menu.Item>
                         </Menu>
                         : menu}>
-                        <img src="/images/icons/menu_white.svg" alt="menu" />
+                        <img src="/images/icons/menu_main.svg" alt="menu" />
                     </Dropdown>
                 </div>
             </Logo>

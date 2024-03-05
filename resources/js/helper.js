@@ -8,6 +8,6 @@ export function download(response, filename) {
 };
 
 export const colors = {
-    main: "#385b5e",
+    main: "#93aca7ff",
     mainHover: "#325154",
 }

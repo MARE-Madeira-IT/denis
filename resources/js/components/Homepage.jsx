@@ -34,7 +34,7 @@ function Homepage() {
                 <About />
                 <Faq />
                 <Partners />
-                <Timeline />
+                {/* <Timeline /> */}
             </Content>
             <Contact style={{ marginTop: "50px" }}> Want to help or still have questions? Contact us at <a href="mailto:info@denis-db.com">info@denis-db.com</a> </Contact>
         </Container>

@@ -116,7 +116,7 @@ const TutorialContainer = styled.div`
 const questions = [
     {
         question: "What is DeNIS",
-        answer: "DeNIS (Debris and Non-Indigenous Species Information System) is a scientific website designed to serve as a one-stop-shop for researchers, policymakers, and stakeholders in the scientific community. It provides comprehensive information on marine debris and non-indigenous species, including their distribution, origin, and impact on marine ecosystems."
+        answer: "DeNIS (Debris and Non-Indigenous Species Information System) is a scientific website designed to serve as a one-stop-shop for researchers, policymakers, and other stakeholders. It provides comprehensive information on marine debris and non-indigenous species, including their distribution, origin, and impact on marine ecosystems."
     },
     {
         question: "Who can benefit from DeNIS?",
@@ -128,7 +128,7 @@ const questions = [
     },
     {
         question: "Can I access DeNIS for free?",
-        answer: "Yes, DeNIS is freely accessible to all users. The platform is designed to promote open access to scientific information and facilitate the sharing of knowledge within the scientific community and beyond."
+        answer: "Yes, DeNIS is freely accessible to all registered users. The platform is designed to promote open access to scientific information and facilitate the sharing of knowledge within the scientific community and beyond. Anyone can register and all registered users can see the data, but only approved users can input data, due to the need for data quality control."
     },
     {
         question: "How frequently is the information on DeNIS updated?",
@@ -158,7 +158,7 @@ function Faq() {
     return (
         <Container id="faqContainer">
             <Title>
-                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/4.jpg" alt="" />
+                <img style={{ transform: "scale(" + scrollParameters.scale + ")" }} src="/images/homepage/2.jpg" alt="" />
             </Title>
             <StyledContent>
                 <div className="content-width">
