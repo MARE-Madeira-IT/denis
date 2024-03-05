@@ -27,13 +27,16 @@ const scroll = keyframes`
 
 const StyledContent = styled(Content)`
     h2 {
-        display: none;
         margin-top: 30px;
         margin-bottom: 12px;
         font-size: 32px;
         line-height: 40px;
         font-weight: 400;
         text-align: left;
+    }
+
+    .hidden_title {
+        display: none;
     }
     
     p, li {
@@ -66,7 +69,7 @@ const StyledContent = styled(Content)`
     }
 
     @media (max-width: ${dimensions.md}) {
-        h2 {
+        .hidden_title {
             display: block;
         }
 
@@ -184,7 +187,7 @@ function About({ loading, fetchReportsCoordinates }) {
             <StyledContent>
                 <div className="content-width">
                     {/* <p>Impedit officia velit nihil debitis commodi. Itaque natus laudantium. Laudantium sed quasi ut non fugiat. Atque impedit est voluptatem sit qui.</p> */}
-                    <h2>Global Database on Marine Debris and Non-Indigenous Species</h2>
+                    <h2 className='hidden_title'>Global Database on Marine Debris and Non-Indigenous Species</h2>
                     <p className='first_paragraph'>
                         Marine debris is considered among the major threats to marine life, biodiversity, and ecosystems and causes particular concern due to its abundance, durability, and persistence in the marine environment. Moreover, marine debris contributes to the transfer of Non-Indigenous Species - NIS, acting as a vector for both first introductions in a new region and secondary spread within an already affected region.
 
