@@ -31,14 +31,6 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
         fetchDebrisRugositySelector()
     }, [])
 
-    const PopoverContent = ({ id }) => (
-        <div>
-            <p>Content</p>
-            <p>Content</p>
-        </div>
-    );
-
-
     return (
         <Select
             value={value}
@@ -77,17 +69,18 @@ function DebrisRugosityRemoteSelectContainer({ fetchDebrisRugositySelector, data
             {selected && <Select.Option value={other}>{other}</Select.Option>}
             {data.map((element) => (
                 <Select.Option key={element.id} value={element.id}>
-                    <Row type="flex" justify='space-between'>
-                        {element.name}
+                    {/* <Row type="flex" justify='space-between'> */}
+                    {element.name}
 
-                        {/* {element.name != "other" &&
+                    {/* {element.name != "other" &&
                             <CustomTooltip placement='right' title={(<img src={"/images/rugosity/" + element.id + ".jpg"} />)}><img src="/images/icons/form/tooltip.svg" /></CustomTooltip>
                         } */}
 
-                    </Row>
+                    {/* </Row> */}
                 </Select.Option>
-            ))}
-        </Select>
+            ))
+            }
+        </Select >
     )
 }
 
