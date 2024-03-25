@@ -8,7 +8,7 @@ import ItemDetection from './Form/ItemDetection';
 import Tour from "../../Hooks/Tour";
 import { dimensions } from '../../dashboardHelper';
 import { connect } from "react-redux";
-import dayjs from 'dayjs';
+import moment from 'moment';
 import { dateTypes } from '../../../../helper';
 
 const { Step } = Steps;
@@ -112,9 +112,9 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
             if (submitData.date_type == "range") {
-                submitData.date = [dayjs(submitData.date[0]).format('YYYY-MM-DD'), dayjs(submitData.date[1]).format('YYYY-MM-DD')];
+                submitData.date = [moment(submitData.date[0]).format('YYYY-MM-DD'), moment(submitData.date[1]).format('YYYY-MM-DD')];
             } else {
-                submitData.date = dayjs(submitData.date).format('YYYY-MM-DD');
+                submitData.date = moment(submitData.date).format('YYYY-MM-DD');
             }
 
             var formInfo = new FormData();
@@ -151,9 +151,9 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
             if (submitData.date_type == "range") {
-                submitData.date = [dayjs(submitData.date[0]).format('YYYY-MM-DD'), dayjs(submitData.date[1]).format('YYYY-MM-DD')];
+                submitData.date = [moment(submitData.date[0]).format('YYYY-MM-DD'), moment(submitData.date[1]).format('YYYY-MM-DD')];
             } else {
-                submitData.date = dayjs(submitData.date).format('YYYY-MM-DD');
+                submitData.date = moment(submitData.date).format('YYYY-MM-DD');
             }
 
             updateReport(currentReport.id, submitData).then(() => {
@@ -228,7 +228,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
             });
 
             form.setFieldsValue({
-                date: data.date_type == "range" ? [dayjs(data.date), dayjs(data.final_date)] : dayjs(data.date),
+                date: data.date_type == "range" ? [moment(data.date), moment(data.final_date)] : moment(data.date),
                 latitude: data.latitude,
                 longitude: data.longitude,
                 date_type: data.date_type,

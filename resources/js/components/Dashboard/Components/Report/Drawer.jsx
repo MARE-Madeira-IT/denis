@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Col, Row } from 'antd';
 import { connect } from 'react-redux';
 import MapViewModal from '../../../MapViewModal';
-import dayjs from "dayjs";
+import moment from "moment";
 import { Create, CreateSecundary, dimensions } from '../../dashboardHelper';
 import { dateTypes } from '../../../../helper';
 
@@ -95,7 +95,7 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
                     </Row>
 
                     <FieldsContainer width="25%">
-                        <FieldContainer name="Date of survey" value={current.date_type != "range" ? dayjs(current.date).format(dateTypes[current.date_type]) : dayjs(current.date).format(dateTypes[current.date_type]) + " - " + dayjs(current.final_date).format(dateTypes[current.date_type])} />
+                        <FieldContainer name="Date of survey" value={current.date_type != "range" ? moment(current.date).format(dateTypes[current.date_type]) : moment(current.date).format(dateTypes[current.date_type]) + " - " + moment(current.final_date).format(dateTypes[current.date_type])} />
                         <FieldContainer name="Localization" value={current.site?.value + ", " + current.site?.region + ", " + current.site?.country?.name + ", " + (current?.site?.lme ? current?.site?.lme?.name : "")} />
                         <FieldContainer name="Ongoing Surveys" value={current.ongoing_survey ? current.ongoing_survey : "No"} />
                         <FieldContainer name="DOI" value={EmptyField(current.doi)} />
