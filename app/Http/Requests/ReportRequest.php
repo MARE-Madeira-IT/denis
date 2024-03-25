@@ -41,6 +41,8 @@ class ReportRequest extends FormRequest
         $country = Country::where('name', 'like', '%' . $this->country . '%')->first();
 
         $this->merge([
+            'date' => $this->date_type == "range" ? $this->date[0] : $this->date,
+            'final_date' => $this->date_type == "range" ? $this->date[1] : null,
             'user_id' => auth()->user()->id,
             'country' => $country ? $country->id : null,
             'debris_habitat' => $habitat,
@@ -70,6 +72,8 @@ class ReportRequest extends FormRequest
             'ongoing_survey' => 'nullable',
             'custom_id' => 'nullable',
             'date' => 'required|date',
+            'date_type' => 'required|string',
+            'final_date' => 'nullable|date',
             'latitude' => ['required', 'regex:/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
             'longitude' => ['required', 'regex:/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,20})?))$/'],
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { Col, Form, Input, DatePicker, Row, Tooltip, Upload } from 'antd'
+import { Col, Form, Input, DatePicker, Row, Tooltip, Upload, Select } from 'antd'
 import CountryRemoteSelectContainer from '../../Site/Country/CountryRemoteSelectContainer'
 import LmeRemoteSelectContainer from '../../Site/Lme/LmeRemoteSelectContainer'
 import { MapContainer, Marker, TileLayer, ZoomControl } from 'react-leaflet'
@@ -21,6 +21,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
     const [latitude, setLatitude] = useState(24.206889622);
     const [longitude, setLongitude] = useState(-36.2109375);
     const [hasTouched, setHasTouched] = useState([false, false]);
+    const [dateType, setDateType] = useState("day")
     const [imageUrl, setImageUrl] = useState([]);
     const markerRef = useRef(null)
     const GEOCODE_URL = "https://revgeocode.search.hereapi.com/v1/revgeocode?lang=en";
@@ -66,6 +67,13 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
         }
     }, [hasTouched])
 
+    useEffect(() => {
+        if (hasInitialData) {
+            setDateType(currentReport.date_type)
+        }
+    }, [hasInitialData])
+
+
 
     const eventHandlers = useMemo(
         () => ({
@@ -101,12 +109,26 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
     return (
         <>
             <Row align='bottom' type="flex" gutter={32}>
-                <Col xs={24} md={8}>
-                    <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
-                        <DatePicker style={{ width: "100%" }} placeholder="Date" />
+                <Col xs={24} md={12}>
+                    <Form.Item label="Date precision*" name="date_type" rules={requiredRule}>
+                        <Select onChange={setDateType}>
+                            <Select.Option value="day">Day</Select.Option>
+                            <Select.Option value="month">Month</Select.Option>
+                            <Select.Option value="year">Year</Select.Option>
+                            <Select.Option value="range">Range</Select.Option>
+
+                        </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={8}>
+                <Col xs={24} md={12}>
+                    <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
+                        {dateType == "range" ? <DatePicker.RangePicker picker="year" style={{ width: "100%" }} /> :
+                            <DatePicker picker={dateType} style={{ width: "100%" }} placeholder="Date" />
+                        }
+                    </Form.Item>
+                </Col>
+
+                <Col xs={24} md={12}>
                     <Form.Item label={(
                         <>
                             <span>Custom identifier</span>
@@ -117,7 +139,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
                     </Form.Item>
                 </Col>
 
-                <Col xs={24} md={8}>
+                <Col xs={24} md={12}>
                     <Form.Item label={(
                         <>
                             <span>Digital object identifier</span>

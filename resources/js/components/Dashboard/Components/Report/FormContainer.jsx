@@ -8,7 +8,8 @@ import ItemDetection from './Form/ItemDetection';
 import Tour from "../../Hooks/Tour";
 import { dimensions } from '../../dashboardHelper';
 import { connect } from "react-redux";
-import moment from 'moment';
+import dayjs from 'dayjs';
+import { dateTypes } from '../../../../helper';
 
 const { Step } = Steps;
 
@@ -110,7 +111,12 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     const create = () => {
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
-            submitData.date = moment(submitData.date).format("YYYY-MM-DD");
+            if (submitData.date_type == "range") {
+                submitData.date = [dayjs(submitData.date[0]).format('YYYY-MM-DD'), dayjs(submitData.date[1]).format('YYYY-MM-DD')];
+            } else {
+                submitData.date = dayjs(submitData.date).format('YYYY-MM-DD');
+            }
+
             var formInfo = new FormData();
 
             Object.entries(submitData).map((entry) => {
@@ -144,7 +150,11 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     const updateForm = () => {
         form.validateFields().then(values => {
             var submitData = { ...formData, ...values }
-            submitData.date = moment(submitData.date).format("YYYY-MM-DD");
+            if (submitData.date_type == "range") {
+                submitData.date = [dayjs(submitData.date[0]).format('YYYY-MM-DD'), dayjs(submitData.date[1]).format('YYYY-MM-DD')];
+            } else {
+                submitData.date = dayjs(submitData.date).format('YYYY-MM-DD');
+            }
 
             updateReport(currentReport.id, submitData).then(() => {
                 handleCancel();
@@ -218,9 +228,10 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
             });
 
             form.setFieldsValue({
-                date: moment(data.date),
+                date: data.date_type == "range" ? [dayjs(data.date), dayjs(data.final_date)] : dayjs(data.date),
                 latitude: data.latitude,
                 longitude: data.longitude,
+                date_type: data.date_type,
                 doi: data.doi,
                 on_going_survey: data.ongoing_survey,
                 site: data.site.value,
@@ -288,7 +299,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
     ]
 
     const fieldsPerSteps = [
-        ["date", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id', 'doi', 'images'],
+        ["date", "date_type", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id', 'doi', 'images'],
         ["debris_type", "debris_depth", "debris_habitat", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
         ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region", 'asisk_score', 'asisk_result']
     ]
@@ -327,7 +338,8 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                             requiredMark={false}
                             form={form}
                             initialValues={{
-                                taxas: [""]
+                                taxas: [""],
+                                date_type: "day"
                             }}
                         >
                             {steps[currentStep]}

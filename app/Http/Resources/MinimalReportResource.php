@@ -20,6 +20,8 @@ class MinimalReportResource extends JsonResource
             'custom_id' => $this->custom_id,
             'status' => $this->validation,
             'date' => $this->date,
+            'final_date' => $this->final_date,
+            'date_type' => $this->date_type,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'notes' => $this->notes,

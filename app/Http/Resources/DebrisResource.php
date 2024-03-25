@@ -33,7 +33,7 @@ class DebrisResource extends JsonResource
             'thickness' => $this->thickness,
             'rugosity' => [
                 'id' => $this->rugosity_id ? $this->rugosity->id : null,
-                'name' => $this->otherRugosity ? $this->otherRugosity : $this->rugosity_id ? $this->rugosity->name : null,
+                'name' => $this->otherRugosity ? $this->otherRugosity : ($this->rugosity_id ? $this->rugosity->name : null),
             ],
             'litter_category' => [
                 'id' => $this->category->id,

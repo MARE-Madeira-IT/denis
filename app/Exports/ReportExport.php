@@ -99,7 +99,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
             $record->latestValidation->validation_id == 2 ? "Approved" : ($record->latestValidation->validation_id == 1 ? "Pending" : "Rejected"),
             $record->custom_id,
             $record->doi,
-            $record->date,
+            $record->date_type == "range" ? $record->date . " - " . $record->final_date : $record->date,
             $record->site->name,
             $record->site->region,
             $record->site->country_id ? $record->site->country->name : "",

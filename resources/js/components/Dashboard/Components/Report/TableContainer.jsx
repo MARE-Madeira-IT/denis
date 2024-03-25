@@ -7,6 +7,8 @@ import { getColumnDateProps } from "./SearchProps/Date";
 import StopPropagation from "../../Common/StopPropagation";
 import { connect } from "react-redux";
 import { deleteReport } from "../../../../redux/report/actions";
+import { dateTypes } from "../../../../helper";
+import dayjs from "dayjs";
 
 const Container = styled.div`
     width: 100%;
@@ -73,6 +75,8 @@ function TableContainer({ permissionLevel, currentUser, loading, data, meta, han
             title: 'Date of survey',
             dataIndex: 'date',
             ...getColumnDateProps('date', searchInput, handleFilter, handleFilterClear),
+            render: (date, row) => row.date_type != "range" ? dayjs(date).format(dateTypes[row.date_type]) : (dayjs(date).format(dateTypes[row.date_type]) + " - " + dayjs(row.final_date).format(dateTypes[row.date_type]))
+
         },
         {
             title: 'Location (site, region, country, lme)',

@@ -16,6 +16,8 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->date('final_date')->nullable();
+            $table->string('date_type')->default('day');
             $table->string('custom_id')->nullable();
             $table->unsignedBigInteger('collection_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();

@@ -13,7 +13,7 @@ class Report extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["user_id", "custom_id", "date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id", "collection_id"];
+    protected $fillable = ["user_id", "custom_id", "date", "date_type", "final_date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id", "collection_id"];
 
     public static function generateDataArray($data)
     {
@@ -21,6 +21,8 @@ class Report extends Model
             "user_id" => $data["user_id"],
             "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
+            "date_type" => $data['date_type'],
+            "final_date" => Arr::get($data, "final_date"),
             "doi" => Arr::get($data, 'doi'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
@@ -37,6 +39,8 @@ class Report extends Model
             "user_id" => $data["user_id"],
             "custom_id" => array_key_exists("custom_id", $data) ? $data["custom_id"] : null,
             "date" => $data["date"],
+            "date_type" => $data['date_type'],
+            "final_date" => Arr::get($data, "final_date"),
             "doi" => Arr::get($data, 'doi'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
@@ -55,6 +59,8 @@ class Report extends Model
                 "collection_id" => $collection->id,
                 "doi" => $collection->doi ? $collection->doi : null,
                 "date" => Carbon::parse($data['date']),
+                "date_type" => $data['date_type'],
+                "final_date" => Arr::get($data, "final_date") ? Carbon::parse($data['final_date']) : null,
                 "latitude" => $data['latitude'],
                 "longitude" => $data['longitude'],
                 "notes" => Arr::get($data, "notes"),

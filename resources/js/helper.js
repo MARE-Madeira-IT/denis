@@ -11,3 +11,10 @@ export const colors = {
     main: "#93aca7ff",
     mainHover: "#325154",
 }
+
+export const dateTypes = {
+    day: "YYYY-MM-DD",
+    month: "YYYY-MM",
+    year: "YYYY",
+    range: "YYYY",
+}

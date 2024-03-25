@@ -18,6 +18,8 @@ class ReportResource extends JsonResource
             'id' => $this->id,
             'user' => $this->user,
             'date' => $this->date,
+            'final_date' => $this->final_date,
+            'date_type' => $this->date_type,
             'doi' => $this->doi,
             'custom_id' => $this->custom_id,
             'status' => $this->validation,
