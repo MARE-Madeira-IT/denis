@@ -118,6 +118,9 @@ function Partners() {
                         <div><a href="https://www.marinespecies.org/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/worms.jpg" alt="WoRMS" /></a></div>
                         <div><a href="https://www.here.com/" target="_blank" rel="noopener noreferrer"><img src="/images/partners/HERE.png" alt="HERE maps" /></a></div>
                     </Flex>
+
+
+                    <p>This database benefited from feedback received during presentations of draft results to the International Council for Exploration of the Seas (ICES) Expert Working Group on Introduction and Transfers of Marine Organisms</p>
                 </div>
 
             </StyledContent>
