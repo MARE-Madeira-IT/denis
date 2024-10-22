@@ -10,6 +10,7 @@ import { dimensions } from '../../dashboardHelper';
 import { connect } from "react-redux";
 import moment from 'moment';
 import { dateTypes } from '../../../../helper';
+import PublicationDetails from './Form/PublicationDetails';
 
 const { Step } = Steps;
 
@@ -232,7 +233,12 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                 latitude: data.latitude,
                 longitude: data.longitude,
                 date_type: data.date_type,
+                title_publication: data.title_publication,
+                journal_publication: data.journal_publication,
                 doi: data.doi,
+                year_publication: data.year_publication,
+                volume_publication: data.volume_publication,
+                pages_publication: data.pages_publication,
                 on_going_survey: data.ongoing_survey,
                 site: data.site.value,
                 region: data.site.region,
@@ -295,13 +301,18 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
             </Form.List>
 
 
-        </>
+        </>,
+        <>
+            <h2 style={{ marginBottom: "30px" }}>Publications and Source Details</h2>
+            <PublicationDetails />
+        </>,
     ]
 
     const fieldsPerSteps = [
-        ["date", "date_type", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id', 'doi', 'images'],
+        ["date", "date_type", "latitude", "longitude", "on_going_survey", "site", "region", "country", "lme", 'custom_id', 'images'],
         ["debris_type", "debris_depth", "debris_habitat", "debris_size", "debris_weight", "debris_thickness", "debris_rugosity", "debris_sub_category", "debris_marks", "debris_origin"],
         ["taxa_level", "taxa_identification", "taxa_authority", "taxa_year_first_report", "taxa_reference", "taxa_species_status", "taxa_population_status", "taxa_abundance", "taxa_viability", "taxa_maturity", "taxa_native_region", 'asisk_score', 'asisk_result']
+        ["doi", "first_author", "authors", "year_publication", "title", "journal", "volume", "pages"]
     ]
 
     return (
@@ -351,6 +362,7 @@ function FormContainer({ activeForm, setFormModal, createReport, data, setHasIni
                             <Step title="Item detection" />
                             <Step title="Marine Debris characterization" />
                             <Step title="Biological information" />
+                            <Step title="Publications Details" />
                         </CustomSteps>
                         {errors.length ? <Alert
                             message="Report has failed"

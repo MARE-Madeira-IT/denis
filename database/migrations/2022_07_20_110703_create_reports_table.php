@@ -23,7 +23,14 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
+            $table->string('title_publication')->nullable();
+            $table->string('journal_publication')->nullable();
             $table->string('doi')->nullable();
+            $table->integer('year_publication')->nullable();
+            $table->string('volume_publication')->nullable();
+            $table->string('pages_publication')->nullable();
+            $table->string('first_author')->nullable();
+            $table->string('authors')->nullable();
             $table->text('notes')->nullable();
             $table->text('ongoing_survey')->nullable();
             $table->unsignedBigInteger('site_id');

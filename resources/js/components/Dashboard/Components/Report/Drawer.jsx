@@ -94,18 +94,36 @@ function Drawer({ current, handleUpdateClick, handleDuplicateClick }) {
                         <MapViewModal customData={{ id: 1, latitude: current.latitude, longitude: current.longitude }} />
                     </Row>
 
-                    <FieldsContainer width="25%">
+                    <FieldsContainer width="33%">
                         <FieldContainer name="Date of survey" value={current.date_type != "range" ? moment(current.date).format(dateTypes[current.date_type]) : moment(current.date).format(dateTypes[current.date_type]) + " - " + moment(current.final_date).format(dateTypes[current.date_type])} />
                         <FieldContainer name="Localization" value={current.site?.value + ", " + current.site?.region + ", " + current.site?.country?.name + ", " + (current?.site?.lme ? current?.site?.lme?.name : "")} />
                         <FieldContainer name="Ongoing Surveys" value={current.ongoing_survey ? current.ongoing_survey : "No"} />
-                        <FieldContainer name="DOI" value={EmptyField(current.doi)} />
                     </FieldsContainer>
+
+
+
 
                     <ImageContainer>
                         {current?.images && current.images.map((image) => (
                             <img src={image?.path} alt="" />
                         ))}
                     </ImageContainer>
+                </Col>
+
+                <Col span={24}>
+                    <Section>Publication details</Section>
+                    <FieldsContainer width="25%">
+                        <FieldContainer name="Title" value={EmptyField(current.title_publication)} />
+                        <FieldContainer name="Journal" value={EmptyField(current.journal_publication)} />
+                        <FieldContainer name="First Author" value={EmptyField(current.first_author)} />
+                        <FieldContainer name="Author(s)" value={EmptyField(current.authors)} />
+                    </FieldsContainer>
+                    <FieldsContainer width="25%">
+                        <FieldContainer name="DOI" value={EmptyField(current.doi)} />
+                        <FieldContainer name="Year of publication" value={EmptyField(current.year_publication)} />
+                        <FieldContainer name="Volume" value={EmptyField(current.volume_publication)} />
+                        <FieldContainer name="Page(s)" value={EmptyField(current.pages_publication)} />
+                    </FieldsContainer>
                 </Col>
                 <Col span={24}>
                     <Section>Debris characterization</Section>

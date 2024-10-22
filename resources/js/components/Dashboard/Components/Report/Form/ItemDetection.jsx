@@ -109,7 +109,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
     return (
         <>
             <Row align='bottom' type="flex" gutter={32}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Date precision*" name="date_type" rules={requiredRule}>
                         <Select onChange={setDateType}>
                             <Select.Option value="day">Day</Select.Option>
@@ -120,7 +120,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
                         </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Date of survey*" name="date" rules={requiredRule}>
                         {dateType == "range" ? <DatePicker.RangePicker picker="year" style={{ width: "100%" }} /> :
                             <DatePicker picker={dateType} style={{ width: "100%" }} placeholder="Date" />
@@ -128,7 +128,7 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
                     </Form.Item>
                 </Col>
 
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label={(
                         <>
                             <span>Custom identifier</span>
@@ -138,19 +138,6 @@ function ItemDetection({ form, hasInitialData, updateMode, active, currentReport
                         <Input placeholder="Ex.: 00001" />
                     </Form.Item>
                 </Col>
-
-                <Col xs={24} md={12}>
-                    <Form.Item label={(
-                        <>
-                            <span>Digital object identifier</span>
-                            <CustomTooltip text="DeNIS is used as a data repository, for already published work and submitted papers. A DOI, or Digital Object Identifier, is an identifier of such content on the web." />
-
-                        </>)} name="doi" rules={[{ required: false }]}>
-                        <Input placeholder="Ex.: 10.1080/15588742.2015" />
-                    </Form.Item>
-                </Col>
-
-
 
             </Row>
             <br />

@@ -13,7 +13,18 @@ class Report extends Model
     use HasFactory;
     use FiltersRecords;
 
-    protected $fillable = ["user_id", "custom_id", "date", "date_type", "final_date", "latitude", "longitude", "doi", "notes", "ongoing_survey", "debris_id", "site_id", "collection_id"];
+    protected $fillable = [
+        "user_id", "custom_id",
+        "date", "date_type", "final_date", "latitude", "longitude",
+        "doi", "notes", "ongoing_survey", "debris_id",
+        "site_id", "collection_id", "title_publication",
+        "journal_publication",
+        "year_publication",
+        "volume_publication",
+        "pages_publication",
+        "first_author",
+        "authors",
+    ];
 
     public static function generateDataArray($data)
     {
@@ -24,6 +35,13 @@ class Report extends Model
             "date_type" => $data['date_type'],
             "final_date" => Arr::get($data, "final_date"),
             "doi" => Arr::get($data, 'doi'),
+            "title_publication" => Arr::get($data, 'title_publication'),
+            "journal_publication" => Arr::get($data, 'journal_publication'),
+            "year_publication" => Arr::get($data, 'year_publication'),
+            "volume_publication" => Arr::get($data, 'volume_publication'),
+            "pages_publication" => Arr::get($data, 'pages_publication'),
+            "first_author" => Arr::get($data, 'first_author'),
+            "authors" => Arr::get($data, 'authors'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
             "notes" => array_key_exists("notes", $data) ? $data["notes"] : null,
@@ -42,6 +60,13 @@ class Report extends Model
             "date_type" => $data['date_type'],
             "final_date" => Arr::get($data, "final_date"),
             "doi" => Arr::get($data, 'doi'),
+            "title_publication" => Arr::get($data, 'title_publication'),
+            "journal_publication" => Arr::get($data, 'journal_publication'),
+            "year_publication" => Arr::get($data, 'year_publication'),
+            "volume_publication" => Arr::get($data, 'volume_publication'),
+            "pages_publication" => Arr::get($data, 'pages_publication'),
+            "first_author" => Arr::get($data, 'first_author'),
+            "authors" => Arr::get($data, 'authors'),
             "latitude" => $data["latitude"],
             "longitude" => $data["longitude"],
             "notes" => array_key_exists("notes", $data) ? $data["notes"] : null,
@@ -58,6 +83,13 @@ class Report extends Model
                 "user_id" => $collection->user_id,
                 "collection_id" => $collection->id,
                 "doi" => $collection->doi ? $collection->doi : null,
+                "title_publication" => $collection->title_publication ? $collection->title_publication : null,
+                "journal_publication" => $collection->journal_publication ? $collection->journal_publication : null,
+                "year_publication" => $collection->year_publication ? $collection->year_publication : null,
+                "volume_publication" => $collection->volume_publication ? $collection->volume_publication : null,
+                "pages_publication" => $collection->pages_publication ? $collection->pages_publication : null,
+                "first_author" => $collection->first_author ? $collection->first_author : null,
+                "authors" => $collection->authors ? $collection->authors : null,
                 "date" => Carbon::parse($data['date']),
                 "date_type" => $data['date_type'],
                 "final_date" => Arr::get($data, "final_date") ? Carbon::parse($data['final_date']) : null,
