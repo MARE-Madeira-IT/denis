@@ -86,6 +86,8 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
             'Asisk score',
             'Asisk result',
             'Notes',
+
+            'User',
         ];
     }
 
@@ -151,6 +153,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
                 $taxa->asisk_score,
                 $taxa->asisk_result,
                 $record->notes,
+                $record->user->email,
             ];
 
             array_push($response, array_merge($init, $newData));
