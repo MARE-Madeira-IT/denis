@@ -88,6 +88,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
             'Notes',
 
             'User',
+            'User email',
         ];
     }
 
@@ -153,6 +154,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
                 $taxa->asisk_score,
                 $taxa->asisk_result,
                 $record->notes,
+                $record->user->name,
                 $record->user->email,
             ];
 
