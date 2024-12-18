@@ -38,6 +38,5 @@ class UploadCollection implements ShouldQueue
         $this->collection->startUpload = Carbon::now();
         $this->collection->save();
         Excel::import(new ReportImport($this->collection), storage_path('app/collections/' . $this->collection->path));
-        
     }
 }
