@@ -83,13 +83,6 @@ class Report extends Model
                 "user_id" => $collection->user_id,
                 "collection_id" => $collection->id,
                 "doi" => $collection->doi ? $collection->doi : null,
-                "title_publication" => $collection->title_publication ? $collection->title_publication : null,
-                "journal_publication" => $collection->journal_publication ? $collection->journal_publication : null,
-                "year_publication" => $collection->year_publication ? $collection->year_publication : null,
-                "volume_publication" => $collection->volume_publication ? $collection->volume_publication : null,
-                "pages_publication" => $collection->pages_publication ? $collection->pages_publication : null,
-                "first_author" => $collection->first_author ? $collection->first_author : null,
-                "authors" => $collection->authors ? $collection->authors : null,
                 "date" => Carbon::parse($data['date']),
                 "date_type" => $data['date_type'],
                 "final_date" => Arr::get($data, "final_date") ? Carbon::parse($data['final_date']) : null,
@@ -101,6 +94,7 @@ class Report extends Model
                 "debris_id" => $debris,
             ]);
         } catch (\Throwable $th) {
+
             return false;
         }
     }

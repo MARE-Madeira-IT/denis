@@ -196,6 +196,11 @@ class ReportController extends Controller
 
             if ($user) {
                 if ($user->hasRole('admin') || $user->id == $report->user_id) {
+                    $debries = $report->debris()->get();
+                    foreach ($debries as $debris) {
+                        $debris->delete();
+                    }
+
                     $report->delete();
                 }
             }

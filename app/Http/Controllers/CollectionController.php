@@ -100,6 +100,16 @@ class CollectionController extends Controller
 
             if ($user) {
                 if ($user->hasRole('admin') || $user->id == $collection->user_id) {
+                    $reports = $collection->reports()->get();
+
+                    foreach ($reports as $report) {
+                        $debries = $report->debris()->get();
+
+                        foreach ($debries as $debris) {
+                            $debris->delete();
+                        }
+                    }
+
                     $collection->delete();
                 }
             }

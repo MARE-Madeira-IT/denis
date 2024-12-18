@@ -37,7 +37,7 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('debris_id');
             $table->timestamps();
 
-            $table->foreign('collection_id')->references('id')->on('collections')->onDelete('set null');
+            $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->foreign('debris_id')->references('id')->on('debris')->onDelete('cascade');
