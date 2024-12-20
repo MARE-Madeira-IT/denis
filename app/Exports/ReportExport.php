@@ -115,7 +115,7 @@ class ReportExport implements FromCollection, WithHeadings, WithMapping, WithTit
             $record->debris->type->name,
             $record->debris->type->depth,
             $record->debris->habitat->name,
-            $record->debris->size->name,
+            $record->debris->debris_size_id ? $record->debris->size->name : "---",
             $record->debris->weight,
             $record->debris->thickness_id ? $record->debris->thickness->name : "---",
             $record->debris->rugosity_id ? $record->debris->rugosity->name : "---",
