@@ -26,6 +26,13 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user->password) {
+            $user->password = bcrypt($credentials['password']);
+            $user->save();
+        }
+
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['message' => 'The credentials used do not match any on our database. If the problem persists contact us.'], 401);
         }
